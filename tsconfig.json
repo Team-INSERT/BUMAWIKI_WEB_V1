@@ -14,24 +14,21 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@hooks/*": [
-        "hooks/*"
+      "@src/*": [
+        "src/*"
       ],
-      "@components/*": [
-        "components/*"
+      "@Components/*": [
+        "Components/*"
       ],
-      "@layouts/*": [
-        "layouts/*"
+      "@Router/*": [
+        "Router/*"
       ],
-      "@pages/*": [
-        "pages/*"
+      "@public/*": [
+        "public/*"
       ],
-      "@utils/*": [
-        "utils/*"
+      "@images/*": [
+        "images/*"
       ],
-      "@typings/*": [
-        "typings/*"
-      ]
     }
   },
   "ts-node": {
