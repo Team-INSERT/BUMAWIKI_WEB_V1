@@ -13,30 +13,14 @@
     "strict": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "paths": {
-      "@src/*": [
-        "src/*"
-      ],
-      "@Components/*": [
-        "Components/*"
-      ],
-      "@Router/*": [
-        "Router/*"
-      ],
-      "@public/*": [
-        "public/*"
-      ],
-      "@images/*": [
-        "images/*"
-      ],
-    }
+    "paths": {}
   },
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs",
       "moduleResolution": "Node",
       "target": "es5",
-      "esModuleInterop": true
-    }
+      "esModuleInterop": true,
+    },
   }
 }
