@@ -24,6 +24,7 @@ $main-color: #274168;
         .section-wrap {
             display: flex;
             cursor: pointer;
+            text-decoration: none;
 
             .section-logo {
                 margin-left: 4vw;
@@ -63,6 +64,7 @@ $main-color: #274168;
                 background-color: #fff;
                 border: 1px solid #ccc;
                 border-left: none;
+                cursor: pointer;
             }
         }
     }
