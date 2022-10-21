@@ -8,6 +8,7 @@ import StudentInfo from "./pages/Details/StudentInfo";
 import AccidentInfo from "./pages/Details/AccidentInfo";
 import ClubInfo from "./pages/Details/ClubInfo";
 import TeacherInfo from "./pages/Details/TeacherInfo";
+import Footer from "./components/Footer";
 
 export {
     Home,
@@ -19,5 +20,6 @@ export {
     StudentInfo,
     AccidentInfo,
     ClubInfo,
-    TeacherInfo
+    TeacherInfo,
+    Footer
 };
