@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Aside from "./components/Aside";
 import Board from "./style/Board";
 import Classification from "./components/Classification";
+import TitleBox from "./components/TitleBox";
 
 export {
     Home,
@@ -27,5 +28,6 @@ export {
     Footer,
     Aside,
     Classification,
-    Board
+    TitleBox,
+    Board,
 };
