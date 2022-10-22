@@ -1,0 +1,60 @@
+$main-color: #274168;
+
+.home-board-wrap {
+    display: flex;
+
+    .line {
+        width: 68vw;
+        height: 2px;
+        background-color: #ccc;
+    }
+
+    .doc-title-box {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+
+        span {
+            color: $main-color;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-size: 34px;
+            margin-left: 30px;
+        }
+    }
+
+    .classif-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+
+    .home-title-box {
+        margin-top: 30px;
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 800;
+        color: #545454;
+
+        .home-title-text {
+            font-size: 28px;
+        }
+
+        .home-subtitle-text {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .home-title-content-text {
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    }
+}
