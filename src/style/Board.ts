@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Board = styled.div`
 	width: 72vw;
-	height:1000px;
+	height:fit-content;
 	background-color: #fff;
 	border-left: 2px solid #ccc;
 	border-right: 2px solid #ccc;
@@ -10,6 +10,8 @@ const Board = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	overflow:hidden;
+	height:auto;
 `;
 
 export default Board;
