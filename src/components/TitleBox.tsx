@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/TitleBox.scss';
+import '../style/components-style/TitleBox.scss';
 
 const TitleBox = () => {
     return (
@@ -54,7 +54,7 @@ const TitleBox = () => {
                     <span>교목</span>
                 </div>
                 <div className='table-content'>
-                    <span>소나무</span>
+                    <span>소나무 - 장수(長壽), 꿋꿋한 절개와 의지를 보이다.</span>
                 </div>
             </div>
             <div className='table-wrap' style={{ marginTop: '-4px' }}>
@@ -62,7 +62,7 @@ const TitleBox = () => {
                     <span>교화</span>
                 </div>
                 <div className='table-content'>
-                    <span>목련</span>
+                    <span>목련 - 우애있고 사랑스러우며 고귀하다.</span>
                 </div>
             </div>
             <div className='table-wrap' style={{ marginTop: '-4px' }}>
@@ -70,7 +70,7 @@ const TitleBox = () => {
                     <span>교조</span>
                 </div>
                 <div className='table-content'>
-                    <span>솔개</span>
+                    <span>솔개 - 유연하고 민첩하며 늠름한 기상으로 높이 날아 세계를 보다.</span>
                 </div>
             </div>
             <div className='table-wrap' style={{ marginTop: '-4px' }}>
