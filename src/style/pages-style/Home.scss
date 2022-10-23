@@ -1,5 +1,20 @@
 $main-color: #274168;
 
+@mixin titleline {
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin description {
+    margin: 30px 0 40px 0;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    font-weight: 500;
+}
+
 .home-board-wrap {
     display: flex;
 
@@ -59,33 +74,94 @@ $main-color: #274168;
     }
 
     .summary-wrap {
-        width: 90%;
-        height: 400px;
+        @include titleline();
         margin-top: 80px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        .summary-title {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .summary {
-            font-size: 30px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 800;
-            color: #545454;
-            margin-bottom: 5px;
-        }
 
         .summary-content {
-            margin: 30px 0 30px 0;
+            @include description();
+        }
+
+        .summary-video {
             display: flex;
-            align-items: center;
+            justify-content: center;
+
+            iframe {
+                width: 800px;
+                height: 450px;
+            }
+        }
+    }
+
+    .department-wrap {
+        @include titleline();
+        margin-top: 80px;
+
+        .department-description {
+            @include description();
+        }
+
+        .department {
             margin-left: 30px;
+            font-weight: 800;
+            color: #545454;
+            font-size: 24px;
+        }
+    }
+
+    .song-wrap {
+        @include titleline();
+        margin-top: 80px;
+
+        .song-description {
+            @include description();
+            line-height: 35px;
+        }
+    }
+
+    .history-wrap {
+        @include titleline();
+
+        .history-description {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .bus-wrap {
+        @include titleline();
+        margin-top: 80px;
+
+        .bus-description {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bus-content {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: -30px;
             font-weight: 500;
+        }
+    }
+
+    .notice-wrap {
+        width: 95%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+
+        .notice-logo {
+            margin-left: auto;
+            margin-right: 5px;
+        }
+
+        .notice-description {
+            margin-left: auto;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 800;
         }
     }
 }
