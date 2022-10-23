@@ -1,0 +1,44 @@
+$main-color: #274168;
+
+.aside-wrap {
+    width: 240px;
+    height: fit-content;
+    border: 2px solid #ccc;
+    margin-top: 20px;
+    position: sticky;
+    top: 2vw;
+
+    .aside-title-box {
+        width: 100%;
+        height: 50px;
+        background-color: $main-color;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid #ccc;
+
+        span {
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+    }
+
+    .aside-doc-box {
+        width: 100%;
+        height: 40px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid #ccc;
+
+        span {
+            color: $main-color;
+            margin-left: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+        }
+    }
+}
