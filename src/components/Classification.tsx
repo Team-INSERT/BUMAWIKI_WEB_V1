@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import '../style/Classification.scss';
+import '../style/components-style/Classification.scss';
 
 const Classification = ({ children }: PropsWithChildren) => {
     return (
