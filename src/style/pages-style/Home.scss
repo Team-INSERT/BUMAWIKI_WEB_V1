@@ -75,7 +75,7 @@ $main-color: #274168;
 
     .summary-wrap {
         @include titleline();
-        margin-top: 80px;
+        margin-top: 20px;
 
         .summary-content {
             @include description();
@@ -94,7 +94,7 @@ $main-color: #274168;
 
     .department-wrap {
         @include titleline();
-        margin-top: 80px;
+        margin-top: 20px;
 
         .department-description {
             @include description();
@@ -110,7 +110,7 @@ $main-color: #274168;
 
     .song-wrap {
         @include titleline();
-        margin-top: 80px;
+        margin-top: 20px;
 
         .song-description {
             @include description();
@@ -120,6 +120,7 @@ $main-color: #274168;
 
     .history-wrap {
         @include titleline();
+        margin-top: 20px;
 
         .history-description {
             display: flex;
@@ -129,7 +130,7 @@ $main-color: #274168;
 
     .bus-wrap {
         @include titleline();
-        margin-top: 80px;
+        margin-top: 20px;
 
         .bus-description {
             display: flex;
