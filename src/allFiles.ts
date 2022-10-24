@@ -13,7 +13,7 @@ import Aside from "./components/Aside";
 import Board from "./style/components-style/Board";
 import Classification from "./components/Classification";
 import TitleBox from "./components/TitleBox";
-import TitleLine from "./components/TitleLine";
+import TopicBox from "./components/TopicBox";
 
 export {
     Home,
@@ -30,6 +30,6 @@ export {
     Aside,
     Classification,
     TitleBox,
-    TitleLine,
+    TopicBox,
     Board,
 };
