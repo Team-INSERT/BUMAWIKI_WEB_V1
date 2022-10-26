@@ -6,6 +6,7 @@ import {
     Aside,
     Footer
 } from 'src/allFiles';
+import '../style/pages-style/Accident.scss'
 
 const Teacher = () => {
     return (
