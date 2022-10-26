@@ -1,11 +1,21 @@
 import React from 'react';
-import { Header } from 'src/allFiles';
+import {
+    Header,
+    Board,
+    SubFooter,
+    Aside,
+    Footer
+} from 'src/allFiles';
 
 const Teacher = () => {
     return (
-        <div>
+        <div className='teacher-wrap'>
             <Header />
-            선생님 목록
+            {/* <Board>
+                <SubFooter />
+            </Board>
+            <Aside />
+            <Footer /> */}
         </div>
     );
 };
