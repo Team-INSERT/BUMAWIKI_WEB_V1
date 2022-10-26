@@ -1,11 +1,21 @@
 import React from 'react';
-import { Header } from 'src/allFiles';
+import {
+    Header,
+    Board,
+    SubFooter,
+    Aside,
+    Footer
+} from 'src/allFiles';
 
 const Accident = () => {
     return (
-        <div>
+        <div className='accident-wrap'>
             <Header />
-            사건사고목록
+            {/* <Board>
+                <SubFooter />
+            </Board>
+            <Aside />
+            <Footer /> */}
         </div>
     );
 };
