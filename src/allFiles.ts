@@ -11,9 +11,9 @@ import TeacherInfo from "./pages/Details/TeacherInfo";
 import Footer from "./components/Footer";
 import Aside from "./components/Aside";
 import Board from "./style/components-style/Board";
-import Classification from "./components/Classification";
-import TitleBox from "./components/TitleBox";
-import AccodianMenu from "./components/\bAccodianMenu";
+import Classify from "./components/Classify";
+import AccodianMenu from "./components/AccodianMenu";
+import SubFooter from "./components/SubFooter";
 
 export {
     Home,
@@ -28,8 +28,8 @@ export {
     TeacherInfo,
     Footer,
     Aside,
-    Classification,
-    TitleBox,
+    Classify,
     AccodianMenu,
+    SubFooter,
     Board,
 };
