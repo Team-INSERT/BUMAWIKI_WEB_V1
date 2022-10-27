@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/pages-style/Home.scss';
+import '../style/components-style/SubFooter.scss';
 
 const SubFooter = () => {
     return (
