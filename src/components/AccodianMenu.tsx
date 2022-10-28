@@ -5,7 +5,7 @@ const AccodianMenu = ({ name, children }: any) => {
     const [detail, setDetail] = useState(true);
  
     const onClickDetail = () => {
-        setDetail(detail => !detail);
+        setDetail(detail => !detail); 
     };
 
     return (
