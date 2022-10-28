@@ -8,7 +8,7 @@ import {
     AccodianMenu,
     Classify
 } from 'src/allFiles';
-import '../style/pages-style/Accident.scss' 
+import '../style/pages-style/Accident.scss'
 
 const Accident = () => {
     return (
@@ -31,7 +31,6 @@ const Accident = () => {
                                     <ul className='accident-list'>
                                         <li>김민준 피자 사건</li>
                                         <li>룸메가 샤워하다가 타방출입 걸린 사건</li>
-                                        <li>썩마딕 사건</li>
                                         <li>김석진 아침운동 없음 페이크 사건</li>
                                         <li>기말고사 주주원 급습 사건</li>
                                         <li>기숙사 내 애정행각 발각 사건</li>
