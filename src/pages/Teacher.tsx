@@ -11,7 +11,7 @@ import {
 import '../style/pages-style/Teacher.scss'
 
 const Teacher = () => {
-    return (
+    return ( 
         <div>
             <Header />
             <div className="teacher-board-wrap">
