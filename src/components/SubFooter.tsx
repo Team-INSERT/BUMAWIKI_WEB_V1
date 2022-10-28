@@ -3,7 +3,7 @@ import '../style/components-style/SubFooter.scss';
 
 const SubFooter = () => {
     return (
-        <>
+        <> 
             <div className='line' />
             <div className='notice-wrap'>
                 <svg className='notice-logo' width="130" height="92" viewBox="0 0 130 92" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
