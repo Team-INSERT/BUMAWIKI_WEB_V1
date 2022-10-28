@@ -20,7 +20,7 @@ $main-color: #274168;
 
     .line {
         width: 68vw;
-        height: 2px;
+        height: 1.5px;
         background-color: #ccc;
     }
 
@@ -143,26 +143,6 @@ $main-color: #274168;
             margin-top: 30px;
             margin-bottom: -30px;
             font-weight: 500;
-        }
-    }
-
-    .notice-wrap {
-        width: 95%;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 30px;
-
-        .notice-logo {
-            margin-left: auto;
-            margin-right: 5px;
-        }
-
-        .notice-description {
-            margin-left: auto;
-            text-align: right;
-            font-size: 14px;
-            font-weight: 800;
         }
     }
 }

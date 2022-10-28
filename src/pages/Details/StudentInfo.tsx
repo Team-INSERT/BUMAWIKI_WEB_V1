@@ -12,11 +12,11 @@ const StudentInfo = () => {
     return (
         <div>
             <Header />
-            {/* <Board>
+            <Board>
                 <SubFooter />
             </Board>
             <Aside />
-            <Footer /> */}
+            <Footer />
         </div>
     );
 };
