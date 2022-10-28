@@ -8,7 +8,7 @@ import {
     AccodianMenu,
     Classify
 } from 'src/allFiles';
-import '../style/pages-style/Accident.scss'
+import '../style/pages-style/Accident.scss' 
 
 const Accident = () => {
     return (
