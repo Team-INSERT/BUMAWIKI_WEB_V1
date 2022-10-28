@@ -12,7 +12,7 @@ import '../style/pages-style/Student.scss'
 
 const Student = () => {
     return (
-        <div>
+        <div> 
             <Header />
             <div className="student-board-wrap">
                 <Board>
