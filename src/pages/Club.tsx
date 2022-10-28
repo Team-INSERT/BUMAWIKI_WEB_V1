@@ -27,7 +27,7 @@ const Club = () => {
                     <div className='summary-wrap'>
                         <AccodianMenu name={'전공동아리'}>
                             <p className='summary-content'>
-                                <span>
+                                <span> 
                                     <ul className='club-list'>
                                         <li>쉬스테마</li>
                                         <li>T자형 인재</li>
