@@ -43,23 +43,6 @@ const Club = () => {
                             </p>
                         </AccodianMenu>
                     </div>
-                    <div className='summary-wrap'>
-                        <AccodianMenu name={'일반동아리'}>
-                            <p className='summary-content'>
-                                <span>
-                                    <ul className='club-list'>
-                                        <li>생활탁구</li>
-                                        <li>축구</li>
-                                        <li>파이썬 투자 동아리</li>
-                                        <li>3D프린팅</li>
-                                        <li>매점운영 동아리</li>
-                                        <li>소작농(소마고 작은 농노들)</li>
-                                        <li>도서부</li>
-                                    </ul>
-                                </span>
-                            </p>
-                        </AccodianMenu>
-                    </div>
                     <SubFooter />
                 </Board>
                 <Aside />
