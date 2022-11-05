@@ -7,8 +7,8 @@ import {
     Footer,
     AccodianMenu,
     Classify
-} from 'src/allFiles';
-import '../style/pages-style/Accident.scss'
+} from 'allFiles';
+import 'style/pages-style/Accident.scss'
 
 const Accident = () => {
     return (

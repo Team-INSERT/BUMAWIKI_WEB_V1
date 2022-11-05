@@ -6,11 +6,11 @@ import {
     Classify,
     AccodianMenu,
     SubFooter,
-} from 'src/allFiles';
+} from 'allFiles';
 import React from 'react';
 import '../style/pages-style/Home.scss';
 
-const Home = () => { 
+const Home = () => {
     return (
         <div>
             <Header />

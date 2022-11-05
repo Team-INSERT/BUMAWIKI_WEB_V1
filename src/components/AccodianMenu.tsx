@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Accodian from 'src/types/accodian';
+import Accodian from 'types/accodian';
 import '../style/components-style/AccodianMenu.scss'
 
 const AccodianMenu: Accodian = ({ name, children }) => {

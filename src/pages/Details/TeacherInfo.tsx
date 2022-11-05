@@ -5,7 +5,7 @@ import {
     SubFooter,
     Aside,
     Footer
-} from 'src/allFiles';
+} from 'allFiles';
 import '../../style/pages-style/details-style/TeacherInfo.scss';
 
 const TeacherInfo = () => {

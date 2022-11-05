@@ -1,10 +1,10 @@
 module.exports = {
     devServer: {
         historyApiFallback: true, // react router
-        port: 8090,
+        port: 4000,
         proxy: {
             '/api/': {
-                target: 'http://localhost:3095',
+                target: 'http://localhost:8080',
                 changeOrigin: true,
             },
         },

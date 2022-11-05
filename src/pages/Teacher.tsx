@@ -7,11 +7,11 @@ import {
     Footer,
     Classify,
     AccodianMenu
-} from 'src/allFiles';
+} from 'allFiles';
 import '../style/pages-style/Teacher.scss'
 
 const Teacher = () => {
-    return ( 
+    return (
         <div>
             <Header />
             <div className="teacher-board-wrap">
