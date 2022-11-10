@@ -9,6 +9,7 @@ import {
     AccodianMenu
 } from 'allFiles';
 import '../style/pages-style/Teacher.scss'
+import { Link } from 'react-router-dom';
 
 const Teacher = () => {
     return (
@@ -29,15 +30,15 @@ const Teacher = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='teacher-list'>
-                                        <li>조윤겸</li>
-                                        <li>김규봉</li>
-                                        <li>강은수</li>
-                                        <li>김경남</li>
-                                        <li>김태영</li>
-                                        <li>김태정</li>
-                                        <li>남민형</li>
-                                        <li>이경숙</li>
-                                        <li>정필립</li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>조윤겸</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김규봉</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>강은수</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김경남</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김태영</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김태정</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>남민형</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>이경숙</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>정필립</Link></li>
                                     </ul>
                                 </span>
                             </p>
@@ -48,16 +49,16 @@ const Teacher = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='teacher-list'>
-                                        <li>유근찬</li>
-                                        <li>김진필</li>
-                                        <li>구진영</li>
-                                        <li>최병준</li>
-                                        <li>정유진</li>
-                                        <li>이선아</li>
-                                        <li>김기태</li>
-                                        <li>박제현</li>
-                                        <li>이세준</li>
-                                        <li>손정웅</li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>유근찬</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김진필</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>구진영</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>최병준</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>정유진</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>이선아</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>김기태</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>박제현</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>이세준</Link></li>
+                                        <li><Link to={`/teacher/${1}`} className='link'>손정웅</Link></li>
                                     </ul>
                                 </span>
                             </p>
