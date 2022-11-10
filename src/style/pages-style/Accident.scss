@@ -36,7 +36,7 @@ $main-color: #274168;
             font-size: 34px;
             margin-left: 30px;
         }
-    } 
+    }
 
     .classif-box {
         display: flex;
@@ -54,10 +54,17 @@ $main-color: #274168;
         }
     }
 
-    .accident-list li {
-        margin-bottom:20px;
-        color:#0038FF;
-        cursor:pointer;
+    .accident-list {
+        li {
+            margin-bottom: 20px;
+            color: #0038FF;
+            cursor: pointer;
+        }
+
+        .link {
+            text-decoration: none;
+            color: #0038FF;
+        }
     }
 
 }

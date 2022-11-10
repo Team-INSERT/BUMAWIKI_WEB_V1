@@ -16,7 +16,7 @@ $main-color: #274168;
 
 .club-board-wrap {
     display: flex;
- 
+
     .line {
         width: 68vw;
         height: 1.5px;
@@ -54,10 +54,16 @@ $main-color: #274168;
         }
     }
 
-    .club-list li {
-        margin-bottom:20px;
-        color:#0038FF;
-        cursor:pointer;
-    }
+    .club-list {
+        li {
+            margin-bottom: 20px;
+            color: #0038FF;
+            cursor: pointer;
+        }
 
+        .link {
+            text-decoration: none;
+            color: #0038FF;
+        }
+    }
 }
