@@ -9,6 +9,7 @@ import {
     AccodianMenu
 } from 'allFiles';
 import '../style/pages-style/Student.scss'
+import { Link } from 'react-router-dom';
 
 const Student = () => {
     return (
@@ -29,14 +30,14 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='student-list'>
-                                        <li>김준서</li>
-                                        <li>김한울</li>
-                                        <li>박다은</li>
-                                        <li>송주영</li>
-                                        <li>우수경</li>
-                                        <li>이규진</li>
-                                        <li>이동호</li>
-                                        <li>이동훈</li>
+                                        <li><Link to={`/student/${1}`} className='link'>김준서</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김한울</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>박다은</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>송주영</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>우수경</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이규진</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이동호</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이동훈</Link></li>
                                     </ul>
                                 </span>
                             </p>
@@ -47,14 +48,14 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='student-list'>
-                                        <li>강웅빈</li>
-                                        <li>구윤하</li>
-                                        <li>권세원</li>
-                                        <li>김나현</li>
-                                        <li>김민석</li>
-                                        <li>김민준</li>
-                                        <li>김호현</li>
-                                        <li>문서빈</li>
+                                        <li><Link to={`/student/${1}`} className='link'>강웅빈</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>구윤하</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>권세원</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김나현</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김민석</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김민준</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김호현</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>문서빈</Link></li>
                                     </ul>
                                 </span>
                             </p>
@@ -65,14 +66,14 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='student-list'>
-                                        <li>강지원</li>
-                                        <li>이재윤</li>
-                                        <li>이상준</li>
-                                        <li>김호현</li>
-                                        <li>이윤찬</li>
-                                        <li>오창민</li>
-                                        <li>박사밀</li>
-                                        <li>석사밀</li>
+                                        <li><Link to={`/student/${1}`} className='link'>강지원</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이재윤</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이상준</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>김호현</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>이윤찬</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>오창민</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>박사밀</Link></li>
+                                        <li><Link to={`/student/${1}`} className='link'>석사밀</Link></li>
                                     </ul>
                                 </span>
                             </p>
