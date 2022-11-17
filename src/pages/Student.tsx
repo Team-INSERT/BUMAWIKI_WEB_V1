@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Header,
     Board,
@@ -12,6 +12,10 @@ import '../style/pages-style/Student.scss'
 import { Link } from 'react-router-dom';
 
 const Student = () => {
+    const [stdId, setStdId] = useState('');
+    function ChangeId(e:string){
+        setStdId(e);
+    }
     return (
         <div>
             <Header />
@@ -30,14 +34,14 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='student-list'>
-                                        <li><Link to={`/student/${1}`} className='link'>김준서</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>김한울</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>박다은</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>송주영</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>우수경</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>이규진</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>이동호</Link></li>
-                                        <li><Link to={`/student/${1}`} className='link'>이동훈</Link></li>
+                                        <li><Link to={`/student/${this}`} className='link'><div onClick={e => ChangeId(String(e.currentTarget))}>김준서</div></Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => ChangeId(e.currentTarget.text)}>김한울</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>박다은</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>송주영</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>우수경</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>이규진</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>이동호</Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link' onClick={e => console.log(e.currentTarget.text)}>이동훈</Link></li>
                                     </ul>
                                 </span>
                             </p>
