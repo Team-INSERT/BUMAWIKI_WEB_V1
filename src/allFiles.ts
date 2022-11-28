@@ -14,6 +14,7 @@ import Board from "./style/components-style/Board";
 import Classify from "./components/Classify";
 import AccodianMenu from "./components/AccodianMenu";
 import SubFooter from "./components/SubFooter";
+import TopBtn from "./components/TopBtn";
 
 export {
     Home,
@@ -32,4 +33,5 @@ export {
     AccodianMenu,
     SubFooter,
     Board,
+    TopBtn,
 };
