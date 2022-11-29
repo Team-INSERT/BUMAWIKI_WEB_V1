@@ -6,7 +6,8 @@ import {
     Aside,
     Footer,
     AccodianMenu,
-    Classify
+    Classify,
+    ScrollBtn,
 } from 'allFiles';
 import 'style/pages-style/Accident.scss'
 import { Link } from 'react-router-dom';
@@ -47,6 +48,7 @@ const Accident = () => {
                     </div>
                     <SubFooter />
                 </Board>
+                <ScrollBtn />
                 <Aside />
             </div>
             <Footer />
