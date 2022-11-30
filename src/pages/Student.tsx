@@ -6,7 +6,8 @@ import {
     Aside,
     Footer,
     Classify,
-    AccodianMenu
+    AccodianMenu,
+    ScrollBtn
 } from 'allFiles';
 import '../style/pages-style/Student.scss'
 import { Link } from 'react-router-dom';
@@ -34,7 +35,7 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='student-list'>
-                                        <li><Link to={`/student/${this}`} className='link'><div onClick={e => ChangeId(String(e.currentTarget))}>김준서</div></Link></li>
+                                        <li><Link to={`/student/${stdId}`} className='link'><div onClick={e => ChangeId(String(e.currentTarget))}>김준서</div></Link></li>
                                         <li><Link to={`/student/${stdId}`} className='link' onClick={e => ChangeId(e.currentTarget.text)}>김한울</Link></li>
                                         <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>박다은</Link></li>
                                         <li><Link to={`/student/${stdId}`} className='link' onClick={e => setStdId(e.currentTarget.text)}>송주영</Link></li>
@@ -85,6 +86,7 @@ const Student = () => {
                     </div>
                     <SubFooter />
                 </Board>
+                <ScrollBtn />
                 <Aside />
             </div>
             <Footer />

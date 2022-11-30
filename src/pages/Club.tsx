@@ -6,7 +6,8 @@ import {
     Aside,
     Footer,
     AccodianMenu,
-    Classify
+    Classify,
+    ScrollBtn,
 } from 'allFiles';
 import 'style/pages-style/Club.scss'
 import { Link } from 'react-router-dom';
@@ -46,6 +47,7 @@ const Club = () => {
                     </div>
                     <SubFooter />
                 </Board>
+                <ScrollBtn />
                 <Aside />
             </div>
             <Footer />

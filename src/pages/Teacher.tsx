@@ -6,7 +6,8 @@ import {
     Aside,
     Footer,
     Classify,
-    AccodianMenu
+    AccodianMenu,
+    ScrollBtn
 } from 'allFiles';
 import '../style/pages-style/Teacher.scss'
 import { Link } from 'react-router-dom';
@@ -66,6 +67,7 @@ const Teacher = () => {
                     </div>
                     <SubFooter />
                 </Board>
+                <ScrollBtn />
                 <Aside />
             </div>
             <Footer />

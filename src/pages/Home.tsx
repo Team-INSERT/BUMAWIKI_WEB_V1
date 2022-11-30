@@ -6,6 +6,7 @@ import {
     Classify,
     AccodianMenu,
     SubFooter,
+    ScrollBtn
 } from 'allFiles';
 import React from 'react';
 import '../style/pages-style/Home.scss';
@@ -371,6 +372,7 @@ const Home = () => {
                     </div>
                     <SubFooter />
                 </Board>
+                <ScrollBtn />
                 <Aside />
             </div>
             <Footer />
