@@ -46,7 +46,7 @@ const Student = () => {
                                 <ul className="student-list">
                                     {students.map((student: Docs) => (<div key={student.id}>
                                         {student.enroll === date ?
-                                            <li><Link to={`/docs/${student.id}`} className='link'>{student.title}</Link></li> : ''}
+                                            <li><Link to={`/docs/${student.title}`} className='link'>{student.title}</Link></li> : ''}
                                     </div>))}
                                 </ul>
                             </C.AccodianMenu>))}

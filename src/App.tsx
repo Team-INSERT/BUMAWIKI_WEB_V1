@@ -34,17 +34,14 @@ const App = () => {
         })
       })
       .catch((err) => {
+        document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
         if (err instanceof AxiosError && err?.response?.status === 403) {
           axios.put('/auth/refresh/access', {
             refresh_token: getCookie('refresh_token')
           }).then((res) => {
-            console.log(res.data)
             document.cookie = `authorization=${res.data.accessToken};`
-            document.cookie = `refresh_token=${res.data.refreshToken};expires=${getCookie('expired_at')};path=/;`
             window.location.reload()
-          }).catch((err) => { console.log(err) })
-        } else {
-          console.log(err)
+          })
         }
       })
   }, [])
@@ -58,13 +55,13 @@ const App = () => {
           <Route path={'/teacher'} element={<R.Teacher />} />
           <Route path={'/accident'} element={<R.Accident />} />
           <Route path={'/club'} element={<R.Club />} />
-          <Route path={'/docs/:id'} element={<R.Docs />} />
+          <Route path={'/docs/:title'} element={<R.Docs />} />
           <Route path={'/search/:result'} element={<R.Search />} />
           <Route path={'/oauth'} element={<R.Signup />} />
           <Route path={'/create'} element={<R.Create />} />
-          <Route path={'/update/:id'} element={<R.Update />} />
-          <Route path={'/version/:id'} element={<R.Version />} />
-          <Route path={'/version/:id/detail/:versionId'} element={<R.VersionDetail />} />
+          <Route path={'/update/:title'} element={<R.Update />} />
+          <Route path={'/version/:title'} element={<R.Version />} />
+          <Route path={'/version/:title/detail/:versionId'} element={<R.VersionDetail />} />
           <Route path={'/mypage'} element={<R.MyPage />} />
           <Route path={'/user/:id'} element={<R.User />} />
           <Route path={'*'} element={<R.NotFound />} />

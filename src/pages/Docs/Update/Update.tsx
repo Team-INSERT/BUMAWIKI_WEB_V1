@@ -113,14 +113,14 @@ const Docs = () => {
             alert('문서가 비어있습니다!')
             return
         }
-        axios.put(`docs/update/${router.id}`, data, {
+        axios.put(`docs/update/${router.title}`, data, {
             headers: {
                 'Content-Type': `multipart/form-data`,
                 Authorization: getCookie('authorization'),
             },
         }).then((res) => {
             alert('문서가 편집되었습니다!')
-            navigate(`/docs/${router.id}`)
+            navigate(`/docs/${router.title}`)
         }).catch((err) => {
             console.log(err)
             if (err.response.status === 403) {
@@ -138,7 +138,7 @@ const Docs = () => {
     }
 
     useEffect(() => {
-        axios.get(`/docs/find/id/${router.id}`)
+        axios.get(`/docs/find/id/${router.title}`)
             .then((res) => {
                 setContents(res.data.contents)
                 setTitle(res.data.title)
@@ -149,7 +149,7 @@ const Docs = () => {
                     alert('오류가 발생하여 문서를 불러올 수 없습니다.')
                 }
             })
-    }, [router.id])
+    }, [router.title])
     return (
         <div>
             <C.Header />

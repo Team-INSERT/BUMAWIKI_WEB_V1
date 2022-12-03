@@ -28,10 +28,10 @@ const Docs = () => {
     const [isLoad, setIsLoad] = useState(false)
 
     useEffect(() => {
-        axios.get(`/docs/find/id/${router.id}`)
+        axios.get(`/docs/find/title/${router.title}`)
             .then((res) => {
                 setDocs(res.data)
-                axios.get(`/docs/find/${router.id}/version`)
+                axios.get(`/docs/find/${router.title}/version`)
                     .then((res) => {
                         const Array = res.data.versionDocsResponseDto.reverse()
                         setVersionDocs(Array[router.versionId || 0])
@@ -48,7 +48,7 @@ const Docs = () => {
                 }
             })
         // eslint-disable-next-line
-    }, [router.id, router.versionId])
+    }, [router.title, router.versionId])
     return (
         <div>
             <C.Header />

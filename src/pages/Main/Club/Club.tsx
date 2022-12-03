@@ -38,7 +38,7 @@ const Club = () => {
                         <C.AccodianMenu name={`전공동아리`}>
                             <ul className="club-list">
                                 {clubs.map((club: Docs) => (
-                                    <li key={club.id}><Link to={`/docs/${club.id}`} className='link'>{club.title}</Link></li>
+                                    <li key={club.id}><Link to={`/docs/${club.title}`} className='link'>{club.title}</Link></li>
                                 ))}
                             </ul>
                         </C.AccodianMenu>

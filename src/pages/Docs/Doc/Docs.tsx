@@ -20,7 +20,7 @@ const Docs = () => {
     const [isLoad, setIsLoad] = useState(false)
 
     useEffect(() => {
-        axios.get(`/docs/find/id/${router.id}`)
+        axios.get(`/docs/find/title/${router.title}`)
             .then((res) => {
                 setDocs({
                     ...res.data,
@@ -35,7 +35,7 @@ const Docs = () => {
                 }
             })
         // eslint-disable-next-line
-    }, [router.id])
+    }, [router.title])
     return (
         <div>
             <C.Header />

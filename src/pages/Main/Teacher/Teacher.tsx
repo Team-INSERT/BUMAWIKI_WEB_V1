@@ -8,6 +8,7 @@ import Docs from 'types/docs'
 const Teacher = () => {
     const [major, setMajor] = useState([])
     const [humanities, setHumanities] = useState([])
+    const [mentor, setMentor] = useState([])
 
     useEffect(() => {
         axios.get('/docs/teacher')
@@ -17,6 +18,8 @@ const Teacher = () => {
             })
             .catch((err) => {
                 console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+                return
             })
         axios.get('/docs/majorTeacher')
             .then((res) => {
@@ -26,6 +29,17 @@ const Teacher = () => {
             .catch((err) => {
                 console.log(err)
                 alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+                return
+            })
+        axios.get('/docs/mentorTeacher')
+            .then((res) => {
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setMentor(data)
+            })
+            .catch((err) => {
+                console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+                return
             })
     }, [])
 
@@ -46,14 +60,28 @@ const Teacher = () => {
                         <C.AccodianMenu name={`인문과목 선생님`}>
                             <ul className="teacher-list">
                                 {humanities.map((teacher: Docs) => (<div key={teacher.id}>
-                                    <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
+                                    <li><Link to={`/docs/${teacher.title}`} className='link'>{teacher.title}</Link></li>
                                 </div>))}
                             </ul>
                         </C.AccodianMenu>
                         <C.AccodianMenu name={`전공과목 선생님`}>
                             <ul className="teacher-list">
                                 {major.map((teacher: Docs) => (<div key={teacher.id}>
-                                    <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
+                                    <li><Link to={`/docs/${teacher.title}`} className='link'>{teacher.title}</Link></li>
+                                </div>))}
+                            </ul>
+                        </C.AccodianMenu>
+                        <C.AccodianMenu name={`전공과목 선생님`}>
+                            <ul className="teacher-list">
+                                {major.map((teacher: Docs) => (<div key={teacher.id}>
+                                    <li><Link to={`/docs/${teacher.title}`} className='link'>{teacher.title}</Link></li>
+                                </div>))}
+                            </ul>
+                        </C.AccodianMenu>
+                        <C.AccodianMenu name={`멘토 선생님`}>
+                            <ul className="teacher-list">
+                                {mentor.map((teacher: Docs) => (<div key={teacher.id}>
+                                    <li><Link to={`/docs/${teacher.title}`} className='link'>{teacher.title}</Link></li>
                                 </div>))}
                             </ul>
                         </C.AccodianMenu>

@@ -1,7 +1,7 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
 import axios from 'axios'
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { documentation } from 'util/documentation'
 import { getCookie } from 'util/getCookie'
@@ -12,11 +12,13 @@ const Docs = () => {
     const user = useContext(UserContext)
     const [docsType, setDocsType] = useState('')
     const [enroll, setEnroll] = useState<number>()
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState(decodeURI(window.location.search.replace('?name=', '')) || '')
     const [contents, setContents] = useState('')
     const [files1, setFiles1] = useState<"" | File>()
     const [files2, setFiles2] = useState<"" | File>()
     const [files3, setFiles3] = useState<"" | File>()
+
+    console.log(window.location.search)
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
@@ -113,13 +115,17 @@ const Docs = () => {
                             <div className='tr-title'>분류</div>
                             <div className='tr-content'>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='TEACHER' name='radio' />
-                                <label htmlFor='TEACHER'>인문 교과 선생님</label>
+                                <label htmlFor='TEACHER'>인문 선생님</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='MAJOR_TEACHER' name='radio' />
-                                <label htmlFor='MAJOR_TEACHER'>전문 교과 선생님</label>
+                                <label htmlFor='MAJOR_TEACHER'>전공 선생님</label>
+                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='MENTOR_TEACHER' name='radio' />
+                                <label htmlFor='MENTOR_TEACHER'>멘토 선생님</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='ACCIDENT' name='radio' />
                                 <label htmlFor='ACCIDENT'>사건/사고</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='CLUB' name='radio' />
-                                <label htmlFor='CLUB'>동아리</label>
+                                <label htmlFor='CLUB'>전공동아리</label>
+                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='FREE_CLUB' name='radio' />
+                                <label htmlFor='FREE_CLUB'>사설동아리</label>
                             </div>
                         </div>
                         <div className='tr-wrap'>

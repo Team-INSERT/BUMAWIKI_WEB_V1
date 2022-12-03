@@ -46,7 +46,7 @@ const Accident = () => {
                                 <ul className="accident-list">
                                     {accidents.map((accident: Docs) => (<div key={accident.id}>
                                         {accident.enroll === date ?
-                                            <li><Link to={`/docs/${accident.id}`} className='link'>{accident.title}</Link></li> : ''}
+                                            <li><Link to={`/docs/${accident.title}`} className='link'>{accident.title}</Link></li> : ''}
                                     </div>))}
                                 </ul>
                             </C.AccodianMenu>

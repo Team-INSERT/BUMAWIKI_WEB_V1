@@ -22,7 +22,7 @@ const DetailBtn = () => {
     })
 
     const onClickDeleteDocs = () => {
-        axios.delete(`/docs/delete/${router.id}`, {
+        axios.delete(`/docs/delete/${router.title}`, {
             headers: {
                 Authorization: getCookie('authorization')
             }
@@ -40,7 +40,7 @@ const DetailBtn = () => {
             alert('내용이 없습니다.')
             return
         }
-        axios.put(`/docs/update/title/${router.id}`, {
+        axios.put(`/docs/update/title/${router.title}`, {
             title: docsName,
         }, {
             headers: {
@@ -49,7 +49,7 @@ const DetailBtn = () => {
         }).then((res) => {
             alert('문서 수정 완료')
             console.log(res)
-            navigate(`/docs/${res.data.id}`)
+            navigate(`/docs/${res.data.title}`)
         }).catch((err) => {
             alert('문서 이름 변경 도중 오류가 발생했습니다.')
             console.log(err)
@@ -57,7 +57,7 @@ const DetailBtn = () => {
     }
 
     useEffect(() => {
-        axios.get(`/docs/find/id/${router.id}`)
+        axios.get(`/docs/find/id/${router.title}`)
             .then((res) => {
                 setDocs({
                     ...res.data,
@@ -71,7 +71,7 @@ const DetailBtn = () => {
                     return;
                 }
             })
-    }, [router.id])
+    }, [router.title])
     return (
         <div className="detail-button-wrap">
             {user.isLogin ? <>
@@ -91,12 +91,12 @@ const DetailBtn = () => {
                         </div>
                     </div></>
                     : ''}
-                <Link to={`/update/${docs?.id}`} className='link-wrap'>
+                <Link to={`/update/${docs.title}`} className='link-wrap'>
                     <div>
                         <h1 className='link'>편집</h1>
                     </div>
                 </Link>
-                <Link to={`/version/${docs?.id}`} className='link-wrap'>
+                <Link to={`/version/${docs.title}`} className='link-wrap'>
                     <div>
                         <h1 className='link'>기록</h1>
                     </div>

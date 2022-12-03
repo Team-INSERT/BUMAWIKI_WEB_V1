@@ -10,7 +10,7 @@ const Version = () => {
     const [version, setVersion] = useState([])
     const [isLoad, setIsLoad] = useState(false)
     useEffect(() => {
-        axios.get(`docs/find/${router.id}/version`)
+        axios.get(`docs/find/${router.title}/version`)
             .then((res) => {
                 setVersion(res.data.versionDocsResponseDto.reverse())
                 console.log(res.data.versionDocsResponseDto)
@@ -20,7 +20,7 @@ const Version = () => {
                 console.log(err)
                 alert('오류가 발생하여 문서를 불러올 수 없습니다.')
             })
-    }, [router.id])
+    }, [router.title])
     return (
         <div>
             <C.Header />
@@ -34,7 +34,7 @@ const Version = () => {
                         <ul>
                             {isLoad ? <>{version.map((ver: any, index: number) => (
                                 <li className='version-list'>
-                                    <span className='version-span'><Link to={`/version/${router.id}/detail/${index}`} className='version-link'>{dateParser(ver.thisVersionCreatedAt)}</Link></span>
+                                    <span className='version-span'><Link to={`/version/${router.title}/detail/${index}`} className='version-link'>{dateParser(ver.thisVersionCreatedAt)}</Link></span>
                                     <span>작성자 : <Link to={`/user/${ver.userId}`} className='user-link'>{ver.nickName}</Link></span>
                                 </li>
                             ))}</> : ''}

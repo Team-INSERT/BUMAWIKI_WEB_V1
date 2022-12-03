@@ -12,12 +12,12 @@ const Search = () => {
     const [result, setResult] = useState([])
     const [isLoad, setIsLoad] = useState(false)
     useEffect(() => {
-        axios.get(`/docs/find/title/${router.result}`)
+        axios.get(`/docs/find/all/title/${router.result}`)
             .then((res) => {
                 console.log(res)
                 setResult(res.data)
                 setIsLoad(true)
-                if (res.data.length === 1) navigate(`/docs/${res.data[0].id}`)
+                if (res.data.length === 1) navigate(`/docs/${res.data[0].title}`)
             })
             .catch((err) => {
                 console.log(err)
@@ -41,10 +41,10 @@ const Search = () => {
                         <ul className="search-list">
                             {isLoad ? <>
                                 {result.map((result: Docs, index) => (
-                                    <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</Link></li>
+                                    <li><Link key={index} className="link" to={`/docs/${result.title}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</Link></li>
                                 ))}</> : <div>
                                 <span>아직 '{router.result}'라는 문서는 없습니다.</span><br /><br />
-                                <Link to='/create' style={{ textDecoration: 'none', color: 'blue' }}>지금 문서를 생성해보세요</Link>
+                                <Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>지금 문서를 생성해보세요</Link>
                             </div>
                             }
                         </ul>
