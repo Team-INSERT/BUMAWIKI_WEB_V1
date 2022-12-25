@@ -15,6 +15,7 @@ import Classify from "./components/Classify";
 import AccodianMenu from "./components/AccodianMenu";
 import SubFooter from "./components/SubFooter";
 import ScrollBtn from "./components/ScrollBtn";
+import Dummy from "./Dummy.json";
 
 export {
     Home,
@@ -34,4 +35,5 @@ export {
     SubFooter,
     Board,
     ScrollBtn,
+    Dummy,
 };
