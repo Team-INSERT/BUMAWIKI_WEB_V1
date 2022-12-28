@@ -48,13 +48,12 @@ $main-color: #274168;
     .summary-wrap {
         @include titleline();
         margin-top: 20px;
-
-        .summary-content {
-            @include description();
-        }
     }
 
     .student-list {
+        margin: 30px 0 0 50px;
+        font-weight: 600;
+
         li {
             margin-bottom: 20px;
             color: #0038FF;
