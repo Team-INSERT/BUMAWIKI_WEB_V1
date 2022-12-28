@@ -37,9 +37,10 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className="student-list">
-                                        {Dummy.student.map(student => (
-                                            <li><Link to={`/student/${student.name}`} className="link">{student.name}</Link></li>
-                                        ))}
+                                        {Dummy.student.map(student => (<>
+                                            {student.enroll === 2021 ?
+                                                <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
+                                        </>))}
                                     </ul>
                                 </span>
                             </p>
@@ -50,9 +51,10 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className="student-list">
-                                        {Dummy.student.map(student => (
-                                            <li><Link to={`/student/${student.name}`} className="link">{student.name}</Link></li>
-                                        ))}
+                                        {Dummy.student.map(student => (<>
+                                            {student.enroll === 2022 ?
+                                                <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
+                                        </>))}
                                     </ul>
                                 </span>
                             </p>
@@ -63,9 +65,10 @@ const Student = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className="student-list">
-                                        {Dummy.student.map(student => (
-                                            <li><Link to={`/student/${student.name}`} className="link">{student.name}</Link></li>
-                                        ))}
+                                        {Dummy.student.map(student => (<>
+                                            {student.enroll === 2023 ?
+                                                <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
+                                        </>))}
                                     </ul>
                                 </span>
                             </p>
