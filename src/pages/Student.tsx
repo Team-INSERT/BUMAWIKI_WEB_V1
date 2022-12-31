@@ -28,8 +28,9 @@ const Student = () => {
         .finally(() => {
             setIsLoad(true)
         })
+
     useEffect(() => {
-        for (let date = 2022; date <= nowDate.getFullYear() + 1; date++) {
+        for (let date = 2022; date <= nowDate.getFullYear(); date++) {
             allDate.push(date)
         }
     }, []);
@@ -52,7 +53,7 @@ const Student = () => {
                                 <ul className="student-list">
                                     {students.map(student => (<>
                                         {student.enroll === date ?
-                                            <li><Link to={`/student/${student.title}`} className='link'>{student.title}</Link></li> : ''}
+                                            <li><Link to={`/docs/${student.id}`} className='link'>{student.title}</Link></li> : ''}
                                     </>))}
                                 </ul>
                             </C.AccodianMenu>
