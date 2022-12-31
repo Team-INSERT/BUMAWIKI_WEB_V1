@@ -4,10 +4,6 @@ import Student from "./pages/Student";
 import Accident from "./pages/Accident";
 import Club from "./pages/Club";
 import Teacher from "./pages/Teacher";
-import StudentInfo from "./pages/Details/StudentInfo";
-import AccidentInfo from "./pages/Details/AccidentInfo";
-import ClubInfo from "./pages/Details/ClubInfo";
-import TeacherInfo from "./pages/Details/TeacherInfo";
 import Footer from "./components/Footer";
 import Aside from "./components/Aside";
 import Board from "./style/components-style/Board";
@@ -16,6 +12,7 @@ import AccodianMenu from "./components/AccodianMenu";
 import SubFooter from "./components/SubFooter";
 import ScrollBtn from "./components/ScrollBtn";
 import Dummy from "./Dummy.json";
+import Docs from "./pages/Docs"
 
 export {
     Home,
@@ -24,16 +21,13 @@ export {
     Accident,
     Club,
     Teacher,
-    StudentInfo,
-    AccidentInfo,
-    ClubInfo,
-    TeacherInfo,
     Footer,
     Aside,
     Classify,
     AccodianMenu,
     SubFooter,
-    Board,
+    Docs,
     ScrollBtn,
+    Board,
     Dummy,
 };
