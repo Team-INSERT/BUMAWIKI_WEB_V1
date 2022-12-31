@@ -1,17 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as C from 'allFiles';
 import '../style/pages-style/Student.scss'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const Student = () => {
-    axios.get('http://172.103.51.102/docs/find/1/version')
+    const [students, setStudents] = useState([{
+        id: 0,
+        title: '',
+        enroll: 0
+    }]);
+    const [allDate] = useState([2021]);
+    const [isLoad, setIsLoad] = useState(false);
+    const nowDate = new Date();
+
+    axios.get('/docs/student')
         .then((res) => {
-            console.log(res)
+            console.log(res);
+            setStudents(res.data);
         })
         .catch((err) => {
-            console.log(err)
+            if (err instanceof AxiosError) {
+                console.log(err);
+                // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+            }
         })
+        .finally(() => {
+            setIsLoad(true)
+        })
+    useEffect(() => {
+        for (let date = 2022; date <= nowDate.getFullYear() + 1; date++) {
+            allDate.push(date)
+        }
+    }, []);
+
     return (
         <div>
             <C.Header />
@@ -24,41 +46,18 @@ const Student = () => {
                         <C.Classify>학생</C.Classify>
                     </div>
                     <div className="line" />
-                    {/* 입학년도별 입학생 */}
-                    <div className='summary-wrap'>
-                        <C.AccodianMenu name={'2021학년도 입학생'}>
-                            <ul className="student-list">
-                                {C.Dummy.student.map(student => (<>
-                                    {student.enroll === 2021 ?
-                                        <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
-                                </>))}
-                            </ul>
-                        </C.AccodianMenu>
-                    </div>
-                    <div className='summary-wrap'>
-                        <C.AccodianMenu name={'2022학년도 입학생'}>
-                            <p className='summary-content'>
+                    {isLoad ? <>{allDate.map((date) => (
+                        <div className='summary-wrap'>
+                            <C.AccodianMenu name={`${date}학년도 입학생`}>
                                 <ul className="student-list">
-                                    {C.Dummy.student.map(student => (<>
-                                        {student.enroll === 2022 ?
-                                            <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
+                                    {students.map(student => (<>
+                                        {student.enroll === date ?
+                                            <li><Link to={`/student/${student.title}`} className='link'>{student.title}</Link></li> : ''}
                                     </>))}
                                 </ul>
-                            </p>
-                        </C.AccodianMenu>
-                    </div>
-                    <div className='summary-wrap'>
-                        <C.AccodianMenu name={'2023학년도 입학생'}>
-                            <p className='summary-content'>
-                                <ul className="student-list">
-                                    {C.Dummy.student.map(student => (<>
-                                        {student.enroll === 2023 ?
-                                            <li><Link to={`/student/${student.name}`} className='link'>{student.name}</Link></li> : ''}
-                                    </>))}
-                                </ul>
-                            </p>
-                        </C.AccodianMenu>
-                    </div>
+                            </C.AccodianMenu>
+                        </div>
+                    ))}</> : ''}
                     <C.SubFooter />
                 </C.Board>
                 <C.ScrollBtn />
