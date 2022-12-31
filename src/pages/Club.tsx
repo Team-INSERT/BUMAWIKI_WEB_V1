@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Header,
     Board,
@@ -11,8 +11,28 @@ import {
 } from 'allFiles';
 import 'style/pages-style/Club.scss'
 import { Link } from 'react-router-dom';
+import axios, { AxiosError } from 'axios';
 
 const Club = () => {
+    const [club, setClub] = useState([
+        {
+            id: 0,
+            title: '',
+            enroll: 0,
+        }
+    ]);
+
+    axios.get('/docs/club')
+        .then((res) => {
+            setClub(res.data)
+        })
+        .catch((err) => {
+            if (err instanceof AxiosError) {
+                console.log(err)
+                // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+            }
+        })
+
     return (
         <div>
             <Header />
@@ -31,15 +51,9 @@ const Club = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='club-list'>
-                                        <li><Link to={`/club/${1}`} className='link'>쉬스테마</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>T자형 인재</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>COIN</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>Ber(blessing software)</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>우최동</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>야누스</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>마나무네</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>JJOK</Link></li>
-                                        <li><Link to={`/club/${1}`} className='link'>오태식과 친구들</Link></li>
+                                        {club.map((club) => (
+                                            <li><Link to={`/club/docs/find/${club.id}`} className='link'>{club.title}</Link></li>
+                                        ))}
                                     </ul>
                                 </span>
                             </p>
