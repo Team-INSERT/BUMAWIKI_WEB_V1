@@ -11,9 +11,12 @@ import {
 } from 'allFiles';
 import '../style/pages-style/Teacher.scss'
 import { Link } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
 
 const Teacher = () => {
+    const [teachers, setTeachers] = useState([{
+        id: 0,
+        title: '',
+    }]);
 
     return (
         <div>
@@ -32,15 +35,9 @@ const Teacher = () => {
                             <p className='summary-content'>
                                 <span>
                                     <ul className='teacher-list'>
-                                        <li><Link to={`/teacher/${1}`} className='link'>조윤겸</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>김규봉</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>강은수</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>김경남</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>김태영</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>김태정</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>남민형</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>이경숙</Link></li>
-                                        <li><Link to={`/teacher/${1}`} className='link'>정필립</Link></li>
+                                        {teachers.map((teacher) => (
+                                            <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
+                                        ))}
                                     </ul>
                                 </span>
                             </p>
