@@ -11,8 +11,8 @@ import Classify from "./components/Classify";
 import AccodianMenu from "./components/AccodianMenu";
 import SubFooter from "./components/SubFooter";
 import ScrollBtn from "./components/ScrollBtn";
-import Dummy from "./Dummy.json";
 import Docs from "./pages/Docs"
+import { changeKor } from "util/changeKor";
 
 export {
     Home,
@@ -29,5 +29,5 @@ export {
     Docs,
     ScrollBtn,
     Board,
-    Dummy,
+    changeKor,
 };

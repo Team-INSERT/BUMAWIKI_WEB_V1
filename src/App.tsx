@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import * as R from './allFiles';
 
+axios.defaults.baseURL = 'http://10.150.150.56';
 
 const App = () => {
   return (
