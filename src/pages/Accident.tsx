@@ -7,7 +7,7 @@ import Docs from 'types/docs';
 
 const Accident = () => {
     const [accidents, setAccidents] = useState([]);
-    const [allDate, setAllDate] = useState([2021]);
+    const [allDate] = useState([2021]);
     const nowDate = new Date();
 
     useEffect(() => {
@@ -24,6 +24,7 @@ const Accident = () => {
                     alert('오류가 발생하여 문서를 불러올 수 없습니다.');
                 }
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
