@@ -3,15 +3,11 @@ import * as C from 'allFiles';
 import '../style/pages-style/Student.scss'
 import { Link } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
+import Docs from 'types/docs';
 
 const Student = () => {
-    const [students, setStudents] = useState([{
-        id: 0,
-        title: '',
-        enroll: 0
-    }]);
+    const [students, setStudents] = useState([]);
     const [allDate] = useState([2021]);
-    const [isLoad, setIsLoad] = useState(false);
     const nowDate = new Date();
 
     useEffect(() => {
@@ -25,12 +21,10 @@ const Student = () => {
             .catch((err) => {
                 if (err instanceof AxiosError) {
                     console.log(err);
-                    // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
                 }
             })
-            .finally(() => {
-                setIsLoad(true)
-            })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -45,18 +39,18 @@ const Student = () => {
                         <C.Classify>학생</C.Classify>
                     </div>
                     <div className="line" />
-                    {isLoad ? <>{allDate.map((date, index) => (
-                        <div className='summary-wrap' key={index}>
+                    {allDate.reverse().map(date => (
+                        <div className='summary-wrap'>
                             <C.AccodianMenu name={`${date}학년도 입학생`}>
                                 <ul className="student-list">
-                                    {students.map((student, index) => (<>
+                                    {students.map((student: Docs) => (<>
                                         {student.enroll === date ?
                                             <li><Link to={`/docs/${student.id}`} className='link'>{student.title}</Link></li> : ''}
                                     </>))}
                                 </ul>
                             </C.AccodianMenu>
                         </div>
-                    ))}</> : ''}
+                    ))}
                     <C.SubFooter />
                 </C.Board>
                 <C.ScrollBtn />

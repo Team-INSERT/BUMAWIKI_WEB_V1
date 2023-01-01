@@ -1,20 +1,24 @@
-.notice-wrap {
-    width: 95%;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
+.sub-footer-wrap {
     margin-top: auto;
-    margin-bottom: 20px;
 
-    .notice-logo {
-        margin-left: auto;
-        margin-right: 5px;
-    }
+    .notice-wrap {
+        width: 95%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        margin-bottom: 20px;
 
-    .notice-description {
-        margin-left: auto;
-        text-align: right;
-        font-size: 14px;
-        font-weight: 800;
+        .notice-logo {
+            margin-left: auto;
+            margin-right: 5px;
+        }
+
+        .notice-description {
+            margin-left: auto;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 800;
+        }
     }
 }

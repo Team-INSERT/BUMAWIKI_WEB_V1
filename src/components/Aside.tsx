@@ -32,7 +32,7 @@ const Aside = () => {
             </div>
             {lastModifiedDocs.map((docs: Docs) => (
                 <div className='aside-doc-box' key={docs.id}>
-                    <Link to={'/docs/id'} className='list'>{docs.title} ({changeKor(docs.docsType)})</Link>
+                    <Link to={`/docs/${docs.id}`} className='list'>{docs.title} ({changeKor(docs.docsType)})</Link>
                 </div>
             ))}
         </div>

@@ -1,10 +1,8 @@
-import { PropsWithChildren, ReactNode } from "react";
-
 interface AccodianType {
     name: string,
-    children: ReactNode
+    children: React.ReactNode
 }
 
-type Accodian = ({ name }: AccodianType, { children }: PropsWithChildren) => any;
+type Accodian = ({ name }: AccodianType, { children }: React.PropsWithChildren) => any;
 
 export default Accodian;

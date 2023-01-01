@@ -55,15 +55,18 @@ $main-color: #274168;
     }
 
     .club-list {
+        margin: 30px 0 0 50px;
+        font-weight: 600;
+
         li {
             margin-bottom: 20px;
             color: #0038FF;
-            cursor: pointer;
         }
 
         .link {
-            text-decoration: none;
             color: #0038FF;
+            text-decoration: none;
+            cursor: pointer;
         }
     }
 }

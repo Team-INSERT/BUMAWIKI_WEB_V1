@@ -1,67 +1,68 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Header,
-    Board,
-    SubFooter,
-    Aside,
-    Footer,
-    Classify,
-    AccodianMenu,
-    ScrollBtn
-} from 'allFiles';
+import * as C from 'allFiles';
 import '../style/pages-style/Teacher.scss'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Docs from 'types/docs';
 
 const Teacher = () => {
-    const [teachers, setTeachers] = useState([{
-        id: 0,
-        title: '',
-    }]);
+    const [major, setMajor] = useState([]);
+    const [humanities, setHumanities] = useState([]);
 
     useEffect(() => {
-        axios.get('/docs/majorTeacher')
+        axios.get('/docs/humanitiesTeacher')
             .then((res) => {
-                console.log(res)
-                setTeachers(res.data)
+                setHumanities(res.data)
             })
             .catch((err) => {
                 console.log(err)
-                // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+            })
+        axios.get('/docs/majorTeacher')
+            .then((res) => {
+                setMajor(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.');
             })
     }, []);
 
     return (
         <div>
-            <Header />
+            <C.Header />
             <div className="teacher-board-wrap">
-                <Board>
+                <C.Board>
                     <div className="doc-title-box">
                         <span>부마위키:선생님</span>
                     </div>
                     <div className="classif-box">
-                        <Classify>선생님</Classify>
+                        <C.Classify>선생님</C.Classify>
                     </div>
                     <div className="line" />
+                    <span className='teacher-warning-text'>* 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 *</span>
                     <div className='summary-wrap'>
-                        <AccodianMenu name={'선생님'}>
-                            <div className='summary-content'>
-                                <span>
-                                    <ul className='teacher-list'>
-                                        {teachers.map((teacher) => (
-                                            <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
-                                        ))}
-                                    </ul>
-                                </span>
-                            </div>
-                        </AccodianMenu>
+                        <C.AccodianMenu name={`인문과목 선생님`}>
+                            <ul className="teacher-list">
+                                {humanities.map((teacher: Docs) => (<>
+                                    <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
+                                </>))}
+                            </ul>
+                        </C.AccodianMenu>
+                        <C.AccodianMenu name={`전공과목 선생님`}>
+                            <ul className="teacher-list">
+                                {major.map((teacher: Docs) => (<>
+                                    <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
+                                </>))}
+                            </ul>
+                        </C.AccodianMenu>
                     </div>
-                    <SubFooter />
-                </Board>
-                <ScrollBtn />
-                <Aside />
+                    <C.SubFooter />
+                </C.Board>
+                <C.ScrollBtn />
+                <C.Aside />
             </div>
-            <Footer />
+            <C.Footer />
         </div>
     );
 };

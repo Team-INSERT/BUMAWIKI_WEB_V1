@@ -1,31 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Header,
-    Board,
-    SubFooter,
-    Aside,
-    Footer,
-    AccodianMenu,
-    Classify,
-    ScrollBtn,
-} from 'allFiles';
+import * as C from 'allFiles';
 import 'style/pages-style/Club.scss'
 import { Link } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
+import Docs from 'types/docs';
 
 const Club = () => {
-    const [club, setClub] = useState([
-        {
-            id: 0,
-            title: '',
-            enroll: 0,
-        }
-    ]);
+    const [clubs, setClubs] = useState([]);
 
     useEffect(() => {
         axios.get('/docs/club')
             .then((res) => {
-                setClub(res.data)
+                setClubs(res.data)
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
@@ -37,36 +23,31 @@ const Club = () => {
 
     return (
         <div>
-            <Header />
+            <C.Header />
             <div className="club-board-wrap">
-                <Board>
+                <C.Board>
                     <div className="doc-title-box">
                         <span>부마위키:동아리</span>
                     </div>
                     <div className="classif-box">
-                        <Classify>동아리</Classify>
+                        <C.Classify>동아리</C.Classify>
                     </div>
                     <div className="line" />
-                    {/* 입학년도별 입학생 */}
                     <div className='summary-wrap'>
-                        <AccodianMenu name={'전공동아리'}>
-                            <p className='summary-content'>
-                                <span>
-                                    <ul className='club-list'>
-                                        {club.map((club) => (
-                                            <li><Link to={`/club/docs/find/${club.id}`} className='link'>{club.title}</Link></li>
-                                        ))}
-                                    </ul>
-                                </span>
-                            </p>
-                        </AccodianMenu>
+                        <C.AccodianMenu name={`전공동아리`}>
+                            <ul className="club-list">
+                                {clubs.map((club: Docs) => (<>
+                                    <li><Link to={`/docs/${club.id}`} className='link'>{club.title}</Link></li>
+                                </>))}
+                            </ul>
+                        </C.AccodianMenu>
                     </div>
-                    <SubFooter />
-                </Board>
-                <ScrollBtn />
-                <Aside />
+                    <C.SubFooter />
+                </C.Board>
+                <C.ScrollBtn />
+                <C.Aside />
             </div>
-            <Footer />
+            <C.Footer />
         </div>
     );
 };

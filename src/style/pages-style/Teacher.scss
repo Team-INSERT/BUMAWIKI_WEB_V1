@@ -45,6 +45,13 @@ $main-color: #274168;
         margin-bottom: 30px;
     }
 
+    .teacher-warning-text {
+        font-weight: 700;
+        margin: 20px 0 10px 30px;
+        margin-right: auto;
+        font-size: 13px;
+    }
+
     .summary-wrap {
         @include titleline();
         margin-top: 20px;
@@ -55,15 +62,18 @@ $main-color: #274168;
     }
 
     .teacher-list {
+        margin: 30px 0 0 50px;
+        font-weight: 600;
+
         li {
             margin-bottom: 20px;
             color: #0038FF;
-            cursor: pointer;
         }
 
         .link {
             color: #0038FF;
             text-decoration: none;
+            cursor: pointer;
         }
     }
 }
