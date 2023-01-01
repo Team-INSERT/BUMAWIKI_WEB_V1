@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as C from 'allFiles';
 import 'style/pages-style/Accident.scss'
 import { Link } from 'react-router-dom';
+import axios, { AxiosError } from 'axios';
 
 const Accident = () => {
+    const [docs, setDocs] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/docs/accident`)
+            .then((res) => {
+                console.log(res)
+                setDocs(res.data)
+            })
+            .catch((err) => {
+                if (err instanceof AxiosError) {
+                    console.log(err);
+                    // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                }
+            })
+    }, []);
+
     return (
         <div>
             <C.Header />

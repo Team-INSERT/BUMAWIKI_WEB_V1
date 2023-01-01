@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Header,
     Board,
@@ -22,16 +22,18 @@ const Club = () => {
         }
     ]);
 
-    axios.get('/docs/club')
-        .then((res) => {
-            setClub(res.data)
-        })
-        .catch((err) => {
-            if (err instanceof AxiosError) {
-                console.log(err)
-                // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
-            }
-        })
+    useEffect(() => {
+        axios.get('/docs/club')
+            .then((res) => {
+                setClub(res.data)
+            })
+            .catch((err) => {
+                if (err instanceof AxiosError) {
+                    console.log(err)
+                    // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                }
+            })
+    }, []);
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Header,
     Board,
@@ -19,15 +19,17 @@ const Teacher = () => {
         title: '',
     }]);
 
-    axios.get('/docs/teacher')
-        .then((res) => {
-            console.log(res)
-            setTeachers(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-            // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
-        })
+    useEffect(() => {
+        axios.get('/docs/majorTeacher')
+            .then((res) => {
+                console.log(res)
+                setTeachers(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+                // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+            })
+    }, []);
 
     return (
         <div>
@@ -43,7 +45,7 @@ const Teacher = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         <AccodianMenu name={'선생님'}>
-                            <p className='summary-content'>
+                            <div className='summary-content'>
                                 <span>
                                     <ul className='teacher-list'>
                                         {teachers.map((teacher) => (
@@ -51,7 +53,7 @@ const Teacher = () => {
                                         ))}
                                     </ul>
                                 </span>
-                            </p>
+                            </div>
                         </AccodianMenu>
                     </div>
                     <SubFooter />
