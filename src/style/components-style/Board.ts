@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Board = styled.div`
 	width: 72vw;
 	height:fit-content;
+	min-height: 100vh;
 	background-color: #fff;
 	border-left: 2px solid #ccc;
 	border-right: 2px solid #ccc;
