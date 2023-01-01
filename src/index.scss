@@ -1,6 +1,14 @@
 * {
   padding: 0;
   margin: 0;
+
+  &::selection {
+    background-color: transparent;
+  }
+}
+
+li {
+  list-style: none;
 }
 
 body {
@@ -15,15 +23,4 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-
-}
-
-li {
-  list-style: none;
-}
-
-* {
-  &::selection {
-    background-color: transparent;
-  }
 }

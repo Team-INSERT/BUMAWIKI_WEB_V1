@@ -16,7 +16,7 @@ const Club = () => {
             .catch((err) => {
                 if (err instanceof AxiosError) {
                     console.log(err)
-                    // alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
                 }
             })
     }, []);
@@ -36,9 +36,9 @@ const Club = () => {
                     <div className='summary-wrap'>
                         <C.AccodianMenu name={`전공동아리`}>
                             <ul className="club-list">
-                                {clubs.map((club: Docs) => (<>
-                                    <li><Link to={`/docs/${club.id}`} className='link'>{club.title}</Link></li>
-                                </>))}
+                                {clubs.map((club: Docs) => (
+                                    <li key={club.id}><Link to={`/docs/${club.id}`} className='link'>{club.title}</Link></li>
+                                ))}
                             </ul>
                         </C.AccodianMenu>
                     </div>

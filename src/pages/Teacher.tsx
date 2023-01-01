@@ -44,16 +44,16 @@ const Teacher = () => {
                     <div className='summary-wrap'>
                         <C.AccodianMenu name={`인문과목 선생님`}>
                             <ul className="teacher-list">
-                                {humanities.map((teacher: Docs) => (<>
+                                {humanities.map((teacher: Docs) => (<div key={teacher.id}>
                                     <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
-                                </>))}
+                                </div>))}
                             </ul>
                         </C.AccodianMenu>
                         <C.AccodianMenu name={`전공과목 선생님`}>
                             <ul className="teacher-list">
-                                {major.map((teacher: Docs) => (<>
+                                {major.map((teacher: Docs) => (<div key={teacher.id}>
                                     <li><Link to={`/docs/${teacher.id}`} className='link'>{teacher.title}</Link></li>
-                                </>))}
+                                </div>))}
                             </ul>
                         </C.AccodianMenu>
                     </div>

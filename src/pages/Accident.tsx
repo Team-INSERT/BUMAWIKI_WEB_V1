@@ -24,7 +24,7 @@ const Accident = () => {
                     alert('오류가 발생하여 문서를 불러올 수 없습니다.');
                 }
             })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -41,12 +41,12 @@ const Accident = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         {allDate.reverse().map((date) => (
-                            <C.AccodianMenu name={`${date}년 사건/사고`}>
+                            <C.AccodianMenu name={`${date}년 사건/사고`} key={date}>
                                 <ul className="accident-list">
-                                    {accidents.map((accident: Docs) => (<>
+                                    {accidents.map((accident: Docs) => (<div key={accident.id}>
                                         {accident.enroll === date ?
                                             <li><Link to={`/docs/${accident.id}`} className='link'>{accident.title}</Link></li> : ''}
-                                    </>))}
+                                    </div>))}
                                 </ul>
                             </C.AccodianMenu>
                         ))}
