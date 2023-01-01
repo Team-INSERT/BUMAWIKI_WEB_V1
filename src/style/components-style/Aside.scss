@@ -3,7 +3,6 @@ $main-color: #274168;
 .aside-wrap {
     width: 240px;
     height: fit-content;
-    border: 2px solid #ccc;
     margin-top: 20px;
     position: sticky;
     top: 2vw;
@@ -14,7 +13,8 @@ $main-color: #274168;
         background-color: $main-color;
         display: flex;
         align-items: center;
-        border-bottom: 2px solid #ccc;
+        border: 2px solid #ccc;
+
 
         span {
             text-decoration: none;
@@ -33,7 +33,8 @@ $main-color: #274168;
         background-color: #fff;
         display: flex;
         align-items: center;
-        border-bottom: 2px solid #ccc;
+        border: 2px solid #ccc;
+        border-top: none;
 
         .list {
             color: $main-color;

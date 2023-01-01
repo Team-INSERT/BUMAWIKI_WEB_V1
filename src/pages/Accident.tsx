@@ -1,33 +1,24 @@
 import React from 'react';
-import {
-    Header,
-    Board,
-    SubFooter,
-    Aside,
-    Footer,
-    AccodianMenu,
-    Classify,
-    ScrollBtn,
-} from 'allFiles';
+import * as C from 'allFiles';
 import 'style/pages-style/Accident.scss'
 import { Link } from 'react-router-dom';
 
 const Accident = () => {
     return (
         <div>
-            <Header />
+            <C.Header />
             <div className="accident-board-wrap">
-                <Board>
+                <C.Board>
                     <div className="doc-title-box">
                         <span>부마위키:사건/사고</span>
                     </div>
                     <div className="classif-box">
-                        <Classify>사건/사고</Classify>
+                        <C.Classify>사건/사고</C.Classify>
                     </div>
                     <div className="line" />
                     {/* 사건/사고 목록 */}
                     <div className='summary-wrap'>
-                        <AccodianMenu name={'사건/사고'}>
+                        <C.AccodianMenu name={'사건/사고'}>
                             <p className='summary-content'>
                                 <span>
                                     <ul className='accident-list'>
@@ -44,14 +35,14 @@ const Accident = () => {
                                     </ul>
                                 </span>
                             </p>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
-                    <SubFooter />
-                </Board>
-                <ScrollBtn />
-                <Aside />
+                    <C.SubFooter />
+                </C.Board>
+                <C.ScrollBtn />
+                <C.Aside />
             </div>
-            <Footer />
+            <C.Footer />
         </div>
     );
 };
