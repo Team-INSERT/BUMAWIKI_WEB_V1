@@ -1,8 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import 'style/components-style/Header.scss';
 
 const Header = () => {
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+    const navigateSearchResult = () => {
+        if (search.length === 0) {
+            alert('검색할 문서명을 입력해주세요!')
+        } else {
+            navigate(`/search/${search}`)
+        }
+    }
+
     return (
         <div className='header-wrap'>
             <Link to={'/'} className='logo-wrap'>
@@ -44,9 +54,13 @@ const Header = () => {
                 </Link>
             </div>
             <div className='search-bar'>
-                <div className='search-wrap'>
-                    <input type='text' className='search-input' />
-                    <button className='search-button'>
+                <form className='search-wrap' onSubmit={(e) => { e.preventDefault() }}>
+                    <input type='text'
+                        className='search-input'
+                        value={search}
+                        onChange={(e) => { setSearch(e.target.value) }}
+                    />
+                    <button className='search-button' onClick={navigateSearchResult}>
                         <svg width="16" height="16" viewBox="0 0 1664 1664" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_69_2)">
                                 <path d="M1152 704C1152 580.667 1108.17 475.167 1020.5 387.5C932.833 299.833 827.333 256 704 256C580.667 256 475.167 299.833 387.5 387.5C299.833 475.167 256 580.667 256 704C256 827.333 299.833 932.833 387.5 1020.5C475.167 1108.17 580.667 1152 704 1152C827.333 1152 932.833 1108.17 1020.5 1020.5C1108.17 932.833 1152 827.333 1152 704ZM1664 1536C1664 1570.67 1651.33 1600.67 1626 1626C1600.67 1651.33 1570.67 1664 1536 1664C1500 1664 1470 1651.33 1446 1626L1103 1284C983.667 1366.67 850.667 1408 704 1408C608.667 1408 517.5 1389.5 430.5 1352.5C343.5 1315.5 268.5 1265.5 205.5 1202.5C142.5 1139.5 92.5 1064.5 55.5 977.5C18.5 890.5 0 799.333 0 704C0 608.667 18.5 517.5 55.5 430.5C92.5 343.5 142.5 268.5 205.5 205.5C268.5 142.5 343.5 92.5 430.5 55.5C517.5 18.5 608.667 0 704 0C799.333 0 890.5 18.5 977.5 55.5C1064.5 92.5 1139.5 142.5 1202.5 205.5C1265.5 268.5 1315.5 343.5 1352.5 430.5C1389.5 517.5 1408 608.667 1408 704C1408 850.667 1366.67 983.667 1284 1103L1627 1446C1651.67 1470.67 1664 1500.67 1664 1536Z" fill="#CCCCCC" />
@@ -58,9 +72,9 @@ const Header = () => {
                             </defs>
                         </svg>
                     </button>
-                </div>
+                </form>
                 <div className='login-wrap'>
-                    <span className='login-text'>로그인</span>
+                    <a className='login-text' href='https://auth.bssm.kro.kr/oauth?clientId=cfedc422&redirectURI=http://10.150.150.56/signup/bsm'>로그인</a>
                 </div>
             </div>
         </div>
