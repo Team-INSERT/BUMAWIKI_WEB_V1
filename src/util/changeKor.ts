@@ -5,10 +5,10 @@ export const changeKor = (classify: string) => {
         return '사건/사고';
     } else if (classify === 'CLUB') {
         return '동아리'
-    } else if (classify === 'HUMANITIES_TEACHER') {
-        return '인문 선생님'
+    } else if (classify === 'TEACHER') {
+        return '일반교과 선생님'
     } else if (classify === 'MAJOR_TEACHER') {
-        return '전공 선생님'
+        return '전공교과 선생님'
     }
     return classify;
 }
