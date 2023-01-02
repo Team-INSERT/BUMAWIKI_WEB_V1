@@ -1,5 +1,5 @@
-import { changeKor } from 'allFiles';
 import React, { PropsWithChildren } from 'react';
+import { changeKor } from 'util/changeKor';
 import '../style/components-style/Classify.scss';
 
 const Classification = ({ children }: PropsWithChildren) => {
