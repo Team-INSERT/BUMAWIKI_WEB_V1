@@ -19,7 +19,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div className='project-info-box'>
-                    <span className='project-info'>booma.wiki | boomawiki@gmail.com | BSSM | TEAM OG | PROJECT BOOMAWIKI</span>
+                    <span className='project-info'>buma.wiki | bumawiki@gmail.com | BSSM | TEAM OG | PROJECT BUMAWIKI</span>
                 </div>
                 <div className='project-info-box'>
                     <span className='project-info'>1393, Garak-daero, Gangseo-gu, Busan, Republic of Korea</span>
