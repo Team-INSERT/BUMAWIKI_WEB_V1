@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'style/components-style/Header.scss';
@@ -74,7 +75,7 @@ const Header = () => {
                     </button>
                 </form>
                 <div className='login-wrap'>
-                    <a className='login-text' href='https://auth.bssm.kro.kr/oauth?clientId=cfedc422&redirectURI=http://10.150.150.56/signup/bsm'>로그인</a>
+                    <a href='https://auth.bssm.kro.kr/oauth?clientId=cfedc422&redirectURI=http://10.150.150.56/signup/bsm' className='login-text'>로그인</a>
                 </div>
             </div>
         </div>

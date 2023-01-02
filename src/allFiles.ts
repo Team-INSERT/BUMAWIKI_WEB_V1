@@ -13,6 +13,7 @@ import SubFooter from "./components/SubFooter";
 import ScrollBtn from "./components/ScrollBtn";
 import Docs from "./pages/Docs";
 import Search from "./pages/Search"
+import Signup from "./pages/Signup"
 
 export {
     Home,
@@ -29,5 +30,6 @@ export {
     Docs,
     Search,
     ScrollBtn,
+    Signup,
     Board
 };

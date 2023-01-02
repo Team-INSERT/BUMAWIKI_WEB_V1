@@ -16,6 +16,7 @@ const App = () => {
         <Route path={'/club'} element={<R.Club />} />
         <Route path={'/docs/:id'} element={<R.Docs />} />
         <Route path={'/search/:result'} element={<R.Search />} />
+        <Route path={'/signup/:query'} element={<R.Signup />} />
       </Routes>
     </Router>
   );
