@@ -13,7 +13,6 @@ import SubFooter from "./components/SubFooter";
 import ScrollBtn from "./components/ScrollBtn";
 import Docs from "./pages/Docs";
 import Search from "./pages/Search"
-import { changeKor } from "util/changeKor";
 
 export {
     Home,
@@ -30,6 +29,5 @@ export {
     Docs,
     Search,
     ScrollBtn,
-    Board,
-    changeKor,
+    Board
 };
