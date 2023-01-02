@@ -1,7 +1,7 @@
-import { changeKor } from 'allFiles';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { changeKor } from 'util/changeKor';
 import '../style/components-style/Aside.scss';
 
 interface Docs {
