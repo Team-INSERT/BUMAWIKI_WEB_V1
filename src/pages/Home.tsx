@@ -1,27 +1,18 @@
-import {
-    Header,
-    Footer,
-    Aside,
-    Board,
-    Classify,
-    AccodianMenu,
-    SubFooter,
-    ScrollBtn
-} from 'allFiles';
+import * as C from 'allFiles';
 import React from 'react';
 import '../style/pages-style/Home.scss';
 
 const Home = () => {
     return (
         <div>
-            <Header />
+            <C.Header />
             <div className='home-board-wrap'>
-                <Board>
+                <C.Board>
                     <div className='doc-title-box'>
                         <span>부마위키:대문</span>
                     </div>
                     <div className='classif-box'>
-                        <Classify>부마위키</Classify>
+                        <C.Classify>부마위키</C.Classify>
                     </div>
                     <div className='line' />
                     <div className='home-title-box'>
@@ -160,7 +151,7 @@ const Home = () => {
                     {/* 개요, 학과 등 학교 설명 컴포넌트 */}
 
                     <div className='summary-wrap'>
-                        <AccodianMenu name={'개요'}>
+                        <C.AccodianMenu name={'개요'}>
                             <p className='summary-content'>
                                 <span>
                                     환영합니다! 창의와 성실로 꿈을 펼치는 부산소프트웨어마이스터고등학교입니다.<br />
@@ -178,10 +169,10 @@ const Home = () => {
                             <div className='summary-video'>
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/DIvVZouIVpQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                             </div>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
                     <div className='department-wrap'>
-                        <AccodianMenu name={'학과'}>
+                        <C.AccodianMenu name={'학과'}>
                             <p className='department-description'><span>1학년때에는 공통이며, 2학년 때 소프트웨어개발과 32명, 임베디드소프트웨어과 32명으로 나뉘게 된다.</span></p>
                             <span className='department'>소프트웨어개발과</span>
                             <p className='department-description' style={{ marginTop: '20px' }}>
@@ -191,10 +182,10 @@ const Home = () => {
                             <p className='department-description' style={{ marginTop: '20px' }}>
                                 <span>전자기기 및 산업용 기기의 HW와 SW에 대한 이해를 바탕으로 제조업 하드웨어를 제어하는 펌웨어 개발, 시험, 유지 보수를<br /> 능동적으로 수행할 수 있는 시스템 SW엔지니어 및 응용 SW엔지니어를 양성한다.</span>
                             </p>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
                     <div className='song-wrap'>
-                        <AccodianMenu name={'교가'}>
+                        <C.AccodianMenu name={'교가'}>
                             <p className='song-description'>
                                 <span>
                                     옛 가야 푸른 정기 서려도는 낙동강 구비<br />
@@ -205,10 +196,10 @@ const Home = () => {
                                     영원토록 길이 빛날 부산소프트웨어마이스터고
                                 </span>
                             </p>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
                     <div className='history-wrap'>
-                        <AccodianMenu name={'학교 연혁'}>
+                        <C.AccodianMenu name={'학교 연혁'}>
                             <div className='history-description'>
                                 <div className='titleBox-wrap'>
                                     <div className='table-wrap' style={{ marginTop: '-4px', borderTop: '2px solid #ccc' }}>
@@ -333,10 +324,10 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
                     <div className='bus-wrap'>
-                        <AccodianMenu name={'운행 버스'}>
+                        <C.AccodianMenu name={'운행 버스'}>
                             <div className='bus-content'>
                                 <p>세 노선 다 배차간격이 길어 이용하기 어려운 편이다. 심지어 김해 4번과 강서2번, 강서15-1번은 일 8회만 운행한다.<br />그래서 기숙사 입소, 퇴소 날에는 학교에서 셔틀버스를 운행한다.</p>
                             </div>
@@ -368,14 +359,14 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </AccodianMenu>
+                        </C.AccodianMenu>
                     </div>
-                    <SubFooter />
-                </Board>
-                <ScrollBtn />
-                <Aside />
+                    <C.SubFooter />
+                </C.Board>
+                <C.ScrollBtn />
+                <C.Aside />
             </div>
-            <Footer />
+            <C.Footer />
         </div>
     );
 };
