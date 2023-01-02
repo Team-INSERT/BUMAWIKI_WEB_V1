@@ -20,12 +20,10 @@ const Signup = () => {
             navigate('/')
             alert('로그인 도중 오류가 발생했습니다.')
         })
+        // eslint-disable-next-line
     }, []);
 
-    return (
-        <div>
-        </div>
-    );
+    return <></>;
 };
 
 export default Signup;
