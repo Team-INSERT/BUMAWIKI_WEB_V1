@@ -7,16 +7,11 @@ import * as R from './allFiles';
 axios.defaults.baseURL = 'http://10.150.150.56';
 
 const userInfo = {
-  class: 0,
-  code: 0,
-  enroled: "",
-  grade: 0,
-  name: "",
-  nickname: "",
-  studentNo: "",
-  profile: "",
-  isLogin: false,
-  isManager: false,
+  id: 0,
+  email: '',
+  nickName: '',
+  authority: 'USER',
+  contributeDocs: []
 };
 
 export const UserContext = createContext(userInfo);
