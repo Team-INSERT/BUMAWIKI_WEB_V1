@@ -7,7 +7,13 @@ import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
     const router = useParams();
-    const [docs, setDocs]: any = useState();
+    const [docs, setDocs] = useState({
+        title: '',
+        docsType: '',
+        enroll: 0,
+        contents: '',
+        lastModifiedAt: ''
+    });
     const [isLoad, setIsLoad] = useState(false);
 
     useEffect(() => {

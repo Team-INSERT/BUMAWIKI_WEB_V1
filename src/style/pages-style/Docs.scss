@@ -66,3 +66,22 @@ $main-color: #274168;
         }
     }
 }
+
+.update-textarea {
+    height: 500px;
+    border: 2px solid #ccc;
+    resize: none;
+    outline: none;
+    padding: 10px;
+}
+
+.update-button {
+    width: 130px;
+    height: 40px;
+    border: 2px solid #ccc;
+    background-color: $main-color;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 20px 0 20px auto;
+}

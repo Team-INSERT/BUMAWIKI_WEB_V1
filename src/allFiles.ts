@@ -15,6 +15,8 @@ import Docs from "./pages/Docs";
 import Search from "./pages/Search"
 import Signup from "./pages/Signup"
 import Create from "./pages/Create"
+import Update from "./pages/Update"
+import NotFound from "./pages/NotFound"
 
 export {
     Home,
@@ -33,5 +35,7 @@ export {
     ScrollBtn,
     Signup,
     Create,
+    Update,
+    NotFound,
     Board
 };

@@ -54,6 +54,8 @@ const App = () => {
           <Route path={'/search/:result'} element={<R.Search />} />
           <Route path={'/signup/:query'} element={<R.Signup />} />
           <Route path={'/create'} element={<R.Create />} />
+          <Route path={'/update/:id'} element={<R.Update />} />
+          <Route path={'*'} element={<R.NotFound />} />
         </Routes>
       </UserContext.Provider>
     </Router>
