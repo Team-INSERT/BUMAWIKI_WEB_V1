@@ -10,7 +10,7 @@ const Teacher = () => {
     const [humanities, setHumanities] = useState([]);
 
     useEffect(() => {
-        axios.get('/docs/humanitiesTeacher')
+        axios.get('/docs/teacher')
             .then((res) => {
                 setHumanities(res.data)
             })
