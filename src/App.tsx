@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
 import * as R from './allFiles';
 
-axios.defaults.baseURL = 'http://10.150.149.108';
+axios.defaults.baseURL = 'http://bumawiki.kro.kr/api';
 
 const userInfo = {
   id: 0,
