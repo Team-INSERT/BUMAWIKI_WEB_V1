@@ -14,6 +14,7 @@ import ScrollBtn from "./components/ScrollBtn";
 import Docs from "./pages/Docs";
 import Search from "./pages/Search"
 import Signup from "./pages/Signup"
+import Create from "./pages/Create"
 
 export {
     Home,
@@ -31,5 +32,6 @@ export {
     Search,
     ScrollBtn,
     Signup,
+    Create,
     Board
 };

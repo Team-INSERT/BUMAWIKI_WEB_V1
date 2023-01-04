@@ -4,7 +4,7 @@ export const documentation = (content: string) => {
         .replace(/<\/목차>/, `?^#h1^?`)
         .replace(/<내용>/, `?^div className='accodian-children'^?`)
         .replace(/<\/내용>/, `?^#div^?`)
-        .replace(/<항목 점>/gi, `?^li style="list-style: disc;"^?`)
+        .replace(/<항목>/gi, `?^li style="list-style: disc;"^?`)
         .replace(/<강조>/, `?^strong^?`)
         .replace(/<\/강조>/, `?^#strong^?`)
         .replace(/<취소선>/, `?^del style="color:#9D9D9D;"^?`)

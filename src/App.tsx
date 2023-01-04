@@ -53,6 +53,7 @@ const App = () => {
           <Route path={'/docs/:id'} element={<R.Docs />} />
           <Route path={'/search/:result'} element={<R.Search />} />
           <Route path={'/signup/:query'} element={<R.Signup />} />
+          <Route path={'/create'} element={<R.Create />} />
         </Routes>
       </UserContext.Provider>
     </Router>
