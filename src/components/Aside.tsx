@@ -20,7 +20,6 @@ const Aside = () => {
             })
             .catch((err) => {
                 console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.');
             })
     }, []);
 
