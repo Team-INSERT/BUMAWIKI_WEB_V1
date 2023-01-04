@@ -1,13 +1,33 @@
 import * as C from 'allFiles';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getCookie } from 'util/getCookie';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
     const router = useParams();
+    const navigate = useNavigate();
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('');
+
+    const onClickUpdateDocs = () => {
+        if (contents.length <= 2) {
+            alert('문서가 비어있습니다!')
+            return;
+        }
+        axios.put(`docs/api/update/${router.id}`, {
+            headers: {
+                authorization: getCookie('authorization')
+            }
+        }).then(() => {
+            alert('문서가 편집되었습니다!');
+            navigate('/');
+        }).catch((err) => {
+            console.log(err)
+            alert('오류가 발생했습니다!')
+        })
+    }
 
     useEffect(() => {
         axios.get(`/docs/find/id/${router.id}`)
@@ -33,7 +53,7 @@ const Docs = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents} />
-                        <button className='update-button'>문서 업데이트</button>
+                        <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>
                     </div>
                     <C.SubFooter />
                 </C.Board>
