@@ -1,0 +1,100 @@
+$main-color: #274168;
+
+.create-table {
+    width: 68vw;
+
+    .tr-wrap {
+        display: flex;
+        height: 40px;
+        align-items: center;
+        border: 2px solid #ccc;
+        border-bottom: none;
+
+        .tr-textarea {
+            width: 100%;
+            height: 90%;
+            outline: none;
+            padding-left: 20px;
+            resize: none;
+            border: none;
+        }
+
+        .docs-example {
+            width: 300px;
+        }
+
+        .docs-example-warn {
+            margin-bottom: auto;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    }
+
+    .tr-text {
+        height: 400px;
+    }
+
+    .tr-example {
+        height: 300px;
+    }
+
+    .last-wrap {
+        border-bottom: 2px solid #ccc;
+    }
+
+    .tr-title {
+        background-color: $main-color;
+        height: 100%;
+        width: 110px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 800;
+    }
+
+    .tr-content {
+        font-weight: 700;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding-left: 20px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+
+        .radio {
+            margin-left: 40px;
+        }
+
+        .classify {
+            margin-right: 5px;
+        }
+    }
+}
+
+.create-submit {
+    display: flex;
+    width: 68vw;
+    height: 50px;
+    margin-bottom: 20px;
+
+    .create-warn {
+        color: red;
+        font-weight: 800;
+        margin-top: 10px;
+        margin-right: auto;
+    }
+
+    button {
+        margin-top: 10px;
+        width: 130px;
+        height: 40px;
+        border: 2px solid #ccc;
+        background-color: $main-color;
+        color: white;
+        font-weight: 800;
+        cursor: pointer;
+    }
+}
