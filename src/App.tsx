@@ -31,7 +31,7 @@ const App = () => {
               refresh_token: getCookie('refresh_token')
             }
           }).then((res) => {
-            document.cookie = `accessToken=${res.data.accessToken};`
+            document.cookie = `authorization=${res.data.accessToken};`
             document.cookie = `refreshToken=${res.data.refreshToken};`
             document.cookie = `expiredAt=${res.data.expiredAt};`
           })
