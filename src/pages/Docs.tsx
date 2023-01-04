@@ -1,7 +1,7 @@
 import * as C from 'allFiles';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { changeKor } from 'util/changeKor';
 import '../style/pages-style/Docs.scss'
 

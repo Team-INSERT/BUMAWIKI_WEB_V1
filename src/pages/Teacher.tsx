@@ -16,7 +16,6 @@ const Teacher = () => {
             })
             .catch((err) => {
                 console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.');
             })
         axios.get('/docs/majorTeacher')
             .then((res) => {
@@ -40,7 +39,7 @@ const Teacher = () => {
                         <C.Classify>선생님</C.Classify>
                     </div>
                     <div className="line" />
-                    <span className='teacher-warning-text'>* 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 *</span>
+                    <span className='teacher-warning-text'>※ 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</span>
                     <div className='summary-wrap'>
                         <C.AccodianMenu name={`인문과목 선생님`}>
                             <ul className="teacher-list">
