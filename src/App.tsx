@@ -20,7 +20,7 @@ const App = () => {
   const [user, setUser] = useState(userInfo);
 
   useEffect(() => {
-    axios.get('/')
+    axios.get('/user')
       .then((res) => {
         setUser(res.data)
       })
