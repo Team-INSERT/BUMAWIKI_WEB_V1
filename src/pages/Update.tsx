@@ -12,14 +12,19 @@ const Docs = () => {
     const [contents, setContents] = useState('');
 
     const onClickUpdateDocs = () => {
+        var FormData = require('form-data');
+        var data = new FormData();
+        data.append('request', { contents: "글 내용을 이렇게 변경합니다 [[사진]]" });
+
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
         }
-        axios.put(`docs/update/${router.id}`, {
+        axios.put(`docs/update/${router.id}`, data, {
             headers: {
-                authorization: getCookie('authorization')
-            }
+                'Content-Type': `multipart/form-data`,
+                Authorization: getCookie('authorization'),
+            },
         }).then(() => {
             alert('문서가 편집되었습니다!');
             navigate('/');
