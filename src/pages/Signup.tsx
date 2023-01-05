@@ -3,15 +3,14 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-    const params = new URLSearchParams(window.location.search);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.post('/auth/oauth/bsm', {
+        axios.post('/auth/oauth/bsm', {}, {
             headers: {
-                authCode: params.get("code")
+                authCode: window.location.search.replace('?code=', '')
             }
         }).then((res) => {
-            document.cookie = `accessToken=${res.data.accessToken};`
+            document.cookie = `authorization=${res.data.accessToken};`
             document.cookie = `refreshToken=${res.data.refreshToken};`
             document.cookie = `expiredAt=${res.data.expiredAt};`
             navigate('/')
