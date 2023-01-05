@@ -26,7 +26,7 @@ const Docs = () => {
             alert('문서의 분류를 선택해주세요!')
             return;
         }
-        axios.post('/docs/api/create', {
+        axios.post('/docs/create', {
             headers: {
                 Authorization: getCookie('authorization'),
                 refresh_token: getCookie('refresh_token')

@@ -16,7 +16,7 @@ const Docs = () => {
             alert('문서가 비어있습니다!')
             return;
         }
-        axios.put(`docs/api/update/${router.id}`, {
+        axios.put(`docs/update/${router.id}`, {
             headers: {
                 authorization: getCookie('authorization')
             }

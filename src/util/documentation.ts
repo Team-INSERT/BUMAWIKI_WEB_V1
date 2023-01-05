@@ -13,6 +13,8 @@ export const documentation = (content: string) => {
         .replace(/}>/, `'^?`)
         .replace(/<\/링크>/, `?^#a^?`)
         .replace(/<br\/>/, `?^br#^?`)
+        .replace(/<</, `?^img src='`)
+        .replace(/>>/, `' alt='' #^?`)
         .replace(/<.*>/gi, ``)
     const HTML_CONTENT = ORIGINAL_CONTENT
         .replace(/\?\^/gi, `<`)

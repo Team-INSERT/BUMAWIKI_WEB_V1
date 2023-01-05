@@ -3,6 +3,7 @@ import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { changeKor } from 'util/changeKor';
+import { documentation } from 'util/documentation';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
@@ -50,7 +51,7 @@ const Docs = () => {
                                         이름 : {docs.title}<br />
                                         입학년도 : {docs.enroll}년<br />
                                         분류 : {changeKor(docs.docsType)}<br />
-                                        {docs.contents}<br />
+                                        {documentation(docs.contents)}<br />
                                     </C.AccodianMenu>
                                     <C.AccodianMenu name="어록">
                                         마지막 수정 날짜 : {docs.lastModifiedAt.replace('T', ' ')}
