@@ -20,11 +20,17 @@ const App = () => {
   const [user, setUser] = useState(userInfo);
 
   useEffect(() => {
-    axios.get('/user')
+    axios.get('/user', {
+      headers: {
+        'Authorization': getCookie('authorization')
+      }
+    })
       .then((res) => {
+        console.log(res.data)
         setUser(res.data)
       })
       .catch((err) => {
+        console.log(err);
         if (err instanceof AxiosError && err?.response?.status === 403) {
           axios.put('/auth/refresh/access', {
             headers: {
@@ -52,9 +58,10 @@ const App = () => {
           <Route path={'/club'} element={<R.Club />} />
           <Route path={'/docs/:id'} element={<R.Docs />} />
           <Route path={'/search/:result'} element={<R.Search />} />
-          <Route path={'/signup/:query'} element={<R.Signup />} />
+          <Route path={'/oauth'} element={<R.Signup />} />
           <Route path={'/create'} element={<R.Create />} />
           <Route path={'/update/:id'} element={<R.Update />} />
+          <Route path={'/version/:id'} element={<R.Version />} />
           <Route path={'*'} element={<R.NotFound />} />
         </Routes>
       </UserContext.Provider>

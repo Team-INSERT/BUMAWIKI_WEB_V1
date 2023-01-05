@@ -17,6 +17,7 @@ import Signup from "./pages/Signup"
 import Create from "./pages/Create"
 import Update from "./pages/Update"
 import NotFound from "./pages/NotFound"
+import Version from "./pages/Version"
 
 export {
     Home,
@@ -37,5 +38,6 @@ export {
     Create,
     Update,
     NotFound,
+    Version,
     Board
 };

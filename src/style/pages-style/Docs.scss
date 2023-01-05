@@ -85,3 +85,23 @@ $main-color: #274168;
     cursor: pointer;
     margin: 20px 0 20px auto;
 }
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+
+    .last-update-date {
+        font-weight: 700;
+        font-size: 12px;
+        margin-left: auto;
+    }
+
+    .docs-content {
+        margin: 20px 0 20px 0;
+
+        img {
+            margin-top: 10px;
+            width: 80%;
+        }
+    }
+}
