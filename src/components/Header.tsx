@@ -74,7 +74,7 @@ const Header = () => {
                     </button>
                 </form>
                 <div className='login-wrap'>
-                    <a href='https://auth.bssm.kro.kr/oauth?clientId=cfedc422&redirectURI=http://10.150.150.56/signup/bsm' className='login-text'>로그인</a>
+                    <a href='https://auth.bssm.kro.kr/oauth?clientId=75711f76&redirectURI=http://localhost:3000/oauth' className='login-text'>로그인</a>
                 </div>
             </div>
         </div>
