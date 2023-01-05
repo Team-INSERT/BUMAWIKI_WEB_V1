@@ -3,6 +3,7 @@ import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { changeKor } from 'util/changeKor';
+import { dateParser } from 'util/dateParser';
 import { documentation } from 'util/documentation';
 import '../style/pages-style/Docs.scss'
 
@@ -21,7 +22,10 @@ const Docs = () => {
         axios.get(`/docs/find/id/${router.id}`)
             .then((res) => {
                 console.log(res)
-                setDocs(res.data)
+                setDocs({
+                    ...res.data,
+                    lastModifiedAt: dateParser(res.data.lastModifiedAt)
+                })
                 setIsLoad(true);
             })
             .catch((err) => {
@@ -30,6 +34,7 @@ const Docs = () => {
                     alert('오류가 발생하여 문서를 불러올 수 없습니다.');
                 }
             })
+        // eslint-disable-next-line
     }, [router.id]);
     return (
         <div>
@@ -44,25 +49,16 @@ const Docs = () => {
                     </div>
                     <div className="line" />
                     <div className='summary-wrap'>
-                        {isLoad ?
-                            (
-                                <div>
-                                    <C.AccodianMenu name="개요">
-                                        이름 : {docs.title}<br />
-                                        입학년도 : {docs.enroll}년<br />
-                                        분류 : {changeKor(docs.docsType)}<br />
-                                        {documentation(docs.contents)}<br />
-                                    </C.AccodianMenu>
-                                    <C.AccodianMenu name="어록">
-                                        마지막 수정 날짜 : {docs.lastModifiedAt.replace('T', ' ')}
-                                    </C.AccodianMenu>
-                                    <C.AccodianMenu name="마지막 수정일">
-                                        마지막 수정 날짜 : {docs.lastModifiedAt.replace('T', ' ')}
-                                    </C.AccodianMenu>
-                                </div>
-                            )
-                            : ''
-                        }
+                        {isLoad ? (
+                            <div className='content-wrap'>
+                                <span className='last-update-date'>마지막 수정 : {docs.lastModifiedAt}</span>
+                                <C.AccodianMenu name="개요">
+                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents) }}>
+                                    </div>
+                                    <br />
+                                </C.AccodianMenu>
+                            </div>
+                        ) : ''}
                     </div>
                     <C.SubFooter />
                 </C.Board>
