@@ -55,6 +55,7 @@ const Docs = () => {
                     <div className="docs-title-box">
                         <span>문서 편집 : {title}</span>
                     </div>
+                    <img src='/images/docs-example.png' alt='문서작성법' className='docs-example' />
                     <div className="line" />
                     <div className='summary-wrap'>
                         <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
