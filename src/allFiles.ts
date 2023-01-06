@@ -18,8 +18,7 @@ import Create from "./pages/Create"
 import Update from "./pages/Update"
 import NotFound from "./pages/NotFound"
 import Version from "./pages/Version"
-import VersionBtn from "./components/VersionBtn";
-import UpdateBtn from "./components/UpdateBtn";
+import DetailBtn from "./components/DetailBtn";
 import MyPage from "./pages/MyPage"
 
 export {
@@ -43,7 +42,6 @@ export {
     NotFound,
     Version,
     Board,
-    VersionBtn,
-    UpdateBtn,
+    DetailBtn,
     MyPage,
 };

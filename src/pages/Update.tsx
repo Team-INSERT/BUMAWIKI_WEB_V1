@@ -1,20 +1,21 @@
 import * as C from 'allFiles';
+import { UserContext } from 'App';
 import axios, { AxiosError } from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
     const router = useParams();
+    const user = useContext(UserContext);
     const navigate = useNavigate();
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('');
 
     const onClickUpdateDocs = () => {
-        var FormData = require('form-data');
-        var data = new FormData();
-        console.log(contents.replace(/\n/gi, '<br>'))
+        const FormData = require('form-data');
+        const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
@@ -29,13 +30,22 @@ const Docs = () => {
             alert('문서가 편집되었습니다!');
             navigate(`/docs/${router.id}`);
         }).catch((err) => {
-            if (err.response.data.status === 403) {
+            console.log(err)
+            if (err.response.status === 403) {
                 alert('로그인 후 이용 가능한 서비스입니다.');
             } else {
-                alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.data.status}`)
+                alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
             }
         })
     }
+
+    useEffect(() => {
+        if (!user.id) {
+            alert('로그인 후 이용 가능한 서비스입니다.');
+            navigate(`/docs/${router.id}`)
+        }
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         axios.get(`/docs/find/id/${router.id}`)
