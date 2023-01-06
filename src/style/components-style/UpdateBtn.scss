@@ -1,0 +1,16 @@
+.updating {
+    font-weight: 800;
+    cursor: pointer;
+
+    ul {
+        display:flex;
+
+        li {
+            margin:10px;
+            
+            .link {
+                text-decoration: none;
+            }
+        }
+    }
+}
