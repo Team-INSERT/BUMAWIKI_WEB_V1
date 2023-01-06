@@ -26,7 +26,6 @@ const App = () => {
       }
     })
       .then((res) => {
-        console.log(res.data)
         setUser(res.data)
       })
       .catch((err) => {
@@ -62,6 +61,7 @@ const App = () => {
           <Route path={'/create'} element={<R.Create />} />
           <Route path={'/update/:id'} element={<R.Update />} />
           <Route path={'/version/:id'} element={<R.Version />} />
+          <Route path={'/mypage'} element={<R.MyPage />} />
           <Route path={'*'} element={<R.NotFound />} />
         </Routes>
       </UserContext.Provider>
