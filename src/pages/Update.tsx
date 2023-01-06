@@ -14,8 +14,7 @@ const Docs = () => {
     const onClickUpdateDocs = () => {
         var FormData = require('form-data');
         var data = new FormData();
-        data.append('request', { contents: "글 내용을 이렇게 변경합니다 [[사진]]" });
-
+        data.append('request', new Blob([`{ \"contents\": "글 내용을 이렇게 변경합니다 [[사진]]" }`],{type:'application/json'}),{contentType: 'application/json',});
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
@@ -24,6 +23,7 @@ const Docs = () => {
             headers: {
                 'Content-Type': `multipart/form-data`,
                 Authorization: getCookie('authorization'),
+                //...data.getHeaders
             },
         }).then(() => {
             alert('문서가 편집되었습니다!');
