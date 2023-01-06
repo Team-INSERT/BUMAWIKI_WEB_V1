@@ -29,10 +29,11 @@ const Docs = () => {
             alert('문서가 편집되었습니다!');
             navigate(`/docs/${router.id}`);
         }).catch((err) => {
-            if (err.response.data.status === 403) {
+            console.log(err)
+            if (err.response.status === 403) {
                 alert('로그인 후 이용 가능한 서비스입니다.');
             } else {
-                alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.data.status}`)
+                alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
             }
         })
     }
