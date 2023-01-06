@@ -1,0 +1,26 @@
+.detail-button-wrap {
+    display: flex;
+
+    .link-wrap {
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 52px;
+            height: 26px;
+            border: 2px solid #ccc;
+
+            .link {
+                color: rgb(146, 146, 146);
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+
+        &:first-child {
+            div {
+                border-right: none;
+            }
+        }
+    }
+}

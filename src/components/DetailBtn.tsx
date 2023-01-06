@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { dateParser } from 'util/dateParser';
-import '../style/components-style/DocsMenu.scss';
+import '../style/components-style/DetailBtn.scss';
 
-const VersionBtn = () => {
+const DetailBtn = () => {
     const router = useParams();
     const [docs, setDocs] = useState({
         id: '',
@@ -32,10 +32,19 @@ const VersionBtn = () => {
             })
     }, [router.id]);
     return (
-        <div className="version">
-            <Link to={`/version/${docs?.id}`} className='link'>수정기록</Link>
+        <div className="detail-button-wrap">
+            <Link to={`/update/${docs?.id}`} className='link-wrap'>
+                <div>
+                    <h1 className='link'>편집</h1>
+                </div>
+            </Link>
+            <Link to={`/version/${docs?.id}`} className='link-wrap'>
+                <div>
+                    <h1 className='link'>기록</h1>
+                </div>
+            </Link>
         </div>
     );
 }
 
-export default VersionBtn;
+export default DetailBtn;
