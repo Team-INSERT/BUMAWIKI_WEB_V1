@@ -26,15 +26,15 @@ const Docs = () => {
             alert('문서의 분류를 선택해주세요!')
             return;
         }
-        axios.post('/docs/create', {
+        const FormData = require('form-data');
+        const data = new FormData();
+        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        axios.post('/docs/create', data, {
             headers: {
+                'Content-Type': `multipart/form-data`,
                 Authorization: getCookie('authorization'),
                 refresh_token: getCookie('refresh_token')
             },
-            title,
-            enroll,
-            contents,
-            docsType,
         }).then(() => {
             alert('문서가 생성되었습니다!')
             navigate('/');
@@ -56,7 +56,9 @@ const Docs = () => {
                         <div className='tr-wrap'>
                             <div className='tr-title'>분류</div>
                             <div className='tr-content'>
-                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify' id='TEACHER' name='radio' />
+                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify' id='STUDENT' name='radio' />
+                                <label htmlFor='STUDENT'>학생</label>
+                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='TEACHER' name='radio' />
                                 <label htmlFor='TEACHER'>선생님</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='ACCIDENT' name='radio' />
                                 <label htmlFor='ACCIDENT'>사건/사고</label>
