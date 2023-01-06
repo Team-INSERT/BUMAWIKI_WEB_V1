@@ -6,6 +6,9 @@ import { changeKor } from 'util/changeKor';
 import { dateParser } from 'util/dateParser';
 import { documentation } from 'util/documentation';
 import '../style/pages-style/Docs.scss'
+import VersionBtn from "../components/VersionBtn";
+import UpdateBtn from "../components/UpdateBtn";
+
 
 const Docs = () => {
     const router = useParams();
@@ -43,6 +46,12 @@ const Docs = () => {
                 <C.Board>
                     <div className="docs-title-box">
                         <span>{docs?.title}</span>
+                        <div className="docs-menu">
+                            <ul>
+                                <li><UpdateBtn /></li>
+                                <li><VersionBtn /></li>
+                            </ul>
+                        </div>
                     </div>
                     <div className="classif-box">
                         <C.Classify>{changeKor(docs?.docsType)}</C.Classify>
