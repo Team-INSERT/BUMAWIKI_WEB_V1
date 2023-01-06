@@ -3,6 +3,7 @@ import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
+import { documentation } from '../util/documentation';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
@@ -14,7 +15,8 @@ const Docs = () => {
     const onClickUpdateDocs = () => {
         var FormData = require('form-data');
         var data = new FormData();
-        data.append('request', new Blob([`{ \"contents\": "글 내용을 이렇게 변경합니다 [[사진]]" }`],{type:'application/json'}),{contentType: 'application/json',});
+        console.log(contents.replace(/\n/gi, '<br>'))
+        data.append('request', new Blob([`{ \"contents\": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
@@ -23,11 +25,10 @@ const Docs = () => {
             headers: {
                 'Content-Type': `multipart/form-data`,
                 Authorization: getCookie('authorization'),
-                //...data.getHeaders
             },
         }).then(() => {
             alert('문서가 편집되었습니다!');
-            navigate('/');
+            navigate(`/docs/${router.id}`);
         }).catch((err) => {
             console.log(err)
             alert('오류가 발생했습니다!')
@@ -57,7 +58,7 @@ const Docs = () => {
                     </div>
                     <div className="line" />
                     <div className='summary-wrap'>
-                        <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents} />
+                        <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
                         <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>
                     </div>
                     <C.SubFooter />
