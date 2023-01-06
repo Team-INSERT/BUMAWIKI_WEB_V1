@@ -3,7 +3,6 @@ import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
-import { documentation } from '../util/documentation';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
@@ -16,7 +15,7 @@ const Docs = () => {
         var FormData = require('form-data');
         var data = new FormData();
         console.log(contents.replace(/\n/gi, '<br>'))
-        data.append('request', new Blob([`{ \"contents\": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
