@@ -18,6 +18,8 @@ import Create from "./pages/Create"
 import Update from "./pages/Update"
 import NotFound from "./pages/NotFound"
 import Version from "./pages/Version"
+import VersionBtn from "./components/VersionBtn";
+import UpdateBtn from "./components/UpdateBtn";
 
 export {
     Home,
@@ -39,5 +41,7 @@ export {
     Update,
     NotFound,
     Version,
-    Board
+    Board,
+    VersionBtn,
+    UpdateBtn,
 };
