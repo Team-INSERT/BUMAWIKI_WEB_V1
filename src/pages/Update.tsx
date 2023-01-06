@@ -4,7 +4,6 @@ import axios, { AxiosError } from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
-import useDidMountEffect from 'util/useDidMountEffect';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
@@ -15,9 +14,8 @@ const Docs = () => {
     const [contents, setContents] = useState('');
 
     const onClickUpdateDocs = () => {
-        var FormData = require('form-data');
-        var data = new FormData();
-        console.log(contents.replace(/\n/gi, '<br>'))
+        const FormData = require('form-data');
+        const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
@@ -46,6 +44,7 @@ const Docs = () => {
             alert('로그인 후 이용 가능한 서비스입니다.');
             navigate(`/docs/${router.id}`)
         }
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
