@@ -1,12 +1,15 @@
 import * as C from 'allFiles';
+import { UserContext } from 'App';
 import axios, { AxiosError } from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCookie } from 'util/getCookie';
+import useDidMountEffect from 'util/useDidMountEffect';
 import '../style/pages-style/Docs.scss'
 
 const Docs = () => {
     const router = useParams();
+    const user = useContext(UserContext);
     const navigate = useNavigate();
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('');
@@ -37,6 +40,13 @@ const Docs = () => {
             }
         })
     }
+
+    useEffect(() => {
+        if (!user.id) {
+            alert('로그인 후 이용 가능한 서비스입니다.');
+            navigate(`/docs/${router.id}`)
+        }
+    }, []);
 
     useEffect(() => {
         axios.get(`/docs/find/id/${router.id}`)
