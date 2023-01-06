@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { dateParser } from 'util/dateParser';
-import '../style/components-style/UpdateBtn.scss';
+import '../style/components-style/DocsMenu.scss';
 
 const UpdateBtn = () => {
     const router = useParams();

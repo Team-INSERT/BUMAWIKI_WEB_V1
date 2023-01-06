@@ -17,7 +17,8 @@ const Docs = () => {
         docsType: '',
         enroll: 0,
         contents: '',
-        lastModifiedAt: ''
+        lastModifiedAt: '',
+        view: '',
     });
     const [isLoad, setIsLoad] = useState(false);
 
@@ -47,10 +48,11 @@ const Docs = () => {
                     <div className="docs-title-box">
                         <span>{docs?.title}</span>
                         <div className="docs-menu">
-                            <ul>
-                                <li><UpdateBtn /></li>
-                                <li><VersionBtn /></li>
-                            </ul>
+                            <table>
+                                {/* <th>view:{docs.view}</th> */}
+                                <th><UpdateBtn /></th>
+                                <th><VersionBtn /></th>
+                            </table>
                         </div>
                     </div>
                     <div className="classif-box">

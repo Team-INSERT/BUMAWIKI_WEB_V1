@@ -14,6 +14,7 @@ const Signup = () => {
             document.cookie = `refreshToken=${res.data.refreshToken};`
             document.cookie = `expiredAt=${res.data.expiredAt};`
             navigate('/')
+            window.location.reload()
         }).catch((err) => {
             console.log(err)
             navigate('/')

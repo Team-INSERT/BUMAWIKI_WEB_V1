@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import { UserContext } from 'App';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'style/components-style/Header.scss';
+import useDidMountEffect from 'util/useDidMountEffect';
 
 const Header = () => {
     const [search, setSearch] = useState('');
+    const [isLoad, setIsLoad] = useState(false);
+    const user = useContext(UserContext);
     const navigate = useNavigate();
     const navigateSearchResult = () => {
         if (search.length === 0) {
@@ -12,6 +16,10 @@ const Header = () => {
             navigate(`/search/${search}`)
         }
     }
+
+    useDidMountEffect(() => {
+        setIsLoad(true);
+    }, [user]);
 
     return (
         <div className='header-wrap'>
@@ -74,7 +82,7 @@ const Header = () => {
                     </button>
                 </form>
                 <div className='login-wrap'>
-                    <a href='https://auth.bssm.kro.kr/oauth?clientId=75711f76&redirectURI=http://localhost:3000/oauth' className='login-text'>로그인</a>
+                    {isLoad ? <Link to='/mypage' className='login-text'>마이페이지</Link> : <a href='https://auth.bssm.kro.kr/oauth?clientId=75711f76&redirectURI=http://localhost:3000/oauth' className='login-text'>로그인</a>}
                 </div>
             </div>
         </div>

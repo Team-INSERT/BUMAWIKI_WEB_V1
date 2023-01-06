@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import * as C from 'allFiles';
 import { useParams } from 'react-router-dom';
 import { dateParser } from '../util/dateParser';
 
@@ -21,12 +22,29 @@ const Version = () => {
     }, [router.id]);
     return (
         <div>
-            {isLoad ? <>{version.reverse().map((ver: any) => (
-                <div>
-                    <span style={{}}>{dateParser(ver.thisVersionCreatedAt)} (작성자 : {ver.nickName}) : {ver.contents}</span>
-                    <br /><br />
-                </div>
-            ))}</> : ''}
+            <C.Header />
+            <div className="docs-board-wrap">
+                <C.Board>
+                    <div className="docs-title-box">
+                        <span>문서 수정 기록</span>
+                    </div>
+                    <div className="line" />
+                    <div className='summary-wrap'>
+                        <ul>
+                            {isLoad ? <>{version.reverse().map((ver: any) => (
+                                <li>
+                                    <span style={{}}>{dateParser(ver.thisVersionCreatedAt)} (작성자 : {ver.nickName}) : {ver.contents}</span>
+                                    <br /><br /><br />
+                                </li>
+                            ))}</> : ''}
+                        </ul>
+                    </div>
+                    <C.SubFooter />
+                </C.Board>
+                <C.ScrollBtn />
+                <C.Aside />
+            </div>
+            <C.Footer />
         </div>
     );
 };

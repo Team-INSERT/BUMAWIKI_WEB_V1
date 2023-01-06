@@ -18,8 +18,12 @@ import Create from "./pages/Create"
 import Update from "./pages/Update"
 import NotFound from "./pages/NotFound"
 import Version from "./pages/Version"
+<<<<<<< HEAD
 import VersionBtn from "./components/VersionBtn";
 import UpdateBtn from "./components/UpdateBtn";
+=======
+import MyPage from "./pages/MyPage"
+>>>>>>> e9eb8c3106d1ca546686aadfbf069d7a75d5a3a1
 
 export {
     Home,
@@ -41,7 +45,12 @@ export {
     Update,
     NotFound,
     Version,
+<<<<<<< HEAD
     Board,
     VersionBtn,
     UpdateBtn,
+=======
+    MyPage,
+    Board
+>>>>>>> e9eb8c3106d1ca546686aadfbf069d7a75d5a3a1
 };

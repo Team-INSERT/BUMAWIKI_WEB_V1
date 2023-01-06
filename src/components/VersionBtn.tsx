@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { dateParser } from 'util/dateParser';
-import '../style/components-style/VersionBtn.scss';
+import '../style/components-style/DocsMenu.scss';
 
 const VersionBtn = () => {
     const router = useParams();
@@ -32,7 +32,7 @@ const VersionBtn = () => {
             })
     }, [router.id]);
     return (
-        <div className="updating">
+        <div className="version">
             <Link to={`/version/${docs?.id}`} className='link'>수정기록</Link>
         </div>
     );
