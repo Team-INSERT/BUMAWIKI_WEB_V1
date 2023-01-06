@@ -1,5 +1,7 @@
 $main-color: #274168;
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 @mixin titleline {
     width: 90%;
     height: fit-content;
@@ -38,11 +40,21 @@ $main-color: #274168;
         .docs-menu {
             margin:20px 40px 20px auto;
 
-            ul {
-                display:flex;
+            // ul {
+            //     display:flex;
 
-                li {
-                    margin-left: 10px;
+            //     li {
+            //         margin-left: 10px;
+            //     }
+            // }
+
+            table {
+                border-collapse: collapse;
+
+                th {
+                    border:2px solid #ccc;
+                    padding:5px;
+                    background-color: #274168;
                 }
             }
         }
@@ -91,6 +103,7 @@ $main-color: #274168;
     resize: none;
     outline: none;
     padding: 10px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .update-button {
