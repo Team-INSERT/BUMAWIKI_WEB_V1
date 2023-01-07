@@ -12,6 +12,7 @@ const Docs = () => {
     const [docsType, setDocsType] = useState('');
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
+    const [files, setFiles] = useState('');
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
@@ -28,7 +29,7 @@ const Docs = () => {
         }
         const FormData = require('form-data');
         const data = new FormData();
-        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}"}`], { type: 'application/json' }), 'file', new Blob([`{"files":"${files}"}`], {type: 'application/json'}), { contentType: 'application/json', });
         axios.post('/docs/create', data, {
             headers: {
                 'Content-Type': `multipart/form-data`,
@@ -80,12 +81,15 @@ const Docs = () => {
                             <div className='tr-title'>예시</div>
                             <div className='tr-content'>
                                 <img src='/images/docs-example.png' className='docs-example' alt='문서 양식' />
-                                <span className='docs-example-warn'>※ 이 외의 다른 태그들은 문서에 적용되지 않습니다 ※</span>
                             </div>
                         </div>
-                        <div className='tr-wrap last-wrap tr-text'>
+                        <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>문서 내용</div>
                             <textarea className='tr-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents} />
+                        </div>
+                        <div className='tr-wrap tr-file'>
+                            <div className='tr-title'>이미지 파일</div>
+                            <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.value);console.log(e.target.value) }} />
                         </div>
                     </div>
                     <div className='create-submit'>

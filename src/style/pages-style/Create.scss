@@ -19,8 +19,17 @@ $main-color: #274168;
             border: none;
         }
 
+        .tr-input {
+            width: 500px;
+            height: 90%;
+            outline: none;
+            padding-left: 20px;
+            resize: none;
+            border: none;
+        }
+
         .docs-example {
-            width: 300px;
+            width: 30%;
         }
 
         .docs-example-warn {
@@ -35,11 +44,16 @@ $main-color: #274168;
         height: 400px;
     }
 
+    .tr-file {
+        height: 100px;
+
+    }
+
     .tr-example {
         height: 300px;
     }
 
-    .last-wrap {
+    .contents-wrap {
         border-bottom: 2px solid #ccc;
     }
 
