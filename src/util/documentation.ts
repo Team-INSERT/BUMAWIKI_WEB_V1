@@ -54,7 +54,9 @@ export const documentation = (content: string) => {
         .replace(/onkeypress/gi, ``)
         .replace(/onkeyup/gi, ``)
         .replace(/alert/gi, ``)
-        .replace(/XSS/gi, ``)
+        .replace(/iframe/gi, ``)
+        .replace(/embed/gi, ``)
+        .replace(/&#.*;/gi, ``)
 
     const HTML_CONTENT = ORIGINAL_CONTENT
         .replace(/\?\^/gi, `<`)
