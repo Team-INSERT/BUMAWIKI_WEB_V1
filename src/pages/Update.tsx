@@ -20,7 +20,7 @@ const Docs = () => {
     const onClickUpdateDocs = () => {
         const FormData = require('form-data');
         const data = new FormData();
-        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"').replace(/\\/gi, '\\\\')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
         if (files1) data.append("files", files1, files1.name);
         if (files2) data.append("files", files2, files2.name);
         if (files3) data.append("files", files3, files3.name);
