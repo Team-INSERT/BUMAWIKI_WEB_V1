@@ -41,7 +41,7 @@ const Search = () => {
                         <ul className="search-list">
                             {isLoad ? <>
                                 {result.map((result: Docs, index) => (
-                                    <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title}({result.enroll})</Link><br /><div className="search-line" /></li>
+                                    <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} ({result.enroll})</Link></li>
                                 ))}</> : <div>
                                         <span>검색 결과가 존재하지 않습니다.</span><br />
                                         <span>생성ㄱ?</span>
