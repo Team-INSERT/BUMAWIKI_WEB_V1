@@ -20,6 +20,7 @@ const Search = () => {
             .catch((err) => {
                 console.log(err)
             })
+        // eslint-disable-next-line
     }, [router.result]);
 
     return (

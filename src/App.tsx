@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { dateUTCParser } from 'util/dateUTCParser';
 import { getCookie } from 'util/getCookie';
 import * as R from './allFiles';
 
@@ -39,9 +40,8 @@ const App = () => {
               refresh_token: getCookie('refresh_token')
             }
           }).then((res) => {
-            document.cookie = `authorization=${res.data.accessToken};`
-            document.cookie = `refreshToken=${res.data.refreshToken};`
-            document.cookie = `expiredAt=${res.data.expiredAt};`
+            document.cookie = `authorization=${res.data.accessToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
+            document.cookie = `refresh_token=${res.data.refreshToken};`
           })
         } else {
           console.log(err)

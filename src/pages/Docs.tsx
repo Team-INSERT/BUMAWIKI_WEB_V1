@@ -22,7 +22,6 @@ const Docs = () => {
     useEffect(() => {
         axios.get(`/docs/find/id/${router.id}`)
             .then((res) => {
-                console.log(res)
                 setDocs({
                     ...res.data,
                     lastModifiedAt: dateParser(res.data.lastModifiedAt)

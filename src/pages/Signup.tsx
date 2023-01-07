@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { dateUTCParser } from 'util/dateUTCParser';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -10,9 +11,8 @@ const Signup = () => {
                 authCode: window.location.search.replace('?code=', '')
             }
         }).then((res) => {
-            document.cookie = `authorization=${res.data.accessToken};`
-            document.cookie = `refreshToken=${res.data.refreshToken};`
-            document.cookie = `expiredAt=${res.data.expiredAt};`
+            document.cookie = `authorization=${res.data.accessToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
+            document.cookie = `refresh_token=${res.data.refreshToken};`
             navigate('/')
             window.location.reload()
         }).catch((err) => {
