@@ -12,7 +12,9 @@ const Docs = () => {
     const [docsType, setDocsType] = useState('');
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
-    const [files, setFiles] = useState<any>();
+    const [files1, setFiles1] = useState<any>();
+    const [files2, setFiles2] = useState<any>();
+    const [files3, setFiles3] = useState<any>();
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
@@ -29,8 +31,10 @@ const Docs = () => {
         }
         const FormData = require('form-data');
         const data = new FormData();
-        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}"}`], { type: 'application/json' }));
-        data.append("files", files, files.name);
+        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}", "docsType":"${docsType}"}`], { type: 'application/json' }));
+        data.append("files", files1, files1.name);
+        data.append("files", files2, files2.name);
+        data.append("files", files3, files3.name);
         axios.post('/docs/create', data, {
             headers: {
                 'Content-Type': `multipart/form-data`,
@@ -58,8 +62,6 @@ const Docs = () => {
                         <div className='tr-wrap'>
                             <div className='tr-title'>분류</div>
                             <div className='tr-content'>
-                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify' id='STUDENT' name='radio' />
-                                <label htmlFor='STUDENT'>학생</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='TEACHER' name='radio' />
                                 <label htmlFor='TEACHER'>인문 교과 선생님</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='MAJOR_TEACHER' name='radio' />
@@ -85,8 +87,14 @@ const Docs = () => {
                             </div>
                         </div>
                         <div className='tr-wrap tr-file'>
-                            <div className='tr-title'>이미지 파일</div>
-                            <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                            <div className='tr-title'>이미지</div>
+                            <div className="inputs">
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                {/* <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.files instanceof FileList ? e.target.files[0] : '') }} /> */}
+                            </div>
                         </div>
                         <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>문서 내용</div>
