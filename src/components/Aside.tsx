@@ -2,12 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { changeKor } from 'util/changeKor';
+import { getLastDate } from 'util/getLastDate';
 import '../style/components-style/Aside.scss';
 
 interface Docs {
     title: string,
     docsType: string,
     id: number,
+    lastModifiedAt: string,
 }
 
 const Aside = () => {
@@ -31,6 +33,7 @@ const Aside = () => {
             {lastModifiedDocs.map((docs: Docs) => (
                 <div className='aside-doc-box' key={docs.id}>
                     <Link to={`/docs/${docs.id}`} className='list'>{docs.title.length > 12 ? `${docs.title.slice(0, 12)}...` : docs.title} ({changeKor(docs.docsType).replace('전공교과 선생님', '선생님').replace('일반교과 선생님', '선생님')})</Link>
+                    <span className='last-date'>&nbsp;― {getLastDate(docs.lastModifiedAt)}</span>
                 </div>
             ))}
         </div>
