@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import * as C from 'allFiles';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { dateParser } from '../util/dateParser';
+import '../style/pages-style/Version.scss';
 
 const Version = () => {
     const router = useParams();
@@ -31,10 +32,10 @@ const Version = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         <ul>
-                            {isLoad ? <>{version.reverse().map((ver: any) => (
-                                <li>
-                                    <span style={{}}>{dateParser(ver.thisVersionCreatedAt)} (작성자 : {ver.nickName}) : {ver.contents}</span>
-                                    <br /><br /><br />
+                            {isLoad ? <>{version.reverse().map((ver: any, index: number) => (
+                                <li className='version-list'>
+                                    <span className='version-span'><Link to={`/version/${router.id}/detail/${index}`} className='version-link'>{dateParser(ver.thisVersionCreatedAt)}</Link></span>
+                                    <span>작성자 : {ver.nickName}</span>
                                 </li>
                             ))}</> : ''}
                         </ul>
