@@ -25,9 +25,6 @@ const Home = () => {
                         </span>
                     </div>
                     <div className='line' />
-
-                    {/* 타이틀박스 ( 소개 표 ) */}
-
                     <div className='titleBox-wrap'>
                         <div className='titleBox-main-title'>
                             <span className='titleBox-title'>부산소프트웨어마이스터고등학교</span>

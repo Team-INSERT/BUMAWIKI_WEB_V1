@@ -3,6 +3,7 @@ import { UserContext } from 'App';
 import axios, { AxiosError } from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { documentation } from 'util/documentation';
 import { getCookie } from 'util/getCookie';
 import '../style/pages-style/Docs.scss'
 
@@ -72,6 +73,8 @@ const Docs = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
+                        <span className='preview-span'>미리보기</span>
+                        <div className='update-textarea' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />
                         <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>
                     </div>
                     <C.SubFooter />
