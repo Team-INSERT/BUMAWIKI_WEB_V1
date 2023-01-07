@@ -11,6 +11,8 @@ export const documentation = (content: string) => {
         .replace(/<\/하양>/gi, `?^#span^?`)
         .replace(/<취소선>/gi, `?^del style="color:#9D9D9D;"^?`)
         .replace(/<\/취소선>/gi, `?^#del^?`)
+        .replace(/<<사진>>:{.*}/gi, `?^ ?^ 문서 생성 시 삽입하신 이미지가 차례대로 표시됩니다 ^? ^?`)
+        .replace(/<<사진>>/gi, `?^ ?^ 문서 생성 시 삽입하신 이미지가 차례대로 표시됩니다 ^? ^?`)
         .replace(/<링크 문서={/gi, `?^a style="text-decoration:none; color:blue;" href='/search/`)
         .replace(/}>/gi, `'^?`)
         .replace(/<\/링크>/gi, `?^#a^?`)

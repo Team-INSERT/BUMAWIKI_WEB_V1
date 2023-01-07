@@ -2,22 +2,26 @@ import * as C from 'allFiles';
 import axios from 'axios';
 import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { documentation } from 'util/documentation';
 import { getCookie } from 'util/getCookie';
 import '../style/pages-style/Create.scss'
 
 const Docs = () => {
-    const date = new Date();
-    const enroll = date.getFullYear();
     const navigate = useNavigate();
     const [docsType, setDocsType] = useState('');
+    const [enroll, setEnroll] = useState(2022);
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
-    const [files1, setFiles1] = useState<any>();
-    const [files2, setFiles2] = useState<any>();
-    const [files3, setFiles3] = useState<any>();
+    const [files1, setFiles1] = useState<"" | File>();
+    const [files2, setFiles2] = useState<"" | File>();
+    const [files3, setFiles3] = useState<"" | File>();
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
+    }
+
+    const onChangeEnrollRadio = (e: ChangeEvent<HTMLInputElement>) => {
+        setEnroll(parseInt(e.target.id))
     }
 
     const onClickCreateDocs = () => {
@@ -32,9 +36,9 @@ const Docs = () => {
         const FormData = require('form-data');
         const data = new FormData();
         data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}", "docsType":"${docsType}"}`], { type: 'application/json' }));
-        data.append("files", files1, files1.name);
-        data.append("files", files2, files2.name);
-        data.append("files", files3, files3.name);
+        if (files1) data.append("files", files1, files1.name);
+        if (files2) data.append("files", files2, files2.name);
+        if (files3) data.append("files", files3, files3.name);
         axios.post('/docs/create', data, {
             headers: {
                 'Content-Type': `multipart/form-data`,
@@ -77,8 +81,16 @@ const Docs = () => {
                             <input className='tr-content' onChange={(e) => { setTitle(e.target.value) }} value={title} />
                         </div>
                         <div className='tr-wrap'>
-                            <div className='tr-title'>작성연도</div>
-                            <input className='tr-content' disabled={true} value={`${enroll}년`} />
+                            <div className='tr-title'>연도</div>
+                            <div className='tr-content'>
+                                {docsType === 'ACCIDENT' ? <><input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2023' name='radios' />
+                                    <label htmlFor='2023' className='enroll'>2023년</label>
+                                    <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2022' name='radios' />
+                                    <label htmlFor='2022' className='enroll'>2022년</label>
+                                    <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2021' name='radios' />
+                                    <label htmlFor='2021' className='enroll'>2021년</label></>
+                                    : '없음'}
+                            </div>
                         </div>
                         <div className='tr-wrap tr-example'>
                             <div className='tr-title'>예시</div>
@@ -89,16 +101,18 @@ const Docs = () => {
                         <div className='tr-wrap tr-file'>
                             <div className='tr-title'>이미지</div>
                             <div className="inputs">
-                                <input type="file" className='tr-input' onChange={(e) => { setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                                <input type="file" className='tr-input' onChange={(e) => { setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                                <input type="file" className='tr-input' onChange={(e) => { setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '');console.log(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                                {/* <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                                <input type="file" className='tr-input' onChange={(e) => { setFiles(e.target.files instanceof FileList ? e.target.files[0] : '') }} /> */}
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                                <input type="file" className='tr-input' onChange={(e) => { setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
                             </div>
                         </div>
                         <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>문서 내용</div>
                             <textarea className='tr-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents} />
+                        </div>
+                        <div className='tr-wrap constents-wrap tr-text'>
+                            <div className='tr-title'>미리보기</div>
+                            <div className='tr-textarea' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }}></div>
                         </div>
                     </div>
                     <div className='create-submit'>

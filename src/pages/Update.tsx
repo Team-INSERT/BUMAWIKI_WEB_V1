@@ -13,11 +13,18 @@ const Docs = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('');
+    const [files1, setFiles1] = useState<"" | File>();
+    const [files2, setFiles2] = useState<"" | File>();
+    const [files3, setFiles3] = useState<"" | File>();
 
     const onClickUpdateDocs = () => {
         const FormData = require('form-data');
         const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        if (files1) data.append("files", files1, files1.name);
+        if (files2) data.append("files", files2, files2.name);
+        if (files3) data.append("files", files3, files3.name);
+
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
@@ -72,6 +79,10 @@ const Docs = () => {
                     <img src='/images/docs-example.png' alt='문서작성법' className='docs-example' />
                     <div className="line" />
                     <div className='summary-wrap'>
+                        <input type='file' className='file' onChange={(e) => { setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                        <input type='file' className='file' onChange={(e) => { setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                        <input type='file' className='file' onChange={(e) => { setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                        <br />
                         <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
                         <span className='preview-span'>미리보기</span>
                         <div className='update-textarea' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />

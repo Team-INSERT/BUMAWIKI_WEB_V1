@@ -26,3 +26,12 @@ code {
   font-weight: 800;
   margin-top: 2vh;
 }
+
+input[type='file'] {
+  margin: 4px 0 4px 0;
+  width: 400px;
+}
+
+input[type=file]::file-selector-button {
+  border: 2px solid #ccc;
+}
