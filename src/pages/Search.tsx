@@ -44,7 +44,7 @@ const Search = () => {
                                     <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} ({result.enroll})</Link></li>
                                 ))}</> : <div>
                                         <span>검색 결과가 존재하지 않습니다.</span><br />
-                                        <span>생성ㄱ?</span>
+                                        <span>생성ㄱ?</span> 
                                     </div>
                                 }
                         </ul>
