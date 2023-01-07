@@ -7,11 +7,11 @@ import Docs from 'types/docs';
 
 const Student = () => {
     const [students, setStudents] = useState([]);
-    const [allDate] = useState([2021]);
+    const [allDate] = useState([2023]);
     const nowDate = new Date();
 
     useEffect(() => {
-        for (let date = 2022; date <= nowDate.getFullYear(); date++) {
+        for (let date = nowDate.getFullYear() - 1; date >= 2021; date--) {
             allDate.push(date)
         }
         axios.get('/docs/student')
@@ -40,7 +40,7 @@ const Student = () => {
                     </div>
                     <div className="line" />
                     <div className='summary-wrap'>
-                        {allDate.reverse().map(date => (
+                        {allDate.map(date => (
                             <C.AccodianMenu name={`${date}학년도 입학생`} key={date}>
                                 <ul className="student-list">
                                     {students.map((student: Docs) => (<div key={student.id}>

@@ -7,11 +7,11 @@ import Docs from 'types/docs';
 
 const Accident = () => {
     const [accidents, setAccidents] = useState([]);
-    const [allDate] = useState([2021]);
+    const [allDate] = useState([2023]);
     const nowDate = new Date();
 
     useEffect(() => {
-        for (let date = 2022; date <= nowDate.getFullYear(); date++) {
+        for (let date = nowDate.getFullYear() - 1; date >= 2021; date--) {
             allDate.push(date)
         }
         axios.get(`/docs/accident`)
@@ -40,7 +40,7 @@ const Accident = () => {
                     </div>
                     <div className="line" />
                     <div className='summary-wrap'>
-                        {allDate.reverse().map((date) => (
+                        {allDate.map((date) => (
                             <C.AccodianMenu name={`${date}년 사건/사고`} key={date}>
                                 <ul className="accident-list">
                                     {accidents.map((accident: Docs) => (<div key={accident.id}>

@@ -11,8 +11,8 @@ const Signup = () => {
                 authCode: window.location.search.replace('?code=', '')
             }
         }).then((res) => {
-            document.cookie = `authorization=${res.data.accessToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
-            document.cookie = `refresh_token=${res.data.refreshToken};`
+            document.cookie = `authorization=${res.data.accessToken};`
+            document.cookie = `refresh_token=${res.data.refreshToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
             navigate('/')
             window.location.reload()
         }).catch((err) => {

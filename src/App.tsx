@@ -33,16 +33,15 @@ const App = () => {
         })
       })
       .catch((err) => {
-        console.log(err);
         if (err instanceof AxiosError && err?.response?.status === 403) {
-          axios.put('/auth/refresh/access', {
+          axios.put('/auth/refresh/access', {}, {
             headers: {
               refresh_token: getCookie('refresh_token')
             }
           }).then((res) => {
-            document.cookie = `authorization=${res.data.accessToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
-            document.cookie = `refresh_token=${res.data.refreshToken};`
-          })
+            document.cookie = `authorization=${res.data.accessToken};`
+            document.cookie = `refresh_token=${res.data.refreshToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
+          }).catch((err) => { console.log(err) })
         } else {
           console.log(err)
         }
