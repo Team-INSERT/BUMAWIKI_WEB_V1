@@ -11,14 +11,13 @@ const Search = () => {
     const navigate = useNavigate();
     const [result, setResult] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
-
     useEffect(() => {
         axios.get(`/docs/find/title/${router.result}`)
             .then((res) => {
                 console.log(res)
                 setResult(res.data)
-                if (res.data.length === 1) navigate(`/docs/${res.data[0].id}`)
                 setIsLoad(true);
+                if (res.data.length === 1) navigate(`/docs/${res.data[0].id}`)
             })
             .catch((err) => {
                 console.log(err)
@@ -44,8 +43,8 @@ const Search = () => {
                                 {result.map((result: Docs, index) => (
                                     <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</Link></li>
                                 ))}</> : <div>
-                                <span>검색 결과가 존재하지 않습니다.</span><br />
-                                <span>생성ㄱ?</span>
+                                <span>아직 '{router.result}'라는 문서는 없습니다.</span><br /><br />
+                                <Link to='/create' style={{ textDecoration: 'none', color: 'blue' }}>지금 문서를 생성해보세요</Link>
                             </div>
                             }
                         </ul>

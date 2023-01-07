@@ -48,7 +48,7 @@ const Docs = () => {
         }
         const FormData = require('form-data');
         const data = new FormData();
-        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"')}", "docsType":"${docsType}"}`], { type: 'application/json' }));
+        data.append('request', new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '\\"').replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`], { type: 'application/json' }));
         if (files1) data.append("files", files1, files1.name);
         if (files2) data.append("files", files2, files2.name);
         if (files3) data.append("files", files3, files3.name);

@@ -13,6 +13,7 @@ const Header = () => {
             alert('검색할 문서명을 입력해주세요!')
         } else {
             navigate(`/search/${search}`)
+            window.location.reload()
         }
     }
     useEffect(() => {
