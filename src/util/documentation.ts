@@ -1,5 +1,6 @@
 export const documentation = (content: string) => {
     const ORIGINAL_CONTENT = content
+        // 태그 지원
         .replace(/<항목>/gi, `?^li style="list-style: disc;"^?`)
         .replace(/<어록>/gi, `?^div style="width:100%; background-color:#ccc; height:50px; border: 1px solid black; font-weight:800; display:flex; align-items:center;"^??^span style="margin-left:20px;"^?`)
         .replace(/<\/어록>/gi, `?^@#@#@span^??^@#@#@div^?`)
@@ -20,6 +21,8 @@ export const documentation = (content: string) => {
         .replace(/<</gi, `?^img src='`)
         .replace(/>>:{/gi, `' alt='' style="width:`)
         .replace(/}/gi, `%;" @#@#@^?`)
+
+        // 문서 보안
         .replace(/<.*>/gi, ``)
         .replace(/&lt;.*&gt;/gi, ``)
         .replace(/onerror/gi, ``)
@@ -57,6 +60,6 @@ export const documentation = (content: string) => {
         .replace(/\?\^/gi, `<`)
         .replace(/\^\?/gi, `>`)
         .replace(/@#@#@/gi, `/`)
-        .replace(/&\$\^%/, `"`);
+        .replace(/&\$\^%/gi, `"`);
     return HTML_CONTENT;
 }
