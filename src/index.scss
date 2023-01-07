@@ -35,3 +35,7 @@ input[type='file'] {
 input[type=file]::file-selector-button {
   border: 2px solid #ccc;
 }
+
+.resize {
+  overflow: scroll;
+}

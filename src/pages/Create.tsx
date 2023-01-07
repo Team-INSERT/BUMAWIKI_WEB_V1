@@ -1,6 +1,7 @@
 import * as C from 'allFiles';
+import { UserContext } from 'App';
 import axios from 'axios';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { documentation } from 'util/documentation';
 import { getCookie } from 'util/getCookie';
@@ -8,6 +9,7 @@ import '../style/pages-style/Create.scss'
 
 const Docs = () => {
     const navigate = useNavigate();
+    const user = useContext(UserContext)
     const [docsType, setDocsType] = useState('');
     const [enroll, setEnroll] = useState(2022);
     const [title, setTitle] = useState('');
@@ -15,6 +17,14 @@ const Docs = () => {
     const [files1, setFiles1] = useState<"" | File>();
     const [files2, setFiles2] = useState<"" | File>();
     const [files3, setFiles3] = useState<"" | File>();
+
+    useEffect(() => {
+        if (!user.id) {
+            alert('로그인 후 이용 가능한 서비스입니다.');
+            navigate('/')
+        }
+        // eslint-disable-next-line
+    }, []);
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
@@ -25,6 +35,9 @@ const Docs = () => {
     }
 
     const onClickCreateDocs = () => {
+        if (!user.id) {
+            alert('로그인 후 이용 가능한 서비스입니다.');
+        }
         if (title.length === 0) {
             alert('문서의 이름을 정해주세요!')
             return;
@@ -45,9 +58,9 @@ const Docs = () => {
                 Authorization: getCookie('authorization'),
                 refresh_token: getCookie('refresh_token')
             },
-        }).then(() => {
+        }).then((res) => {
             alert('문서가 생성되었습니다!')
-            navigate('/');
+            navigate(`/docs/${res.data.id}`);
         }).catch((err) => {
             console.log(err)
             alert('오류가 발생했습니다.')
@@ -112,7 +125,7 @@ const Docs = () => {
                         </div>
                         <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>미리보기</div>
-                            <div className='tr-textarea' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }}></div>
+                            <div className='tr-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }}></div>
                         </div>
                     </div>
                     <div className='create-submit'>
