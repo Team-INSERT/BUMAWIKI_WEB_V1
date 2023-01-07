@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Docs from 'types/docs';
 import '../style/pages-style/Search.scss'
+import { changeKor } from 'util/changeKor';
 
 const Search = () => {
     const router = useParams();
@@ -41,12 +42,12 @@ const Search = () => {
                         <ul className="search-list">
                             {isLoad ? <>
                                 {result.map((result: Docs, index) => (
-                                    <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} ({result.enroll})</Link></li>
+                                    <li><Link key={index} className="link" to={`/docs/${result.id}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</Link></li>
                                 ))}</> : <div>
-                                        <span>검색 결과가 존재하지 않습니다.</span><br />
-                                        <span>생성ㄱ?</span> 
-                                    </div>
-                                }
+                                <span>검색 결과가 존재하지 않습니다.</span><br />
+                                <span>생성ㄱ?</span>
+                            </div>
+                            }
                         </ul>
                     </div>
                     <C.SubFooter />
