@@ -22,6 +22,7 @@ export const documentation = (content: string) => {
         .replace(/}/gi, `%;" @#@#@^?`)
         .replace(/<.*>/gi, ``)
         .replace(/&lt;.*&gt;/gi, ``)
+        .replace(/onerror/gi, `해킹시도하지마세요 ㅎㅎ`)
     const HTML_CONTENT = ORIGINAL_CONTENT
         .replace(/\?\^/gi, `<`)
         .replace(/\^\?/gi, `>`)
