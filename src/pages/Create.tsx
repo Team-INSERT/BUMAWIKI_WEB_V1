@@ -59,7 +59,9 @@ const Docs = () => {
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify' id='STUDENT' name='radio' />
                                 <label htmlFor='STUDENT'>학생</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='TEACHER' name='radio' />
-                                <label htmlFor='TEACHER'>선생님</label>
+                                <label htmlFor='TEACHER'>인문 교과 선생님</label>
+                                <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='MAJOR_TEACHER' name='radio' />
+                                <label htmlFor='MAJOR_TEACHER'>전문 교과 선생님</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='ACCIDENT' name='radio' />
                                 <label htmlFor='ACCIDENT'>사건/사고</label>
                                 <input type='radio' onChange={(e) => { onChangeRadio(e) }} className='classify radio' id='CLUB' name='radio' />
