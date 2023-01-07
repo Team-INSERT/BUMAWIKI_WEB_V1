@@ -155,7 +155,7 @@ const Home = () => {
                                     부산소프트웨어마이스터고등학교 학생이라면 누구나 문서를 편집하고 작성할 수 있습니다.<br />
                                     <br />
                                     사실에 근거하고 남을 비방하거나 칭찬하지 않는 선에서 자유롭게 문서를 편집할 수 있습니다.<br />
-                                    문의 및 문서삭제는 <span style={{ color: 'blue', fontWeight: 400 }}>boomawiki@gmail.com</span>으로 요청하실 수 있습니다.<br />
+                                    문의 및 문서삭제는 <span style={{ color: 'blue', fontWeight: 400 }}>bumawiki@gmail.com</span>으로 요청하실 수 있습니다.<br />
                                     <br />
                                     <span style={{ fontWeight: 800 }}>
                                         교내의 모든 유/무선 네트워크 정보는 국가정보원 『국가·공공기관의 무선망 구축 보안 가이드라인, 국가정보보안 기본지침』 과,<br />
