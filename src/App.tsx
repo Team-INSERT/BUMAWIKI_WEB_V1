@@ -26,7 +26,10 @@ const App = () => {
       }
     })
       .then((res) => {
-        setUser(res.data)
+        setUser({
+          ...res.data,
+          contributeDocs: res.data.contributeDocs.reverse()
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +64,7 @@ const App = () => {
           <Route path={'/create'} element={<R.Create />} />
           <Route path={'/update/:id'} element={<R.Update />} />
           <Route path={'/version/:id'} element={<R.Version />} />
+          <Route path={'/version/:id/detail/:versionId'} element={<R.VersionDetail />} />
           <Route path={'/mypage'} element={<R.MyPage />} />
           <Route path={'*'} element={<R.NotFound />} />
         </Routes>

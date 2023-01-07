@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound"
 import Version from "./pages/Version"
 import DetailBtn from "./components/DetailBtn";
 import MyPage from "./pages/MyPage"
+import VersionDetail from "./pages/VersionDetail"
 
 export {
     Home,
@@ -43,5 +44,6 @@ export {
     Version,
     Board,
     DetailBtn,
+    VersionDetail,
     MyPage,
 };
