@@ -88,7 +88,7 @@ const Header = () => {
                     </button>
                 </form>
                 <div className='login-wrap'>
-                    {isLoad ? <Link to='/mypage' className='login-text'>마이페이지</Link> : <a href='https://auth.bssm.kro.kr/oauth?clientId=75711f76&redirectURI=http://localhost:3000/oauth' className='login-text'>로그인</a>}
+                    {isLoad ? <Link to='/mypage' className='login-text'>마이페이지</Link> : <a href='https://auth.bssm.kro.kr/oauth?clientId=a1a16261&redirectURI=http://bumawiki.kro.kr/oauth' className='login-text'>로그인</a>}
                 </div>
             </div>
         </div>

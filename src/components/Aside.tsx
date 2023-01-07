@@ -30,7 +30,7 @@ const Aside = () => {
             </div>
             {lastModifiedDocs.map((docs: Docs) => (
                 <div className='aside-doc-box' key={docs.id}>
-                    <Link to={`/docs/${docs.id}`} className='list'>{docs.title.length > 12 ? `${docs.title.slice(0, 12)}...` : docs.title} ({changeKor(docs.docsType).replace('전공교과 선생님', '선생님').replace('인문교과 선생님', '선생님')})</Link>
+                    <Link to={`/docs/${docs.id}`} className='list'>{docs.title.length > 12 ? `${docs.title.slice(0, 12)}...` : docs.title} ({changeKor(docs.docsType).replace('전공교과 선생님', '선생님').replace('일반교과 선생님', '선생님')})</Link>
                 </div>
             ))}
         </div>
