@@ -34,8 +34,8 @@ const MyPage = () => {
                             <div className='contribute-info'>
                                 <span className='contribute-text'>이 유저가 기여한 문서의 정보들이다.</span>
                                 <div className='contribute-list'>
-                                    {user.contributeDocs.reverse().map((docs: any) => (
-                                        <span>문서명 : <Link className='contribute-link' to={`/docs/${docs.docsId}`}>{docs.title}[{docs.docsId}]</Link> - 버전 {docs.versionDocsId}<br />
+                                    {user.contributeDocs.map((docs: any) => (
+                                        <span>문서명 : <Link className='contribute-link' to={`/docs/${docs.docsId}`}>{docs.title}[{docs.docsId}]</Link><br />
                                             수정 날짜 : {dateParser(docs.createTime)}
                                         </span>
                                     ))}
