@@ -15,4 +15,8 @@
     .classif-case {
         color: #ec9f19;
     }
+
+    @media (max-width: 500px) {
+        width: 90vw;
+    }
 }

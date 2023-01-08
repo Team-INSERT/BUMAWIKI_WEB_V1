@@ -23,6 +23,10 @@ $main-color: #274168;
         width: 68vw;
         height: 1.5px;
         background-color: #ccc;
+
+        @media (max-width: 500px) {
+            width: 90vw;
+        }
     }
 
     .docs-example {
@@ -48,6 +52,10 @@ $main-color: #274168;
             font-weight: 800;
             font-size: 34px;
             margin-left: 30px;
+
+            @media (max-width: 500px) {
+                font-size: 26px;
+            }
         }
     }
 

@@ -26,6 +26,10 @@ $main-color: #274168;
         width: 68vw;
         height: 1.5px;
         background-color: #ccc;
+
+        @media (max-width: 500px) {
+            width: 90vw;
+        }
     }
 
     .doc-title-box {
@@ -62,11 +66,19 @@ $main-color: #274168;
 
         .home-title-text {
             font-size: 28px;
+
+            @media (max-width: 500px) {
+                font-size: 18px;
+            }
         }
 
         .home-subtitle-text {
             font-weight: 600;
             font-size: 16px;
+
+            @media (max-width: 500px) {
+                font-size: 12px;
+            }
         }
 
         .home-title-content-text {
@@ -74,6 +86,10 @@ $main-color: #274168;
             font-weight: 500;
             font-size: 14px;
             margin-top: 40px;
+
+            @media (max-width: 500px) {
+                font-size: 10px;
+            }
         }
     }
 
@@ -83,6 +99,10 @@ $main-color: #274168;
 
         .summary-content {
             @include description();
+
+            @media (max-width: 500px) {
+                font-size: 12px;
+            }
         }
 
         .summary-video {
@@ -92,9 +112,14 @@ $main-color: #274168;
             iframe {
                 width: 800px;
                 height: 450px;
+
+                @media (max-width: 500px) {
+                    width: 96%;
+                    height: auto;
+                }
             }
         }
-    } 
+    }
 
     .department-wrap {
         @include titleline();
@@ -102,6 +127,10 @@ $main-color: #274168;
 
         .department-description {
             @include description();
+
+            @media (max-width: 500px) {
+                font-size: 12px;
+            }
         }
 
         .department {
@@ -119,6 +148,10 @@ $main-color: #274168;
         .song-description {
             @include description();
             line-height: 35px;
+
+            @media (max-width: 500px) {
+                font-size: 12px;
+            }
         }
     }
 
@@ -147,6 +180,10 @@ $main-color: #274168;
             margin-top: 30px;
             margin-bottom: -30px;
             font-weight: 500;
+
+            @media (max-width: 500px) {
+                font-size: 10px;
+            }
         }
     }
 }
@@ -155,6 +192,10 @@ $main-color: #274168;
     width: 48vw;
     height: fit-content;
     margin-top: 50px;
+
+    @media (max-width: 500px) {
+        width: 88vw;
+    }
 
     .titleBox-main-title {
         width: 100%;
@@ -166,17 +207,29 @@ $main-color: #274168;
         align-items: center;
         flex-direction: column;
 
+        @media (max-width: 500px) {
+            height: 50px;
+        }
+
         .titleBox-title {
             font-family: 'Open Sans', sans-serif;
             color: white;
             font-weight: 800;
             font-size: 24px;
+
+            @media (max-width: 500px) {
+                font-size: 16px;
+            }
         }
 
         .titleBox-eng-title {
             color: white;
             font-weight: 300;
             font-size: 14px;
+
+            @media (max-width: 500px) {
+                font-size: 10px;
+            }
         }
     }
 
@@ -199,6 +252,10 @@ $main-color: #274168;
         border-bottom: 2px solid #ccc;
         margin-bottom: 4px;
 
+        @media (max-width: 500px) {
+            height: 30px;
+        }
+
         .table-name {
             width: 140px;
             height: 100%;
@@ -212,6 +269,14 @@ $main-color: #274168;
                 font-family: 'Open Sans', sans-serif;
                 font-weight: 800;
                 font-size: 18px;
+
+                @media (max-width: 500px) {
+                    font-size: 10px;
+                }
+            }
+
+            @media (max-width: 500px) {
+                width: 100px;
             }
         }
 
@@ -227,11 +292,19 @@ $main-color: #274168;
                 font-family: 'Open Sans', sans-serif;
                 font-weight: 800;
                 font-size: 16px;
+
+                @media (max-width: 500px) {
+                    font-size: 10px;
+                }
             }
 
             a {
                 color: blue;
                 font-weight: 600;
+
+                @media (max-width: 500px) {
+                    font-size: 10px;
+                }
             }
         }
     }

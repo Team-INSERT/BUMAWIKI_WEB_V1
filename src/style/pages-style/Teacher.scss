@@ -21,6 +21,10 @@ $main-color: #274168;
         width: 68vw;
         height: 1.5px;
         background-color: #ccc;
+
+        @media (max-width: 500px) {
+            width: 90vw;
+        }
     }
 
     .doc-title-box {

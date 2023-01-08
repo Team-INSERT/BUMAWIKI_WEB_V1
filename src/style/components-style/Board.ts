@@ -13,6 +13,11 @@ const Board = styled.div`
 	flex-direction: column;
 	overflow:hidden;
 	height:auto;
+	
+	@media (max-width: 500px) {
+        width:100vw;
+		margin: 0;
+    }
 `;
 
 export default Board;

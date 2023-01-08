@@ -31,6 +31,10 @@
         width: 100%;
         height: 2px;
         background-color: #ccc;
+
+        @media (max-width: 500px) {
+            width: 90vw;
+        }
     }
 
     .mypage-info-box {
