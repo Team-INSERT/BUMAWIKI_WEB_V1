@@ -23,12 +23,6 @@ const Docs = () => {
         thisVersionCreatedAt: '',
         userId: ''
     })
-    const [prevVersionDocs, setPrevVersionDocs] = useState({
-        contents: '',
-        nickName: '',
-        thisVersionCreatedAt: '',
-        userId: ''
-    })
     const [prevContents, setPrevContents] = useState('');
     const [nextContents, setNextContents] = useState('');
     const [isLoad, setIsLoad] = useState(false);
@@ -41,7 +35,6 @@ const Docs = () => {
                     .then((res) => {
                         const Array = res.data.versionDocsResponseDto.reverse()
                         setVersionDocs(Array[router.versionId || 0])
-                        setPrevVersionDocs(Array[parseInt(router.versionId as string) + 1 || 1])
                         const a = Array[router.versionId || 0].contents, b = Array[parseInt(router.versionId as string) + 1 || 1].contents
                         setPrevContents(a.replace(b, ''))
                         setNextContents(b.replace(a.replace(a.replace(b, ''), ''), ''))

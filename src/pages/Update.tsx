@@ -24,7 +24,7 @@ const Docs = () => {
         const FormData = require('form-data');
         const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
-        for (let i = 0; i < files.length; i++) {
+        for (let i = files.length - 1; i >= 0; i--) {
             data.append("files", files[i], files[i].name);
         }
         console.log(files)
