@@ -64,6 +64,15 @@ const Docs = () => {
                         {isLoad ? (
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}</span>
+                                <C.AccodianMenu name="원문 코드" isOpen={false}>
+                                    <div className='docs-content' dangerouslySetInnerHTML={{
+                                        __html: versionDocs?.contents
+                                            .replace(/<</gi, `&lt;&lt;`)
+                                            .replace(/>>/gi, `&gt;&gt;`)
+                                    }}>
+                                    </div>
+                                    <br />
+                                </C.AccodianMenu>
                                 <C.AccodianMenu name="개요">
                                     <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(versionDocs?.contents.replace(/<br>/gi, '\n')) }}>
                                     </div>
