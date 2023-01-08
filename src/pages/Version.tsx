@@ -12,8 +12,7 @@ const Version = () => {
     useEffect(() => {
         axios.get(`docs/find/${router.id}/version`)
             .then((res) => {
-                setVersion(res.data.versionDocsResponseDto)
-                console.log(res.data.versionDocsResponseDto)
+                setVersion(res.data.versionDocsResponseDto.reverse())
                 setIsLoad(true)
             })
             .catch((err) => {
@@ -32,7 +31,7 @@ const Version = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         <ul>
-                            {isLoad ? <>{version.reverse().map((ver: any, index: number) => (
+                            {isLoad ? <>{version.map((ver: any, index: number) => (
                                 <li className='version-list'>
                                     <span className='version-span'><Link to={`/version/${router.id}/detail/${index}`} className='version-link'>{dateParser(ver.thisVersionCreatedAt)}</Link></span>
                                     <span>작성자 : {ver.nickName}</span>

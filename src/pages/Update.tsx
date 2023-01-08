@@ -13,18 +13,17 @@ const Docs = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('');
-    const [files1, setFiles1] = useState<"" | File>();
-    const [files2, setFiles2] = useState<"" | File>();
-    const [files3, setFiles3] = useState<"" | File>();
+    const [files, setFiles] = useState<any>([]);
+    const [fileInput, setFileInput] = useState(['']);
 
     const onClickUpdateDocs = () => {
         const FormData = require('form-data');
         const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
-        if (files1) data.append("files", files1, files1.name);
-        if (files2) data.append("files", files2, files2.name);
-        if (files3) data.append("files", files3, files3.name);
-
+        for (let i = 0; i < files.length; i++) {
+            data.append("files", files[i], files[i].name);
+        }
+        console.log(files)
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
             return;
@@ -79,9 +78,13 @@ const Docs = () => {
                     <img src='/images/docs-example.png' alt='문서작성법' className='docs-example' />
                     <div className="line" />
                     <div className='summary-wrap'>
-                        <input type='file' className='file' onChange={(e) => { setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                        <input type='file' className='file' onChange={(e) => { setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
-                        <input type='file' className='file' onChange={(e) => { setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '') }} />
+                        {fileInput.map(() => (
+                            <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]); }} />
+                        ))}
+                        <div className='file-add-wrap' onClick={() => { setFileInput([...fileInput, '']) }}>
+                            <button className='file-add-button'>+</button><span>사진 더 선택하기</span>
+                        </div>
+                        <span className='docs-need-file'>문서에 필요한 사진태그 개수 : {files.length}개</span>
                         <br />
                         <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
                         <span className='preview-span'>미리보기</span>
