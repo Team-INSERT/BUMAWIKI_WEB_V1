@@ -86,7 +86,7 @@ const Docs = () => {
                         </div>
                         <span className='docs-need-file'>문서에 필요한 사진태그 개수 : {files.length}개</span>
                         <br />
-                        <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n')} />
+                        <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')} />
                         <span className='preview-span'>미리보기</span>
                         <div className='update-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />
                         <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>

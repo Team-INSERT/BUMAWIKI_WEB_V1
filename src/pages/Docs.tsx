@@ -42,7 +42,7 @@ const Docs = () => {
             <div className="docs-board-wrap">
                 <C.Board>
                     <div className="docs-title-box">
-                        <span>{docs?.title}</span>
+                        <span>{docs?.title.replace(/&\$\^%/gi, '"')}</span>
                         <div className="docs-menu">
                             <C.DetailBtn />
                         </div>
@@ -56,7 +56,7 @@ const Docs = () => {
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {docs.lastModifiedAt}</span>
                                 <C.AccodianMenu name="개요">
-                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents.replace(/<br>/gi, '\n')) }}>
+                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')) }}>
                                     </div>
                                     <br />
                                 </C.AccodianMenu>
