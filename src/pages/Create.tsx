@@ -1,11 +1,10 @@
 import * as C from 'allFiles';
 import { UserContext } from 'App';
 import axios from 'axios';
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { documentation } from 'util/documentation';
 import { getCookie } from 'util/getCookie';
-import useDidMountEffect from 'util/useDidMountEffect';
 import '../style/pages-style/Create.scss'
 
 const Docs = () => {

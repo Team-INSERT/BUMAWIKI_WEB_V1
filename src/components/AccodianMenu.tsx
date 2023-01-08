@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import Accodian from 'types/accodian';
+import React, { useEffect, useState } from 'react';
+import AccodianType from 'types/accodian';
 import '../style/components-style/AccodianMenu.scss'
 
-const AccodianMenu: Accodian = ({ name, children }) => {
-    const [detail, setDetail] = useState(true);
+const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
+    const [detail, setDetail] = useState<boolean>(true);
+
+    useEffect(() => {
+        if (isOpen === false) setDetail(false)
+    }, [])
 
     const onClickDetail = () => {
         setDetail(detail => !detail);

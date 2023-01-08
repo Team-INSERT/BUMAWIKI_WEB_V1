@@ -11,7 +11,8 @@ const Club = () => {
     useEffect(() => {
         axios.get('/docs/club')
             .then((res) => {
-                setClubs(res.data)
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setClubs(data)
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {

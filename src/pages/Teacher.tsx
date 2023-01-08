@@ -12,14 +12,16 @@ const Teacher = () => {
     useEffect(() => {
         axios.get('/docs/teacher')
             .then((res) => {
-                setHumanities(res.data)
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setHumanities(data)
             })
             .catch((err) => {
                 console.log(err)
             })
         axios.get('/docs/majorTeacher')
             .then((res) => {
-                setMajor(res.data)
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setMajor(data)
             })
             .catch((err) => {
                 console.log(err)

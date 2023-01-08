@@ -16,7 +16,8 @@ const Student = () => {
         }
         axios.get('/docs/student')
             .then((res) => {
-                setStudents(res.data);
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setStudents(data);
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
@@ -41,7 +42,7 @@ const Student = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         {allDate.map(date => (
-                            <C.AccodianMenu name={`${date}학년도 입학생`} key={date}>
+                            <C.AccodianMenu name={`${date}학년도 입학생`} key={date} isOpen={date === 2023 ? false : true}>
                                 <ul className="student-list">
                                     {students.map((student: Docs) => (<div key={student.id}>
                                         {student.enroll === date ?

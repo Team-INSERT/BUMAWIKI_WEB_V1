@@ -1,8 +1,7 @@
 interface AccodianType {
     name: string,
-    children: React.ReactNode
+    children: React.ReactNode,
+    isOpen?: boolean
 }
 
-type Accodian = ({ name }: AccodianType, { children }: React.PropsWithChildren) => any;
-
-export default Accodian;
+export default AccodianType;

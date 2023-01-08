@@ -16,7 +16,8 @@ const Accident = () => {
         }
         axios.get(`/docs/accident`)
             .then((res) => {
-                setAccidents(res.data)
+                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                setAccidents(data)
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
