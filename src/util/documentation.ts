@@ -14,7 +14,7 @@ export const documentation = (content: string) => {
         .replace(/<\/노랑>/gi, `?^@#@#@span^?`)
         .replace(/<취소선>/gi, `?^del style="color:#ccc;"^?`)
         .replace(/<\/취소선>/gi, `?^@#@#@del^?`)
-        .replace(/<소제목>/gi, `?^span style="color:#274168; font-size:40px; font-weight:700;"^?`)
+        .replace(/<소제목>/gi, `?^span style="color:#274168; font-size:28px; font-weight:700;"^?`)
         .replace(/<\/소제목>/gi, `?^@#@#@span^??^hr@#@#@^?`)
         .replace(/<<사진>>:{.*}/gi, `?^ ?^ 문서 생성 시 삽입하신 이미지가 차례대로 표시됩니다 ^? ^?`)
         .replace(/<<사진>>/gi, `?^ ?^ 문서 생성 시 삽입하신 이미지가 차례대로 표시됩니다 ^? ^?`)
