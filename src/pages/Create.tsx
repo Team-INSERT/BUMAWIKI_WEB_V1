@@ -5,6 +5,7 @@ import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { documentation } from 'util/documentation';
 import { getCookie } from 'util/getCookie';
+import useDidMountEffect from 'util/useDidMountEffect';
 import '../style/pages-style/Create.scss'
 
 const Docs = () => {
@@ -18,14 +19,6 @@ const Docs = () => {
     const [files2, setFiles2] = useState<"" | File>();
     const [files3, setFiles3] = useState<"" | File>();
 
-    useEffect(() => {
-        if (!user.id) {
-            alert('로그인 후 이용 가능한 서비스입니다.');
-            navigate('/')
-        }
-        // eslint-disable-next-line
-    }, []);
-
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
     }
@@ -35,8 +28,9 @@ const Docs = () => {
     }
 
     const onClickCreateDocs = () => {
-        if (!user.id) {
+        if (!user.isLogin) {
             alert('로그인 후 이용 가능한 서비스입니다.');
+            return;
         }
         if (!enroll) {
             alert('연도를 선택해주세요!')

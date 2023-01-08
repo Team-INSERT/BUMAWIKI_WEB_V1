@@ -12,7 +12,8 @@ const userInfo = {
   email: '',
   nickName: '',
   authority: 'USER',
-  contributeDocs: []
+  contributeDocs: [],
+  isLogin: false,
 };
 
 export const UserContext = createContext(userInfo);
@@ -29,7 +30,8 @@ const App = () => {
       .then((res) => {
         setUser({
           ...res.data,
-          contributeDocs: res.data.contributeDocs.reverse()
+          contributeDocs: res.data.contributeDocs.reverse(),
+          isLogin: true,
         })
       })
       .catch((err) => {

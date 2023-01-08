@@ -17,6 +17,10 @@ const Docs = () => {
     const [fileInput, setFileInput] = useState(['']);
 
     const onClickUpdateDocs = () => {
+        if (!user.isLogin) {
+            alert('로그인 후 이용 가능한 서비스입니다.')
+            return;
+        }
         const FormData = require('form-data');
         const data = new FormData();
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
@@ -45,14 +49,6 @@ const Docs = () => {
             }
         })
     }
-
-    useEffect(() => {
-        if (!user.id) {
-            alert('로그인 후 이용 가능한 서비스입니다.');
-            navigate(`/docs/${router.id}`)
-        }
-        // eslint-disable-next-line
-    }, []);
 
     useEffect(() => {
         axios.get(`/docs/find/id/${router.id}`)
