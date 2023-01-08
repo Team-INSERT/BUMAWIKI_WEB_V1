@@ -23,6 +23,14 @@ const Docs = () => {
         thisVersionCreatedAt: '',
         userId: ''
     })
+    const [prevVersionDocs, setPrevVersionDocs] = useState({
+        contents: '',
+        nickName: '',
+        thisVersionCreatedAt: '',
+        userId: ''
+    })
+    const [prevContents, setPrevContents] = useState('');
+    const [nextContents, setNextContents] = useState('');
     const [isLoad, setIsLoad] = useState(false);
 
     useEffect(() => {
@@ -33,7 +41,10 @@ const Docs = () => {
                     .then((res) => {
                         const Array = res.data.versionDocsResponseDto.reverse()
                         setVersionDocs(Array[router.versionId || 0])
-                        console.log(Array[router.versionId || 0])
+                        setPrevVersionDocs(Array[parseInt(router.versionId as string) + 1 || 1])
+                        const a = Array[router.versionId || 0].contents, b = Array[parseInt(router.versionId as string) + 1 || 1].contents
+                        setPrevContents(a.replace(b, ''))
+                        setNextContents(b.replace(a.replace(a.replace(b, ''), ''), ''))
                     })
                 setIsLoad(true);
             })
@@ -64,14 +75,19 @@ const Docs = () => {
                         {isLoad ? (
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}</span>
-                                <C.AccodianMenu name="원문 코드" isOpen={false}>
+                                <C.AccodianMenu name="수정된 내용" isOpen={false}>
                                     <div className='docs-content' dangerouslySetInnerHTML={{
                                         __html: versionDocs?.contents
+                                            .replace(prevContents, `<span style="background-color:#3FB950;">${prevContents}</span>`)
                                             .replace(/<</gi, `&lt;&lt;`)
                                             .replace(/>>/gi, `&gt;&gt;`)
-                                    }}>
-                                    </div>
-                                    <br />
+                                    }}></div>
+                                    <div className='docs-content' dangerouslySetInnerHTML={{
+                                        __html: nextContents
+                                            .replace(nextContents, `<span style="background-color:#fe5250;">${nextContents}</span>`)
+                                            .replace(/<</gi, `&lt;&lt;`)
+                                            .replace(/>>/gi, `&gt;&gt;`)
+                                    }}></div>
                                 </C.AccodianMenu>
                                 <C.AccodianMenu name="개요">
                                     <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(versionDocs?.contents.replace(/<br>/gi, '\n')) }}>
