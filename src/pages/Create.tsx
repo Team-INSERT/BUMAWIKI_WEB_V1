@@ -11,7 +11,7 @@ const Docs = () => {
     const navigate = useNavigate();
     const user = useContext(UserContext)
     const [docsType, setDocsType] = useState('');
-    const [enroll, setEnroll] = useState(2022);
+    const [enroll, setEnroll] = useState<number>();
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
     const [files1, setFiles1] = useState<"" | File>();
@@ -37,6 +37,10 @@ const Docs = () => {
     const onClickCreateDocs = () => {
         if (!user.id) {
             alert('로그인 후 이용 가능한 서비스입니다.');
+        }
+        if (!enroll) {
+            alert('연도를 선택해주세요!')
+            return;
         }
         if (title.length === 0) {
             alert('문서의 이름을 정해주세요!')
