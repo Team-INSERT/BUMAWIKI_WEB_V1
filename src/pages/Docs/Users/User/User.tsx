@@ -18,7 +18,7 @@ const MyPage = () => {
     useEffect(() => {
         axios.get(`/user/id/${router.id}`)
             .then((res) => {
-                setUser(res.data)
+                setUser({ ...res.data, contributeDocs: res.data.contributeDocs.reverse() })
             })
             .catch((err) => {
                 alert('유저 정보를 불러오는 도중 오류가 발생했습니다.')
