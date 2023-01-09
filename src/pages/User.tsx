@@ -45,20 +45,19 @@ const MyPage = () => {
                                 <span>이름은 {user.nickName}이며, 부마위키의 {user.authority === 'ADMIN' ? '관리자' : '사용자'} 중 한 명이다.</span>
                             </div>
                         </C.AccodianMenu>
-                        {user.id ? <>
-                            <C.AccodianMenu name={'기여한 문서'}>
-                                <div className='contribute-info'>
-                                    <span className='contribute-text'>이 유저가 기여한 문서의 정보들이다.</span>
-                                    <div className='contribute-list'>
-                                        {user.contributeDocs.map((docs: Contributors, index) => (
-                                            <span key={index}>문서명 : <Link className='contribute-link' to={`/docs/${docs.docsId}`}>{docs.title}[{docs.docsId}]</Link><br />
-                                                수정 날짜 : {dateParser(docs.createTime)}
-                                            </span>
-                                        ))}
-                                    </div>
+                        <C.AccodianMenu name={'기여한 문서'}>
+                            <div className='contribute-info'>
+                                <span className='contribute-text'>이 유저가 기여한 문서의 정보들이다.</span>
+                                <div className='contribute-list'>
+                                    {user.contributeDocs.map((docs: Contributors, index) => (
+                                        <span key={index}>문서명 : <Link className='contribute-link' to={`/docs/${docs.docsId}`}>{docs.title}[{docs.docsId}]</Link><br />
+                                            수정 날짜 : {dateParser(docs.createTime)}
+                                        </span>
+                                    ))}
                                 </div>
-                            </C.AccodianMenu>
-                            <div className='line margin' /></> : ''}
+                            </div>
+                        </C.AccodianMenu>
+                        <div className='line margin' />
                     </div>
                 </C.Board>
                 <C.Aside />
