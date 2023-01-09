@@ -36,8 +36,8 @@ const Docs = () => {
                         const Array = res.data.versionDocsResponseDto.reverse()
                         setVersionDocs(Array[router.versionId || 0])
                         const a = Array[router.versionId || 0].contents, b = Array[parseInt(router.versionId as string) + 1 || 1].contents
-                        setPrevContents(a.replace(b, ''))
-                        setNextContents(b.replace(a.replace(a.replace(b, ''), ''), ''))
+                        setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
+                        setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
                     })
                 setIsLoad(true)
             })
@@ -68,16 +68,21 @@ const Docs = () => {
                         {isLoad ? (
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}</span>
+                                <C.AccodianMenu name="코드 내용" isOpen={false}>
+                                    <div className='docs-content'>
+                                        {versionDocs.contents.replace(/<br>/gi, '\n')}
+                                    </div>
+                                </C.AccodianMenu>
                                 <C.AccodianMenu name="수정된 내용" isOpen={false}>
                                     <div className='docs-content' dangerouslySetInnerHTML={{
-                                        __html: versionDocs?.contents
-                                            .replace(prevContents, `<span style="background-color:#3FB950;">${prevContents}</span>`)
+                                        __html: prevContents
+                                            .replace(prevContents, `<span style="background-color:#3FB950;">${prevContents.replace(/\?@\$\?@\$/gi, '< /')}</span>`)
                                             .replace(/<</gi, `&lt;&lt;`)
                                             .replace(/>>/gi, `&gt;&gt;`)
                                     }}></div>
                                     <div className='docs-content' dangerouslySetInnerHTML={{
                                         __html: nextContents
-                                            .replace(nextContents, `<span style="background-color:#fe5250;">${nextContents}</span>`)
+                                            .replace(nextContents, `<span style="background-color:#fe5250;">${nextContents.replace(/\?@\$\?@\$/gi, '< /')}}</span>`)
                                             .replace(/<</gi, `&lt;&lt;`)
                                             .replace(/>>/gi, `&gt;&gt;`)
                                     }}></div>
