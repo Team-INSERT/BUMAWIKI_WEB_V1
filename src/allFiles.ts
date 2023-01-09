@@ -21,6 +21,7 @@ import Version from "./pages/Version"
 import DetailBtn from "./components/DetailBtn";
 import MyPage from "./pages/MyPage"
 import VersionDetail from "./pages/VersionDetail"
+import User from "./pages/User"
 
 export {
     Home,
@@ -46,4 +47,5 @@ export {
     DetailBtn,
     VersionDetail,
     MyPage,
+    User,
 };

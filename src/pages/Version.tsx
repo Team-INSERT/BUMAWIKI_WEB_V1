@@ -13,6 +13,7 @@ const Version = () => {
         axios.get(`docs/find/${router.id}/version`)
             .then((res) => {
                 setVersion(res.data.versionDocsResponseDto.reverse())
+                console.log(res.data.versionDocsResponseDto)
                 setIsLoad(true)
             })
             .catch((err) => {
@@ -34,7 +35,7 @@ const Version = () => {
                             {isLoad ? <>{version.map((ver: any, index: number) => (
                                 <li className='version-list'>
                                     <span className='version-span'><Link to={`/version/${router.id}/detail/${index}`} className='version-link'>{dateParser(ver.thisVersionCreatedAt)}</Link></span>
-                                    <span>작성자 : {ver.nickName}</span>
+                                    <span>작성자 : <Link to={`/user/${ver.userId}`} className='user-link'>{ver.nickName}</Link></span>
                                 </li>
                             ))}</> : ''}
                         </ul>

@@ -66,6 +66,7 @@ const App = () => {
           <Route path={'/version/:id'} element={<R.Version />} />
           <Route path={'/version/:id/detail/:versionId'} element={<R.VersionDetail />} />
           <Route path={'/mypage'} element={<R.MyPage />} />
+          <Route path={'/user/:id'} element={<R.User />} />
           <Route path={'*'} element={<R.NotFound />} />
         </Routes>
       </UserContext.Provider>
