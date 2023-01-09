@@ -26,6 +26,41 @@ const Docs = () => {
         setEnroll(parseInt(e.target.id))
     }
 
+    const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setContents(e.target.value)
+        if (contents.substring(contents.length - 3, contents.length) === '<강조' ||
+            contents.substring(contents.length - 3, contents.length) === '<어록' ||
+            contents.substring(contents.length - 3, contents.length) === '<빨강' ||
+            contents.substring(contents.length - 3, contents.length) === '<하양' ||
+            contents.substring(contents.length - 3, contents.length) === '<노랑') {
+            setContents(`${contents}></${contents.substring(contents.length - 2, contents.length)}>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 1;
+                e.target.selectionEnd = contents.length + 1;
+            }, 10)
+        } else if (
+            contents.substring(contents.length - 4, contents.length) === '<취소선' ||
+            contents.substring(contents.length - 4, contents.length) === '<소제목') {
+            setContents(`${contents}></${contents.substring(contents.length - 3, contents.length)}>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 1;
+                e.target.selectionEnd = contents.length + 1;
+            }, 10)
+        } else if (contents.substring(contents.length - 3, contents.length) === '<링크') {
+            setContents(`${contents} 문서={}></링크>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 5;
+                e.target.selectionEnd = contents.length + 5;
+            }, 10)
+        } else if (contents.substring(contents.length - 5, contents.length) === '<외부링크') {
+            setContents(`${contents} 문서={}></외부링크>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 5;
+                e.target.selectionEnd = contents.length + 5;
+            }, 10)
+        }
+    }
+
     const onClickCreateDocs = () => {
         if (!user.isLogin) {
             alert('로그인 후 이용 가능한 서비스입니다.')
@@ -119,7 +154,7 @@ const Docs = () => {
                         </div>
                         <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>문서 내용</div>
-                            <textarea className='tr-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents} />
+                            <textarea className='tr-textarea' onChange={(e) => { onChangeTextArea(e) }} value={contents} />
                         </div>
                         <div className='tr-wrap constents-wrap tr-text'>
                             <div className='tr-title'>미리보기</div>
