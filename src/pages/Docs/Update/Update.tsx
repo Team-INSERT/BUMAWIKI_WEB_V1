@@ -13,11 +13,42 @@ const Docs = () => {
     const navigate = useNavigate()
     const [title, setTitle] = useState('')
     const [contents, setContents] = useState('')
-    const [files, setFiles] = useState<any>([])
+    const [files, setFiles] = useState<any>([]);
     const [fileInput, setFileInput] = useState([''])
 
-    const ASAA = (e: any) => {
-        console.log(e.target.selectionStart)
+    const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setContents(e.target.value)
+        if (contents.substring(contents.length - 3, contents.length) === '<강조' ||
+            contents.substring(contents.length - 3, contents.length) === '<어록' ||
+            contents.substring(contents.length - 3, contents.length) === '<빨강' ||
+            contents.substring(contents.length - 3, contents.length) === '<하양' ||
+            contents.substring(contents.length - 3, contents.length) === '<노랑') {
+            setContents(`${contents}></${contents.substring(contents.length - 2, contents.length)}>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 1;
+                e.target.selectionEnd = contents.length + 1;
+            }, 10)
+        } else if (
+            contents.substring(contents.length - 4, contents.length) === '<취소선' ||
+            contents.substring(contents.length - 4, contents.length) === '<소제목') {
+            setContents(`${contents}></${contents.substring(contents.length - 3, contents.length)}>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 1;
+                e.target.selectionEnd = contents.length + 1;
+            }, 10)
+        } else if (contents.substring(contents.length - 3, contents.length) === '<링크') {
+            setContents(`${contents} 문서={}></링크>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 5;
+                e.target.selectionEnd = contents.length + 5;
+            }, 10)
+        } else if (contents.substring(contents.length - 5, contents.length) === '<외부링크') {
+            setContents(`${contents} 문서={}></외부링크>`)
+            setTimeout(() => {
+                e.target.selectionStart = contents.length + 5;
+                e.target.selectionEnd = contents.length + 5;
+            }, 10)
+        }
     }
 
     const onClickUpdateDocs = () => {
@@ -28,8 +59,10 @@ const Docs = () => {
         const FormData = require('form-data')
         const data = new FormData()
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
-        for (let i = files.length - 1; i >= 0; i--) {
-            data.append("files", files[i], files[i].name)
+        if (files instanceof FileList) {
+            for (let i = files.length - 1; i >= 0; i--) {
+                data.append("files", files[i], files[i].name)
+            }
         }
         if (contents.length === 0) {
             alert('문서가 비어있습니다!')
@@ -89,8 +122,7 @@ const Docs = () => {
                         <br />
                         <textarea
                             className='update-textarea'
-                            onSelect={(e) => { ASAA(e) }}
-                            onChange={(e) => { setContents(e.target.value); }}
+                            onChange={(e) => { onChangeTextArea(e) }}
                             value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')} />
                         <span className='preview-span'>미리보기</span>
                         <div className='update-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />
