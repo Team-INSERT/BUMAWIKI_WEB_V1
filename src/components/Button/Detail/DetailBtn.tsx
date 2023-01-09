@@ -36,14 +36,19 @@ const DetailBtn = () => {
     }
 
     const onClickChangeDocsName = () => {
-        const data = `{"title": "${docsName}"\n}`
-
+        if (docsName.length === 0) {
+            alert('내용이 없습니다.')
+            return
+        }
         axios.put(`/docs/update/title/${router.id}`, {
+            title: docsName,
+        }, {
             headers: {
                 Authorization: getCookie('authorization')
-            },
-            data
+            }
         }).then((res) => {
+            alert('문서 수정 완료')
+            console.log(res)
             navigate(`/docs/${res.data.id}`)
         }).catch((err) => {
             alert('문서 이름 변경 도중 오류가 발생했습니다.')
