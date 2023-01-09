@@ -69,6 +69,22 @@ const DetailBtn = () => {
     return (
         <div className="detail-button-wrap">
             {user.isLogin ? <>
+                {user.authority === 'ADMIN' ? <>
+                    <div className='link-wrap' onClick={onClickDeleteDocs}>
+                        <div>
+                            <h1 className='link'>삭제</h1>
+                        </div>
+                    </div>
+                    <input className='link-wrap-input'
+                        value={docsName}
+                        onChange={(e) => { setDocsName(e.target.value) }}
+                        required={true} />
+                    <div className='link-wrap' onClick={onClickChangeDocsName}>
+                        <div>
+                            <h1 className='link'>변경</h1>
+                        </div>
+                    </div></>
+                    : ''}
                 <Link to={`/update/${docs?.id}`} className='link-wrap'>
                     <div>
                         <h1 className='link'>편집</h1>
@@ -78,21 +94,7 @@ const DetailBtn = () => {
                     <div>
                         <h1 className='link'>기록</h1>
                     </div>
-                </Link>{user.authority === 'ADMIN' ? <>
-                    <div className='link-wrap' onClick={onClickDeleteDocs}>
-                        <div>
-                            <h1 className='link'>삭제</h1>
-                        </div>
-                    </div>
-                    <input className='link-wrap-input'
-                        value={docsName}
-                        onChange={(e) => { setDocsName(e.target.value) }} />
-                    <div className='link-wrap' onClick={onClickChangeDocsName}>
-                        <div>
-                            <h1 className='link'>변경</h1>
-                        </div>
-                    </div></>
-                    : ''}</> : ''}
+                </Link></> : ''}
         </div>
     );
 }
