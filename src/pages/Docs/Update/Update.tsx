@@ -1,7 +1,7 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
 import axios, { AxiosError } from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { documentation } from 'util/documentation'
 import { getCookie } from 'util/getCookie'
@@ -15,6 +15,10 @@ const Docs = () => {
     const [contents, setContents] = useState('')
     const [files, setFiles] = useState<any>([])
     const [fileInput, setFileInput] = useState([''])
+
+    const ASAA = (e: any) => {
+        console.log(e.target.selectionStart)
+    }
 
     const onClickUpdateDocs = () => {
         if (!user.isLogin) {
@@ -83,7 +87,11 @@ const Docs = () => {
                         </div>
                         <span className='docs-need-file'>문서에 필요한 사진태그 개수 : {files.length}개</span>
                         <br />
-                        <textarea className='update-textarea' onChange={(e) => { setContents(e.target.value) }} value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')} />
+                        <textarea
+                            className='update-textarea'
+                            onSelect={(e) => { ASAA(e) }}
+                            onChange={(e) => { setContents(e.target.value); }}
+                            value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')} />
                         <span className='preview-span'>미리보기</span>
                         <div className='update-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />
                         <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>

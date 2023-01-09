@@ -16,7 +16,7 @@ const MyPage = () => {
     const router = useParams()
 
     useEffect(() => {
-        axios.get(`/api/user/id/${router.id}`)
+        axios.get(`/user/id/${router.id}`)
             .then((res) => {
                 setUser(res.data)
             })
