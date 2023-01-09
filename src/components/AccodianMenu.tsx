@@ -7,6 +7,8 @@ const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
 
     useEffect(() => {
         if (isOpen === false) setDetail(false)
+
+        // eslint-disable-next-line
     }, [])
 
     const onClickDetail = () => {
