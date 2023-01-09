@@ -1,29 +1,29 @@
-import axios from 'axios';
-import * as C from 'allFiles';
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import Docs from 'types/docs';
+import axios from 'axios'
+import * as C from 'allFiles'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import Docs from 'types/docs'
 import './Search.scss'
-import { changeKor } from 'util/changeKor';
+import { changeKor } from 'util/changeKor'
 
 const Search = () => {
-    const router = useParams();
-    const navigate = useNavigate();
-    const [result, setResult] = useState([]);
-    const [isLoad, setIsLoad] = useState(false);
+    const router = useParams()
+    const navigate = useNavigate()
+    const [result, setResult] = useState([])
+    const [isLoad, setIsLoad] = useState(false)
     useEffect(() => {
         axios.get(`/docs/find/title/${router.result}`)
             .then((res) => {
                 console.log(res)
                 setResult(res.data)
-                setIsLoad(true);
+                setIsLoad(true)
                 if (res.data.length === 1) navigate(`/docs/${res.data[0].id}`)
             })
             .catch((err) => {
                 console.log(err)
             })
         // eslint-disable-next-line
-    }, [router.result]);
+    }, [router.result])
 
     return (
         <div>
@@ -56,7 +56,7 @@ const Search = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Search;
+export default Search

@@ -1,5 +1,5 @@
-import React from 'react';
-import './SubFooter.scss';
+import React from 'react'
+import './SubFooter.scss'
 
 const SubFooter = () => {
     return (
@@ -23,7 +23,7 @@ const SubFooter = () => {
                 </p>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SubFooter;
+export default SubFooter

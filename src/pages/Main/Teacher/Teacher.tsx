@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import * as C from 'allFiles';
+import React, { useEffect, useState } from 'react'
+import * as C from 'allFiles'
 import './Teacher.scss'
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Docs from 'types/docs';
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import Docs from 'types/docs'
 
 const Teacher = () => {
-    const [major, setMajor] = useState([]);
-    const [humanities, setHumanities] = useState([]);
+    const [major, setMajor] = useState([])
+    const [humanities, setHumanities] = useState([])
 
     useEffect(() => {
         axios.get('/docs/teacher')
@@ -25,9 +25,9 @@ const Teacher = () => {
             })
             .catch((err) => {
                 console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
             })
-    }, []);
+    }, [])
 
     return (
         <div>
@@ -65,7 +65,7 @@ const Teacher = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Teacher;
+export default Teacher

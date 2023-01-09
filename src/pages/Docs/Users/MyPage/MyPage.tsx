@@ -1,15 +1,15 @@
-import * as C from 'allFiles';
-import { UserContext } from 'App';
-import React, { useContext } from 'react';
-import './MyPage.scss';
-import { dateParser } from 'util/dateParser';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { getCookie } from 'util/getCookie';
-import Contributors from 'types/contributors';
+import * as C from 'allFiles'
+import { UserContext } from 'App'
+import React, { useContext } from 'react'
+import './MyPage.scss'
+import { dateParser } from 'util/dateParser'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { getCookie } from 'util/getCookie'
+import Contributors from 'types/contributors'
 
 const MyPage = () => {
-    const user = useContext(UserContext);
+    const user = useContext(UserContext)
 
     const onClickLogOut = () => {
         axios.delete('/auth/bsm/logout', {
@@ -69,7 +69,7 @@ const MyPage = () => {
             <C.ScrollBtn />
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default MyPage;
+export default MyPage

@@ -1,5 +1,5 @@
-import * as C from 'allFiles';
-import React from 'react';
+import * as C from 'allFiles'
+import React from 'react'
 
 const NotFound = () => {
     return (
@@ -10,7 +10,7 @@ const NotFound = () => {
             </C.Board>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default NotFound;
+export default NotFound

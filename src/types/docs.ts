@@ -7,4 +7,4 @@ interface Docs {
     view: number,
 }
 
-export default Docs;
+export default Docs

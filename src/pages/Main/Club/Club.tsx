@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import * as C from 'allFiles';
+import React, { useEffect, useState } from 'react'
+import * as C from 'allFiles'
 import './Club.scss'
-import { Link } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
-import Docs from 'types/docs';
+import { Link } from 'react-router-dom'
+import axios, { AxiosError } from 'axios'
+import Docs from 'types/docs'
 
 const Club = () => {
-    const [clubs, setClubs] = useState([]);
+    const [clubs, setClubs] = useState([])
 
     useEffect(() => {
         axios.get('/docs/club')
@@ -17,10 +17,10 @@ const Club = () => {
             .catch((err) => {
                 if (err instanceof AxiosError) {
                     console.log(err)
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
                 }
             })
-    }, []);
+    }, [])
 
     return (
         <div>
@@ -50,7 +50,7 @@ const Club = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Club;
+export default Club

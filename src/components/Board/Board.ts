@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Board = styled.div`
 	width: 72vw;
@@ -20,4 +20,4 @@ const Board = styled.div`
     }
 `;
 
-export default Board;
+export default Board

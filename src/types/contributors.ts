@@ -4,4 +4,4 @@ interface Contributors {
     createTime: string,
 }
 
-export default Contributors;
+export default Contributors

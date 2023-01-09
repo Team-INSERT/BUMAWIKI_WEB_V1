@@ -1,6 +1,6 @@
-import * as C from 'allFiles';
-import React from 'react';
-import './Home.scss';
+import * as C from 'allFiles'
+import React from 'react'
+import './Home.scss'
 
 const Home = () => {
     return (
@@ -164,7 +164,7 @@ const Home = () => {
                                 </span>
                             </p>
                             <div className='summary-video'>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/DIvVZouIVpQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/DIvVZouIVpQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowFullScreen></iframe>
                             </div>
                         </C.AccodianMenu>
                     </div>
@@ -365,7 +365,7 @@ const Home = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

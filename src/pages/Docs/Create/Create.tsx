@@ -1,22 +1,22 @@
-import * as C from 'allFiles';
-import { UserContext } from 'App';
-import axios from 'axios';
-import React, { ChangeEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { documentation } from 'util/documentation';
-import { getCookie } from 'util/getCookie';
+import * as C from 'allFiles'
+import { UserContext } from 'App'
+import axios from 'axios'
+import React, { ChangeEvent, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { documentation } from 'util/documentation'
+import { getCookie } from 'util/getCookie'
 import './Create.scss'
 
 const Docs = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const user = useContext(UserContext)
-    const [docsType, setDocsType] = useState('');
-    const [enroll, setEnroll] = useState<number>();
-    const [title, setTitle] = useState('');
-    const [contents, setContents] = useState('');
-    const [files1, setFiles1] = useState<"" | File>();
-    const [files2, setFiles2] = useState<"" | File>();
-    const [files3, setFiles3] = useState<"" | File>();
+    const [docsType, setDocsType] = useState('')
+    const [enroll, setEnroll] = useState<number>()
+    const [title, setTitle] = useState('')
+    const [contents, setContents] = useState('')
+    const [files1, setFiles1] = useState<"" | File>()
+    const [files2, setFiles2] = useState<"" | File>()
+    const [files3, setFiles3] = useState<"" | File>()
 
     const onChangeRadio = (e: ChangeEvent<HTMLInputElement>) => {
         setDocsType(e.target.id)
@@ -28,27 +28,27 @@ const Docs = () => {
 
     const onClickCreateDocs = () => {
         if (!user.isLogin) {
-            alert('로그인 후 이용 가능한 서비스입니다.');
-            return;
+            alert('로그인 후 이용 가능한 서비스입니다.')
+            return
         }
         if (!enroll) {
             alert('연도를 선택해주세요!')
-            return;
+            return
         }
         if (title.length === 0) {
             alert('문서의 이름을 정해주세요!')
-            return;
+            return
         }
         if (!docsType) {
             alert('문서의 분류를 선택해주세요!')
-            return;
+            return
         }
-        const FormData = require('form-data');
-        const data = new FormData();
-        data.append('request', new Blob([`{ "title": "${title.replace(/"/gi, '&$^%')}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`], { type: 'application/json' }));
-        if (files1) data.append("files", files1, files1.name);
-        if (files2) data.append("files", files2, files2.name);
-        if (files3) data.append("files", files3, files3.name);
+        const FormData = require('form-data')
+        const data = new FormData()
+        data.append('request', new Blob([`{ "title": "${title.replace(/"/gi, '&$^%')}", "enroll":"${enroll}", "contents":"${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`], { type: 'application/json' }))
+        if (files1) data.append("files", files1, files1.name)
+        if (files2) data.append("files", files2, files2.name)
+        if (files3) data.append("files", files3, files3.name)
         axios.post('/docs/create', data, {
             headers: {
                 'Content-Type': `multipart/form-data`,
@@ -57,10 +57,11 @@ const Docs = () => {
             },
         }).then((res) => {
             alert('문서가 생성되었습니다!')
-            navigate(`/docs/${res.data.id}`);
+            navigate(`/docs/${res.data.id}`)
         }).catch((err) => {
             console.log(err)
             alert('오류가 발생했습니다.')
+            return;
         })
     }
 
@@ -136,7 +137,7 @@ const Docs = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Docs;
+export default Docs

@@ -10,5 +10,5 @@ export const changeKor = (classify: string) => {
     } else if (classify === 'MAJOR_TEACHER') {
         return '전공교과 선생님'
     }
-    return classify;
+    return classify
 }

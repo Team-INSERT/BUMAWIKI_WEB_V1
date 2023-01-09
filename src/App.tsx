@@ -1,11 +1,11 @@
-import axios, { AxiosError } from 'axios';
-import React, { createContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { dateUTCParser } from 'util/dateUTCParser';
-import { getCookie } from 'util/getCookie';
-import * as R from './allFiles';
+import axios, { AxiosError } from 'axios'
+import React, { createContext, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { dateUTCParser } from 'util/dateUTCParser'
+import { getCookie } from 'util/getCookie'
+import * as R from './allFiles'
 
-axios.defaults.baseURL = 'http://bumawiki.kro.kr/api';
+axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const userInfo = {
   id: 0,
@@ -14,12 +14,12 @@ const userInfo = {
   authority: 'USER',
   contributeDocs: [],
   isLogin: false,
-};
+}
 
-export const UserContext = createContext(userInfo);
+export const UserContext = createContext(userInfo)
 
 const App = () => {
-  const [user, setUser] = useState(userInfo);
+  const [user, setUser] = useState(userInfo)
 
   useEffect(() => {
     axios.get('/user', {
@@ -47,7 +47,7 @@ const App = () => {
           console.log(err)
         }
       })
-  }, []);
+  }, [])
 
   return (
     <Router>
@@ -71,7 +71,7 @@ const App = () => {
         </Routes>
       </UserContext.Provider>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

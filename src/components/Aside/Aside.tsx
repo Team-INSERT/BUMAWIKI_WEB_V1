@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { changeKor } from 'util/changeKor';
-import { getLastDate } from 'util/getLastDate';
-import './Aside.scss';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { changeKor } from 'util/changeKor'
+import { getLastDate } from 'util/getLastDate'
+import './Aside.scss'
 
 interface Docs {
     title: string,
@@ -13,7 +13,7 @@ interface Docs {
 }
 
 const Aside = () => {
-    const [lastModifiedDocs, setLastModifiedDocs] = useState([]);
+    const [lastModifiedDocs, setLastModifiedDocs] = useState([])
 
     useEffect(() => {
         axios.get('/docs/find/modified')
@@ -23,7 +23,7 @@ const Aside = () => {
             .catch((err) => {
                 console.log(err)
             })
-    }, []);
+    }, [])
 
     return (
         <div className='aside-wrap'>
@@ -37,7 +37,7 @@ const Aside = () => {
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default Aside;
+export default Aside

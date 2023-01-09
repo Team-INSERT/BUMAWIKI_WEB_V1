@@ -1,5 +1,5 @@
-import React from 'react';
-import './ScrollBtn.scss';
+import React from 'react'
+import './ScrollBtn.scss'
 
 const ScrollBtn = () => {
     const scrollToTop = () => {
@@ -30,4 +30,4 @@ const ScrollBtn = () => {
     )
 }
 
-export default ScrollBtn;
+export default ScrollBtn

@@ -1,13 +1,13 @@
-import { UserContext } from 'App';
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Header.scss';
+import { UserContext } from 'App'
+import React, { useContext, useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import './Header.scss'
 
 const Header = () => {
-    const [search, setSearch] = useState('');
-    const [isLoad, setIsLoad] = useState(false);
-    const user = useContext(UserContext);
-    const navigate = useNavigate();
+    const [search, setSearch] = useState('')
+    const [isLoad, setIsLoad] = useState(false)
+    const user = useContext(UserContext)
+    const navigate = useNavigate()
     const navigateSearchResult = () => {
         if (search.length === 0) {
             alert('검색할 문서명을 입력해주세요!')
@@ -18,7 +18,7 @@ const Header = () => {
     }
     useEffect(() => {
         if (user.id) setIsLoad(true)
-    }, [user]);
+    }, [user])
 
     return (
         <div className='header-wrap'>
@@ -94,7 +94,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

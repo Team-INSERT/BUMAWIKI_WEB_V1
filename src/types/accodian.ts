@@ -4,4 +4,4 @@ interface AccodianType {
     isOpen?: boolean
 }
 
-export default AccodianType;
+export default AccodianType

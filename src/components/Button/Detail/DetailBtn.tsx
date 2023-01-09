@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
-import { dateParser } from 'util/dateParser';
-import './DetailBtn.scss';
-import { UserContext } from 'App';
-import { getCookie } from 'util/getCookie';
+import React, { useState, useEffect, useContext } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import axios, { AxiosError } from 'axios'
+import { dateParser } from 'util/dateParser'
+import './DetailBtn.scss'
+import { UserContext } from 'App'
+import { getCookie } from 'util/getCookie'
 
 const DetailBtn = () => {
-    const router = useParams();
-    const user = useContext(UserContext);
-    const [docsName, setDocsName] = useState('');
-    const navigate = useNavigate();
+    const router = useParams()
+    const user = useContext(UserContext)
+    const [docsName, setDocsName] = useState('')
+    const navigate = useNavigate()
     const [docs, setDocs] = useState({
         id: '',
         title: '',
@@ -19,7 +19,7 @@ const DetailBtn = () => {
         contents: '',
         lastModifiedAt: '',
         view: ''
-    });
+    })
 
     const onClickDeleteDocs = () => {
         axios.delete(`/docs/delete/${router.id}`, {
@@ -36,7 +36,7 @@ const DetailBtn = () => {
     }
 
     const onClickChangeDocsName = () => {
-        const data = `{"title": "${docsName}"\n}`;
+        const data = `{"title": "${docsName}"\n}`
 
         axios.put(`/docs/update/title/${router.id}`, {
             headers: {
@@ -61,11 +61,12 @@ const DetailBtn = () => {
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
-                    console.log(err);
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    console.log(err)
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+                    return;
                 }
             })
-    }, [router.id]);
+    }, [router.id])
     return (
         <div className="detail-button-wrap">
             {user.isLogin ? <>
@@ -96,7 +97,7 @@ const DetailBtn = () => {
                     </div>
                 </Link></> : ''}
         </div>
-    );
+    )
 }
 
-export default DetailBtn;
+export default DetailBtn

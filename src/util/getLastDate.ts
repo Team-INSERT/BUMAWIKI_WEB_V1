@@ -14,5 +14,5 @@ export const getLastDate = (date: string) => {
                 `${Math.trunc((nowDate.getTime() - Date.parse(date)) / 1000 / 60)}분 전`
             :
             `${Math.trunc((nowDate.getTime() - Date.parse(date)) / 1000)}초 전`
-    return lastDate;
+    return lastDate
 }

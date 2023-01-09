@@ -70,5 +70,5 @@ export const documentation = (content: string) => {
         .replace(/\^\?/gi, `>`)
         .replace(/@#@#@/gi, `/`)
         .replace(/&\$\^%/gi, `"`);
-    return HTML_CONTENT;
+    return HTML_CONTENT
 }

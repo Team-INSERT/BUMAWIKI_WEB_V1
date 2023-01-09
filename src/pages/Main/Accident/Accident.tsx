@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import * as C from 'allFiles';
+import React, { useEffect, useState } from 'react'
+import * as C from 'allFiles'
 import './Accident.scss'
-import { Link } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
-import Docs from 'types/docs';
+import { Link } from 'react-router-dom'
+import axios, { AxiosError } from 'axios'
+import Docs from 'types/docs'
 
 const Accident = () => {
-    const [accidents, setAccidents] = useState([]);
-    const [allDate] = useState([2023]);
-    const nowDate = new Date();
+    const [accidents, setAccidents] = useState([])
+    const [allDate] = useState([2023])
+    const nowDate = new Date()
 
     useEffect(() => {
         for (let date = nowDate.getFullYear() - 1; date >= 2021; date--) {
@@ -21,12 +21,12 @@ const Accident = () => {
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
-                    console.log(err);
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    console.log(err)
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
                 }
             })
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     return (
         <div>
@@ -59,7 +59,7 @@ const Accident = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Accident;
+export default Accident

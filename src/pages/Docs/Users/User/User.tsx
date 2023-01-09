@@ -1,10 +1,10 @@
-import * as C from 'allFiles';
-import React, { useEffect, useState } from 'react';
-import '../MyPage/MyPage.scss';
-import { dateParser } from 'util/dateParser';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import Contributors from 'types/contributors';
+import * as C from 'allFiles'
+import React, { useEffect, useState } from 'react'
+import '../MyPage/MyPage.scss'
+import { dateParser } from 'util/dateParser'
+import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
+import Contributors from 'types/contributors'
 
 const MyPage = () => {
     const [user, setUser] = useState({
@@ -12,8 +12,8 @@ const MyPage = () => {
         nickName: '알 수 없음',
         authority: '',
         contributeDocs: []
-    });
-    const router = useParams();
+    })
+    const router = useParams()
 
     useEffect(() => {
         axios.get(`/api/user/id/${router.id}`)
@@ -23,9 +23,9 @@ const MyPage = () => {
             .catch((err) => {
                 alert('유저 정보를 불러오는 도중 오류가 발생했습니다.')
                 console.log(err)
-                return;
+                return
             })
-    }, [router.id]);
+    }, [router.id])
 
     return (
         <div>
@@ -64,7 +64,7 @@ const MyPage = () => {
             <C.ScrollBtn />
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default MyPage;
+export default MyPage

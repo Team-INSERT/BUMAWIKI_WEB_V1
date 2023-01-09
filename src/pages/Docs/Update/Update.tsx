@@ -1,36 +1,36 @@
-import * as C from 'allFiles';
-import { UserContext } from 'App';
-import axios, { AxiosError } from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { documentation } from 'util/documentation';
-import { getCookie } from 'util/getCookie';
+import * as C from 'allFiles'
+import { UserContext } from 'App'
+import axios, { AxiosError } from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { documentation } from 'util/documentation'
+import { getCookie } from 'util/getCookie'
 import '../Doc/Docs.scss'
 
 const Docs = () => {
-    const router = useParams();
-    const user = useContext(UserContext);
-    const navigate = useNavigate();
+    const router = useParams()
+    const user = useContext(UserContext)
+    const navigate = useNavigate()
     const [title, setTitle] = useState('')
-    const [contents, setContents] = useState('');
-    const [files, setFiles] = useState<any>([]);
-    const [fileInput, setFileInput] = useState(['']);
+    const [contents, setContents] = useState('')
+    const [files, setFiles] = useState<any>([])
+    const [fileInput, setFileInput] = useState([''])
 
     const onClickUpdateDocs = () => {
         if (!user.isLogin) {
             alert('로그인 후 이용 가능한 서비스입니다.')
-            return;
+            return
         }
-        const FormData = require('form-data');
-        const data = new FormData();
-        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', });
+        const FormData = require('form-data')
+        const data = new FormData()
+        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
         for (let i = files.length - 1; i >= 0; i--) {
-            data.append("files", files[i], files[i].name);
+            data.append("files", files[i], files[i].name)
         }
         console.log(files)
         if (contents.length <= 2) {
             alert('문서가 비어있습니다!')
-            return;
+            return
         }
         axios.put(`docs/update/${router.id}`, data, {
             headers: {
@@ -38,12 +38,12 @@ const Docs = () => {
                 Authorization: getCookie('authorization'),
             },
         }).then(() => {
-            alert('문서가 편집되었습니다!');
-            navigate(`/docs/${router.id}`);
+            alert('문서가 편집되었습니다!')
+            navigate(`/docs/${router.id}`)
         }).catch((err) => {
             console.log(err)
             if (err.response.status === 403) {
-                alert('로그인 후 이용 가능한 서비스입니다.');
+                alert('로그인 후 이용 가능한 서비스입니다.')
             } else {
                 alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
             }
@@ -58,11 +58,11 @@ const Docs = () => {
             })
             .catch((err) => {
                 if (err instanceof AxiosError) {
-                    console.log(err);
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.');
+                    console.log(err)
+                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
                 }
             })
-    }, [router.id]);
+    }, [router.id])
     return (
         <div>
             <C.Header />
@@ -75,7 +75,7 @@ const Docs = () => {
                     <div className="line" />
                     <div className='summary-wrap'>
                         {fileInput.map(() => (
-                            <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]); }} />
+                            <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]) }} />
                         ))}
                         <div className='file-add-wrap' onClick={() => { setFileInput([...fileInput, '']) }}>
                             <button className='file-add-button'>+</button><span>사진 더 선택하기</span>
@@ -94,7 +94,7 @@ const Docs = () => {
             </div>
             <C.Footer />
         </div>
-    );
-};
+    )
+}
 
-export default Docs;
+export default Docs
