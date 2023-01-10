@@ -39,8 +39,9 @@ const App = () => {
           axios.put('/auth/refresh/access', {
             refresh_token: getCookie('refresh_token')
           }).then((res) => {
+            console.log(res.data)
             document.cookie = `authorization=${res.data.accessToken};`
-            document.cookie = `refresh_token=${res.data.refreshToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
+            document.cookie = `refresh_token=${res.data.refreshToken};expires=${getCookie('expired_at')};path=/;`
             window.location.reload()
           }).catch((err) => { console.log(err) })
         } else {
