@@ -129,13 +129,14 @@ const Docs = () => {
                         <div className='tr-wrap'>
                             <div className='tr-title'>연도</div>
                             <div className='tr-content'>
-                                {docsType !== 'CLUB' ? <><input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2023' name='radios' />
+                                <>
+                                    <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2023' name='radios' />
                                     <label htmlFor='2023' className='enroll'>2023년</label>
                                     <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2022' name='radios' />
                                     <label htmlFor='2022' className='enroll'>2022년</label>
                                     <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2021' name='radios' />
-                                    <label htmlFor='2021' className='enroll'>2021년</label></>
-                                    : '없음'}
+                                    <label htmlFor='2021' className='enroll'>2021년</label>
+                                </>
                             </div>
                         </div>
                         <div className='tr-wrap tr-example'>
