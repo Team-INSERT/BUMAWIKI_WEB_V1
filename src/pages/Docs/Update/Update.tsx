@@ -16,6 +16,52 @@ const Docs = () => {
     const [files, setFiles] = useState<any>([]);
     const [fileInput, setFileInput] = useState([''])
 
+    const [table, setTable] = useState('');
+    const [tableColor, setTableColor] = useState('');
+    const [tableTextColor, setTableTextColor] = useState('');
+    const [tableLine, setTableLine] = useState('');
+    const [tableName, setTableName] = useState('');
+    const [tableHeight, setTableHeight] = useState('');
+    const [tableBirth, setTableBirth] = useState('');
+    const [tableCountry, setTableCountry] = useState('');
+    const [tableMBTI, setTableMBTI] = useState('');
+    const [tableClub, setTableClub] = useState('');
+    const [tableField, setTableField] = useState('');
+
+    useEffect(() => {
+        setTable(`?^table style="border-collapse: collapse; border:2px solid ${tableLine}; width:360px;"^?
+?^tr style="border:2px solid ${tableLine}"^?
+?^td colSpan="2" style="text-align: center; height: 38px; font-weight: 800; color: ${tableTextColor}; background-color: ${tableColor};"^?${tableName}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="border:2px solid ${tableLine}"^?
+?^td colSpan="2" style="width: 360px; height: 200px; overflow: hidden; background-image:url('<<사진>>'); background-size: cover;"^??^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px; border: 2px solid black"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?키?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableHeight}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px; border: 2px solid black;"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?생일?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableBirth}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px; border: 2px solid black;"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?국적?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableCountry}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px; border: 2px solid black;"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?MBTI?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableMBTI}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px; border: 2px solid black;"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?소속?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableClub}?^@#@#@td^?
+?^@#@#@tr^?
+?^tr style="height: 38px;"^?
+?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?분야?^@#@#@td^?
+?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableField}?^@#@#@td^?
+?^@#@#@tr^??^@#@#@table^?`)
+    }, [table, tableTextColor, tableColor, tableName, tableHeight, tableBirth, tableCountry, tableMBTI, tableClub, tableField, tableLine])
+
     const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setContents(e.target.value)
         if (contents.substring(contents.length - 3, contents.length) === '<강조' ||
@@ -58,7 +104,8 @@ const Docs = () => {
         }
         const FormData = require('form-data')
         const data = new FormData()
-        data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
+        data.append('request', new Blob([`{ "contents": "${contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
+        console.log(contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/'))
         for (let i = files.length - 1; i >= 0; i--) {
             data.append("files", files[i], files[i].name)
         }
@@ -122,12 +169,82 @@ const Docs = () => {
                         </div>
                         <span className='docs-need-file'>문서에 필요한 사진태그 개수 : {files.length}개</span>
                         <br />
+                        <span className='create-profile'>프로필 생성기</span>
+                        <div className='create-profile-wrap'>
+                            <div className='create-table'>
+                                <div className='create-title'>표 색상</div>
+                                <input placeholder='ex) #251678, orange'
+                                    onChange={(e) => { setTableColor(e.target.value) }}
+                                    value={tableColor} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>글자 색상</div>
+                                <input placeholder='ex) black, white'
+                                    onChange={(e) => { setTableTextColor(e.target.value) }}
+                                    value={tableTextColor} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>선 색상</div>
+                                <input placeholder='ex) black, white'
+                                    onChange={(e) => { setTableLine(e.target.value) }}
+                                    value={tableLine} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>사진</div>
+                                <div className='create-file'>
+                                    <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]) }} />
+                                </div>
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>이름</div>
+                                <input
+                                    onChange={(e) => { setTableName(e.target.value) }}
+                                    value={tableName} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>키</div>
+                                <input
+                                    onChange={(e) => { setTableHeight(e.target.value) }}
+                                    value={tableHeight} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>생일</div>
+                                <input
+                                    onChange={(e) => { setTableBirth(e.target.value) }}
+                                    value={tableBirth} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>국적</div>
+                                <input
+                                    onChange={(e) => { setTableCountry(e.target.value) }}
+                                    value={tableCountry} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>MBTI</div>
+                                <input
+                                    onChange={(e) => { setTableMBTI(e.target.value) }}
+                                    value={tableMBTI} />
+                            </div>
+                            <div className='create-table'>
+                                <div className='create-title'>소속</div>
+                                <input
+                                    onChange={(e) => { setTableClub(e.target.value) }}
+                                    value={tableClub} />
+                            </div>
+                            <div className='create-table last-table'>
+                                <div className='create-title'>분야</div>
+                                <input
+                                    onChange={(e) => { setTableField(e.target.value) }}
+                                    value={tableField} />
+                            </div>
+                            <span className='input-profile'>{'※ 내용 안에 [[프로필]] 태그를 삽입해주세요! ※'}</span>
+                        </div>
                         <textarea
                             className='update-textarea'
                             onChange={(e) => { onChangeTextArea(e) }}
                             value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')} />
                         <span className='preview-span'>미리보기</span>
-                        <div className='update-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n')) }} />
+                        <div className='update-textarea resize' dangerouslySetInnerHTML={{ __html: documentation(contents.replace(/<br>/gi, '\n').replace('[[프로필]]', table)) }} />
                         <button onClick={onClickUpdateDocs} className='update-button'>문서 업데이트</button>
                     </div>
                     <C.SubFooter />

@@ -76,6 +76,67 @@ $main-color: #274168;
             font-weight: 600;
         }
 
+        .create-profile {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .create-profile-wrap {
+            margin: 10px 0 10px 0;
+
+            .create-table {
+                display: flex;
+                width: fit-content;
+
+                .create-title {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 90px;
+                    height: 40px;
+                    background-color: #274168;
+                    color: white;
+                    font-weight: 700;
+                    font-size: 14px;
+                    text-align: center;
+                    border: 2px solid #ccc;
+                    border-bottom: none;
+                }
+
+                input {
+                    border: 2px solid #ccc;
+                    border-left: none;
+                    border-bottom: none;
+                    outline: none;
+                    padding-left: 10px;
+                    width: 260px;
+                }
+
+                .create-file {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 270px;
+                    height: 40px;
+                    border-right: 2px solid #ccc;
+                    border-top: 2px solid #ccc;
+
+                    .file {
+                        border: none;
+                    }
+                }
+            }
+
+            .last-table {
+                border-bottom: 2px solid #ccc;
+            }
+
+            .input-profile {
+                font-weight: 700;
+                font-size: 14px;
+            }
+        }
+
         .file-add-wrap {
             display: flex;
             align-items: center;
