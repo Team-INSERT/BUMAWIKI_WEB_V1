@@ -59,10 +59,8 @@ const Docs = () => {
         const FormData = require('form-data')
         const data = new FormData()
         data.append('request', new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
-        if (files instanceof FileList) {
-            for (let i = files.length - 1; i >= 0; i--) {
-                data.append("files", files[i], files[i].name)
-            }
+        for (let i = files.length - 1; i >= 0; i--) {
+            data.append("files", files[i], files[i].name)
         }
         if (contents.length === 0) {
             alert('문서가 비어있습니다!')
@@ -73,15 +71,19 @@ const Docs = () => {
                 'Content-Type': `multipart/form-data`,
                 Authorization: getCookie('authorization'),
             },
-        }).then(() => {
+        }).then((res) => {
             alert('문서가 편집되었습니다!')
-            navigate(`/docs/${router.id}`)
+            navigate(``)
         }).catch((err) => {
             console.log(err)
-            if (err.response.status === 403 && err.response.data.message === 'Cannot Change Your Docs') {
-                alert('자기자신의 문서는 변경할 수 없습니다.')
-            } else if (err.response.status === 403) {
-                alert('로그인 후 사용 가능한 서비스입니다.')
+            if (err.response.status === 403) {
+                if (err.response.data.message === 'Cannot Change Your Docs') {
+                    alert('자기자신의 문서는 변경할 수 없습니다.')
+                } else if (err.response.data.error === 'Forbidden') {
+                    alert('편집 권한이 없는 유저입니다.')
+                } else {
+                    alert('로그인 후 사용 가능한 서비스입니다.')
+                }
             } else {
                 alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
             }
