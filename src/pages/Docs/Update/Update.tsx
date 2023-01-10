@@ -73,7 +73,7 @@ const Docs = () => {
             },
         }).then((res) => {
             alert('문서가 편집되었습니다!')
-            navigate(``)
+            navigate(`/docs/${router.id}`)
         }).catch((err) => {
             console.log(err)
             if (err.response.status === 403) {
