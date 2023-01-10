@@ -80,7 +80,7 @@ const Docs = () => {
                 if (err.response.data.message === 'Cannot Change Your Docs') {
                     alert('자기자신의 문서는 변경할 수 없습니다.')
                 } else if (err.response.data.error === 'Forbidden') {
-                    alert('편집 권한이 없는 유저입니다.')
+                    alert('읽기전용 유저입니다.')
                 } else {
                     alert('로그인 후 사용 가능한 서비스입니다.')
                 }

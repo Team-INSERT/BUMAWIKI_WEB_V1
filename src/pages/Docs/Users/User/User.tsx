@@ -41,7 +41,7 @@ const MyPage = () => {
                     <div className='mypage-info-box'>
                         <C.AccodianMenu name={'정보'}>
                             <div className='mypage-info'>
-                                <span>이름은 {user.nickName}이며, 부마위키의 {user.authority === 'ADMIN' ? '관리자' : '사용자'} 중 한 명이다.</span>
+                                <span>이름은 {user.nickName}이며, 부마위키의 {user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.</span>
                             </div>
                         </C.AccodianMenu>
                         <C.AccodianMenu name={'기여한 문서'}>

@@ -25,6 +25,7 @@ const MyPage = () => {
             console.log(err)
         })
     }
+    console.log(user)
 
     return (
         <div>
@@ -41,7 +42,7 @@ const MyPage = () => {
                         <C.AccodianMenu name={'정보'}>
                             <div className='mypage-info'>
                                 {user.id ? <>
-                                    <span>이름은 {user.nickName}이며, 부마위키의 사용자 중 한 명이다.</span>
+                                    <span>이름은 {user.nickName}이며, 부마위키의 {user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.</span>
                                     <span>이 유저의 아이디는 '{user.id}'이며, 이메일은 {user.email}이다.</span><br />
                                     <span className='logout' onClick={onClickLogOut}>로그아웃</span></>
                                     : <span>이 유저는 로그인을 하지 않은 유저다. 로그인을 하면 문서를 생성하고 편집할 수 있다.</span>}
