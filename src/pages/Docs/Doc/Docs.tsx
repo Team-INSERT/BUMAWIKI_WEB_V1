@@ -71,6 +71,7 @@ const Docs = () => {
             <C.Footer />
         </div>
     )
+
 }
 
 export default Docs
