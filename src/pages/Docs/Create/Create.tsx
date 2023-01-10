@@ -129,7 +129,7 @@ const Docs = () => {
                         <div className='tr-wrap'>
                             <div className='tr-title'>연도</div>
                             <div className='tr-content'>
-                                {docsType === 'ACCIDENT' ? <><input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2023' name='radios' />
+                                {docsType !== 'CLUB' ? <><input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2023' name='radios' />
                                     <label htmlFor='2023' className='enroll'>2023년</label>
                                     <input type='radio' onChange={(e) => { onChangeEnrollRadio(e) }} className='classify radio' id='2022' name='radios' />
                                     <label htmlFor='2022' className='enroll'>2022년</label>
