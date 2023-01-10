@@ -55,7 +55,7 @@ const Docs = () => {
                         {isLoad ? (
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {docs.lastModifiedAt}</span>
-                                <C.AccodianMenu name="개요">
+                                <C.AccodianMenu name="내용">
                                     <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')) }}>
                                     </div>
                                     <br />
