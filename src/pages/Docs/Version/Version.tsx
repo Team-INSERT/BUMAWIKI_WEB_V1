@@ -9,17 +9,22 @@ const Version = () => {
     const router = useParams()
     const [version, setVersion] = useState([])
     const [isLoad, setIsLoad] = useState(false)
+
+    const getFindVersionDocs = async () => {
+        try {
+            const res = await axios.get(`docs/find/${router.title}/version`)
+            setVersion(res.data.versionDocsResponseDto.reverse())
+            console.log(res.data.versionDocsResponseDto)
+            setIsLoad(true)
+        } catch (err) {
+            console.log(err)
+            alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+        }
+    }
+
     useEffect(() => {
-        axios.get(`docs/find/${router.title}/version`)
-            .then((res) => {
-                setVersion(res.data.versionDocsResponseDto.reverse())
-                console.log(res.data.versionDocsResponseDto)
-                setIsLoad(true)
-            })
-            .catch((err) => {
-                console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-            })
+        getFindVersionDocs()
+        // eslint-disable-next-line
     }, [router.title])
     return (
         <div>
