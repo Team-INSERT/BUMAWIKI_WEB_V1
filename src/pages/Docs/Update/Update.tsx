@@ -1,34 +1,36 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
 import axios, { AxiosError } from 'axios'
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import * as R from 'react-router-dom'
 import { documentation } from 'util/documentation'
 import { getCookie } from 'util/getCookie'
 import '../Doc/Docs.scss'
 
 const Docs = () => {
-    const router = useParams()
-    const user = useContext(UserContext)
-    const navigate = useNavigate()
-    const [title, setTitle] = useState('')
-    const [contents, setContents] = useState('')
-    const [files, setFiles] = useState<any>([]);
-    const [fileInput, setFileInput] = useState([''])
+    const router = R.useParams()
+    const user = React.useContext(UserContext)
+    const navigate = R.useNavigate()
+    const [title, setTitle] = React.useState('')
+    const [contents, setContents] = React.useState('')
+    const [files, setFiles] = React.useState<any>([]);
+    const [fileInput, setFileInput] = React.useState([''])
 
-    const [table, setTable] = useState('');
-    const [tableColor, setTableColor] = useState('');
-    const [tableTextColor, setTableTextColor] = useState('');
-    const [tableLine, setTableLine] = useState('');
-    const [tableName, setTableName] = useState('');
-    const [tableHeight, setTableHeight] = useState('');
-    const [tableBirth, setTableBirth] = useState('');
-    const [tableCountry, setTableCountry] = useState('');
-    const [tableMBTI, setTableMBTI] = useState('');
-    const [tableClub, setTableClub] = useState('');
-    const [tableField, setTableField] = useState('');
+    // 모듈화 필요.. 살려주세요
 
-    useEffect(() => {
+    const [table, setTable] = React.useState('');
+    const [tableColor, setTableColor] = React.useState('');
+    const [tableTextColor, setTableTextColor] = React.useState('');
+    const [tableLine, setTableLine] = React.useState('');
+    const [tableName, setTableName] = React.useState('');
+    const [tableHeight, setTableHeight] = React.useState('');
+    const [tableBirth, setTableBirth] = React.useState('');
+    const [tableCountry, setTableCountry] = React.useState('');
+    const [tableMBTI, setTableMBTI] = React.useState('');
+    const [tableClub, setTableClub] = React.useState('');
+    const [tableField, setTableField] = React.useState('');
+
+    React.useEffect(() => {
         setTable(`?^table style="border-collapse: collapse; border:2px solid ${tableLine}; width:360px;"^?
 ?^tr style="border:2px solid ${tableLine}"^?
 ?^td colSpan="2" style="text-align: center; height: 38px; font-weight: 800; color: ${tableTextColor}; background-color: ${tableColor};"^?${tableName}?^@#@#@td^?
@@ -62,7 +64,7 @@ const Docs = () => {
 ?^@#@#@tr^??^@#@#@table^?`)
     }, [table, tableTextColor, tableColor, tableName, tableHeight, tableBirth, tableCountry, tableMBTI, tableClub, tableField, tableLine])
 
-    const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContents(e.target.value)
         if (contents.substring(contents.length - 3, contents.length) === '<강조' ||
             contents.substring(contents.length - 3, contents.length) === '<어록' ||
@@ -97,7 +99,7 @@ const Docs = () => {
         }
     }
 
-    const onClickUpdateDocs = () => {
+    const onClickUpdateDocs = async () => {
         if (!user.isLogin) {
             alert('로그인 후 이용 가능한 서비스입니다.')
             return
@@ -113,42 +115,49 @@ const Docs = () => {
             alert('문서가 비어있습니다!')
             return
         }
-        axios.put(`docs/update/${router.title}`, data, {
-            headers: {
-                'Content-Type': `multipart/form-data`,
-                Authorization: getCookie('authorization'),
-            },
-        }).then((res) => {
+        try {
+            await axios.put(`docs/update/${router.title}`, data, {
+                headers: {
+                    'Content-Type': `multipart/form-data`,
+                    Authorization: getCookie('authorization'),
+                },
+            })
             alert('문서가 편집되었습니다!')
             navigate(`/docs/${router.title}`)
-        }).catch((err) => {
+        } catch (err) {
             console.log(err)
-            if (err.response.status === 403) {
-                if (err.response.data.message === 'Cannot Change Your Docs') {
-                    alert('자기자신의 문서는 변경할 수 없습니다.')
-                } else if (err.response.data.error === 'Forbidden') {
-                    alert('읽기전용 유저입니다.')
+            if (err instanceof AxiosError && err.response !== undefined) {
+                if (err.response.status === 403) {
+                    if (err.response.data.message === 'Cannot Change Your Docs') {
+                        alert('자기자신의 문서는 변경할 수 없습니다.')
+                    } else if (err.response.data.error === 'Forbidden') {
+                        alert('읽기전용 유저입니다.')
+                    } else {
+                        alert('로그인 후 사용 가능한 서비스입니다.')
+                    }
                 } else {
-                    alert('로그인 후 사용 가능한 서비스입니다.')
+                    alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
                 }
-            } else {
-                alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
             }
-        })
+        }
     }
 
-    useEffect(() => {
-        axios.get(`/docs/find/id/${router.title}`)
-            .then((res) => {
-                setContents(res.data.contents)
-                setTitle(res.data.title)
-            })
-            .catch((err) => {
-                if (err instanceof AxiosError) {
-                    console.log(err)
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-                }
-            })
+    const getDocsInfo = async () => {
+        try {
+            const res = await axios.get(`/docs/find/title/${router.title}`)
+            setContents(res.data.contents)
+            setTitle(res.data.title)
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        getDocsInfo()
+        // eslint-disable-next-line
     }, [router.title])
     return (
         <div>
