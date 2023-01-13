@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
-import React, { useContext } from 'react'
+import React from 'react'
 import './MyPage.scss'
 import { dateParser } from 'util/dateParser'
 import { Link } from 'react-router-dom'
@@ -9,23 +9,23 @@ import { getCookie } from 'util/getCookie'
 import Contributors from 'types/contributors'
 
 const MyPage = () => {
-    const user = useContext(UserContext)
+    const user = React.useContext(UserContext)
 
-    const onClickLogOut = () => {
-        axios.delete('/auth/bsm/logout', {
-            data: {
-                refresh_token: getCookie('refresh_token')
-            }
-        }).then(() => {
+    const onClickLogOut = async () => {
+        try {
+            await axios.delete('/auth/bsm/logout', {
+                data: {
+                    refresh_token: getCookie('refresh_token')
+                }
+            })
             document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
             document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
             window.location.reload()
-        }).catch((err) => {
+        } catch (err) {
             alert('로그아웃에 실패했습니다.')
             console.log(err)
-        })
+        }
     }
-    console.log(user)
 
     return (
         <div>
