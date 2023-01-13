@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
 import axios, { AxiosError } from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { changeKor } from 'util/changeKor'
 import { dateParser } from 'util/dateParser'
@@ -9,7 +9,7 @@ import './Docs.scss'
 
 const Docs = () => {
     const router = useParams()
-    const [docs, setDocs] = useState({
+    const [docs, setDocs] = React.useState({
         title: '',
         docsType: '',
         enroll: 0,
@@ -17,25 +17,29 @@ const Docs = () => {
         lastModifiedAt: '',
         view: '',
     })
-    const [isLoad, setIsLoad] = useState(false)
+    const [isLoad, setIsLoad] = React.useState(false)
 
-    useEffect(() => {
-        axios.get(`/docs/find/title/${router.title}`)
-            .then((res) => {
-                setDocs({
-                    ...res.data,
-                    lastModifiedAt: dateParser(res.data.lastModifiedAt)
-                })
-                setIsLoad(true)
+    const getDocsInfo = async () => {
+        try {
+            const res = await axios.get(`/docs/find/title/${router.title}`);
+            setDocs({
+                ...res.data,
+                lastModifiedAt: dateParser(res.data.lastModifiedAt)
             })
-            .catch((err) => {
-                if (err instanceof AxiosError) {
-                    console.log(err)
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-                }
-            })
+            setIsLoad(true)
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        getDocsInfo()
         // eslint-disable-next-line
     }, [router.title])
+
     return (
         <div>
             <C.Header />
@@ -56,8 +60,7 @@ const Docs = () => {
                             <div className='content-wrap'>
                                 <span className='last-update-date'>마지막 수정 : {docs.lastModifiedAt}</span>
                                 <C.AccodianMenu name="내용">
-                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')) }}>
-                                    </div>
+                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')) }}></div>
                                     <br />
                                 </C.AccodianMenu>
                             </div>
