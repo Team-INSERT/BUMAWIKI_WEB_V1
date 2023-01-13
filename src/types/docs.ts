@@ -5,6 +5,7 @@ interface Docs {
     contents: string,
     docsType: string,
     view: number,
+    lastModifiedAt: ''
 }
 
 export default Docs
