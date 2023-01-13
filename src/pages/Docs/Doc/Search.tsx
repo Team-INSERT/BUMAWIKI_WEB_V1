@@ -1,27 +1,31 @@
 import axios from 'axios'
 import * as C from 'allFiles'
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import * as R from 'react-router-dom'
 import Docs from 'types/docs'
 import './Search.scss'
 import { changeKor } from 'util/changeKor'
 
 const Search = () => {
-    const router = useParams()
-    const navigate = useNavigate()
-    const [result, setResult] = useState([])
-    const [isLoad, setIsLoad] = useState(false)
-    useEffect(() => {
-        axios.get(`/docs/find/all/title/${router.result}`)
-            .then((res) => {
-                console.log(res)
-                setResult(res.data)
-                setIsLoad(true)
-                if (res.data.length === 1) navigate(`/docs/${res.data[0].title}`)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    const router = R.useParams()
+    const navigate = R.useNavigate()
+    const [result, setResult] = React.useState([])
+    const [isLoad, setIsLoad] = React.useState(false)
+
+    const getFindAllDocsInfo = async () => {
+        try {
+            const res = await axios.get(`/docs/find/all/title/${router.result}`)
+            if (res.data.length === 1) navigate(`/docs/${res.data[0].title}`)
+            setResult(res.data)
+            setIsLoad(true)
+        } catch (err) {
+            alert('검색 도중 오류가 발생했습니다.')
+            console.log(err)
+        }
+    }
+
+    React.useEffect(() => {
+        getFindAllDocsInfo();
         // eslint-disable-next-line
     }, [router.result])
 
@@ -41,12 +45,11 @@ const Search = () => {
                         <ul className="search-list">
                             {isLoad ? <>
                                 {result.map((result: Docs, index) => (
-                                    <li><Link key={index} className="link" to={`/docs/${result.title}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</Link></li>
+                                    <li><R.Link key={index} className="link" to={`/docs/${result.title}`}>{result.title} — ( {changeKor(result.docsType)},{result.enroll} )</R.Link></li>
                                 ))}</> : <div>
                                 <span>아직 '{router.result}'라는 문서는 없습니다.</span><br /><br />
-                                <Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>지금 문서를 생성해보세요</Link>
-                            </div>
-                            }
+                                <R.Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>지금 문서를 생성해보세요</R.Link>
+                            </div>}
                         </ul>
                     </div>
                     <C.SubFooter />
