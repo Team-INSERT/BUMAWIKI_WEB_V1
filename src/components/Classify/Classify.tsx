@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { changeKor } from 'util/changeKor'
 import './Classify.scss'
 
-const Classification = ({ children }: PropsWithChildren) => {
+const Classification = ({ children }: React.PropsWithChildren) => {
     return (
         <div className='classif-wrap'>
             <span className='classif'>분류 :&nbsp;</span>
