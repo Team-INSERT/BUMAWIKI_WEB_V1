@@ -1,28 +1,25 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import Docs from 'types/docs'
 import { changeKor } from 'util/changeKor'
 import { getLastDate } from 'util/getLastDate'
 import './Aside.scss'
 
-interface Docs {
-    title: string,
-    docsType: string,
-    id: number,
-    lastModifiedAt: string,
-}
-
 const Aside = () => {
-    const [lastModifiedDocs, setLastModifiedDocs] = useState([])
+    const [lastModifiedDocs, setLastModifiedDocs] = React.useState([])
 
-    useEffect(() => {
-        axios.get('/docs/find/modified')
-            .then((res) => {
-                setLastModifiedDocs(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    const axiosGetModifiedDocs = async () => {
+        try {
+            const res = await axios.get('/docs/find/modified')
+            setLastModifiedDocs(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    React.useEffect(() => {
+        axiosGetModifiedDocs();
     }, [])
 
     return (
