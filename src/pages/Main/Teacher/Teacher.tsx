@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as C from 'allFiles'
 import './Teacher.scss'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import Docs from 'types/docs'
 
 const Teacher = () => {
@@ -10,37 +10,36 @@ const Teacher = () => {
     const [humanities, setHumanities] = useState([])
     const [mentor, setMentor] = useState([])
 
-    useEffect(() => {
-        axios.get('/docs/teacher')
-            .then((res) => {
-                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+    const getTeacherDocs = async (router: string) => {
+        try {
+            const res = await axios.get(`/docs/${router}`)
+            const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+
+            if (router === 'teacher') {
                 setHumanities(data)
-            })
-            .catch((err) => {
-                console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-                return
-            })
-        axios.get('/docs/majorTeacher')
-            .then((res) => {
-                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+            } else if (router === 'majorTeacher') {
                 setMajor(data)
-            })
-            .catch((err) => {
-                console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-                return
-            })
-        axios.get('/docs/mentorTeacher')
-            .then((res) => {
-                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+            } else if (router === 'mentorTeacher') {
                 setMentor(data)
-            })
-            .catch((err) => {
-                console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+            }
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.log(err.status)
                 return
-            })
+            }
+        }
+    }
+
+    useEffect(() => {
+        try {
+            getTeacherDocs('teacher')
+            getTeacherDocs('majorTeacher')
+            getTeacherDocs('mentorTeacher')
+        } catch (err) {
+            alert('문서를 불러오는 도중 오류가 발생했습니다.')
+            console.log(err)
+            return
+        }
     }, [])
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import * as C from 'allFiles'
 import './Accident.scss'
 import { Link } from 'react-router-dom'
@@ -6,25 +6,28 @@ import axios, { AxiosError } from 'axios'
 import Docs from 'types/docs'
 
 const Accident = () => {
-    const [accidents, setAccidents] = useState([])
-    const [allDate] = useState([2023])
+    const [accidents, setAccidents] = React.useState([])
+    const [allDate] = React.useState([2023])
     const nowDate = new Date()
 
-    useEffect(() => {
+    const getAccidentDocs = async () => {
+        try {
+            const res = await axios.get(`/docs/accident`)
+            const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+            setAccidents(data)
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.log(err)
+                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+            }
+        }
+    }
+
+    React.useEffect(() => {
         for (let date = nowDate.getFullYear() - 1; date >= 2021; date--) {
             allDate.push(date)
         }
-        axios.get(`/docs/accident`)
-            .then((res) => {
-                const data = res.data.sort((a: Docs, b: Docs) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
-                setAccidents(data)
-            })
-            .catch((err) => {
-                if (err instanceof AxiosError) {
-                    console.log(err)
-                    alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-                }
-            })
+        getAccidentDocs()
         // eslint-disable-next-line
     }, [])
 
