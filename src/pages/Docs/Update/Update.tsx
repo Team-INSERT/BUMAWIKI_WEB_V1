@@ -1,7 +1,7 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
 import axios, { AxiosError } from 'axios'
-import React, { ChangeEvent, useReducer } from 'react'
+import React from 'react'
 import * as R from 'react-router-dom'
 import autoComplete from 'util/autoComplete'
 import { documentation } from 'util/documentation'
@@ -32,7 +32,7 @@ const Docs = () => {
     const [fileInput, setFileInput] = React.useState([''])
     const [table, setTable] = React.useState('')
 
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = React.useReducer(reducer, {
         Color: '',
         TextColor: '',
         Line: '',
@@ -47,7 +47,7 @@ const Docs = () => {
 
     const { Color, Country, TextColor, Line, Name, Height, Birth, MBTI, Club, Field } = state;
 
-    const onChangeTable = (e:ChangeEvent<HTMLInputElement>) => {
+    const onChangeTable = (e:React.ChangeEvent<HTMLInputElement>) => {
         dispatch(e.target);
     }
 

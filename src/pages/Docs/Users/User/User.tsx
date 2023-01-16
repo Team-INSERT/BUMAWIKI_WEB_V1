@@ -1,5 +1,5 @@
 import * as C from 'allFiles'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../MyPage/MyPage.scss'
 import { dateParser } from 'util/dateParser'
 import { Link, useParams } from 'react-router-dom'
@@ -7,7 +7,7 @@ import axios from 'axios'
 import Contributors from 'types/contributors'
 
 const MyPage = () => {
-    const [user, setUser] = useState({
+    const [user, setUser] = React.useState({
         id: 0,
         nickName: '알 수 없음',
         authority: '',
@@ -26,7 +26,7 @@ const MyPage = () => {
         }
     }
 
-    useEffect(() => {
+    React.useLayoutEffect(() => {
         getUserInfo()
         // eslint-disable-next-line
     }, [router.id])
