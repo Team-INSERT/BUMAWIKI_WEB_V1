@@ -1,102 +1,64 @@
 import * as C from 'allFiles'
 import { UserContext } from 'App'
 import axios, { AxiosError } from 'axios'
-import React from 'react'
+import React, { ChangeEvent, useReducer } from 'react'
 import * as R from 'react-router-dom'
+import autoComplete from 'util/autoComplete'
 import { documentation } from 'util/documentation'
 import { getCookie } from 'util/getCookie'
+import makeTable from 'util/makeTable'
 import '../Doc/Docs.scss'
+
+interface reducerAction {
+    name: string,
+    value: string,
+}
+
+function reducer(state:any, action: reducerAction){
+    return {
+        ...state,
+        [action.name]: action.value,
+    }
+}
 
 const Docs = () => {
     const router = R.useParams()
     const user = React.useContext(UserContext)
     const navigate = R.useNavigate()
+
     const [title, setTitle] = React.useState('')
     const [contents, setContents] = React.useState('')
-    const [files, setFiles] = React.useState<any>([]);
+    const [files, setFiles] = React.useState<any>([])
     const [fileInput, setFileInput] = React.useState([''])
+    const [table, setTable] = React.useState('')
 
-    // 모듈화 필요.. 살려주세요
+    const [state, dispatch] = useReducer(reducer, {
+        Color: '',
+        TextColor: '',
+        Line: '',
+        Name: '',
+        Height: '',
+        Birth: '',
+        Country: '',
+        MBTI: '',
+        Club: '',
+        Field: '',
+    })
 
-    const [table, setTable] = React.useState('');
-    const [tableColor, setTableColor] = React.useState('');
-    const [tableTextColor, setTableTextColor] = React.useState('');
-    const [tableLine, setTableLine] = React.useState('');
-    const [tableName, setTableName] = React.useState('');
-    const [tableHeight, setTableHeight] = React.useState('');
-    const [tableBirth, setTableBirth] = React.useState('');
-    const [tableCountry, setTableCountry] = React.useState('');
-    const [tableMBTI, setTableMBTI] = React.useState('');
-    const [tableClub, setTableClub] = React.useState('');
-    const [tableField, setTableField] = React.useState('');
+    const { Color, Country, TextColor, Line, Name, Height, Birth, MBTI, Club, Field } = state;
+
+    const onChangeTable = (e:ChangeEvent<HTMLInputElement>) => {
+        dispatch(e.target);
+    }
+
 
     React.useEffect(() => {
-        setTable(`?^table style="border-collapse: collapse; border:2px solid ${tableLine}; width:360px;"^?
-?^tr style="border:2px solid ${tableLine}"^?
-?^td colSpan="2" style="text-align: center; height: 38px; font-weight: 800; color: ${tableTextColor}; background-color: ${tableColor};"^?${tableName}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="border:2px solid ${tableLine}"^?
-?^td colSpan="2" style="width: 360px; height: 200px; overflow: hidden; background-image:url('<<사진>>'); background-size: cover;"^??^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px; border: 2px solid black"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?키?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableHeight}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px; border: 2px solid black;"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?생일?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableBirth}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px; border: 2px solid black;"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?국적?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableCountry}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px; border: 2px solid black;"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?MBTI?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableMBTI}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px; border: 2px solid black;"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?소속?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableClub}?^@#@#@td^?
-?^@#@#@tr^?
-?^tr style="height: 38px;"^?
-?^td style="border:2px solid ${tableLine}; color: ${tableTextColor}; font-weight: 700; font-size: 14px; width: 70px; text-align: center; background-color: ${tableColor};"^?분야?^@#@#@td^?
-?^td style="backgroundColor: white; padding-left: 10px; border: 2px solid ${tableLine}; font-size: 13px; font-weight: 600;"^?${tableField}?^@#@#@td^?
-?^@#@#@tr^??^@#@#@table^?`)
-    }, [table, tableTextColor, tableColor, tableName, tableHeight, tableBirth, tableCountry, tableMBTI, tableClub, tableField, tableLine])
+        setTable(makeTable(Line, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field))
+    }, [table, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field, Line])
 
     const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContents(e.target.value)
-        if (contents.substring(contents.length - 3, contents.length) === '<강조' ||
-            contents.substring(contents.length - 3, contents.length) === '<어록' ||
-            contents.substring(contents.length - 3, contents.length) === '<빨강' ||
-            contents.substring(contents.length - 3, contents.length) === '<하양' ||
-            contents.substring(contents.length - 3, contents.length) === '<노랑') {
-            setContents(`${contents}></${contents.substring(contents.length - 2, contents.length)}>`)
-            setTimeout(() => {
-                e.target.selectionStart = contents.length + 1;
-                e.target.selectionEnd = contents.length + 1;
-            }, 10)
-        } else if (
-            contents.substring(contents.length - 4, contents.length) === '<취소선' ||
-            contents.substring(contents.length - 4, contents.length) === '<소제목') {
-            setContents(`${contents}></${contents.substring(contents.length - 3, contents.length)}>`)
-            setTimeout(() => {
-                e.target.selectionStart = contents.length + 1;
-                e.target.selectionEnd = contents.length + 1;
-            }, 10)
-        } else if (contents.substring(contents.length - 3, contents.length) === '<링크') {
-            setContents(`${contents} 문서={}></링크>`)
-            setTimeout(() => {
-                e.target.selectionStart = contents.length + 5;
-                e.target.selectionEnd = contents.length + 5;
-            }, 10)
-        } else if (contents.substring(contents.length - 5, contents.length) === '<외부링크') {
-            setContents(`${contents} 문서={}></외부링크>`)
-            setTimeout(() => {
-                e.target.selectionStart = contents.length + 5;
-                e.target.selectionEnd = contents.length + 5;
-            }, 10)
-        }
+        autoComplete(contents, e)
     }
 
     const onClickUpdateDocs = async () => {
@@ -107,7 +69,6 @@ const Docs = () => {
         const FormData = require('form-data')
         const data = new FormData()
         data.append('request', new Blob([`{ "contents": "${contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], { type: 'application/json' }), { contentType: 'application/json', })
-        console.log(contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/'))
         for (let i = files.length - 1; i >= 0; i--) {
             data.append("files", files[i], files[i].name)
         }
@@ -182,69 +143,49 @@ const Docs = () => {
                         <div className='create-profile-wrap'>
                             <div className='create-table'>
                                 <div className='create-title'>표 색상</div>
-                                <input placeholder='ex) #251678, orange'
-                                    onChange={(e) => { setTableColor(e.target.value) }}
-                                    value={tableColor} />
+                                <input placeholder='ex) #251678, orange' onChange={onChangeTable} name="Color" value={Color} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>글자 색상</div>
-                                <input placeholder='ex) black, white'
-                                    onChange={(e) => { setTableTextColor(e.target.value) }}
-                                    value={tableTextColor} />
+                                <input placeholder='ex) black, white' onChange={onChangeTable} name="TextColor" value={TextColor} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>선 색상</div>
-                                <input placeholder='ex) black, white'
-                                    onChange={(e) => { setTableLine(e.target.value) }}
-                                    value={tableLine} />
+                                <input placeholder='ex) black, white' onChange={onChangeTable} name="Line" value={Line} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>사진</div>
-                                <div className='create-file'>
-                                    <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]) }} />
+                                <div className='create-file'> 
+                                <input type='file' className='file' onChange={(e) => { setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files]) }} />
                                 </div>
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>이름</div>
-                                <input
-                                    onChange={(e) => { setTableName(e.target.value) }}
-                                    value={tableName} />
+                                <input onChange={onChangeTable} name="Name" value={Name} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>키</div>
-                                <input
-                                    onChange={(e) => { setTableHeight(e.target.value) }}
-                                    value={tableHeight} />
+                                <input onChange={onChangeTable} name="Height" value={Height} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>생일</div>
-                                <input
-                                    onChange={(e) => { setTableBirth(e.target.value) }}
-                                    value={tableBirth} />
+                                <input onChange={onChangeTable} name="Birth" value={Birth} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>국적</div>
-                                <input
-                                    onChange={(e) => { setTableCountry(e.target.value) }}
-                                    value={tableCountry} />
+                                <input onChange={onChangeTable} name="Country" value={Country} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>MBTI</div>
-                                <input
-                                    onChange={(e) => { setTableMBTI(e.target.value) }}
-                                    value={tableMBTI} />
+                                <input onChange={onChangeTable} name="MBTI" value={MBTI} />
                             </div>
                             <div className='create-table'>
                                 <div className='create-title'>소속</div>
-                                <input
-                                    onChange={(e) => { setTableClub(e.target.value) }}
-                                    value={tableClub} />
+                                <input onChange={onChangeTable} name="Club" value={Club} />
                             </div>
                             <div className='create-table last-table'>
                                 <div className='create-title'>분야</div>
-                                <input
-                                    onChange={(e) => { setTableField(e.target.value) }}
-                                    value={tableField} />
+                                <input onChange={onChangeTable} name="Field" value={Field} />
                             </div>
                             <span className='input-profile'>{'※ 내용 안에 [[프로필]] 태그를 삽입해주세요! ※'}</span>
                         </div>
