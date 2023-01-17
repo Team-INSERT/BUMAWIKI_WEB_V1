@@ -2,12 +2,12 @@ import { UserContext } from 'App'
 import React from 'react'
 import * as R from 'react-router-dom'
 import './Header.scss'
-import Student from '../../../svg/student.svg'
-import Teacher from '../../../svg/teacher.svg'
-import Accident from '../../../svg/accident.svg'
-import Club from '../../../svg/club.svg'
-import Create from '../../../svg/create.svg'
-import Search from '../../../svg/search.svg'
+import Student from '../../../assets/student.svg'
+import Teacher from '../../../assets/teacher.svg'
+import Accident from '../../../assets/accident.svg'
+import Club from '../../../assets/club.svg'
+import Create from '../../../assets/create.svg'
+import Search from '../../../assets/search.svg'
 
 const Header = () => {
     const [search, setSearch] = React.useState('')

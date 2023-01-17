@@ -1,8 +1,8 @@
 import React from 'react'
 import AccodianType from 'types/accodian'
 import './AccodianMenu.scss'
-import ArrowRight from '../../svg/arrow_right.svg'
-import ArrowDown from '../../svg/arrow_down.svg'
+import ArrowRight from '../../assets/arrow_right.svg'
+import ArrowDown from '../../assets/arrow_down.svg'
 
 const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
     const [detail, setDetail] = React.useState<boolean>(true)

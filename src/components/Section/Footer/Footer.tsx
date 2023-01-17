@@ -1,7 +1,7 @@
 import React from 'react'
 import './Footer.scss'
-import Github from '../../../svg/github.svg'
-import Instagram from '../../../svg/instagram.svg'
+import Github from '../../../assets/github.svg'
+import Instagram from '../../../assets/instagram.svg'
 
 const Footer = () => {
     return (

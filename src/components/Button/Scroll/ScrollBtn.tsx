@@ -1,7 +1,7 @@
 import React from 'react'
 import './ScrollBtn.scss'
-import ScrollUp from '../../../svg/scroll_up.svg'
-import ScrollDown from '../../../svg/scroll_down.svg'
+import ScrollUp from '../../../assets/scroll_up.svg'
+import ScrollDown from '../../../assets/scroll_down.svg'
 
 const ScrollBtn = () => {
     const scrollToTop = () => {
