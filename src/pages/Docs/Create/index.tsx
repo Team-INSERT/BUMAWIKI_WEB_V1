@@ -15,9 +15,7 @@ const Docs = () => {
 	const [enroll, setEnroll] = React.useState<number>()
 	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
 	const [contents, setContents] = React.useState('')
-	const [files1, setFiles1] = React.useState<'' | File>()
-	const [files2, setFiles2] = React.useState<'' | File>()
-	const [files3, setFiles3] = React.useState<'' | File>()
+	const [files, setFiles] = React.useState<any>()
 
 	console.log(window.location.search)
 
@@ -69,10 +67,9 @@ const Docs = () => {
 				{ type: 'application/json' }
 			)
 		)
-
-		if (files1) data.append('files', files1, files1.name)
-		if (files2) data.append('files', files2, files2.name)
-		if (files3) data.append('files', files3, files3.name)
+		for (let i = files.length - 1; i >= 0; i--) {
+			data.append('files', files[i], files[i].name)
+		}
 
 		try {
 			const res = await axios.post('/docs/create', data, {
@@ -141,18 +138,12 @@ const Docs = () => {
 						<S.CreateTableTRFile>
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
-								<input
-									type="file"
-									onChange={(e) => setFiles1(e.target.files instanceof FileList ? e.target.files[0] : '')}
-								/>
-								<input
-									type="file"
-									onChange={(e) => setFiles2(e.target.files instanceof FileList ? e.target.files[0] : '')}
-								/>
-								<input
-									type="file"
-									onChange={(e) => setFiles3(e.target.files instanceof FileList ? e.target.files[0] : '')}
-								/>
+								{['', '', ''].map(() => (
+									<input
+										type="file"
+										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
+									/>
+								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
