@@ -5,114 +5,136 @@ import { useParams } from 'react-router-dom'
 import { changeKor } from 'util/changeKor'
 import { dateParser } from 'util/dateParser'
 import { documentation } from 'util/documentation'
-import '../Doc/Docs.scss'
+import '../Doc/style.ts'
 
 const Docs = () => {
-    const router = useParams()
-    const [docs, setDocs] = React.useState({
-        title: '',
-        docsType: '',
-        enroll: 0,
-        contents: '',
-        lastModifiedAt: '',
-        view: '',
-    })
-    const [versionDocs, setVersionDocs] = React.useState({
-        contents: '',
-        nickName: '',
-        thisVersionCreatedAt: '',
-        userId: ''
-    })
-    const [prevContents, setPrevContents] = React.useState('')
-    const [nextContents, setNextContents] = React.useState('')
-    const [isLoad, setIsLoad] = React.useState(false)
+	const router = useParams()
+	const [docs, setDocs] = React.useState({
+		title: '',
+		docsType: '',
+		enroll: 0,
+		contents: '',
+		lastModifiedAt: '',
+		view: '',
+	})
+	const [versionDocs, setVersionDocs] = React.useState({
+		contents: '',
+		nickName: '',
+		thisVersionCreatedAt: '',
+		userId: '',
+	})
+	const [prevContents, setPrevContents] = React.useState('')
+	const [nextContents, setNextContents] = React.useState('')
+	const [isLoad, setIsLoad] = React.useState(false)
 
-    const getFindDetailVersionDocs = async () => {
-        try {
-            const res = await axios.get(`/docs/find/${router.title}/version`)
-            const Array = res.data.versionDocsResponseDto.reverse()
-            setVersionDocs(Array[router.versionId || 0])
-            const a = Array[router.versionId || 0].contents, b = Array[parseInt(router.versionId as string) + 1 || 1].contents
-            setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
-            setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
-            setIsLoad(true)
-        } catch (err) {
-            console.log(err)
-            return
-        }
-    }
+	const getFindDetailVersionDocs = async () => {
+		try {
+			const res = await axios.get(`/docs/find/${router.title}/version`)
+			const Array = res.data.versionDocsResponseDto.reverse()
+			setVersionDocs(Array[router.versionId || 0])
+			const a = Array[router.versionId || 0].contents,
+				b = Array[parseInt(router.versionId as string) + 1 || 1].contents
+			setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
+			setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
+			setIsLoad(true)
+		} catch (err) {
+			console.log(err)
+			return
+		}
+	}
 
-    const getDocsInfo = async () => {
-        try {
-            const res = await axios.get(`/docs/find/title/${router.title}`)
-            setDocs(res.data)
-            getFindDetailVersionDocs()
-        } catch (err) {
-            if (err instanceof AxiosError) {
-                console.log(err)
-                alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-            }
-        }
-    }
+	const getDocsInfo = async () => {
+		try {
+			const res = await axios.get(`/docs/find/title/${router.title}`)
+			setDocs(res.data)
+			getFindDetailVersionDocs()
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				console.log(err)
+				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+			}
+		}
+	}
 
-    React.useEffect(() => {
-        getDocsInfo()
-        // eslint-disable-next-line
-    }, [router.title, router.versionId])
-    return (
-        <div>
-            <C.Header />
-            <div className="docs-board-wrap">
-                <C.Board>
-                    <div className="docs-title-box">
-                        <span>{docs?.title}</span>
-                        <div className="docs-menu">
-                            <C.DetailBtn />
-                        </div>
-                    </div>
-                    <div className="classif-box">
-                        <C.Classify>{changeKor(docs?.docsType)}</C.Classify>
-                    </div>
-                    <div className="line" />
-                    <div className='summary-wrap'>
-                        {isLoad ? (
-                            <div className='content-wrap'>
-                                <span className='last-update-date'>마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}</span>
-                                <C.AccodianMenu name="코드 내용" isOpen={false}>
-                                    <div className='docs-content'>
-                                        {versionDocs.contents.replace(/<br>/gi, '\n')}
-                                    </div>
-                                </C.AccodianMenu>
-                                <C.AccodianMenu name="수정된 내용" isOpen={false}>
-                                    <div className='docs-content' dangerouslySetInnerHTML={{
-                                        __html: prevContents
-                                            .replace(prevContents, `<span style="background-color:#3FB950;">${prevContents.replace(/\?@\$\?@\$/gi, '< /')}</span>`)
-                                            .replace(/<</gi, `&lt;&lt;`)
-                                            .replace(/>>/gi, `&gt;&gt;`)
-                                    }}></div>
-                                    <div className='docs-content' dangerouslySetInnerHTML={{
-                                        __html: nextContents
-                                            .replace(nextContents, `<span style="background-color:#fe5250;">${nextContents.replace(/\?@\$\?@\$/gi, '< /')}}</span>`)
-                                            .replace(/<</gi, `&lt;&lt;`)
-                                            .replace(/>>/gi, `&gt;&gt;`)
-                                    }}></div>
-                                </C.AccodianMenu>
-                                <C.AccodianMenu name="개요">
-                                    <div className='docs-content' dangerouslySetInnerHTML={{ __html: documentation(versionDocs?.contents.replace(/<br>/gi, '\n')) }}>
-                                    </div>
-                                    <br />
-                                </C.AccodianMenu>
-                            </div>
-                        ) : ''}
-                    </div>
-                    <C.SubFooter />
-                </C.Board>
-                <C.ScrollBtn />
-                <C.Aside />
-            </div>
-            <C.Footer />
-        </div>
-    )
+	React.useEffect(() => {
+		getDocsInfo()
+		// eslint-disable-next-line
+	}, [router.title, router.versionId])
+	return (
+		<div>
+			<C.Header />
+			<div className="docs-board-wrap">
+				<C.Board>
+					<div className="docs-title-box">
+						<span>{docs?.title}</span>
+						<div className="docs-menu">
+							<C.DetailBtn />
+						</div>
+					</div>
+					<div className="classif-box">
+						<C.Classify>{changeKor(docs?.docsType)}</C.Classify>
+					</div>
+					<div className="line" />
+					<div className="summary-wrap">
+						{isLoad ? (
+							<div className="content-wrap">
+								<span className="last-update-date">
+									마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}
+								</span>
+								<C.AccodianMenu name="코드 내용" isOpen={false}>
+									<div className="docs-content">{versionDocs.contents.replace(/<br>/gi, '\n')}</div>
+								</C.AccodianMenu>
+								<C.AccodianMenu name="수정된 내용" isOpen={false}>
+									<div
+										className="docs-content"
+										dangerouslySetInnerHTML={{
+											__html: prevContents
+												.replace(
+													prevContents,
+													`<span style="background-color:#3FB950;">${prevContents.replace(
+														/\?@\$\?@\$/gi,
+														'< /'
+													)}</span>`
+												)
+												.replace(/<</gi, `&lt;&lt;`)
+												.replace(/>>/gi, `&gt;&gt;`),
+										}}></div>
+									<div
+										className="docs-content"
+										dangerouslySetInnerHTML={{
+											__html: nextContents
+												.replace(
+													nextContents,
+													`<span style="background-color:#fe5250;">${nextContents.replace(
+														/\?@\$\?@\$/gi,
+														'< /'
+													)}}</span>`
+												)
+												.replace(/<</gi, `&lt;&lt;`)
+												.replace(/>>/gi, `&gt;&gt;`),
+										}}></div>
+								</C.AccodianMenu>
+								<C.AccodianMenu name="개요">
+									<div
+										className="docs-content"
+										dangerouslySetInnerHTML={{
+											__html: documentation(versionDocs?.contents.replace(/<br>/gi, '\n')),
+										}}></div>
+									<br />
+								</C.AccodianMenu>
+							</div>
+						) : (
+							''
+						)}
+					</div>
+					<C.SubFooter />
+				</C.Board>
+				<C.ScrollBtn />
+				<C.Aside />
+			</div>
+			<C.Footer />
+		</div>
+	)
 }
 
 export default Docs
