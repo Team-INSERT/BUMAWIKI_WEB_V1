@@ -1,0 +1,135 @@
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+export const HeaderWrap = styled.div`
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 6.5vh;
+	background-color: #274168;
+`
+
+export const HeaderLink = styled(Link)`
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		display: none;
+	}
+`
+
+export const HeaderLogo = styled.img`
+	margin-left: 7vw;
+	width: 8vw;
+	height: auto;
+`
+
+export const HeaderSectionWrap = styled.div`
+	display: flex;
+`
+
+export const HeaderSection = styled(Link)`
+	display: flex;
+	cursor: pointer;
+	text-decoration: none;
+	margin-left: 4vw;
+	justify-content: center;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		margin-left: 6vw;
+	}
+`
+
+export const HeaderSectionLogo = styled.img`
+	width: 14px;
+	height: 14px;
+`
+
+export const HeaderSectionText = styled.span`
+	margin-left: 8px;
+	color: white;
+	font-size: 15px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 800;
+
+	@media (max-width: 500px) {
+		display: none;
+	}
+`
+
+export const HeaderSearchWrap = styled.div`
+	display: flex;
+	margin-left: auto;
+	align-items: center;
+`
+
+export const HeaderSearchForm = styled.form`
+	display: flex;
+	justify-content: center;
+`
+
+export const HeaderSearchInput = styled.input`
+	width: 160px;
+	height: 24px;
+	border: 1px solid #ccc;
+	outline: none;
+	padding-left: 8px;
+	font-size: 12px;
+	font-family: 'Open Sans', sans-serif;
+	color: $main-color;
+	font-weight: 800;
+
+	@media (max-width: 500px) {
+		width: 70px;
+		height: 16px;
+	}
+`
+
+export const HeaderSearchButton = styled.button`
+	width: 28px;
+	height: 26px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-left: none;
+	cursor: pointer;
+
+	@media (max-width: 500px) {
+		width: 18px;
+		height: 18px;
+	}
+`
+
+export const HeaderSearchLogo = styled.img``
+
+export const HeaderLoginWrap = styled.div`
+	margin: 0 7vw 0 1vw;
+
+	@media (max-width: 500px) {
+		margin-left: 3vw;
+	}
+`
+
+export const HeaderMypageText = styled(Link)`
+	cursor: pointer;
+	color: white;
+	font-family: 'Open Sans', 'sans-serif';
+	font-weight: 800;
+	text-decoration: none;
+
+	@media (max-width: 500px) {
+		font-size: 12px;
+	}
+`
+
+export const HeaderLoginText = styled.a`
+	cursor: pointer;
+	color: white;
+	font-family: 'Open Sans', 'sans-serif';
+	font-weight: 800;
+	text-decoration: none;
+
+	@media (max-width: 500px) {
+		font-size: 12px;
+	}
+`
