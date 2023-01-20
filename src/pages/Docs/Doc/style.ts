@@ -13,7 +13,6 @@ export const DocsLine = styled.div`
 		width: 90vw;
 	}
 `
-
 export const DocsTitleWrap = styled.div`
 	width: 100%;
 	height: 80px;
