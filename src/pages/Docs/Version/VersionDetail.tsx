@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { changeKor } from 'util/changeKor'
 import { dateParser } from 'util/dateParser'
 import { documentation } from 'util/documentation'
-import '../Doc/style.ts'
+import * as S from '../Doc/style'
 
 const Docs = () => {
 	const router = useParams()
@@ -63,30 +63,29 @@ const Docs = () => {
 	return (
 		<div>
 			<C.Header />
-			<div className="docs-board-wrap">
+			<S.DocsWrap>
 				<C.Board>
-					<div className="docs-title-box">
-						<span>{docs?.title}</span>
-						<div className="docs-menu">
+					<S.DocsTitleWrap>
+						<S.DocsTitleText>{docs?.title}</S.DocsTitleText>
+						<S.DocsMenu>
 							<C.DetailBtn />
-						</div>
-					</div>
-					<div className="classif-box">
+						</S.DocsMenu>
+					</S.DocsTitleWrap>
+					<S.Classify>
 						<C.Classify>{changeKor(docs?.docsType)}</C.Classify>
-					</div>
-					<div className="line" />
-					<div className="summary-wrap">
+					</S.Classify>
+					<S.DocsLine />
+					<S.DocsContents>
 						{isLoad ? (
-							<div className="content-wrap">
-								<span className="last-update-date">
+							<S.DocsContentsLoadWrap>
+								<S.LastUpdateDate>
 									마지막 수정 : {dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}
-								</span>
+								</S.LastUpdateDate>
 								<C.AccodianMenu name="코드 내용" isOpen={false}>
-									<div className="docs-content">{versionDocs.contents.replace(/<br>/gi, '\n')}</div>
+									<S.DocsContents>{versionDocs.contents.replace(/<br>/gi, '\n')}</S.DocsContents>
 								</C.AccodianMenu>
 								<C.AccodianMenu name="수정된 내용" isOpen={false}>
-									<div
-										className="docs-content"
+									<S.DocsContents
 										dangerouslySetInnerHTML={{
 											__html: prevContents
 												.replace(
@@ -98,9 +97,8 @@ const Docs = () => {
 												)
 												.replace(/<</gi, `&lt;&lt;`)
 												.replace(/>>/gi, `&gt;&gt;`),
-										}}></div>
-									<div
-										className="docs-content"
+										}}></S.DocsContents>
+									<S.DocsContents
 										dangerouslySetInnerHTML={{
 											__html: nextContents
 												.replace(
@@ -112,26 +110,24 @@ const Docs = () => {
 												)
 												.replace(/<</gi, `&lt;&lt;`)
 												.replace(/>>/gi, `&gt;&gt;`),
-										}}></div>
+										}}></S.DocsContents>
 								</C.AccodianMenu>
 								<C.AccodianMenu name="개요">
-									<div
-										className="docs-content"
+									<S.DocsContents
 										dangerouslySetInnerHTML={{
 											__html: documentation(versionDocs?.contents.replace(/<br>/gi, '\n')),
-										}}></div>
-									<br />
+										}}></S.DocsContents>
 								</C.AccodianMenu>
-							</div>
+							</S.DocsContentsLoadWrap>
 						) : (
 							''
 						)}
-					</div>
+					</S.DocsContents>
 					<C.SubFooter />
 				</C.Board>
 				<C.ScrollBtn />
 				<C.Aside />
-			</div>
+			</S.DocsWrap>
 			<C.Footer />
 		</div>
 	)

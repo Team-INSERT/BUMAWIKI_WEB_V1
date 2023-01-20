@@ -19,9 +19,9 @@ import Update from './pages/Docs/Update'
 import NotFound from './pages/Docs/NotFound'
 import Version from './pages/Docs/Version/Version'
 import DetailBtn from './components/Button/Detail'
-import MyPage from './pages/Docs/Users/MyPage/MyPage'
+import MyPage from './pages/Docs/Users/MyPage'
 import VersionDetail from './pages/Docs/Version/VersionDetail'
-import User from './pages/Docs/Users/User/User'
+import User from './pages/Docs/Users/User'
 
 export {
 	Home,
