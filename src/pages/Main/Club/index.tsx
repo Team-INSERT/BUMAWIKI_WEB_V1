@@ -55,7 +55,7 @@ const Club = () => {
 						</C.AccodianMenu>
 					</S.ClubListWrap>
 					<S.ClubListWrap>
-						<C.AccodianMenu name={`전공동아리`}>
+						<C.AccodianMenu name={`사설동아리`}>
 							<S.ClubList>
 								{freeClubs.map((club: Docs) => (
 									<S.ClubListItem key={club.id}>
