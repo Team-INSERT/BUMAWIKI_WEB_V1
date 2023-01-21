@@ -27,11 +27,6 @@ const Docs = () => {
 		setEnroll(parseInt(e.target.id))
 	}
 
-	const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setContents(e.target.value)
-		autoComplete(contents, e)
-	}
-
 	const onClickCreateDocs = async () => {
 		if (!user.isLogin) {
 			alert('로그인 후 이용 가능한 서비스입니다.')
@@ -138,7 +133,7 @@ const Docs = () => {
 						<S.CreateTableTRFile>
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
-								{['', '', ''].map(() => (
+								{[null, null, null].map(() => (
 									<input
 										type="file"
 										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
@@ -148,7 +143,7 @@ const Docs = () => {
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
-							<S.CreateTableTRTextarea onChange={(e) => onChangeTextArea(e)} value={contents} />
+							<S.CreateTableTRTextarea onChange={(e) => setContents(autoComplete(contents, e))} value={contents} />
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
