@@ -33,7 +33,7 @@ const autoComplete = (contents: string, e: React.ChangeEvent<HTMLTextAreaElement
 		}, 10)
 		return `${contents} 문서={}></외부링크>`
 	} else {
-		return ``
+		return e.target.value
 	}
 }
 
