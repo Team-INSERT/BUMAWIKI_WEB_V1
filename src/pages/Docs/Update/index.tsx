@@ -55,11 +55,6 @@ const Docs = () => {
 		setTable(makeTable(Line, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field))
 	}, [table, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field, Line])
 
-	const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setContents(e.target.value)
-		autoComplete(contents, e)
-	}
-
 	const onClickUpdateDocs = async () => {
 		if (!user.isLogin) {
 			alert('로그인 후 이용 가능한 서비스입니다.')
@@ -207,12 +202,14 @@ const Docs = () => {
 								<input onChange={onChangeTable} name="Field" value={Field} />
 							</S.CreateProfileTableLast>
 							<S.CreateProfileInputWarn>※ 내용 안에 [[프로필]] 태그를 삽입해주세요! ※</S.CreateProfileInputWarn>
+							<br />
+							<S.CreateProfileInputWarn>
+								※ 프로필을 변경하시려면 [[프로필]] 태그를 삭제했다가 재입력해주셔야해요! ※
+							</S.CreateProfileInputWarn>
 						</S.CreateProfileWrap>
 						<S.UpdateTextarea
-							onChange={(e) => {
-								onChangeTextArea(e)
-							}}
-							value={contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')}
+							onChange={(e) => setContents(autoComplete(contents, e))}
+							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
