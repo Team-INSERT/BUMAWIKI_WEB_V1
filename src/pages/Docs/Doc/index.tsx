@@ -1,22 +1,15 @@
 import * as C from 'allFiles'
-import axios, { AxiosError } from 'axios'
+import * as FC from 'util/'
+import * as S from './style'
+
+import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { changeKor } from 'util/typeEditor'
-import { dateParser } from 'util/dateParser'
-import { documentation } from 'util/documentation'
-import * as S from './style'
+import DocsType from 'types/docs'
 
 const Docs = () => {
 	const router = useParams()
-	const [docs, setDocs] = React.useState({
-		title: '',
-		docsType: '',
-		enroll: 0,
-		contents: '',
-		lastModifiedAt: '',
-		view: '',
-	})
+	const [docs, setDocs] = React.useState<DocsType>()
 	const [isLoad, setIsLoad] = React.useState(false)
 
 	const getDocsInfo = async () => {
@@ -24,11 +17,11 @@ const Docs = () => {
 			const res = await axios.get(`/docs/find/title/${router.title}`)
 			setDocs({
 				...res.data,
-				lastModifiedAt: dateParser(res.data.lastModifiedAt),
+				lastModifiedAt: FC.dateParser(res.data.lastModifiedAt),
 			})
 			setIsLoad(true)
 		} catch (err) {
-			if (err instanceof AxiosError) {
+			if (err instanceof axios.AxiosError) {
 				console.log(err)
 				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			}
@@ -52,17 +45,17 @@ const Docs = () => {
 						</S.DocsMenu>
 					</S.DocsTitleWrap>
 					<S.Classify>
-						<C.Classify>{changeKor(docs?.docsType)}</C.Classify>
+						<C.Classify>{FC.typeEditor(docs?.docsType as string)}</C.Classify>
 					</S.Classify>
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{isLoad ? (
 							<S.DocsContentsLoadWrap>
-								<S.LastUpdateDate>마지막 수정 : {docs.lastModifiedAt}</S.LastUpdateDate>
+								<S.LastUpdateDate>마지막 수정 : {docs?.lastModifiedAt}</S.LastUpdateDate>
 								<C.AccodianMenu name="내용">
 									<S.DocsContents
 										dangerouslySetInnerHTML={{
-											__html: documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')),
+											__html: FC.documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"') as string),
 										}}></S.DocsContents>
 								</C.AccodianMenu>
 							</S.DocsContentsLoadWrap>

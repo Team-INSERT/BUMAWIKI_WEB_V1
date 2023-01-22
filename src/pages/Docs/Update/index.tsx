@@ -1,13 +1,11 @@
 import * as C from 'allFiles'
-import { UserContext } from 'App'
-import axios, { AxiosError } from 'axios'
-import React from 'react'
 import * as R from 'react-router-dom'
-import { autoComplete } from 'util/autoComplete'
-import { documentation } from 'util/documentation'
-import { getCookie } from 'util/getCookie'
-import { makeTable } from 'util/makeTable'
+import * as FC from 'util/'
 import * as S from './style'
+
+import { UserContext } from 'App'
+import axios from 'axios'
+import React from 'react'
 
 interface reducerAction {
 	name: string
@@ -52,7 +50,7 @@ const Docs = () => {
 	}
 
 	React.useEffect(() => {
-		setTable(makeTable(Line, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field))
+		setTable(FC.makeTable(Line, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field))
 	}, [table, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field, Line])
 
 	const onClickUpdateDocs = async () => {
@@ -64,16 +62,9 @@ const Docs = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob(
-				[
-					`{ "contents": "${contents
-						.replace('[[프로필]]', table)
-						.replace(/\n/gi, '<br>')
-						.replace(/"/gi, '&$^%')
-						.replace(/\\/gi, '/')}" }`,
-				],
-				{ type: 'application/json' }
-			),
+			new Blob([`{ "contents": "${contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], {
+				type: 'application/json',
+			}),
 			{ contentType: 'application/json' }
 		)
 		for (let i = files.length - 1; i >= 0; i--) {
@@ -87,14 +78,14 @@ const Docs = () => {
 			await axios.put(`docs/update/${router.title}`, data, {
 				headers: {
 					'Content-Type': `multipart/form-data`,
-					Authorization: getCookie('authorization'),
+					Authorization: FC.getCookie('authorization'),
 				},
 			})
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
 		} catch (err) {
 			console.log(err)
-			if (err instanceof AxiosError && err.response !== undefined) {
+			if (err instanceof axios.AxiosError && err.response !== undefined) {
 				if (err.response.status === 403) {
 					if (err.response.data.message === 'Cannot Change Your Docs') {
 						alert('자기자신의 문서는 변경할 수 없습니다.')
@@ -116,7 +107,7 @@ const Docs = () => {
 			setContents(res.data.contents)
 			setTitle(res.data.title)
 		} catch (err) {
-			if (err instanceof AxiosError) {
+			if (err instanceof axios.AxiosError) {
 				console.log(err)
 				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			}
@@ -139,10 +130,7 @@ const Docs = () => {
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map(() => (
-							<input
-								type="file"
-								onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
-							/>
+							<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
 						))}
 						<S.FileAddWrap onClick={() => setFileInput([...fileInput, ''])}>
 							<S.FileAddButton>+</S.FileAddButton>
@@ -167,10 +155,7 @@ const Docs = () => {
 							<S.CreateProfileTable>
 								<S.CreateProfileTableTitle>사진</S.CreateProfileTableTitle>
 								<S.CreateProfileTableFile>
-									<input
-										type="file"
-										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
-									/>
+									<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
 								</S.CreateProfileTableFile>
 							</S.CreateProfileTable>
 							<S.CreateProfileTable>
@@ -203,18 +188,13 @@ const Docs = () => {
 							</S.CreateProfileTableLast>
 							<S.CreateProfileInputWarn>※ 내용 안에 [[프로필]] 태그를 삽입해주세요! ※</S.CreateProfileInputWarn>
 							<br />
-							<S.CreateProfileInputWarn>
-								※ 프로필을 변경하시려면 [[프로필]] 태그를 삭제했다가 재입력해주셔야해요! ※
-							</S.CreateProfileInputWarn>
+							<S.CreateProfileInputWarn>※ 프로필을 변경하시려면 [[프로필]] 태그를 삭제했다가 재입력해주셔야해요! ※</S.CreateProfileInputWarn>
 						</S.CreateProfileWrap>
-						<S.UpdateTextarea
-							onChange={(e) => setContents(autoComplete(contents, e))}
-							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
-						/>
+						<S.UpdateTextarea onChange={(e) => setContents(FC.autoComplete(contents, e))} value={contents.replace(/\?\^table.*/gi, '[[프로필]]')} />
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
 							dangerouslySetInnerHTML={{
-								__html: documentation(contents.replace(/<br>/gi, '\n').replace('[[프로필]]', table)),
+								__html: FC.documentation(contents.replace(/<br>/gi, '\n').replace('[[프로필]]', table)),
 							}}
 						/>
 						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>

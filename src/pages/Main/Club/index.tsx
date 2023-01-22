@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import * as C from 'allFiles'
 import * as S from './style'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import Docs from 'types/docs'
 
 const Club = () => {
-	const [clubs, setClubs] = useState([])
-	const [freeClubs, setFreeClubs] = useState([])
+	const [clubs, setClubs] = React.useState([])
+	const [freeClubs, setFreeClubs] = React.useState([])
 
 	const getClubDocs = async () => {
 		try {
@@ -15,19 +15,17 @@ const Club = () => {
 			setClubs(clubData)
 
 			const freeClub = await axios.get(`/docs/freeClub`)
-			const freeClubData = freeClub.data.sort((a: Docs, b: Docs) =>
-				a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1
-			)
+			const freeClubData = freeClub.data.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setFreeClubs(freeClubData)
 		} catch (err) {
-			if (err instanceof AxiosError) {
+			if (err instanceof axios.AxiosError) {
 				console.log(err)
 				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			}
 		}
 	}
 
-	useEffect(() => {
+	React.useEffect(() => {
 		getClubDocs()
 	}, [])
 

@@ -1,6 +1,7 @@
 import * as C from 'allFiles'
-import React from 'react'
 import * as S from './style'
+
+import React from 'react'
 
 const NotFound = () => {
 	return (

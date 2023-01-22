@@ -1,10 +1,11 @@
 import * as C from 'allFiles'
+import * as FC from 'util/'
+import * as S from './style'
+
 import React from 'react'
-import { dateParser } from 'util/dateParser'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Contributors from 'types/contributors'
-import * as S from './style'
 
 const MyPage = () => {
 	const [user, setUser] = React.useState({
@@ -46,8 +47,7 @@ const MyPage = () => {
 							<S.UserInfoLoadWrap>
 								<span>
 									이름은 {user.nickName}이며, 부마위키의{' '}
-									{user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'}{' '}
-									중 한 명이다.
+									{user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
 								</span>
 							</S.UserInfoLoadWrap>
 						</C.AccodianMenu>
@@ -62,7 +62,7 @@ const MyPage = () => {
 												{docs.title}[{docs.docsId}]
 											</S.ContributeLink>
 											<br />
-											수정 날짜 : {dateParser(docs.createTime)}
+											수정 날짜 : {FC.dateParser(docs.createTime)}
 										</span>
 									))}
 								</S.ContributeList>

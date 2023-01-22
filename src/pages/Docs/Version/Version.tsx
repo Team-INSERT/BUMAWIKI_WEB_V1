@@ -1,15 +1,16 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 import * as C from 'allFiles'
-import { useParams } from 'react-router-dom'
-import { dateParser } from '../../../util/dateParser'
+import * as FC from 'util/'
 import * as S from '../Doc/style'
 import * as V from './style'
 
+import axios from 'axios'
+import React from 'react'
+import { useParams } from 'react-router-dom'
+
 const Version = () => {
 	const router = useParams()
-	const [version, setVersion] = useState([])
-	const [isLoad, setIsLoad] = useState(false)
+	const [version, setVersion] = React.useState([])
+	const [isLoad, setIsLoad] = React.useState(false)
 
 	const getFindVersionDocs = async () => {
 		try {
@@ -23,7 +24,7 @@ const Version = () => {
 		}
 	}
 
-	useEffect(() => {
+	React.useEffect(() => {
 		getFindVersionDocs()
 		// eslint-disable-next-line
 	}, [router.title])
@@ -43,9 +44,7 @@ const Version = () => {
 									{version.map((ver: any, index: number) => (
 										<V.VersionList>
 											<span>
-												<V.VersionLink to={`/version/${router.title}/detail/${index}`}>
-													{dateParser(ver.thisVersionCreatedAt)}
-												</V.VersionLink>
+												<V.VersionLink to={`/version/${router.title}/detail/${index}`}>{FC.dateParser(ver.thisVersionCreatedAt)}</V.VersionLink>
 											</span>
 											<span>
 												작성자 : <V.VersionLink to={`/user/${ver.userId}`}>{ver.nickName}</V.VersionLink>

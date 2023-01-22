@@ -1,6 +1,7 @@
 import * as C from 'allFiles'
-import React from 'react'
 import * as S from './style'
+
+import React from 'react'
 
 const Home = () => {
 	return (
@@ -161,13 +162,11 @@ const Home = () => {
 									<br />
 									사실에 근거하고 남을 비방하거나 칭찬하지 않는 선에서 자유롭게 문서를 편집할 수 있습니다.
 									<br />
-									문의 및 문서삭제는 <span style={{ color: 'blue', fontWeight: 400 }}>bumawiki@gmail.com</span>으로
-									요청하실 수 있습니다.
+									문의 및 문서삭제는 <span style={{ color: 'blue', fontWeight: 400 }}>bumawiki@gmail.com</span>으로 요청하실 수 있습니다.
 									<br />
 									<br />
 									<span style={{ fontWeight: 800 }}>
-										교내의 모든 유/무선 네트워크 정보는 국가정보원 『국가·공공기관의 무선망 구축 보안 가이드라인,
-										국가정보보안 기본지침』 과,
+										교내의 모든 유/무선 네트워크 정보는 국가정보원 『국가·공공기관의 무선망 구축 보안 가이드라인, 국가정보보안 기본지침』 과,
 										<br />
 										교육부 『정보보안기본지침』에 따라 대외비로 관리되고 있으니 절대로 기재해서는 안 됩니다.
 									</span>
@@ -192,14 +191,12 @@ const Home = () => {
 							</S.DepartmentContent>
 							<S.DepartmentTitle>소프트웨어개발과</S.DepartmentTitle>
 							<S.DepartmentContent>
-								SW구조에 대한 이해를 바탕으로 다양한 SW개발 도구 및 설계 방법을 학습함으로써 SW분석, 설계, 구현, 시험,
-								유지 보수 등의
+								SW구조에 대한 이해를 바탕으로 다양한 SW개발 도구 및 설계 방법을 학습함으로써 SW분석, 설계, 구현, 시험, 유지 보수 등의
 								<br /> 업무를 능동적으로 수행할 수 있는 진보적이고 창의적인 SW 개발자를 양성한다.
 							</S.DepartmentContent>
 							<S.DepartmentTitle>임베디드소프트웨어과</S.DepartmentTitle>
 							<S.DepartmentContent>
-								전자기기 및 산업용 기기의 HW와 SW에 대한 이해를 바탕으로 제조업 하드웨어를 제어하는 펌웨어 개발, 시험,
-								유지 보수를
+								전자기기 및 산업용 기기의 HW와 SW에 대한 이해를 바탕으로 제조업 하드웨어를 제어하는 펌웨어 개발, 시험, 유지 보수를
 								<br /> 능동적으로 수행할 수 있는 시스템 SW엔지니어 및 응용 SW엔지니어를 양성한다.
 							</S.DepartmentContent>
 						</C.AccodianMenu>
@@ -352,8 +349,7 @@ const Home = () => {
 					<S.BusWrap>
 						<C.AccodianMenu name={'운행 버스'}>
 							<S.BusContent>
-								세 노선 다 배차간격이 길어 이용하기 어려운 편이다. 심지어 김해 4번과 강서2번, 강서15-1번은 일 8회만
-								운행한다.
+								세 노선 다 배차간격이 길어 이용하기 어려운 편이다. 심지어 김해 4번과 강서2번, 강서15-1번은 일 8회만 운행한다.
 								<br />
 								그래서 기숙사 입소, 퇴소 날에는 학교에서 셔틀버스를 운행한다.
 							</S.BusContent>

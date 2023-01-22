@@ -1,7 +1,8 @@
+import * as FC from 'util/'
+
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { dateUTCParser } from 'util/dateUTCParser'
 
 const Signup = () => {
 	const navigate = useNavigate()
@@ -18,7 +19,7 @@ const Signup = () => {
 				}
 			)
 			document.cookie = `authorization=${res.data.accessToken};`
-			document.cookie = `refresh_token=${res.data.refreshToken};expires=${dateUTCParser(res.data.expiredAt)};path=/;`
+			document.cookie = `refresh_token=${res.data.refreshToken};expires=${FC.dateUTCParser(res.data.expiredAt)};path=/;`
 			navigate('/')
 			window.location.reload()
 		} catch (err) {
@@ -28,7 +29,7 @@ const Signup = () => {
 		}
 	}
 
-	useEffect(() => {
+	React.useEffect(() => {
 		getSignUpData()
 		// eslint-disable-next-line
 	}, [])

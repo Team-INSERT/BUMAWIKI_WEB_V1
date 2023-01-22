@@ -1,10 +1,11 @@
-import axios from 'axios'
 import * as C from 'allFiles'
-import React from 'react'
 import * as R from 'react-router-dom'
-import Docs from 'types/docs'
 import * as S from './style'
-import { changeKor } from 'util/typeEditor'
+import * as FC from 'util/'
+
+import Docs from 'types/docs'
+import React from 'react'
+import axios from 'axios'
 
 const Search = () => {
 	const router = R.useParams()
@@ -48,7 +49,7 @@ const Search = () => {
 									{result.map((result: Docs, index) => (
 										<S.SearchListItem>
 											<S.SearchLink key={index} className="link" to={`/docs/${result.title}`}>
-												{result.title} — ( {changeKor(result.docsType)},{result.enroll} )
+												{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
 											</S.SearchLink>
 										</S.SearchListItem>
 									))}

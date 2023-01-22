@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import * as C from 'allFiles'
 import * as S from './style'
+
+import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Docs from 'types/docs'
 
 const Teacher = () => {
-	const [major, setMajor] = useState([])
-	const [humanities, setHumanities] = useState([])
-	const [mentor, setMentor] = useState([])
-	const [isError, setIsError] = useState(false)
+	const [major, setMajor] = React.useState([])
+	const [humanities, setHumanities] = React.useState([])
+	const [mentor, setMentor] = React.useState([])
+	const [isError, setIsError] = React.useState(false)
 
 	const getTeacherDocs = async (router: string) => {
 		try {
@@ -30,14 +31,14 @@ const Teacher = () => {
 		}
 	}
 
-	useEffect(() => {
+	React.useEffect(() => {
 		getTeacherDocs('teacher')
 		getTeacherDocs('majorTeacher')
 		getTeacherDocs('mentorTeacher')
 		// eslint-disable-next-line
 	}, [])
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (isError) alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 	}, [isError])
 
@@ -53,9 +54,7 @@ const Teacher = () => {
 						<C.Classify>선생님</C.Classify>
 					</S.Classify>
 					<S.TeacherLine />
-					<S.TeacherWarnText>
-						※ 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※
-					</S.TeacherWarnText>
+					<S.TeacherWarnText>※ 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.TeacherWarnText>
 					<S.TeacherList>
 						<C.AccodianMenu name={`인문과목 선생님`}>
 							<S.TeacherDetailList>

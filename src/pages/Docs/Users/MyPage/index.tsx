@@ -1,10 +1,10 @@
 import * as C from 'allFiles'
+import * as S from './style'
+import * as FC from 'util/'
+
 import { UserContext } from 'App'
 import React from 'react'
-import * as S from './style'
-import { dateParser } from 'util/dateParser'
 import axios from 'axios'
-import { getCookie } from 'util/getCookie'
 import Contributors from 'types/contributors'
 
 const MyPage = () => {
@@ -14,7 +14,7 @@ const MyPage = () => {
 		try {
 			await axios.delete('/auth/bsm/logout', {
 				data: {
-					refresh_token: getCookie('refresh_token'),
+					refresh_token: FC.getCookie('refresh_token'),
 				},
 			})
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
@@ -43,12 +43,7 @@ const MyPage = () => {
 									<>
 										<span>
 											이름은 {user.nickName}이며, 부마위키의{' '}
-											{user.authority === 'ADMIN'
-												? '관리자'
-												: user.authority === 'BANNED'
-												? '읽기전용 사용자'
-												: '사용자'}{' '}
-											중 한 명이다.
+											{user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
 										</span>
 										<span>
 											이 유저의 아이디는 '{user.id}'이며, 이메일은 {user.email}이다.
@@ -63,26 +58,23 @@ const MyPage = () => {
 							</S.MyPageInfoLoadWrap>
 						</C.AccodianMenu>
 						{user.id ? (
-							<>
-								<C.AccodianMenu name={'기여한 문서'}>
-									<S.ContributeWrap>
-										<span>이 유저가 기여한 문서의 정보들이다.</span>
-										<S.ContributeList>
-											{user.contributeDocs.map((docs: Contributors, index) => (
-												<span key={index}>
-													문서명 :
-													<S.ContributeLink to={`/docs/${docs.docsId}`}>
-														{docs.title}[{docs.docsId}]
-													</S.ContributeLink>
-													<br />
-													수정 날짜 : {dateParser(docs.createTime)}
-												</span>
-											))}
-										</S.ContributeList>
-									</S.ContributeWrap>
-								</C.AccodianMenu>
-								<div className="line margin" />
-							</>
+							<C.AccodianMenu name={'기여한 문서'}>
+								<S.ContributeWrap>
+									<span>이 유저가 기여한 문서의 정보들이다.</span>
+									<S.ContributeList>
+										{user.contributeDocs.map((docs: Contributors, index) => (
+											<span key={index}>
+												문서명 :
+												<S.ContributeLink to={`/docs/${docs.docsId}`}>
+													{docs.title}[{docs.docsId}]
+												</S.ContributeLink>
+												<br />
+												수정 날짜 : {FC.dateParser(docs.createTime)}
+											</span>
+										))}
+									</S.ContributeList>
+								</S.ContributeWrap>
+							</C.AccodianMenu>
 						) : (
 							''
 						)}
