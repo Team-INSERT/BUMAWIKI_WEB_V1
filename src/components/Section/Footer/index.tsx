@@ -1,5 +1,6 @@
-import React from 'react'
 import * as S from './style'
+
+import React from 'react'
 import Github from '../../../assets/github.svg'
 import Instagram from '../../../assets/instagram.svg'
 

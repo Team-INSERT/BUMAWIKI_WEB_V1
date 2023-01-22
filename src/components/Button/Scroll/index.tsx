@@ -1,5 +1,6 @@
-import React from 'react'
 import * as S from './style'
+
+import React from 'react'
 import ScrollUp from '../../../assets/scroll_up.svg'
 import ScrollDown from '../../../assets/scroll_down.svg'
 

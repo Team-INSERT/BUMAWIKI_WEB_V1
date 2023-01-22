@@ -1,4 +1,4 @@
-export const documentation = (content: string) => {
+const documentation = (content: string) => {
 	const ORIGINAL_CONTENT = content
 		// 태그 지원
 		.replace(/<항목>/gi, `?^li style="list-style: disc;"^?`)
@@ -74,3 +74,5 @@ export const documentation = (content: string) => {
 		.replace(/&\$\^%/gi, `"`)
 	return HTML_CONTENT
 }
+
+export default documentation

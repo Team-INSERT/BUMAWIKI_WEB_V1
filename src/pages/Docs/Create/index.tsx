@@ -1,31 +1,21 @@
 import * as C from 'allFiles'
-import { UserContext } from 'App'
+import * as S from './style'
+import * as FC from 'util/'
+
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import autoComplete from 'util/autoComplete'
-import { documentation } from 'util/documentation'
-import { getCookie } from 'util/getCookie'
-import * as S from './style'
+import { UserContext } from 'App'
 
 const Docs = () => {
 	const navigate = useNavigate()
 	const user = React.useContext(UserContext)
-	const [docsType, setDocsType] = React.useState('')
-	const [enroll, setEnroll] = React.useState<number>()
+
 	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
-	const [contents, setContents] = React.useState('')
+	const [docsType, setDocsType] = React.useState<string>('')
+	const [contents, setContents] = React.useState<string>('')
+	const [enroll, setEnroll] = React.useState<number>()
 	const [files, setFiles] = React.useState<any>()
-
-	console.log(window.location.search)
-
-	const onChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setDocsType(e.target.id)
-	}
-
-	const onChangeEnrollRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setEnroll(parseInt(e.target.id))
-	}
 
 	const onClickCreateDocs = async () => {
 		if (!user.isLogin) {
@@ -70,8 +60,8 @@ const Docs = () => {
 			const res = await axios.post('/docs/create', data, {
 				headers: {
 					'Content-Type': `multipart/form-data`,
-					Authorization: getCookie('authorization'),
-					refresh_token: getCookie('refresh_token'),
+					Authorization: FC.getCookie('authorization'),
+					refresh_token: FC.getCookie('refresh_token'),
 				},
 			})
 			alert('문서가 생성되었습니다!')
@@ -84,7 +74,7 @@ const Docs = () => {
 	}
 
 	return (
-		<div>
+		<>
 			<C.Header />
 			<S.CreateWrap>
 				<C.Board>
@@ -96,17 +86,17 @@ const Docs = () => {
 							<S.CreateTableTRTitle>분류</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
 								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="MAJOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="MAJOR_TEACHER" name="radio" />
 								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="MENTOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="MENTOR_TEACHER" name="radio" />
 								<label htmlFor="ACCIDENT">사건/사고</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="ACCIDENT" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="ACCIDENT" name="radio" />
 								<label htmlFor="CLUB">전공동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeRadio(e)} id="FREE_CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="FREE_CLUB" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
@@ -117,11 +107,11 @@ const Docs = () => {
 							<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
 								<S.EnrollLabel htmlFor="2023">2023년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeEnrollRadio(e)} id="2023" name="radios" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2023" name="radios" />
 								<S.EnrollLabel htmlFor="2022">2022년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeEnrollRadio(e)} id="2022" name="radios" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2022" name="radios" />
 								<S.EnrollLabel htmlFor="2021">2021년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => onChangeEnrollRadio(e)} id="2021" name="radios" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2021" name="radios" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTRExample>
@@ -134,29 +124,24 @@ const Docs = () => {
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
 								{[null, null, null].map(() => (
-									<input
-										type="file"
-										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
-									/>
+									<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
-							<S.CreateTableTRTextarea onChange={(e) => setContents(autoComplete(contents, e))} value={contents} />
+							<S.CreateTableTRTextarea onChange={(e) => setContents(FC.autoComplete(contents, e))} value={contents} />
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
 							<S.CreateTableTRDiv
 								dangerouslySetInnerHTML={{
-									__html: documentation(contents.replace(/<br>/gi, '\n')),
+									__html: FC.documentation(contents.replace(/<br>/gi, '\n')),
 								}}></S.CreateTableTRDiv>
 						</S.CreateTableTRTextContent>
 					</S.CreateTable>
 					<S.CreateSubmit>
-						<S.CreateWarn>
-							※ 필독! 문서 내 부적절한 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※
-						</S.CreateWarn>
+						<S.CreateWarn>※ 필독! 문서 내 부적절한 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.CreateWarn>
 						<S.CreateButton onClick={onClickCreateDocs}>문서 생성</S.CreateButton>
 					</S.CreateSubmit>
 					<C.SubFooter />
@@ -165,7 +150,7 @@ const Docs = () => {
 				<C.Aside />
 			</S.CreateWrap>
 			<C.Footer />
-		</div>
+		</>
 	)
 }
 

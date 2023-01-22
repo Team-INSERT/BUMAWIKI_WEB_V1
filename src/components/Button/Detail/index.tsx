@@ -1,11 +1,11 @@
-import React from 'react'
 import * as R from 'react-router-dom'
-import axios, { AxiosError } from 'axios'
-import { dateParser } from 'util/dateParser'
-import { UserContext } from 'App'
-import { getCookie } from 'util/getCookie'
-import Docs from 'types/docs'
+import * as FC from 'util/'
 import * as S from './style'
+
+import React from 'react'
+import axios from 'axios'
+import { UserContext } from 'App'
+import Docs from 'types/docs'
 
 const DetailBtn = () => {
 	const router = R.useParams()
@@ -20,10 +20,10 @@ const DetailBtn = () => {
 			const res = await axios.get(`/docs/find/id/${router.title}`)
 			setDocs({
 				...res.data,
-				lastModifiedAt: dateParser(res.data.lastModifiedAt),
+				lastModifiedAt: FC.dateParser(res.data.lastModifiedAt),
 			})
 		} catch (err) {
-			if (err instanceof AxiosError) {
+			if (err instanceof axios.AxiosError) {
 				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 				console.log(err)
 				return
@@ -43,7 +43,7 @@ const DetailBtn = () => {
 				{ title: docsName },
 				{
 					headers: {
-						Authorization: getCookie('authorization'),
+						Authorization: FC.getCookie('authorization'),
 					},
 				}
 			)
@@ -59,7 +59,7 @@ const DetailBtn = () => {
 		try {
 			axios.delete(`/docs/delete/${router.title}`, {
 				headers: {
-					Autsorization: getCookie('authorization'),
+					Autsorization: FC.getCookie('authorization'),
 				},
 			})
 			alert('문서가 삭제되었습니다!')

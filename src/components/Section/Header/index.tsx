@@ -1,7 +1,9 @@
-import { UserContext } from 'App'
-import React from 'react'
 import * as R from 'react-router-dom'
 import * as S from './style'
+
+import { UserContext } from 'App'
+import React from 'react'
+
 import Student from '../../../assets/student.svg'
 import Teacher from '../../../assets/teacher.svg'
 import Accident from '../../../assets/accident.svg'
@@ -12,8 +14,10 @@ import Search from '../../../assets/search.svg'
 const Header = () => {
 	const [search, setSearch] = React.useState('')
 	const [isLoad, setIsLoad] = React.useState(false)
+
 	const user = React.useContext(UserContext)
 	const navigate = R.useNavigate()
+
 	const navigateSearchResult = () => {
 		if (search.length === 0) {
 			alert('검색할 문서명을 입력해주세요!')

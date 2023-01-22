@@ -1,6 +1,7 @@
+import * as S from './style'
+
 import React from 'react'
 import AccodianType from 'types/accodian'
-import * as S from './style'
 import ArrowRight from '../../assets/arrow_right.svg'
 import ArrowDown from '../../assets/arrow_down.svg'
 

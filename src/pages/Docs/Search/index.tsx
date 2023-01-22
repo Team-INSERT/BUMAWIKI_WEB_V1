@@ -4,7 +4,7 @@ import React from 'react'
 import * as R from 'react-router-dom'
 import Docs from 'types/docs'
 import * as S from './style'
-import { changeKor } from 'util/changeKor'
+import { changeKor } from 'util/typeEditor'
 
 const Search = () => {
 	const router = R.useParams()

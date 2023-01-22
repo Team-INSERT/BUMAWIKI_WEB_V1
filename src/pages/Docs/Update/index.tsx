@@ -3,10 +3,10 @@ import { UserContext } from 'App'
 import axios, { AxiosError } from 'axios'
 import React from 'react'
 import * as R from 'react-router-dom'
-import autoComplete from 'util/autoComplete'
+import { autoComplete } from 'util/autoComplete'
 import { documentation } from 'util/documentation'
 import { getCookie } from 'util/getCookie'
-import makeTable from 'util/makeTable'
+import { makeTable } from 'util/makeTable'
 import * as S from './style'
 
 interface reducerAction {

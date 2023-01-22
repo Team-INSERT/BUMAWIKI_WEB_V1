@@ -1,9 +1,9 @@
+import * as S from './style'
+import * as FC from 'util/'
+
 import axios from 'axios'
 import React from 'react'
 import Docs from 'types/docs'
-import { asideFormat } from 'util/asideFormat'
-import { getLastDate } from 'util/getLastDate'
-import * as S from './style'
 
 const Aside = () => {
 	const [lastModifiedDocs, setLastModifiedDocs] = React.useState([])
@@ -28,8 +28,8 @@ const Aside = () => {
 			</S.AsideTitleWrap>
 			{lastModifiedDocs.map((docs: Docs) => (
 				<S.AsideDocWrap key={docs.id}>
-					<S.AsideList to={`/docs/${docs.title}`}>{asideFormat(docs.title, docs.docsType)}</S.AsideList>
-					<S.AsideLastModified>&nbsp;― {getLastDate(docs.lastModifiedAt)}</S.AsideLastModified>
+					<S.AsideList to={`/docs/${docs.title}`}>{FC.asideFormat(docs.title, docs.docsType)}</S.AsideList>
+					<S.AsideLastModified>&nbsp;― {FC.getLastDate(docs.lastModifiedAt)}</S.AsideLastModified>
 				</S.AsideDocWrap>
 			))}
 		</S.AsideWrap>
