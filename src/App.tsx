@@ -4,22 +4,13 @@ import * as R from './allFiles'
 import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { RecoilRoot, useSetRecoilState } from 'recoil'
+import userState from 'recoil/userState'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
-const userInfo = {
-	id: 0,
-	email: '',
-	nickName: '',
-	authority: 'USER',
-	contributeDocs: [],
-	isLogin: false,
-}
-
-export const UserContext = React.createContext(userInfo)
-
 const App = () => {
-	const [user, setUser] = React.useState(userInfo)
+	const setUser = useSetRecoilState(userState)
 
 	React.useEffect(() => {
 		axios
@@ -51,8 +42,8 @@ const App = () => {
 	}, [])
 
 	return (
-		<Router>
-			<UserContext.Provider value={user}>
+		<RecoilRoot>
+			<Router>
 				<Routes>
 					<Route path={'/'} element={<R.Home />} />
 					<Route path={'/student'} element={<R.Student />} />
@@ -70,8 +61,8 @@ const App = () => {
 					<Route path={'/user/:id'} element={<R.User />} />
 					<Route path={'*'} element={<R.NotFound />} />
 				</Routes>
-			</UserContext.Provider>
-		</Router>
+			</Router>
+		</RecoilRoot>
 	)
 }
 
