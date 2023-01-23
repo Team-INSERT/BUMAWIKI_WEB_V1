@@ -4,12 +4,13 @@ import * as S from './style'
 
 import React from 'react'
 import axios from 'axios'
-import { UserContext } from 'App'
 import Docs from 'types/docs'
+import { useRecoilValue } from 'recoil'
+import userState from 'recoil/userState'
 
 const DetailBtn = () => {
 	const router = R.useParams()
-	const user = React.useContext(UserContext)
+	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 
 	const [docs, setDocs] = React.useState<Docs>()

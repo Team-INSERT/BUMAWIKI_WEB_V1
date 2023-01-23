@@ -5,11 +5,12 @@ import * as FC from 'util/'
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from 'App'
+import { useRecoilValue } from 'recoil'
+import userState from 'recoil/userState'
 
 const Docs = () => {
 	const navigate = useNavigate()
-	const user = React.useContext(UserContext)
+	const user = useRecoilValue(userState)
 
 	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
 	const [docsType, setDocsType] = React.useState<string>('')
@@ -28,7 +29,7 @@ const Docs = () => {
 			return
 		}
 
-		if (title.length === 0) {
+		if (!title.length) {
 			alert('문서의 이름을 정해주세요!')
 			return
 		}

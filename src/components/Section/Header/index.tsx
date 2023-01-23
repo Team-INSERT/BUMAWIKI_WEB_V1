@@ -1,7 +1,6 @@
 import * as R from 'react-router-dom'
 import * as S from './style'
 
-import { UserContext } from 'App'
 import React from 'react'
 
 import Student from '../../../assets/student.svg'
@@ -10,12 +9,14 @@ import Accident from '../../../assets/accident.svg'
 import Club from '../../../assets/club.svg'
 import Create from '../../../assets/create.svg'
 import Search from '../../../assets/search.svg'
+import { useRecoilValue } from 'recoil'
+import userState from 'recoil/userState'
 
 const Header = () => {
 	const [search, setSearch] = React.useState('')
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	const user = React.useContext(UserContext)
+	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 
 	const navigateSearchResult = () => {

@@ -2,13 +2,14 @@ import * as C from 'allFiles'
 import * as S from './style'
 import * as FC from 'util/'
 
-import { UserContext } from 'App'
 import React from 'react'
 import axios from 'axios'
 import Contributors from 'types/contributors'
+import { useRecoilValue } from 'recoil'
+import userState from 'recoil/userState'
 
 const MyPage = () => {
-	const user = React.useContext(UserContext)
+	const user = useRecoilValue(userState)
 
 	const onClickLogOut = async () => {
 		try {

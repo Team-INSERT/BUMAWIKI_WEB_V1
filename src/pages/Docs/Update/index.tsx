@@ -3,9 +3,10 @@ import * as R from 'react-router-dom'
 import * as FC from 'util/'
 import * as S from './style'
 
-import { UserContext } from 'App'
 import axios from 'axios'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
+import userState from 'recoil/userState'
 
 interface reducerAction {
 	name: string
@@ -21,7 +22,7 @@ function reducer(state: any, action: reducerAction) {
 
 const Docs = () => {
 	const router = R.useParams()
-	const user = React.useContext(UserContext)
+	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 
 	const [title, setTitle] = React.useState('')
