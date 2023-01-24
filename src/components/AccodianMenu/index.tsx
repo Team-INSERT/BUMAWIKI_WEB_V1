@@ -2,8 +2,6 @@ import * as S from './style'
 
 import React from 'react'
 import AccodianType from 'types/accodian'
-import ArrowRight from '../../assets/arrow_right.svg'
-import ArrowDown from '../../assets/arrow_down.svg'
 
 const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
 	const [detail, setDetail] = React.useState<boolean>(true)
@@ -23,7 +21,7 @@ const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
 	return (
 		<S.AccodianWrap>
 			<S.AccodianTitleWrap onClick={onClickDetail}>
-				<S.AccodianArrow src={detail ? ArrowRight : ArrowDown} alt="" />
+				<S.AccodianArrow src={detail ? require('assets/arrow_right.svg').default : require('assets/arrow_down.svg').default} alt="" />
 				<S.AccodianName opacity={opacity}>{name}</S.AccodianName>
 			</S.AccodianTitleWrap>
 			<S.AccodianLine />

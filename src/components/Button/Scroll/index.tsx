@@ -1,8 +1,6 @@
 import * as S from './style'
 
 import React from 'react'
-import ScrollUp from '../../../assets/scroll_up.svg'
-import ScrollDown from '../../../assets/scroll_down.svg'
 
 const ScrollBtn = () => {
 	const scrollToTop = () => {
@@ -15,10 +13,10 @@ const ScrollBtn = () => {
 	return (
 		<S.ScrollButtonWrap>
 			<S.ScrollButton onClick={scrollToTop}>
-				<S.ScrollArrow src={ScrollUp} alt="" />
+				<S.ScrollArrow src={require('assets/scroll_up.svg').default} alt="" />
 			</S.ScrollButton>
 			<S.ScrollButton onClick={scrollToBottom}>
-				<S.ScrollArrow src={ScrollDown} alt="" />
+				<S.ScrollArrow src={require('assets/scroll_down.svg').default} alt="" />
 			</S.ScrollButton>
 		</S.ScrollButtonWrap>
 	)

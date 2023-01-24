@@ -33,7 +33,7 @@ const DetailBtn = () => {
 	}
 
 	const onClickChangeDocsName = async () => {
-		if (docsName.length === 0) {
+		if (!docsName.length) {
 			alert('내용이 없습니다.')
 			return
 		}
@@ -87,13 +87,7 @@ const DetailBtn = () => {
 									<S.DetailText>삭제</S.DetailText>
 								</S.DetailButton>
 							</S.DetailWrap>
-							<S.DetailInput
-								value={docsName}
-								onChange={(e) => {
-									setDocsName(e.target.value)
-								}}
-								required={true}
-							/>
+							<S.DetailInput value={docsName} onChange={(e) => setDocsName(e.target.value)} />
 							<S.DetailWrap onClick={onClickChangeDocsName}>
 								<S.DetailButton>
 									<S.DetailText>변경</S.DetailText>

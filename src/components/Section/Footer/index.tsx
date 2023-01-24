@@ -1,19 +1,17 @@
 import * as S from './style'
 
 import React from 'react'
-import Github from '../../../assets/github.svg'
-import Instagram from '../../../assets/instagram.svg'
 
 const Footer = () => {
 	return (
 		<S.FooterWrap>
 			<S.FooterLogoWrap>
 				<S.FooterLink href={'https://github.com/Original-Gimchi'} target={'_blank'} rel="noreferrer">
-					<S.FooterLogo src={Github} alt="" />
+					<S.FooterLogo src={require('assets/github.svg').default} alt="" />
 				</S.FooterLink>
 				<S.FooterLine />
 				<S.FooterLink href={'https://www.instagram.com/#'} target={'_blank'} rel="noreferrer">
-					<S.FooterLogo src={Instagram} alt="" />
+					<S.FooterLogo src={require('assets/instagram.svg').default} alt="" />
 				</S.FooterLink>
 			</S.FooterLogoWrap>
 			<S.FooterInfoWrap>
