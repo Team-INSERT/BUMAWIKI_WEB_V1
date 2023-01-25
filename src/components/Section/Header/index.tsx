@@ -3,7 +3,7 @@ import * as S from './style'
 
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 const Header = () => {
 	const [search, setSearch] = React.useState('')

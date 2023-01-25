@@ -6,7 +6,7 @@ import React from 'react'
 import axios from 'axios'
 import Contributors from 'types/contributors'
 import { useRecoilValue } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)

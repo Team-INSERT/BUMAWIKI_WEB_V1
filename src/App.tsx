@@ -5,7 +5,7 @@ import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { RecoilRoot, useSetRecoilState } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 

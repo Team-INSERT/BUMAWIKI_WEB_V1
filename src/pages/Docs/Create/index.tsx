@@ -6,7 +6,7 @@ import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 const Docs = () => {
 	const navigate = useNavigate()

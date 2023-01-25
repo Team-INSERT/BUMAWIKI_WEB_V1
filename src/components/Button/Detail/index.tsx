@@ -6,7 +6,7 @@ import React from 'react'
 import axios from 'axios'
 import Docs from 'types/docs'
 import { useRecoilValue } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 const DetailBtn = () => {
 	const router = R.useParams()

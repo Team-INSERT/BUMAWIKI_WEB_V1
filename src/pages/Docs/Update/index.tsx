@@ -6,7 +6,7 @@ import * as S from './style'
 import axios from 'axios'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import userState from 'recoil/userState'
+import userState from 'atom/userState'
 
 interface reducerAction {
 	name: string
