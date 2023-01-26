@@ -1,11 +1,11 @@
 const getCookie = (cName: string) => {
 	cName = cName + '='
-	var cookieData = document.cookie
-	var start = cookieData.indexOf(cName)
-	var cValue = ''
+	const cookieData = document.cookie
+	let start = cookieData.indexOf(cName)
+	let cValue = ''
 	if (start !== -1) {
 		start += cName.length
-		var end = cookieData.indexOf(';', start)
+		let end = cookieData.indexOf(';', start)
 		if (end === -1) end = cookieData.length
 		cValue = cookieData.substring(start, end)
 	}
