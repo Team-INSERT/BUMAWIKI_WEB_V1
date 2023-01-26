@@ -1,5 +1,7 @@
 import * as S from './style'
 
+import github from 'assets/github.svg'
+import instagram from 'assets/instagram.svg'
 import React from 'react'
 
 const Footer = () => {
@@ -7,11 +9,11 @@ const Footer = () => {
 		<S.FooterWrap>
 			<S.FooterLogoWrap>
 				<S.FooterLink href={'https://github.com/Original-Gimchi'} target={'_blank'} rel="noreferrer">
-					<S.FooterLogo src={require('assets/github.svg').default} alt="" />
+					<S.FooterLogo src={github} alt="" />
 				</S.FooterLink>
 				<S.FooterLine />
 				<S.FooterLink href={'https://www.instagram.com/#'} target={'_blank'} rel="noreferrer">
-					<S.FooterLogo src={require('assets/instagram.svg').default} alt="" />
+					<S.FooterLogo src={instagram} alt="" />
 				</S.FooterLink>
 			</S.FooterLogoWrap>
 			<S.FooterInfoWrap>

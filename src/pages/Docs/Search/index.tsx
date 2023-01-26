@@ -1,12 +1,12 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
-import * as S from './style'
-import * as FC from 'utils/function'
 import * as api from 'utils/api/getDocs'
+import * as FC from 'utils/function'
+import * as S from './style'
 
-import Docs from 'types/docs'
 import React from 'react'
 import { useQuery } from 'react-query'
+import Docs from 'types/docs'
 
 const Search = () => {
 	const router = R.useParams()
@@ -33,7 +33,7 @@ const Search = () => {
 			<S.SearchWrap>
 				<C.Board>
 					<S.SearchTitleWrap>
-						<span>"{router.result}" 검색결과</span>
+						<span>&quot;{router.result}&quot; 검색결과</span>
 					</S.SearchTitleWrap>
 					<S.Classify>
 						<C.Classify>검색</C.Classify>
@@ -44,8 +44,8 @@ const Search = () => {
 							{isLoad ? (
 								<>
 									{result.map((result: Docs, index) => (
-										<S.SearchListItem>
-											<S.SearchLink key={index} className="link" to={`/docs/${result.title}`}>
+										<S.SearchListItem key={index}>
+											<S.SearchLink to={`/docs/${result.title}`}>
 												{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
 											</S.SearchLink>
 										</S.SearchListItem>
@@ -53,7 +53,7 @@ const Search = () => {
 								</>
 							) : (
 								<div>
-									<span>아직 "{router.result}" 문서는 없습니다.</span>
+									<span>아직 &quot;{router.result}&quot; 문서는 없습니다.</span>
 									<br />
 									<br />
 									<R.Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>

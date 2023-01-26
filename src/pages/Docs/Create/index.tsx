@@ -1,13 +1,13 @@
 import * as C from 'allFiles'
-import * as S from './style'
-import * as FC from 'utils/function'
 import * as api from 'utils/api/editDocs'
+import * as FC from 'utils/function'
+import * as S from './style'
 
+import userState from 'atom/userState'
 import React from 'react'
+import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import userState from 'atom/userState'
-import { useMutation } from 'react-query'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -17,7 +17,7 @@ const Docs = () => {
 	const [docsType, setDocsType] = React.useState<string>('')
 	const [contents, setContents] = React.useState<string>('')
 	const [enroll, setEnroll] = React.useState<number>()
-	const [files, setFiles] = React.useState<any>()
+	const [files, setFiles] = React.useState<any>() // 변경 필요
 
 	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
@@ -51,6 +51,7 @@ const Docs = () => {
 			return
 		}
 
+		// eslint-disable-next-line
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -122,8 +123,12 @@ const Docs = () => {
 						<S.CreateTableTRFile>
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
-								{[null, null, null].map(() => (
-									<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
+								{[null, null, null].map((index) => (
+									<input
+										key={index}
+										type="file"
+										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
+									/>
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>

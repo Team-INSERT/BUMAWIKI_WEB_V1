@@ -1,9 +1,9 @@
 import * as C from 'allFiles'
 import * as S from './style'
 
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import Docs from 'types/docs'
 
 const Teacher = () => {
@@ -58,8 +58,8 @@ const Teacher = () => {
 					<S.TeacherList>
 						<C.AccodianMenu name={`인문과목 선생님`}>
 							<S.TeacherDetailList>
-								{humanities.map((teacher: Docs) => (
-									<S.TeacherListItem>
+								{humanities.map((teacher: Docs, index) => (
+									<S.TeacherListItem key={index}>
 										<S.TeacherLink to={`/docs/${teacher.title}`}>{teacher.title}</S.TeacherLink>
 									</S.TeacherListItem>
 								))}
@@ -67,8 +67,8 @@ const Teacher = () => {
 						</C.AccodianMenu>
 						<C.AccodianMenu name={`전공과목 선생님`}>
 							<S.TeacherDetailList>
-								{major.map((teacher: Docs) => (
-									<S.TeacherListItem>
+								{major.map((teacher: Docs, index) => (
+									<S.TeacherListItem key={index}>
 										<S.TeacherLink to={`/docs/${teacher.title}`} className="link">
 											{teacher.title}
 										</S.TeacherLink>

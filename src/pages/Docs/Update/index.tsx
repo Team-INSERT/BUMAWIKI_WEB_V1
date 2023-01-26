@@ -1,21 +1,22 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
+import * as editApi from 'utils/api/editDocs'
+import * as getApi from 'utils/api/getDocs'
 import * as FC from 'utils/function'
 import * as S from './style'
-import * as getApi from 'utils/api/getDocs'
-import * as editApi from 'utils/api/editDocs'
 
+import userState from 'atom/userState'
 import axios from 'axios'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
-import userState from 'atom/userState'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
+import { useRecoilValue } from 'recoil'
 
 interface reducerAction {
 	name: string
 	value: string
 }
 
+// 변경 필요
 function reducer(state: any, action: reducerAction) {
 	return {
 		...state,
@@ -30,7 +31,7 @@ const Docs = () => {
 
 	const [title, setTitle] = React.useState('')
 	const [contents, setContents] = React.useState('')
-	const [files, setFiles] = React.useState<any>([])
+	const [files, setFiles] = React.useState<any>([]) // 변경 필요
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
 
@@ -87,6 +88,7 @@ const Docs = () => {
 			return
 		}
 
+		// eslint-disable-next-line
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -125,8 +127,8 @@ const Docs = () => {
 					<S.DocsExampleImage src="/images/docs-example.png" alt="문서작성법" />
 					<S.DocsLine />
 					<S.DocsContentsWrap>
-						{fileInput.map(() => (
-							<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
+						{fileInput.map((index) => (
+							<input key={index} type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
 						))}
 						<S.FileAddWrap onClick={() => setFileInput([...fileInput, ''])}>
 							<S.FileAddButton>+</S.FileAddButton>

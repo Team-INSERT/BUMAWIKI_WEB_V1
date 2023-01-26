@@ -1,12 +1,13 @@
 import * as C from 'allFiles'
+import * as api from 'utils/api/getDocs'
 import * as FC from 'utils/function'
 import * as S from '../Doc/style'
 import * as V from './style'
-import * as api from 'utils/api/getDocs'
 
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import VersionDocs from 'types/versionDocs'
 
 const Version = () => {
 	const router = useParams()
@@ -37,8 +38,8 @@ const Version = () => {
 						<ul>
 							{isLoad ? (
 								<>
-									{version.map((ver: any, index: number) => (
-										<V.VersionList>
+									{version.map((ver: VersionDocs, index: number) => (
+										<V.VersionList key={index}>
 											<span>
 												<V.VersionLink to={`/version/${router.title}/detail/${index}`}>{FC.dateParser(ver.thisVersionCreatedAt)}</V.VersionLink>
 											</span>

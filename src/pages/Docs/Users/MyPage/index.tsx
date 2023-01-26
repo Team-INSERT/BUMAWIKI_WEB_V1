@@ -1,13 +1,13 @@
 import * as C from 'allFiles'
-import * as S from './style'
-import * as FC from 'utils/function'
 import * as api from 'utils/api/user'
+import * as FC from 'utils/function'
+import * as S from './style'
 
-import React from 'react'
-import Contributors from 'types/contributors'
-import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
+import React from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { useRecoilValue } from 'recoil'
+import Contributors from 'types/contributors'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
@@ -45,7 +45,7 @@ const MyPage = () => {
 											{user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
 										</span>
 										<span>
-											이 유저의 아이디는 '{user.id}'이며, 이메일은 {user.email}이다.
+											이 유저의 아이디는 {user.id}이며, 이메일은 {user.email}이다.
 										</span>
 										<br />
 										<S.LogoutText onClick={() => mutate()}>로그아웃</S.LogoutText>

@@ -1,10 +1,10 @@
 import * as C from 'allFiles'
-import * as S from './style'
 import * as api from 'utils/api/getDocs'
+import * as S from './style'
 
 import React from 'react'
-import Docs from 'types/docs'
 import { useQuery } from 'react-query'
+import Docs from 'types/docs'
 
 const Accident = () => {
 	const [accidents, setAccidents] = React.useState([])
@@ -44,8 +44,8 @@ const Accident = () => {
 					<S.AccidentListWrap>
 						{allDate.map((date) => (
 							<C.AccodianMenu name={`${date}년 사건/사고`} key={date}>
-								{accidents.map((accident: Docs) => (
-									<S.AccidentList>
+								{accidents.map((accident: Docs, index) => (
+									<S.AccidentList key={index}>
 										{accident.enroll === date ? (
 											<S.AccidentListItem>
 												<S.AccidentLink to={`/docs/${accident.title}`}>{accident.title}</S.AccidentLink>

@@ -1,10 +1,10 @@
 import * as C from 'allFiles'
-import * as S from './style'
 import * as api from 'utils/api/getDocs'
+import * as S from './style'
 
 import React from 'react'
-import Docs from 'types/docs'
 import { useQuery } from 'react-query'
+import Docs from 'types/docs'
 
 const Student = () => {
 	const [students, setStudents] = React.useState([])
@@ -44,8 +44,8 @@ const Student = () => {
 					<S.StudentListWrap>
 						{allDate.map((date) => (
 							<C.AccodianMenu name={`${date}년도 입학생`} key={date}>
-								{students.map((student: Docs) => (
-									<S.StudentList>
+								{students.map((student: Docs, index) => (
+									<S.StudentList key={index}>
 										{student.enroll === date ? (
 											<S.StudentListItem>
 												<S.StudentLink to={`/docs/${student.title}`}>{student.title}</S.StudentLink>
