@@ -2,14 +2,17 @@ import * as C from 'allFiles'
 import * as FC from 'util/function/'
 import * as S from '../Doc/style'
 
-import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import Docs from 'types/docs'
+import { useQuery } from 'react-query'
+import { getVersionDocs } from 'util/api/docs'
 
 const VersionDetail = () => {
 	const router = useParams()
-	const [docs, setDocs] = React.useState<Docs>()
+	const [docs, setDocs] = React.useState({
+		title: '',
+		docsType: '',
+	})
 	const [versionDocs, setVersionDocs] = React.useState({
 		contents: '',
 		nickName: '',
@@ -20,39 +23,28 @@ const VersionDetail = () => {
 	const [nextContents, setNextContents] = React.useState('')
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	const getFindDetailVersionDocs = async () => {
-		try {
-			const res = await axios.get(`/docs/find/${router.title}/version`)
-			const Array = res.data.versionDocsResponseDto.reverse()
+	useQuery('versionDocs', () => getVersionDocs(router.title as string), {
+		onSuccess: (data) => {
+			const Array = data.versionDocsResponseDto.reverse()
+			setDocs({
+				title: data.title,
+				docsType: data.docsType,
+			})
 			setVersionDocs(Array[router.versionId || 0])
-			const a = Array[router.versionId || 0].contents,
-				b = Array[parseInt(router.versionId as string) + 1 || 1].contents
+
+			const a = Array[router.versionId || 0].contents
+			const b = Array[parseInt(router.versionId as string) + 1 || 1].contents
+
 			setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
 			setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
 			setIsLoad(true)
-		} catch (err) {
+		},
+		onError: (err) => {
 			console.log(err)
-			return
-		}
-	}
+			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+		},
+	})
 
-	const getDocsInfo = async () => {
-		try {
-			const res = await axios.get(`/docs/find/title/${router.title}`)
-			setDocs(res.data)
-			getFindDetailVersionDocs()
-		} catch (err) {
-			if (err instanceof axios.AxiosError) {
-				console.log(err)
-				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-			}
-		}
-	}
-
-	React.useEffect(() => {
-		getDocsInfo()
-		// eslint-disable-next-line
-	}, [router.title, router.versionId])
 	return (
 		<div>
 			<C.Header />

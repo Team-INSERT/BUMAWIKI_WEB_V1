@@ -7,6 +7,8 @@ import axios from 'axios'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
+import { MutationFunction, useMutation, useQuery } from 'react-query'
+import { getDocs, updateDocs } from 'util/api/docs'
 
 interface reducerAction {
 	name: string
@@ -30,6 +32,25 @@ const Docs = () => {
 	const [files, setFiles] = React.useState<any>([])
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
+
+	const { mutate } = useMutation(updateDocs as MutationFunction, {
+		onSuccess: () => {
+			alert('문서가 편집되었습니다!')
+			navigate(`/docs/${router.title}`)
+		},
+		onError: (err) => {
+			console.log(err)
+			if (err instanceof axios.AxiosError && err.response !== undefined) {
+				if (err.response.status === 403) {
+					if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
+					if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
+					else alert('로그인 후 사용 가능한 서비스입니다.')
+				} else {
+					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
+				}
+			}
+		},
+	})
 
 	const [state, dispatch] = React.useReducer(reducer, {
 		Color: '',
@@ -59,6 +80,12 @@ const Docs = () => {
 			alert('로그인 후 이용 가능한 서비스입니다.')
 			return
 		}
+
+		if (!contents.length) {
+			alert('문서가 비어있습니다!')
+			return
+		}
+
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -71,54 +98,21 @@ const Docs = () => {
 		for (let i = files.length - 1; i >= 0; i--) {
 			data.append('files', files[i], files[i].name)
 		}
-		if (contents.length === 0) {
-			alert('문서가 비어있습니다!')
-			return
-		}
-		try {
-			await axios.put(`docs/update/${router.title}`, data, {
-				headers: {
-					'Content-Type': `multipart/form-data`,
-					Authorization: FC.getCookie('authorization'),
-				},
-			})
-			alert('문서가 편집되었습니다!')
-			navigate(`/docs/${router.title}`)
-		} catch (err) {
+
+		mutate({ data, title: router.title })
+	}
+
+	useQuery('docs', () => getDocs(router.title as string), {
+		onSuccess: (data) => {
+			setContents(data.contents)
+			setTitle(data.title)
+		},
+		onError: (err) => {
+			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			console.log(err)
-			if (err instanceof axios.AxiosError && err.response !== undefined) {
-				if (err.response.status === 403) {
-					if (err.response.data.message === 'Cannot Change Your Docs') {
-						alert('자기자신의 문서는 변경할 수 없습니다.')
-					} else if (err.response.data.error === 'Forbidden') {
-						alert('읽기전용 유저입니다.')
-					} else {
-						alert('로그인 후 사용 가능한 서비스입니다.')
-					}
-				} else {
-					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
-				}
-			}
-		}
-	}
+		},
+	})
 
-	const getDocsInfo = async () => {
-		try {
-			const res = await axios.get(`/docs/find/title/${router.title}`)
-			setContents(res.data.contents)
-			setTitle(res.data.title)
-		} catch (err) {
-			if (err instanceof axios.AxiosError) {
-				console.log(err)
-				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-			}
-		}
-	}
-
-	React.useEffect(() => {
-		getDocsInfo()
-		// eslint-disable-next-line
-	}, [router.title])
 	return (
 		<>
 			<C.Header />

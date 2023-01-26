@@ -3,29 +3,27 @@ import * as S from './style'
 import * as FC from 'util/function/'
 
 import React from 'react'
-import axios from 'axios'
 import Contributors from 'types/contributors'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
+import { useMutation, useQueryClient } from 'react-query'
+import { logoutUser } from 'util/api/docs'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
+	const queryClient = useQueryClient()
 
-	const onClickLogOut = async () => {
-		try {
-			await axios.delete('/auth/bsm/logout', {
-				data: {
-					refresh_token: FC.getCookie('refresh_token'),
-				},
-			})
+	const { mutate } = useMutation(logoutUser, {
+		onSuccess: () => {
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			window.location.reload()
-		} catch (err) {
+			queryClient.invalidateQueries('user')
+		},
+		onError: (err) => {
 			alert('로그아웃에 실패했습니다.')
 			console.log(err)
-		}
-	}
+		},
+	})
 
 	return (
 		<>
@@ -50,7 +48,7 @@ const MyPage = () => {
 											이 유저의 아이디는 '{user.id}'이며, 이메일은 {user.email}이다.
 										</span>
 										<br />
-										<S.LogoutText onClick={onClickLogOut}>로그아웃</S.LogoutText>
+										<S.LogoutText onClick={() => mutate()}>로그아웃</S.LogoutText>
 									</>
 								) : (
 									<span>이 유저는 로그인을 하지 않은 유저다. 로그인을 하면 문서를 생성하고 편집할 수 있다.</span>

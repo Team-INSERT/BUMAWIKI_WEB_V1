@@ -1,24 +1,34 @@
 import * as R from 'react-router-dom'
-import * as FC from 'util/function/'
 import * as S from './style'
 
 import React from 'react'
-import axios from 'axios'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
-import { MutationFunction, useMutation, useQuery, useQueryClient } from 'react-query'
+import { MutationFunction, useMutation, useQueryClient } from 'react-query'
+import { deleteDocs, updateDocsTitle } from 'util/api/docs'
 
 const DetailBtn = () => {
 	const router = R.useParams()
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
+	const [docsName, setDocsName] = React.useState('')
 	const queryClient = useQueryClient()
 
-	const [docsName, setDocsName] = React.useState('')
-	const { data } = useQuery('docs', () => axios.get(`/docs/find/id/${router.title}`))
-	const { mutate } = useMutation(() => axios.put(`/docs/update/title/${router.title}`), {
+	const updateDocsTitleMutation = useMutation(updateDocsTitle as MutationFunction, {
 		onSuccess: () => {
-			queryClient.invalidateQueries('getManagePost')
+			alert('문서 이름이 변경되었습니다!')
+			queryClient.invalidateQueries('docs')
+		},
+		onError: (err) => {
+			alert('오류가 발생했습니다.')
+			console.log(err)
+		},
+	})
+
+	const deleteDocsTitleMutation = useMutation(deleteDocs as MutationFunction, {
+		onSuccess: () => {
+			alert('문서가 삭제되었습니다!')
+			navigate('/')
 		},
 		onError: (err) => {
 			alert('오류가 발생했습니다.')
@@ -31,43 +41,20 @@ const DetailBtn = () => {
 			alert('내용이 없습니다.')
 			return
 		}
-
-		try {
-			const res = await axios.put(
-				`/docs/update/title/${router.title}`,
-				{ title: docsName },
-				{
-					headers: {
-						Authorization: FC.getCookie('authorization'),
-					},
-				}
-			)
-			alert('문서 수정 완료')
-			navigate(`/docs/${res.data.title}`)
-		} catch (err) {
-			alert('문서 이름 변경 도중 오류가 발생했습니다.')
-			console.log(err)
-		}
+		updateDocsTitleMutation.mutate({
+			title: router.title,
+			docsName,
+		})
 	}
 
 	const onClickDeleteDocs = async () => {
-		try {
-			axios.delete(`/docs/delete/${router.title}`, {
-				headers: {
-					Autsorization: FC.getCookie('authorization'),
-				},
+		const result = window.confirm('정말 삭제하시겠습니까?')
+		if (result) {
+			deleteDocsTitleMutation.mutate({
+				title: router.title,
 			})
-			alert('문서가 삭제되었습니다!')
-			navigate('/')
-		} catch (err) {
-			alert('문서 삭제 도중 오류가 발생했습니다.')
-			console.log(err)
 		}
 	}
-
-	React.useEffect(() => {
-		// eslint-disable-next-line
-	}, [router])
 
 	return (
 		<>
@@ -90,12 +77,12 @@ const DetailBtn = () => {
 					) : (
 						''
 					)}
-					<S.DetailLinkWrap to={`/update/${data?.data.title}`}>
+					<S.DetailLinkWrap to={`/update/${router.title}`}>
 						<S.DetailButton>
 							<S.DetailText>편집</S.DetailText>
 						</S.DetailButton>
 					</S.DetailLinkWrap>
-					<S.DetailLinkWrap to={`/version/${data?.data.title}`}>
+					<S.DetailLinkWrap to={`/version/${router.title}`}>
 						<S.DetailButton>
 							<S.DetailText>기록</S.DetailText>
 						</S.DetailButton>

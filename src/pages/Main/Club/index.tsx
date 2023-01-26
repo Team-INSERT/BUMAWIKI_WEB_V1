@@ -3,31 +3,26 @@ import * as C from 'allFiles'
 import * as S from './style'
 import axios from 'axios'
 import Docs from 'types/docs'
+import { useQuery } from 'react-query'
+import { getBaseDocs } from 'util/api/docs'
 
 const Club = () => {
 	const [clubs, setClubs] = React.useState([])
 	const [freeClubs, setFreeClubs] = React.useState([])
 
-	const getClubDocs = async () => {
-		try {
-			const club = await axios.get(`/docs/club`)
-			const clubData = club.data.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
-			setClubs(clubData)
-
-			const freeClub = await axios.get(`/docs/freeClub`)
-			const freeClubData = freeClub.data.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
+	useQuery('getClub', () => getBaseDocs('club'), {
+		onSuccess: async (res) => {
+			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
+			setClubs(data)
+			const freeClub = (await axios.get(`/docs/freeClub`)).data
+			const freeClubData = freeClub.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setFreeClubs(freeClubData)
-		} catch (err) {
-			if (err instanceof axios.AxiosError) {
-				console.log(err)
-				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-			}
-		}
-	}
-
-	React.useEffect(() => {
-		getClubDocs()
-	}, [])
+		},
+		onError: (err) => {
+			console.log(err)
+			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+		},
+	})
 
 	return (
 		<div>

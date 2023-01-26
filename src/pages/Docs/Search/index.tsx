@@ -5,7 +5,8 @@ import * as FC from 'util/function/'
 
 import Docs from 'types/docs'
 import React from 'react'
-import axios from 'axios'
+import { useQuery } from 'react-query'
+import { findDocs } from 'util/api/docs'
 
 const Search = () => {
 	const router = R.useParams()
@@ -13,22 +14,18 @@ const Search = () => {
 	const [result, setResult] = React.useState([])
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	const getFindAllDocsInfo = async () => {
-		try {
-			const res = await axios.get(`/docs/find/all/title/${router.result}`)
-			if (res.data.length === 1) navigate(`/docs/${res.data[0].title}`)
-			setResult(res.data)
+	useQuery('findDocs', () => findDocs(router.title as string), {
+		onSuccess: (data) => {
+			if (data.length === 1) navigate(`/docs/${data[0].title}`)
+			setResult(data)
 			setIsLoad(true)
-		} catch (err) {
+		},
+		onError: (err) => {
 			alert('검색 도중 오류가 발생했습니다.')
+			navigate('/')
 			console.log(err)
-		}
-	}
-
-	React.useEffect(() => {
-		getFindAllDocsInfo()
-		// eslint-disable-next-line
-	}, [router.result])
+		},
+	})
 
 	return (
 		<>
@@ -36,7 +33,7 @@ const Search = () => {
 			<S.SearchWrap>
 				<C.Board>
 					<S.SearchTitleWrap>
-						<span>'{router.result}' 검색결과</span>
+						<span>"{router.result}" 검색결과</span>
 					</S.SearchTitleWrap>
 					<S.Classify>
 						<C.Classify>검색</C.Classify>
@@ -56,7 +53,7 @@ const Search = () => {
 								</>
 							) : (
 								<div>
-									<span>아직 '{router.result}'라는 문서는 없습니다.</span>
+									<span>아직 "{router.result}" 문서는 없습니다.</span>
 									<br />
 									<br />
 									<R.Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>

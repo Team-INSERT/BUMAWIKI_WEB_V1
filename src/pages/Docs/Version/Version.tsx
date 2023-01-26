@@ -3,31 +3,27 @@ import * as FC from 'util/function/'
 import * as S from '../Doc/style'
 import * as V from './style'
 
-import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { getVersionDocs } from 'util/api/docs'
 
 const Version = () => {
 	const router = useParams()
 	const [version, setVersion] = React.useState([])
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	const getFindVersionDocs = async () => {
-		try {
-			const res = await axios.get(`docs/find/${router.title}/version`)
-			setVersion(res.data.versionDocsResponseDto.reverse())
-			console.log(res.data.versionDocsResponseDto)
+	useQuery('versionDocs', () => getVersionDocs(router.title as string), {
+		onSuccess: (data) => {
+			setVersion(data.versionDocsResponseDto.reverse())
 			setIsLoad(true)
-		} catch (err) {
+		},
+		onError: (err) => {
 			console.log(err)
 			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-		}
-	}
+		},
+	})
 
-	React.useEffect(() => {
-		getFindVersionDocs()
-		// eslint-disable-next-line
-	}, [router.title])
 	return (
 		<>
 			<C.Header />

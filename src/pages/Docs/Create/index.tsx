@@ -2,11 +2,12 @@ import * as C from 'allFiles'
 import * as S from './style'
 import * as FC from 'util/function/'
 
-import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
+import { useMutation } from 'react-query'
+import { createDocs } from 'util/api/docs'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -17,6 +18,17 @@ const Docs = () => {
 	const [contents, setContents] = React.useState<string>('')
 	const [enroll, setEnroll] = React.useState<number>()
 	const [files, setFiles] = React.useState<any>()
+
+	const { mutate } = useMutation(createDocs, {
+		onSuccess: (data) => {
+			alert('문서가 생성되었습니다!')
+			navigate(`/docs/${data.id}`)
+		},
+		onError: (err) => {
+			alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
+			console.log(err)
+		},
+	})
 
 	const onClickCreateDocs = async () => {
 		if (!user.isLogin) {
@@ -57,21 +69,7 @@ const Docs = () => {
 			data.append('files', files[i], files[i].name)
 		}
 
-		try {
-			const res = await axios.post('/docs/create', data, {
-				headers: {
-					'Content-Type': `multipart/form-data`,
-					Authorization: FC.getCookie('authorization'),
-					refresh_token: FC.getCookie('refresh_token'),
-				},
-			})
-			alert('문서가 생성되었습니다!')
-			navigate(`/docs/${res.data.id}`)
-		} catch (err) {
-			console.log(err)
-			alert('오류가 발생했습니다.')
-			return
-		}
+		mutate({ data })
 	}
 
 	return (

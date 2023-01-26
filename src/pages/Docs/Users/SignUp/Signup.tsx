@@ -1,36 +1,28 @@
 import * as FC from 'util/function/'
 
-import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { loginUser } from 'util/api/docs'
 
 const Signup = () => {
 	const navigate = useNavigate()
 
-	const getSignUpData = async () => {
-		try {
-			const res = await axios.post(
-				'/auth/oauth/bsm',
-				{},
-				{
-					headers: {
-						authCode: window.location.search.replace('?code=', ''),
-					},
-				}
-			)
-			document.cookie = `authorization=${res.data.accessToken};`
-			document.cookie = `refresh_token=${res.data.refreshToken};expires=${FC.dateUTCParser(res.data.expiredAt)};path=/;`
+	const { mutate } = useMutation(() => loginUser(window.location.search.replace('?code=', '')), {
+		onSuccess: (data) => {
+			document.cookie = `authorization=${data.accessToken};`
+			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`
 			navigate('/')
-			window.location.reload()
-		} catch (err) {
+		},
+		onError: (err) => {
 			console.log(err)
 			navigate('/')
 			alert('로그인 도중 오류가 발생했습니다.')
-		}
-	}
+		},
+	})
 
 	React.useEffect(() => {
-		getSignUpData()
+		mutate()
 		// eslint-disable-next-line
 	}, [])
 

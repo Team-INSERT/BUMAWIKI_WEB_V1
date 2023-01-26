@@ -4,8 +4,9 @@ import * as S from './style'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import Contributors from 'types/contributors'
+import { useQuery } from 'react-query'
+import { getOtherUser } from 'util/api/docs'
 
 const MyPage = () => {
 	const [user, setUser] = React.useState({
@@ -15,22 +16,15 @@ const MyPage = () => {
 		contributeDocs: [],
 	})
 	const router = useParams()
-
-	const getUserInfo = async () => {
-		try {
-			const res = await axios.get(`/user/id/${router.id}`)
-			setUser({ ...res.data, contributeDocs: res.data.contributeDocs.reverse() })
-		} catch (err) {
+	useQuery('otherUser', () => getOtherUser(parseInt(router.id as string)), {
+		onSuccess: (data) => {
+			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
+		},
+		onError: (err) => {
 			alert('유저 정보를 불러오는 도중 오류가 발생했습니다.')
 			console.log(err)
-			return
-		}
-	}
-
-	React.useLayoutEffect(() => {
-		getUserInfo()
-		// eslint-disable-next-line
-	}, [router.id])
+		},
+	})
 
 	return (
 		<div>
@@ -57,7 +51,7 @@ const MyPage = () => {
 								<S.ContributeList>
 									{user.contributeDocs.map((docs: Contributors, index) => (
 										<span key={index}>
-											문서명 :{' '}
+											문서명 :&nbsp;
 											<S.ContributeLink to={`/docs/${docs.docsId}`}>
 												{docs.title}[{docs.docsId}]
 											</S.ContributeLink>
