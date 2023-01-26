@@ -1,17 +1,17 @@
 import * as C from 'allFiles'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as S from './style'
+import * as api from 'utils/api/getDocs'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { getDocs } from 'util/api/docs'
 
 const Docs = () => {
 	const router = useParams()
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	const { data } = useQuery('docs', () => getDocs(router.title as string), {
+	const { data } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: () => setIsLoad(true),
 		onError: (err) => {
 			alert('오류가 발생하여 문서를 불러올 수 없습니다.')

@@ -1,16 +1,17 @@
-import React from 'react'
 import * as C from 'allFiles'
 import * as S from './style'
+import * as api from 'utils/api/getDocs'
+
+import React from 'react'
 import axios from 'axios'
 import Docs from 'types/docs'
 import { useQuery } from 'react-query'
-import { getBaseDocs } from 'util/api/docs'
 
 const Club = () => {
 	const [clubs, setClubs] = React.useState([])
 	const [freeClubs, setFreeClubs] = React.useState([])
 
-	useQuery('getClub', () => getBaseDocs('club'), {
+	useQuery('getClub', () => api.getBaseDocs('club'), {
 		onSuccess: async (res) => {
 			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setClubs(data)

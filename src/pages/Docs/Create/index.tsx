@@ -1,13 +1,13 @@
 import * as C from 'allFiles'
 import * as S from './style'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
+import * as api from 'utils/api/editDocs'
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
 import { useMutation } from 'react-query'
-import { createDocs } from 'util/api/docs'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -19,7 +19,7 @@ const Docs = () => {
 	const [enroll, setEnroll] = React.useState<number>()
 	const [files, setFiles] = React.useState<any>()
 
-	const { mutate } = useMutation(createDocs, {
+	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
 			alert('문서가 생성되었습니다!')
 			navigate(`/docs/${data.id}`)

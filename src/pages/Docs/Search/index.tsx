@@ -1,12 +1,12 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
 import * as S from './style'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
+import * as api from 'utils/api/getDocs'
 
 import Docs from 'types/docs'
 import React from 'react'
 import { useQuery } from 'react-query'
-import { findDocs } from 'util/api/docs'
 
 const Search = () => {
 	const router = R.useParams()
@@ -14,7 +14,7 @@ const Search = () => {
 	const [result, setResult] = React.useState([])
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	useQuery('findDocs', () => findDocs(router.title as string), {
+	useQuery('findDocs', () => api.findDocs(router.title as string), {
 		onSuccess: (data) => {
 			if (data.length === 1) navigate(`/docs/${data[0].title}`)
 			setResult(data)

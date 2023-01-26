@@ -1,12 +1,12 @@
 import * as C from 'allFiles'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as S from './style'
+import * as api from 'utils/api/user'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Contributors from 'types/contributors'
 import { useQuery } from 'react-query'
-import { getOtherUser } from 'util/api/docs'
 
 const MyPage = () => {
 	const [user, setUser] = React.useState({
@@ -16,7 +16,7 @@ const MyPage = () => {
 		contributeDocs: [],
 	})
 	const router = useParams()
-	useQuery('otherUser', () => getOtherUser(parseInt(router.id as string)), {
+	useQuery('otherUser', () => api.getOtherUser(parseInt(router.id as string)), {
 		onSuccess: (data) => {
 			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
 		},

@@ -1,4 +1,4 @@
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as S from './style'
 
 import React from 'react'

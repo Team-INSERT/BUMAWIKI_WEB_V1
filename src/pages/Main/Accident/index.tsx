@@ -1,16 +1,17 @@
-import React from 'react'
 import * as C from 'allFiles'
 import * as S from './style'
+import * as api from 'utils/api/getDocs'
+
+import React from 'react'
 import Docs from 'types/docs'
 import { useQuery } from 'react-query'
-import { getBaseDocs } from 'util/api/docs'
 
 const Accident = () => {
 	const [accidents, setAccidents] = React.useState([])
 	const [allDate] = React.useState<number[]>([])
 	const nowDate = new Date()
 
-	useQuery('getAccident', () => getBaseDocs('accident'), {
+	useQuery('getAccident', () => api.getBaseDocs('accident'), {
 		onSuccess: (res) => {
 			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setAccidents(data)

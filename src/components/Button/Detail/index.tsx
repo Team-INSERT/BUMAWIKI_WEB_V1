@@ -1,11 +1,11 @@
 import * as R from 'react-router-dom'
 import * as S from './style'
+import * as api from 'utils/api/editDocs'
 
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
 import { MutationFunction, useMutation, useQueryClient } from 'react-query'
-import { deleteDocs, updateDocsTitle } from 'util/api/docs'
 
 const DetailBtn = () => {
 	const router = R.useParams()
@@ -14,7 +14,7 @@ const DetailBtn = () => {
 	const [docsName, setDocsName] = React.useState('')
 	const queryClient = useQueryClient()
 
-	const updateDocsTitleMutation = useMutation(updateDocsTitle as MutationFunction, {
+	const updateDocsTitleMutation = useMutation(api.updateDocsTitle as MutationFunction, {
 		onSuccess: () => {
 			alert('문서 이름이 변경되었습니다!')
 			queryClient.invalidateQueries('docs')
@@ -25,7 +25,7 @@ const DetailBtn = () => {
 		},
 	})
 
-	const deleteDocsTitleMutation = useMutation(deleteDocs as MutationFunction, {
+	const deleteDocsTitleMutation = useMutation(api.deleteDocs as MutationFunction, {
 		onSuccess: () => {
 			alert('문서가 삭제되었습니다!')
 			navigate('/')

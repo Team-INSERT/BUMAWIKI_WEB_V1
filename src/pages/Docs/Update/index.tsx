@@ -1,14 +1,15 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as S from './style'
+import * as getApi from 'utils/api/getDocs'
+import * as editApi from 'utils/api/editDocs'
 
 import axios from 'axios'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
-import { getDocs, updateDocs } from 'util/api/docs'
 
 interface reducerAction {
 	name: string
@@ -33,7 +34,7 @@ const Docs = () => {
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
 
-	const { mutate } = useMutation(updateDocs as MutationFunction, {
+	const { mutate } = useMutation(editApi.updateDocs as MutationFunction, {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
@@ -102,7 +103,7 @@ const Docs = () => {
 		mutate({ data, title: router.title })
 	}
 
-	useQuery('docs', () => getDocs(router.title as string), {
+	useQuery('docs', () => getApi.getDocs(router.title as string), {
 		onSuccess: (data) => {
 			setContents(data.contents)
 			setTitle(data.title)

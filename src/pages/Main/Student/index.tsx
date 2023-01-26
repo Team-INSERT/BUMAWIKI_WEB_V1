@@ -1,17 +1,17 @@
 import * as C from 'allFiles'
 import * as S from './style'
+import * as api from 'utils/api/getDocs'
 
 import React from 'react'
 import Docs from 'types/docs'
 import { useQuery } from 'react-query'
-import { getBaseDocs } from 'util/api/docs'
 
 const Student = () => {
 	const [students, setStudents] = React.useState([])
 	const [allDate] = React.useState<number[]>([])
 	const nowDate = new Date()
 
-	useQuery('getStudent', () => getBaseDocs('student'), {
+	useQuery('getStudent', () => api.getBaseDocs('student'), {
 		onSuccess: (res) => {
 			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setStudents(data)

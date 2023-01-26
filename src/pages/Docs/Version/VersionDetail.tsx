@@ -1,11 +1,11 @@
 import * as C from 'allFiles'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as S from '../Doc/style'
+import * as api from 'utils/api/getDocs'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { getVersionDocs } from 'util/api/docs'
 
 const VersionDetail = () => {
 	const router = useParams()
@@ -23,7 +23,7 @@ const VersionDetail = () => {
 	const [nextContents, setNextContents] = React.useState('')
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	useQuery('versionDocs', () => getVersionDocs(router.title as string), {
+	useQuery('versionDocs', () => api.getVersionDocs(router.title as string), {
 		onSuccess: (data) => {
 			const Array = data.versionDocsResponseDto.reverse()
 			setDocs({

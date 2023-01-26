@@ -1,14 +1,14 @@
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
+import * as api from 'utils/api/user'
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
-import { loginUser } from 'util/api/docs'
 
 const Signup = () => {
 	const navigate = useNavigate()
 
-	const { mutate } = useMutation(() => loginUser(window.location.search.replace('?code=', '')), {
+	const { mutate } = useMutation(() => api.loginUser(window.location.search.replace('?code=', '')), {
 		onSuccess: (data) => {
 			document.cookie = `authorization=${data.accessToken};`
 			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`

@@ -1,13 +1,13 @@
 import * as S from './style'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
+import * as api from 'utils/api/getDocs'
 
 import React from 'react'
 import Docs from 'types/docs'
 import { useQuery } from 'react-query'
-import { getLastModifiedDocs } from 'util/api/docs'
 
 const Aside = () => {
-	const { data } = useQuery('lastModifiedDocs', getLastModifiedDocs, {
+	const { data } = useQuery('lastModifiedDocs', api.getLastModifiedDocs, {
 		onError: (err) => {
 			console.log(err)
 		},

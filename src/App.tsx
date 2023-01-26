@@ -1,5 +1,6 @@
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
 import * as R from './allFiles'
+import * as api from 'utils/api/user'
 
 import axios from 'axios'
 import React from 'react'
@@ -7,14 +8,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { RecoilRoot, useSetRecoilState } from 'recoil'
 import userState from 'atom/userState'
 import { useQuery } from 'react-query'
-import { getUser } from 'util/api/docs'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	useQuery('user', getUser, {
+	useQuery('user', api.getUser, {
 		onSuccess: (data) => {
 			setUser({
 				...data,

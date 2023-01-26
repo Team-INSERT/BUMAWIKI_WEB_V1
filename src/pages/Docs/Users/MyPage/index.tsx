@@ -1,19 +1,19 @@
 import * as C from 'allFiles'
 import * as S from './style'
-import * as FC from 'util/function/'
+import * as FC from 'utils/function'
+import * as api from 'utils/api/user'
 
 import React from 'react'
 import Contributors from 'types/contributors'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
 import { useMutation, useQueryClient } from 'react-query'
-import { logoutUser } from 'util/api/docs'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
 	const queryClient = useQueryClient()
 
-	const { mutate } = useMutation(logoutUser, {
+	const { mutate } = useMutation(api.logoutUser, {
 		onSuccess: () => {
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
