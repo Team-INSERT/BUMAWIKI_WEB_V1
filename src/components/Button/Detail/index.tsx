@@ -1,36 +1,30 @@
 import * as R from 'react-router-dom'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 import * as S from './style'
 
 import React from 'react'
 import axios from 'axios'
-import Docs from 'types/docs'
 import { useRecoilValue } from 'recoil'
 import userState from 'atom/userState'
+import { MutationFunction, useMutation, useQuery, useQueryClient } from 'react-query'
 
 const DetailBtn = () => {
 	const router = R.useParams()
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
+	const queryClient = useQueryClient()
 
-	const [docs, setDocs] = React.useState<Docs>()
 	const [docsName, setDocsName] = React.useState('')
-
-	const getDocsInfo = async () => {
-		try {
-			const res = await axios.get(`/docs/find/id/${router.title}`)
-			setDocs({
-				...res.data,
-				lastModifiedAt: FC.dateParser(res.data.lastModifiedAt),
-			})
-		} catch (err) {
-			if (err instanceof axios.AxiosError) {
-				alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-				console.log(err)
-				return
-			}
-		}
-	}
+	const { data } = useQuery('docs', () => axios.get(`/docs/find/id/${router.title}`))
+	const { mutate } = useMutation(() => axios.put(`/docs/update/title/${router.title}`), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('getManagePost')
+		},
+		onError: (err) => {
+			alert('오류가 발생했습니다.')
+			console.log(err)
+		},
+	})
 
 	const onClickChangeDocsName = async () => {
 		if (!docsName.length) {
@@ -72,7 +66,6 @@ const DetailBtn = () => {
 	}
 
 	React.useEffect(() => {
-		getDocsInfo()
 		// eslint-disable-next-line
 	}, [router])
 
@@ -97,12 +90,12 @@ const DetailBtn = () => {
 					) : (
 						''
 					)}
-					<S.DetailLinkWrap to={`/update/${docs?.title}`}>
+					<S.DetailLinkWrap to={`/update/${data?.data.title}`}>
 						<S.DetailButton>
 							<S.DetailText>편집</S.DetailText>
 						</S.DetailButton>
 					</S.DetailLinkWrap>
-					<S.DetailLinkWrap to={`/version/${docs?.title}`}>
+					<S.DetailLinkWrap to={`/version/${data?.data.title}`}>
 						<S.DetailButton>
 							<S.DetailText>기록</S.DetailText>
 						</S.DetailButton>

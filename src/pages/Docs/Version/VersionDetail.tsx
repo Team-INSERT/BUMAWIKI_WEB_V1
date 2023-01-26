@@ -1,5 +1,5 @@
 import * as C from 'allFiles'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 import * as S from '../Doc/style'
 
 import axios from 'axios'

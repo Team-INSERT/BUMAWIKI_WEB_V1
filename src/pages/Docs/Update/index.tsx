@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 import * as S from './style'
 
 import axios from 'axios'

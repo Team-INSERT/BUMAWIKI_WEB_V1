@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
 import * as S from './style'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 
 import axios from 'axios'
 import React from 'react'

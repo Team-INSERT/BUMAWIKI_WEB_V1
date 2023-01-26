@@ -1,7 +1,7 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
 import * as S from './style'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 
 import Docs from 'types/docs'
 import React from 'react'

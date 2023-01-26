@@ -1,32 +1,24 @@
 import * as S from './style'
-import * as FC from 'util/'
+import * as FC from 'util/function/'
 
 import axios from 'axios'
 import React from 'react'
 import Docs from 'types/docs'
+import { useQuery } from 'react-query'
 
 const Aside = () => {
-	const [lastModifiedDocs, setLastModifiedDocs] = React.useState([])
-
-	const axiosGetModifiedDocs = async () => {
-		try {
-			const res = await axios.get('/docs/find/modified')
-			setLastModifiedDocs(res.data)
-		} catch (err) {
+	const { data } = useQuery('lastModifiedDocs', () => axios.get('/docs/find/modified'), {
+		onError: (err) => {
 			console.log(err)
-		}
-	}
-
-	React.useEffect(() => {
-		axiosGetModifiedDocs()
-	}, [])
+		},
+	})
 
 	return (
 		<S.AsideWrap>
 			<S.AsideTitleWrap>
 				<S.AsideTitle>최근 수정된 문서</S.AsideTitle>
 			</S.AsideTitleWrap>
-			{lastModifiedDocs.map((docs: Docs) => (
+			{data?.data.map((docs: Docs) => (
 				<S.AsideDocWrap key={docs.id}>
 					<S.AsideList to={`/docs/${docs.title}`}>{FC.asideFormat(docs.title, docs.docsType)}</S.AsideList>
 					<S.AsideLastModified>&nbsp;― {FC.getLastDate(docs.lastModifiedAt)}</S.AsideLastModified>

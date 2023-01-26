@@ -7,17 +7,5 @@ import getCookie from './getCookie'
 import getLastDate from './getLastDate'
 import makeTable from './makeTable'
 import typeEditor from './typeEditor'
-import useDidMountEffect from './useDidMountEffect'
 
-export {
-	asideFormat,
-	autoComplete,
-	dateParser,
-	dateUTCParser,
-	documentation,
-	getCookie,
-	getLastDate,
-	makeTable,
-	typeEditor,
-	useDidMountEffect,
-}
+export { asideFormat, autoComplete, dateParser, dateUTCParser, documentation, getCookie, getLastDate, makeTable, typeEditor }
