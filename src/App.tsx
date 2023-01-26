@@ -6,40 +6,35 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { RecoilRoot, useSetRecoilState } from 'recoil'
 import userState from 'atom/userState'
+import { useQuery } from 'react-query'
+import { getUser } from 'util/api/docs'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	React.useEffect(() => {
-		axios
-			.get('/user', {
-				headers: {
-					Authorization: FC.getCookie('authorization'),
-				},
+	useQuery('user', getUser, {
+		onSuccess: (data) => {
+			setUser({
+				...data,
+				contributeDocs: data.contributeDocs.reverse(),
+				isLogin: true,
 			})
-			.then((res) => {
-				setUser({
-					...res.data,
-					contributeDocs: res.data.contributeDocs.reverse(),
-					isLogin: true,
-				})
-			})
-			.catch((err) => {
-				document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-				if (err instanceof axios.AxiosError && err?.response?.status === 403) {
-					axios
-						.put('/auth/refresh/access', {
-							refresh_token: FC.getCookie('refresh_token'),
-						})
-						.then((res) => {
-							document.cookie = `authorization=${res.data.accessToken};`
-							window.location.reload()
-						})
+		},
+		onError: (err) => {
+			document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
+			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
+				try {
+					axios.put('/auth/refresh/access', {
+						refresh_token: FC.getCookie('refresh_token'),
+					})
+				} catch (err) {
+					console.log(err)
 				}
-			})
-	}, [])
+			}
+		},
+	})
 
 	return (
 		<RecoilRoot>
