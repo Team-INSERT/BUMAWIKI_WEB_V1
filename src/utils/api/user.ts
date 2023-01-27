@@ -34,3 +34,9 @@ export const getUser = async () => {
 		})
 	).data
 }
+
+export const getRefreshToken = async () => {
+	return await axios.put('/auth/refresh/access', {
+		refresh_token: FC.getCookie('refresh_token'),
+	})
+}

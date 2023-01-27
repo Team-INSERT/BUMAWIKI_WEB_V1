@@ -1,18 +1,21 @@
-import * as FC from 'utils/function'
-import * as R from './allFiles'
 import * as api from 'utils/api/user'
+import * as R from './allFiles'
 
+import userState from 'atom/userState'
 import axios from 'axios'
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useMutation, useQuery } from 'react-query'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { RecoilRoot, useSetRecoilState } from 'recoil'
-import userState from 'atom/userState'
-import { useQuery } from 'react-query'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
+
+	const { mutate } = useMutation(api.getRefreshToken, {
+		onError: (err) => console.log(err),
+	})
 
 	useQuery('user', api.getUser, {
 		onSuccess: (data) => {
@@ -24,15 +27,7 @@ const App = () => {
 		},
 		onError: (err) => {
 			document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
-				try {
-					axios.put('/auth/refresh/access', {
-						refresh_token: FC.getCookie('refresh_token'),
-					})
-				} catch (err) {
-					console.log(err)
-				}
-			}
+			if (err instanceof axios.AxiosError && err?.response?.status === 403) mutate()
 		},
 	})
 
