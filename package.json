@@ -64,6 +64,5 @@
 			"import": "./build/release.js",
 			"types": "./build/release.d.ts"
 		}
-	},
-	"homepage": "http://106.252.133.22"
+	}
 }
