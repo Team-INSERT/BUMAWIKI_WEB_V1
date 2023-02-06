@@ -30,7 +30,10 @@
 		"start": "craco start",
 		"build": "react-scripts build",
 		"test": "jest",
-		"eject": "craco eject"
+		"eject": "craco eject",
+		"asbuild:debug": "asc assembly/index.ts --target debug",
+		"asbuild:release": "asc assembly/index.ts --target release",
+		"asbuild": "npm run asbuild:debug && npm run asbuild:release"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -58,5 +61,13 @@
 		"jest": "^29.4.0",
 		"prettier": "^2.8.3",
 		"ts-jest": "^29.0.5"
-	}
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./build/release.js",
+			"types": "./build/release.d.ts"
+		}
+	},
+	"homepage": "http://106.252.133.22"
 }
