@@ -1,20 +1,4 @@
-// @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
 import styled from 'styled-components'
-
-// @mixin titleline {
-//     width: 90%;
-//     height: fit-content;
-//     display: flex;
-//     flex-direction: column;
-// }
-
-// @mixin description {
-//     margin: 30px 0 0 50px;
-//     display: flex;
-//     align-items: center;
-//     font-weight: 500;
-// }
 
 export const DocsWrap = styled.div`
 	display: flex;

@@ -8,6 +8,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
+import onKeyDownUseTab from 'utils/function/onKeyDownUseTab'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -134,7 +135,11 @@ const Docs = () => {
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
-							<S.CreateTableTRTextarea onChange={(e) => setContents(FC.autoComplete(contents, e))} value={contents} />
+							<S.CreateTableTRTextarea
+								onKeyDown={(e) => onKeyDownUseTab(e)}
+								onChange={(e) => setContents(FC.autoComplete(contents, e))}
+								value={contents}
+							/>
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
