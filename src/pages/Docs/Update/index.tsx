@@ -2,11 +2,15 @@ import * as C from 'allFiles'
 import * as R from 'react-router-dom'
 import * as FC from 'utils/function'
 import * as S from './style'
+import * as getApi from 'utils/api/getDocs'
+import * as editApi from 'utils/api/editDocs'
 
 import userState from 'atom/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import onKeyDownUseTab from 'utils/function/onKeyDownUseTab'
+import { MutationFunction, useMutation, useQuery } from 'react-query'
+import axios from 'axios'
 
 interface reducerAction {
 	name: string
@@ -32,24 +36,24 @@ const Docs = () => {
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
 
-	// const { mutate } = useMutation(editApi.updateDocs as MutationFunction, {
-	// 	onSuccess: () => {
-	// 		alert('문서가 편집되었습니다!')
-	// 		navigate(`/docs/${router.title}`)
-	// 	},
-	// 	onError: (err) => {
-	// 		console.log(err)
-	// 		if (err instanceof axios.AxiosError && err.response !== undefined) {
-	// 			if (err.response.status === 403) {
-	// 				if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
-	// 				if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
-	// 				else alert('로그인 후 사용 가능한 서비스입니다.')
-	// 			} else {
-	// 				alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
-	// 			}
-	// 		}
-	// 	},
-	// })
+	const { mutate } = useMutation(editApi.updateDocs as MutationFunction, {
+		onSuccess: () => {
+			alert('문서가 편집되었습니다!')
+			navigate(`/docs/${router.title}`)
+		},
+		onError: (err) => {
+			console.log(err)
+			if (err instanceof axios.AxiosError && err.response !== undefined) {
+				if (err.response.status === 403) {
+					if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
+					if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
+					else alert('로그인 후 사용 가능한 서비스입니다.')
+				} else {
+					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
+				}
+			}
+		},
+	})
 
 	const [state, dispatch] = React.useReducer(reducer, {
 		Color: '',
@@ -99,19 +103,19 @@ const Docs = () => {
 			data.append('files', files[i], files[i].name)
 		}
 
-		// mutate({ data, title: router.title })
+		mutate({ data, title: router.title })
 	}
 
-	// useQuery('docs', () => getApi.getDocs(router.title as string), {
-	// 	onSuccess: (data) => {
-	// 		setContents(data.contents)
-	// 		setTitle(data.title)
-	// 	},
-	// 	onError: (err) => {
-	// 		alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-	// 		console.log(err)
-	// 	},
-	// })
+	useQuery('docs', () => getApi.getDocs(router.title as string), {
+		onSuccess: (data) => {
+			setContents(data.contents)
+			setTitle(data.title)
+		},
+		onError: (err) => {
+			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+			console.log(err)
+		},
+	})
 
 	return (
 		<>
@@ -187,7 +191,7 @@ const Docs = () => {
 						</S.CreateProfileWrap>
 						<S.UpdateTextarea
 							onKeyDown={(e) => onKeyDownUseTab(e)}
-							onChange={(e) => setContents(FC.autoComplete(contents, e))}
+							onChange={(e) => setContents(FC.autoComplete(e))}
 							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
