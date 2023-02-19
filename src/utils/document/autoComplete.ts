@@ -21,11 +21,7 @@ const autoComplete = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const after_back_text = e.target.value.slice(e.target.selectionStart, e.target.value.length)
 		const outsideTag = after_back_text.slice(after_back_text.indexOf('</'), after_back_text.indexOf('>') + 1).replace('/', '')
 
-		if (insideTag === outsideTag) {
-			if (e.target.value[selection - 1] === '>' && e.target.value[selection] === '<') {
-				return e.target.value
-			}
-		}
+		if (insideTag === outsideTag) return e.target.value
 
 		if (insideTag.split('>').length === 3) return e.target.value
 		console.log(insideTag.split('>').length)
