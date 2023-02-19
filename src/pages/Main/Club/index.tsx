@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
 import * as S from './style'
-import * as api from 'utils/api/getDocs'
+import * as api from 'api/getDocs'
 
 import React from 'react'
 import axios from 'axios'

@@ -1,14 +1,13 @@
 import * as C from 'allFiles'
 import * as R from 'react-router-dom'
-import * as FC from 'utils/function'
+import * as FC from 'utils'
 import * as S from './style'
-import * as getApi from 'utils/api/getDocs'
-import * as editApi from 'utils/api/editDocs'
+import * as getApi from 'api/getDocs'
+import * as editApi from 'api/editDocs'
 
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import onKeyDownUseTab from 'utils/function/onKeyDownUseTab'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import axios from 'axios'
 
@@ -190,7 +189,7 @@ const Docs = () => {
 							<S.CreateProfileInputWarn>※ 프로필을 변경하시려면 [[프로필]] 태그를 삭제했다가 재입력해주셔야해요! ※</S.CreateProfileInputWarn>
 						</S.CreateProfileWrap>
 						<S.UpdateTextarea
-							onKeyDown={(e) => onKeyDownUseTab(e)}
+							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setContents(FC.autoComplete(e))}
 							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
 						/>

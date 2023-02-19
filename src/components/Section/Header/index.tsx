@@ -7,7 +7,7 @@ import Create from 'assets/create.svg'
 import Search from 'assets/search.svg'
 import Student from 'assets/student.svg'
 import Teacher from 'assets/teacher.svg'
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 

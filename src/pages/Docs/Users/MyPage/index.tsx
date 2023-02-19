@@ -1,9 +1,9 @@
 import * as C from 'allFiles'
-import * as api from 'utils/api/user'
-import * as FC from 'utils/function'
+import * as api from 'api/user'
+import * as FC from 'utils'
 import * as S from './style'
 
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import React from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useRecoilValue } from 'recoil'

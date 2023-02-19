@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as FC from 'utils/function'
+import * as FC from 'utils'
 
 export const logoutUser = async () => {
 	return await axios.delete('/auth/bsm/logout', {

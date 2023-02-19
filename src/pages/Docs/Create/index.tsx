@@ -1,14 +1,13 @@
 import * as C from 'allFiles'
-import * as api from 'utils/api/editDocs'
-import * as FC from 'utils/function'
+import * as api from 'api/editDocs'
+import * as FC from 'utils'
 import * as S from './style'
 
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import onKeyDownUseTab from 'utils/function/onKeyDownUseTab'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -135,7 +134,7 @@ const Docs = () => {
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
-							<S.CreateTableTRTextarea onKeyDown={(e) => onKeyDownUseTab(e)} onChange={(e) => setContents(FC.autoComplete(e))} value={contents} />
+							<S.CreateTableTRTextarea onKeyDown={(e) => FC.onKeyDownUseTab(e)} onChange={(e) => setContents(FC.autoComplete(e))} value={contents} />
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>

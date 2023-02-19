@@ -1,6 +1,6 @@
 import * as S from './style'
-import * as FC from 'utils/function'
-import * as api from 'utils/api/getDocs'
+import * as FC from 'utils'
+import * as api from 'api/getDocs'
 
 import React from 'react'
 import Docs from 'types/docs'

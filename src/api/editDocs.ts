@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as FC from 'utils/function'
+import * as FC from 'utils'
 
 export const updateDocsTitle = async (title: string, docsName: string) => {
 	return await axios.put(

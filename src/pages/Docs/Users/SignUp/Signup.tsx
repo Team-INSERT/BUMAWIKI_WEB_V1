@@ -1,5 +1,5 @@
-import * as FC from 'utils/function'
-import * as api from 'utils/api/user'
+import * as FC from 'utils'
+import * as api from 'api/user'
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'

@@ -1,10 +1,10 @@
 import * as R from 'react-router-dom'
 import * as S from './style'
-import * as api from 'utils/api/editDocs'
+import * as api from 'api/editDocs'
 
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import { MutationFunction, useMutation, useQueryClient } from 'react-query'
 
 const DetailBtn = () => {

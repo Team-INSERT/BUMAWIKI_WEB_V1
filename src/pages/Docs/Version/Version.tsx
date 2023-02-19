@@ -1,6 +1,6 @@
 import * as C from 'allFiles'
-import * as api from 'utils/api/getDocs'
-import * as FC from 'utils/function'
+import * as api from 'api/getDocs'
+import * as FC from 'utils'
 import * as S from '../Doc/style'
 import * as V from './style'
 

@@ -1,7 +1,7 @@
 import * as C from 'allFiles'
-import * as FC from 'utils/function'
+import * as FC from 'utils'
 import * as S from '../Doc/style'
-import * as api from 'utils/api/getDocs'
+import * as api from 'api/getDocs'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'

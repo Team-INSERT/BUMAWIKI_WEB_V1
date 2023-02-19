@@ -1,5 +1,5 @@
 import * as C from 'allFiles'
-import * as api from 'utils/api/getDocs'
+import * as api from 'api/getDocs'
 import * as S from './style'
 
 import React from 'react'

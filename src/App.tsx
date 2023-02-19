@@ -1,7 +1,7 @@
-import * as api from 'utils/api/user'
+import * as api from 'api/user'
 import * as R from './allFiles'
 
-import userState from 'atom/userState'
+import userState from 'context/userState'
 import axios from 'axios'
 import React from 'react'
 import { useMutation, useQuery } from 'react-query'
