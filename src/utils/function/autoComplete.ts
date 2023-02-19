@@ -14,6 +14,22 @@ const autoComplete = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		} else {
 			text += `</${tag}` + e.target.value.slice(e.target.selectionStart, e.target.value.length)
 		}
+
+		const after_front_text = e.target.value.slice(0, e.target.selectionStart)
+		const insideTag = after_front_text.slice(after_front_text.lastIndexOf('<'), after_front_text.length)
+
+		const after_back_text = e.target.value.slice(e.target.selectionStart, e.target.value.length)
+		const outsideTag = after_back_text.slice(after_back_text.indexOf('</'), after_back_text.indexOf('>') + 1).replace('/', '')
+
+		if (insideTag === outsideTag) {
+			if (e.target.value[selection - 1] === '>' && e.target.value[selection] === '<') {
+				return e.target.value
+			}
+		}
+
+		if (insideTag.split('>').length === 3) return e.target.value
+		console.log(insideTag.split('>').length)
+
 		setTimeout(() => {
 			e.target.selectionStart = selection
 			e.target.selectionEnd = selection
