@@ -134,7 +134,11 @@ const Docs = () => {
 						</S.CreateTableTRFile>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
-							<S.CreateTableTRTextarea onKeyDown={(e) => FC.onKeyDownUseTab(e)} onChange={(e) => setContents(FC.autoClosing(e))} value={contents} />
+							<S.CreateTableTRTextarea
+								onKeyDown={(e) => FC.onKeyDownUseTab(e)}
+								onChange={(e) => setContents(FC.autoClosingTag(e))}
+								value={contents}
+							/>
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
