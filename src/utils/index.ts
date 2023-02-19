@@ -1,5 +1,5 @@
 import asideFormat from './etc/asideFormat'
-import autoComplete from './document/autoComplete'
+import autoClosing from './document/autoClosing'
 import dateParser from './date/dateParser'
 import dateUTCParser from './date/dateUTCParser'
 import documentation from './document/documentation'
@@ -9,4 +9,4 @@ import makeTable from './document/makeTable'
 import typeEditor from './etc/typeEditor'
 import onKeyDownUseTab from './document/onKeyDownUseTab'
 
-export { asideFormat, autoComplete, dateParser, dateUTCParser, documentation, getCookie, getLastDate, makeTable, typeEditor, onKeyDownUseTab }
+export { asideFormat, autoClosing, dateParser, dateUTCParser, documentation, getCookie, getLastDate, makeTable, typeEditor, onKeyDownUseTab }

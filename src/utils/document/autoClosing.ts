@@ -1,4 +1,4 @@
-const autoComplete = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+const autoClosing = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 	const selection = e.target.selectionStart
 
 	if (e.target.value[e.target.selectionStart - 1] === '>') {
@@ -35,4 +35,4 @@ const autoComplete = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 	return e.target.value
 }
 
-export default autoComplete
+export default autoClosing

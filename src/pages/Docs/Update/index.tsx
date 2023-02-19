@@ -190,7 +190,7 @@ const Docs = () => {
 						</S.CreateProfileWrap>
 						<S.UpdateTextarea
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
-							onChange={(e) => setContents(FC.autoComplete(e))}
+							onChange={(e) => setContents(FC.autoClosing(e))}
 							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
