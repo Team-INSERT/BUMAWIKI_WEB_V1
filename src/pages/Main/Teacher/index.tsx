@@ -10,7 +10,6 @@ const Teacher = () => {
 	const [major, setMajor] = React.useState([])
 	const [humanities, setHumanities] = React.useState([])
 	const [mentor, setMentor] = React.useState([])
-	const [isError, setIsError] = React.useState(false)
 
 	const getTeacherDocs = async (router: string) => {
 		try {
@@ -22,11 +21,11 @@ const Teacher = () => {
 				getTeacherDocs('majorTeacher')
 			} else if (router === 'majorTeacher') {
 				setMajor(data)
+				getTeacherDocs('mentorTeacher')
 			} else if (router === 'mentorTeacher') {
 				setMentor(data)
 			}
 		} catch (err) {
-			setIsError(true)
 			return
 		}
 	}
@@ -37,10 +36,6 @@ const Teacher = () => {
 		getTeacherDocs('mentorTeacher')
 		// eslint-disable-next-line
 	}, [])
-
-	React.useEffect(() => {
-		if (isError) alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-	}, [isError])
 
 	return (
 		<>

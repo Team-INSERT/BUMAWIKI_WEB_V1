@@ -8,7 +8,7 @@ import { useMutation, useQuery } from 'react-query'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { RecoilRoot, useSetRecoilState } from 'recoil'
 
-axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
+axios.defaults.baseURL = 'http://bumawiki.kro.kr:8080/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
