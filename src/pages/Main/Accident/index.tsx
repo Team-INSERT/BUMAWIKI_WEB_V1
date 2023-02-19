@@ -1,6 +1,7 @@
 import * as C from 'allFiles'
 import * as api from 'api/getDocs'
 import * as S from './style'
+import * as FC from 'utils'
 
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -8,8 +9,7 @@ import Docs from 'types/docs'
 
 const Accident = () => {
 	const [accidents, setAccidents] = React.useState([])
-	const [allDate] = React.useState<number[]>([])
-	const nowDate = new Date()
+	const years = FC.getAllYear()
 
 	useQuery('getAccident', () => api.getBaseDocs('accident'), {
 		onSuccess: (res) => {
@@ -21,13 +21,6 @@ const Accident = () => {
 			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 		},
 	})
-
-	React.useEffect(() => {
-		for (let date = nowDate.getFullYear(); date >= 2021; date--) {
-			allDate.push(date)
-		}
-		// eslint-disable-next-line
-	}, [])
 
 	return (
 		<>
@@ -42,11 +35,11 @@ const Accident = () => {
 					</S.AccidentClassify>
 					<S.AccidentLine />
 					<S.AccidentListWrap>
-						{allDate.map((date) => (
-							<C.AccodianMenu name={`${date}년 사건/사고`} key={date}>
+						{years.map((year) => (
+							<C.AccodianMenu name={`${year}년 사건/사고`} key={year}>
 								{accidents.map((accident: Docs, index) => (
 									<S.AccidentList key={index}>
-										{accident.enroll === date ? (
+										{accident.enroll === year ? (
 											<S.AccidentListItem>
 												<S.AccidentLink to={`/docs/${accident.title}`}>{accident.title}</S.AccidentLink>
 											</S.AccidentListItem>

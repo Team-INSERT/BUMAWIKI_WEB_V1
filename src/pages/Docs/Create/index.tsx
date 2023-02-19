@@ -12,6 +12,7 @@ import { useRecoilValue } from 'recoil'
 const Docs = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
+	const years = FC.getAllYear()
 
 	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
 	const [docsType, setDocsType] = React.useState<string>('')
@@ -51,7 +52,6 @@ const Docs = () => {
 			return
 		}
 
-		// eslint-disable-next-line
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -106,12 +106,12 @@ const Docs = () => {
 						<S.CreateTableTR>
 							<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
-								<S.EnrollLabel htmlFor="2023">2023년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2023" name="radios" />
-								<S.EnrollLabel htmlFor="2022">2022년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2022" name="radios" />
-								<S.EnrollLabel htmlFor="2021">2021년</S.EnrollLabel>
-								<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id="2021" name="radios" />
+								{years.map((year) => (
+									<>
+										<S.EnrollLabel htmlFor={`${year}`}>{year}년</S.EnrollLabel>
+										<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id={`${year}`} name="radios" />
+									</>
+								))}
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTRExample>
@@ -123,7 +123,7 @@ const Docs = () => {
 						<S.CreateTableTRFile>
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
-								{[null, null, null].map((index) => (
+								{[null, null, null].map((_, index) => (
 									<input
 										key={index}
 										type="file"

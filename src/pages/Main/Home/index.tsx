@@ -113,7 +113,7 @@ const Home = () => {
 								<S.TableText>학생 수</S.TableText>
 							</S.TableName>
 							<S.TableContent>
-								<S.TableText>122명 (2022.09.26)</S.TableText>
+								<S.TableText>125명 (2022.05)</S.TableText>
 							</S.TableContent>
 						</S.TableWrap>
 						<S.TableWrap>
@@ -121,7 +121,7 @@ const Home = () => {
 								<S.TableText>교직원 수</S.TableText>
 							</S.TableName>
 							<S.TableContent>
-								<S.TableText>22명 (2021.11.28)</S.TableText>
+								<S.TableText>33명 (2022.05)</S.TableText>
 							</S.TableContent>
 						</S.TableWrap>
 						<S.TableWrap>
