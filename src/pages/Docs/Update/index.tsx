@@ -10,14 +10,15 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import axios from 'axios'
+import FileListArray from 'types/filelistArray'
+import MakeTableState from 'types/makeTableState'
 
 interface reducerAction {
 	name: string
 	value: string
 }
 
-// 변경 필요
-function reducer(state: any, action: reducerAction) {
+function reducer(state: MakeTableState, action: reducerAction) {
 	return {
 		...state,
 		[action.name]: action.value,
@@ -31,7 +32,7 @@ const Docs = () => {
 
 	const [title, setTitle] = React.useState('')
 	const [contents, setContents] = React.useState('')
-	const [files, setFiles] = React.useState<any>([]) // 변경 필요
+	const [files, setFiles] = React.useState<FileListArray[]>([]) // 변경 필요
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
 
@@ -53,6 +54,10 @@ const Docs = () => {
 			}
 		},
 	})
+
+	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) setFiles([...files, e.target.files[0]])
+	}
 
 	const [state, dispatch] = React.useReducer(reducer, {
 		Color: '',
@@ -88,7 +93,6 @@ const Docs = () => {
 			return
 		}
 
-		// eslint-disable-next-line
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -128,7 +132,7 @@ const Docs = () => {
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map((index) => (
-							<input key={index} type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
+							<input key={index} type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
 						))}
 						<S.FileAddWrap onClick={() => setFileInput([...fileInput, ''])}>
 							<S.FileAddButton>+</S.FileAddButton>
@@ -153,7 +157,7 @@ const Docs = () => {
 							<S.CreateProfileTable>
 								<S.CreateProfileTableTitle>사진</S.CreateProfileTableTitle>
 								<S.CreateProfileTableFile>
-									<input type="file" onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])} />
+									<input type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
 								</S.CreateProfileTableFile>
 							</S.CreateProfileTable>
 							<S.CreateProfileTable>

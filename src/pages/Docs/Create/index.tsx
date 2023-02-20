@@ -8,6 +8,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
+import FileListArray from 'types/filelistArray'
 
 const Docs = () => {
 	const navigate = useNavigate()
@@ -18,7 +19,7 @@ const Docs = () => {
 	const [docsType, setDocsType] = React.useState<string>('')
 	const [contents, setContents] = React.useState<string>('')
 	const [enroll, setEnroll] = React.useState<number>()
-	const [files, setFiles] = React.useState<any>() // 변경 필요
+	const [files, setFiles] = React.useState<FileListArray[]>([])
 
 	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
@@ -30,6 +31,10 @@ const Docs = () => {
 			console.log(err)
 		},
 	})
+
+	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) setFiles([...files, e.target.files[0]])
+	}
 
 	const onClickCreateDocs = async () => {
 		if (!user.isLogin) {
@@ -66,11 +71,9 @@ const Docs = () => {
 				{ type: 'application/json' }
 			)
 		)
-		for (let i = files.length - 1; i >= 0; i--) {
-			data.append('files', files[i], files[i].name)
-		}
+		if (files !== undefined) for (let i = files.length - 1; i >= 0; i--) data.append('files', files[i], files[i].name)
 
-		mutate({ data })
+		mutate({ data } as unknown as FormData)
 	}
 
 	return (
@@ -124,11 +127,10 @@ const Docs = () => {
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
 								{[null, null, null].map((_, index) => (
-									<input
-										key={index}
-										type="file"
-										onChange={(e) => setFiles([e.target.files instanceof FileList ? e.target.files[0] : '', ...files])}
-									/>
+									<>
+										<input key={index} type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
+										<img id="preview" alt="" />
+									</>
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
