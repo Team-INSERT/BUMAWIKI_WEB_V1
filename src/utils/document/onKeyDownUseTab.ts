@@ -1,10 +1,14 @@
-const onKeyDownUseTab = (e: any) => {
-	if (e.key === 'Tab') {
+const onKeyDownUseTab = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+	const target = e.target as HTMLTextAreaElement
+
+	if (e.keyCode === 9) {
 		e.preventDefault()
-		var start = e.target.selectionStart
-		var end = e.target.selectionEnd
-		e.target.value = e.target.value.substring(0, start) + '\t' + e.target.value.substring(end)
-		e.target.selectionStart = e.target.selectionEnd = start + 1
+		var v = target.value,
+			s = target.selectionStart,
+			f = target.selectionEnd
+		target.value = v.substring(0, s) + '\t' + v.substring(f)
+		target.selectionStart = target.selectionEnd = s + 1
+		return false
 	}
 }
 
