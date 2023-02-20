@@ -129,7 +129,6 @@ const Docs = () => {
 								{[null, null, null].map((_, index) => (
 									<>
 										<input key={index} type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
-										<img id="preview" alt="" />
 									</>
 								))}
 							</S.FileInputWrap>
