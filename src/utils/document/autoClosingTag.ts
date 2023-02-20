@@ -24,12 +24,11 @@ const autoClosingTag = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		if (insideTag === outsideTag) return e.target.value
 
 		if (insideTag.split('>').length === 3) return e.target.value
-		console.log(insideTag.split('>').length)
 
 		setTimeout(() => {
 			e.target.selectionStart = selection
 			e.target.selectionEnd = selection
-		}, 0)
+		})
 		return text
 	}
 	return e.target.value
