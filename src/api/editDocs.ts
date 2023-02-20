@@ -13,7 +13,7 @@ export const updateDocsTitle = async (title: string, docsName: string) => {
 	)
 }
 
-export const createDocs = async (data: any) => {
+export const createDocs = async (data: FormData) => {
 	return (
 		await axios.post('/docs/create', data, {
 			headers: {
@@ -25,7 +25,7 @@ export const createDocs = async (data: any) => {
 	).data
 }
 
-export const updateDocs = async (data: any, title: string) => {
+export const updateDocs = async (data: FormData, title: string) => {
 	return await axios.put(`docs/update/${title}`, data, {
 		headers: {
 			'Content-Type': `multipart/form-data`,
