@@ -32,27 +32,25 @@ const App = () => {
 	})
 
 	return (
-		<RecoilRoot>
-			<Router>
-				<Routes>
-					<Route path={'/'} element={<R.Home />} />
-					<Route path={'/student'} element={<R.Student />} />
-					<Route path={'/teacher'} element={<R.Teacher />} />
-					<Route path={'/accident'} element={<R.Accident />} />
-					<Route path={'/club'} element={<R.Club />} />
-					<Route path={'/docs/:title'} element={<R.Docs />} />
-					<Route path={'/search/:result'} element={<R.Search />} />
-					<Route path={'/oauth'} element={<R.Signup />} />
-					<Route path={'/create'} element={<R.Create />} />
-					<Route path={'/update/:title'} element={<R.Update />} />
-					<Route path={'/version/:title'} element={<R.Version />} />
-					<Route path={'/version/:title/detail/:versionId'} element={<R.VersionDetail />} />
-					<Route path={'/mypage'} element={<R.MyPage />} />
-					<Route path={'/user/:id'} element={<R.User />} />
-					<Route path={'*'} element={<R.NotFound />} />
-				</Routes>
-			</Router>
-		</RecoilRoot>
+		<Router>
+			<Routes>
+				<Route path={'/'} element={<R.Home />} />
+				<Route path={'/student'} element={<R.Student />} />
+				<Route path={'/teacher'} element={<R.Teacher />} />
+				<Route path={'/accident'} element={<R.Accident />} />
+				<Route path={'/club'} element={<R.Club />} />
+				<Route path={'/docs/:title'} element={<R.Docs />} />
+				<Route path={'/search/:result'} element={<R.Search />} />
+				<Route path={'/oauth'} element={<R.Signup />} />
+				<Route path={'/create'} element={<R.Create />} />
+				<Route path={'/update/:title'} element={<R.Update />} />
+				<Route path={'/version/:title'} element={<R.Version />} />
+				<Route path={'/version/:title/detail/:versionId'} element={<R.VersionDetail />} />
+				<Route path={'/mypage'} element={<R.MyPage />} />
+				<Route path={'/user/:id'} element={<R.User />} />
+				<Route path={'*'} element={<R.NotFound />} />
+			</Routes>
+		</Router>
 	)
 }
 
