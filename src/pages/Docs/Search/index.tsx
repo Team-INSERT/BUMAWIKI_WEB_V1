@@ -22,7 +22,6 @@ const Search = () => {
 		},
 		onError: (err) => {
 			alert('검색 도중 오류가 발생했습니다.')
-			navigate('/')
 			console.log(err)
 		},
 	})

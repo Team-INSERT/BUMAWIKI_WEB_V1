@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs'
+import { AxiosError } from 'axios'
 
 const initialDocs = {
 	id: -1,
@@ -25,11 +26,12 @@ const Doc = () => {
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: (res) => {
-			setDocs(res[0])
+			setDocs(res)
 			setIsLoad(true)
 		},
-		onError: (err) => {
-			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+		onError: (err: AxiosError) => {
+			if (err.message.includes('404') || err.message.includes('500')) alert('문서를 찾을 수 없습니다! 이름을 확인해주세요.')
+			else alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			console.log(err)
 		},
 	})

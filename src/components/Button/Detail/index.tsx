@@ -18,10 +18,12 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	const [docsName, setDocsName] = React.useState('')
 	const queryClient = useQueryClient()
 
-	const updateDocsTitleMutation = useMutation(api.updateDocsTitle as MutationFunction, {
-		onSuccess: () => {
+	const updateDocsTitleMutation = useMutation(api.updateDocsTitle, {
+		onSuccess: (res) => {
 			alert('문서 이름이 변경되었습니다!')
 			queryClient.invalidateQueries('docs')
+			navigate(`/docs/${res.data.title}`)
+			window.location.reload()
 		},
 		onError: (err) => {
 			alert('오류가 발생했습니다.')
@@ -45,7 +47,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			alert('내용이 없습니다.')
 			return
 		}
-		updateDocsTitleMutation.mutate({ title: router.title, docsName })
+		updateDocsTitleMutation.mutate({ title: router.title as string, docsName })
 	}
 
 	const onClickDeleteDocs = async () => {

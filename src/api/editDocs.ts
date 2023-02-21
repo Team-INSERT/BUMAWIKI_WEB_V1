@@ -7,7 +7,6 @@ interface UpdateDocsProps {
 }
 
 export const updateDocsTitle = async ({ title, docsName }: UpdateDocsProps) => {
-	console.log(title)
 	return await axios.put(
 		`/docs/update/title/${title}`,
 		{

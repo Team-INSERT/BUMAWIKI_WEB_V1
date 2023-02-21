@@ -12,7 +12,10 @@ const asideFormat = (docsTitle: string, docsType: string) => {
 	if (type.includes('동아리')) {
 		return `${title} (동아리)`
 	}
-	return `${title} ${type}`
+	if (type.includes('사건')) {
+		return `${title} (사건)`
+	}
+	return `${title} (${type})`
 }
 
 export default asideFormat

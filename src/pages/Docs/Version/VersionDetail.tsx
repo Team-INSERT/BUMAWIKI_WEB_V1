@@ -26,17 +26,21 @@ const VersionDetail = () => {
 	useQuery('versionDocs', () => api.getVersionDocs(router.title as string), {
 		onSuccess: (data) => {
 			const Array = data.versionDocsResponseDto.reverse()
+			console.log(data)
 			setDocs({
-				title: data.title,
-				docsType: data.docsType,
+				title: data.docsResponseDto.title,
+				docsType: data.docsResponseDto.docsType,
 			})
 			setVersionDocs(Array[router.versionId || 0])
 
 			const a = Array[router.versionId || 0].contents
-			const b = Array[parseInt(router.versionId as string) + 1 || 1].contents
 
-			setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
-			setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
+			if (data.versionDocsResponseDto.length > 1) {
+				const b = Array[parseInt(router.versionId as string) + 1 || 1].contents
+
+				setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
+				setNextContents(b.replace(a.replace(a.replace(b, ''), ''), '').replace(/<\//gi, '?@$?@$'))
+			}
 			setIsLoad(true)
 		},
 		onError: (err) => {
@@ -57,7 +61,7 @@ const VersionDetail = () => {
 						<C.Classify>{FC.typeEditor(docs?.docsType as string)}</C.Classify>
 					</S.Classify>
 					<S.DocsLine />
-					<S.DocsContents>
+					<S.DocsContentsWrap>
 						{isLoad ? (
 							<S.DocsContentsLoadWrap>
 								<S.LastUpdateDate>
@@ -92,7 +96,7 @@ const VersionDetail = () => {
 						) : (
 							''
 						)}
-					</S.DocsContents>
+					</S.DocsContentsWrap>
 					<C.SubFooter />
 				</C.Board>
 				<C.ScrollBtn />
