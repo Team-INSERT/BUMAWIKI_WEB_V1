@@ -57,6 +57,6 @@ export const AccidentLink = styled(Link)`
 `
 
 export const AccidentListItem = styled.li`
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 	color: #0038ff;
 `

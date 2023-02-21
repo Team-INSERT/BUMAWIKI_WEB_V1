@@ -59,7 +59,7 @@ export const TeacherDetailList = styled.ul`
 `
 
 export const TeacherListItem = styled.li`
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 	color: #0038ff;
 `
 

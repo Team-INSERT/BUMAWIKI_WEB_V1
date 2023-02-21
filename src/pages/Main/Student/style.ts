@@ -57,6 +57,6 @@ export const StudentLink = styled(Link)`
 `
 
 export const StudentListItem = styled.li`
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 	color: #0038ff;
 `

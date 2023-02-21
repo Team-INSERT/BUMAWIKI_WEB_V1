@@ -14,7 +14,7 @@ const Search = () => {
 	const [result, setResult] = React.useState([])
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	useQuery('findDocs', () => api.findDocs(router.title as string), {
+	useQuery('findDocs', () => api.findDocs(router.result as string), {
 		onSuccess: (data) => {
 			if (data.length === 1) navigate(`/docs/${data[0].title}`)
 			setResult(data)

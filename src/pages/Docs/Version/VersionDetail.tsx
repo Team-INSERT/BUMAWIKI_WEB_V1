@@ -26,7 +26,7 @@ const VersionDetail = () => {
 	useQuery('versionDocs', () => api.getVersionDocs(router.title as string), {
 		onSuccess: (data) => {
 			const Array = data.versionDocsResponseDto.reverse()
-			console.log(data)
+
 			setDocs({
 				title: data.docsResponseDto.title,
 				docsType: data.docsResponseDto.docsType,
@@ -35,7 +35,7 @@ const VersionDetail = () => {
 
 			const a = Array[router.versionId || 0].contents
 
-			if (data.versionDocsResponseDto.length > 1) {
+			if (data.versionDocsResponseDto.length - 1 !== parseInt(router.versionId as string)) {
 				const b = Array[parseInt(router.versionId as string) + 1 || 1].contents
 
 				setPrevContents(a.replace(b, '').replace(/<\//gi, '?@$?@$'))
@@ -81,7 +81,7 @@ const VersionDetail = () => {
 									<S.DocsContents
 										dangerouslySetInnerHTML={{
 											__html: nextContents
-												.replace(nextContents, `<span style="background-color:#fe5250;">${nextContents.replace(/\?@\$\?@\$/gi, '< /')}}</span>`)
+												.replace(nextContents, `<span style="background-color:#fe5250;">${nextContents.replace(/\?@\$\?@\$/gi, '< /')}</span>`)
 												.replace(/<</gi, `&lt;&lt;`)
 												.replace(/>>/gi, `&gt;&gt;`),
 										}}></S.DocsContents>

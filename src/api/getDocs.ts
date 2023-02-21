@@ -9,7 +9,8 @@ export const getLastModifiedDocs = async () => {
 }
 
 export const findDocs = async (title: string) => {
-	return (await axios.get(`/docs/find/title/${title}`)).data
+	console.log(title)
+	return (await axios.get(`/docs/find/all/title/${title}`)).data
 }
 
 export const getVersionDocs = async (title: string) => {
