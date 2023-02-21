@@ -111,8 +111,8 @@ const Update = () => {
 
 	useQuery('docs', () => getApi.getDocs(router.title as string), {
 		onSuccess: (data) => {
-			setContents(data[0].contents)
-			setTitle(data[0].title)
+			setContents(data.contents)
+			setTitle(data.title)
 		},
 		onError: (err) => {
 			alert('오류가 발생하여 문서를 불러올 수 없습니다.')

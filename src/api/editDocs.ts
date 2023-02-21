@@ -1,12 +1,17 @@
 import axios from 'axios'
 import * as FC from 'utils'
 
-interface UpdateDocsProps {
+interface UpdateDocsTitleProps {
 	title: string
 	docsName: string
 }
 
-export const updateDocsTitle = async ({ title, docsName }: UpdateDocsProps) => {
+interface UpdateDocsProps {
+	data: FormData
+	title: string
+}
+
+export const updateDocsTitle = async ({ title, docsName }: UpdateDocsTitleProps) => {
 	return await axios.put(
 		`/docs/update/title/${title}`,
 		{
@@ -32,7 +37,8 @@ export const createDocs = async (data: FormData) => {
 	).data
 }
 
-export const updateDocs = async (data: FormData, title: string) => {
+export const updateDocs = async ({ data, title }: UpdateDocsProps) => {
+	console.log(title)
 	return await axios.put(`docs/update/${title}`, data, {
 		headers: {
 			'Content-Type': `multipart/form-data`,
