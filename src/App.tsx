@@ -38,6 +38,7 @@ const App = () => {
 
 	React.useEffect(() => {
 		refreshLogin()
+		// eslint-disable-next-line
 	}, [])
 
 	return (
