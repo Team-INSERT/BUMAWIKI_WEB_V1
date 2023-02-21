@@ -72,17 +72,15 @@ const Teacher = () => {
 							</S.TeacherDetailList>
 						</C.AccodianMenu>
 						<C.AccodianMenu name={`멘토 선생님`}>
-							<ul className="teacher-list">
+							<S.TeacherDetailList>
 								{mentor.map((teacher: Docs) => (
-									<div key={teacher.id}>
-										<li>
-											<Link to={`/docs/${teacher.title}`} className="link">
-												{teacher.title}
-											</Link>
-										</li>
-									</div>
+									<S.TeacherListItem key={teacher.id}>
+										<S.TeacherLink to={`/docs/${teacher.title}`} className="link">
+											{teacher.title}
+										</S.TeacherLink>
+									</S.TeacherListItem>
 								))}
-							</ul>
+							</S.TeacherDetailList>
 						</C.AccodianMenu>
 					</S.TeacherList>
 					<C.SubFooter />
