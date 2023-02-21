@@ -37,6 +37,11 @@ const Create = () => {
 	}
 
 	const onClickCreateDocs = async () => {
+		if (title.includes('?') || title.includes('/')) {
+			alert('제목에는 ?나 /를 넣을 수 없습니다.')
+			return
+		}
+
 		if (!user.isLogin) {
 			alert('로그인 후 이용 가능한 서비스입니다.')
 			return

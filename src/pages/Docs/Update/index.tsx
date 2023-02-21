@@ -195,7 +195,7 @@ const Update = () => {
 						<S.UpdateTextarea
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setContents(FC.autoClosingTag(e))}
-							value={contents.replace(/\?\^table.*/gi, '[[프로필]]')}
+							value={contents.replace(/\?\^table.*/gi, '[[프로필]]').replace(/<br>/gi, '\n')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
