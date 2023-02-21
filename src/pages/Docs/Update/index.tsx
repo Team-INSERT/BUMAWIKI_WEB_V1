@@ -25,14 +25,14 @@ function reducer(state: MakeTableState, action: reducerAction) {
 	}
 }
 
-const Docs = () => {
+const Update = () => {
 	const router = R.useParams()
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 
 	const [title, setTitle] = React.useState('')
 	const [contents, setContents] = React.useState('')
-	const [files, setFiles] = React.useState<FileListArray[]>([]) // 변경 필요
+	const [files, setFiles] = React.useState<FileListArray[]>([])
 	const [fileInput, setFileInput] = React.useState([''])
 	const [table, setTable] = React.useState('')
 
@@ -111,8 +111,8 @@ const Docs = () => {
 
 	useQuery('docs', () => getApi.getDocs(router.title as string), {
 		onSuccess: (data) => {
-			setContents(data.contents)
-			setTitle(data.title)
+			setContents(data[0].contents)
+			setTitle(data[0].title)
 		},
 		onError: (err) => {
 			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
@@ -215,4 +215,4 @@ const Docs = () => {
 	)
 }
 
-export default Docs
+export default Update

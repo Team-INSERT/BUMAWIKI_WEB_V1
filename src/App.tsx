@@ -1,35 +1,44 @@
-import * as api from 'api/user'
 import * as R from './allFiles'
+import * as FC from 'utils'
+import * as api from 'api/user'
 
 import userState from 'context/userState'
 import axios from 'axios'
 import React from 'react'
-import { useMutation, useQuery } from 'react-query'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { RecoilRoot, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr:8080/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	const { mutate } = useMutation(api.getRefreshToken, {
-		onError: (err) => console.log(err),
-	})
-
-	useQuery('user', api.getUser, {
-		onSuccess: (data) => {
+	const refreshLogin = async () => {
+		try {
+			const data = await api.getUser()
 			setUser({
 				...data,
 				contributeDocs: data.contributeDocs.reverse(),
 				isLogin: true,
 			})
-		},
-		onError: (err) => {
+		} catch (err) {
 			document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			if (err instanceof axios.AxiosError && err?.response?.status === 403) mutate()
-		},
-	})
+			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
+				axios
+					.put('/auth/refresh/access', {
+						refresh_token: FC.getCookie('refresh_token'),
+					})
+					.then((res) => {
+						document.cookie = `authorization=${res.data.accessToken};`
+						window.location.reload()
+					})
+			}
+		}
+	}
+
+	React.useEffect(() => {
+		refreshLogin()
+	}, [])
 
 	return (
 		<Router>

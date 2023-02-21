@@ -63,10 +63,8 @@ const MyPage = () => {
 									<S.ContributeList>
 										{user.contributeDocs.map((docs: Contributors, index) => (
 											<span key={index}>
-												문서명 :
-												<S.ContributeLink to={`/docs/${docs.docsId}`}>
-													{docs.title}[{docs.docsId}]
-												</S.ContributeLink>
+												문서명 :&nbsp;
+												<S.ContributeLink to={`/docs/${docs.title}`}>{docs.title}</S.ContributeLink>
 												<br />
 												수정 날짜 : {FC.dateParser(docs.createTime)}
 											</span>

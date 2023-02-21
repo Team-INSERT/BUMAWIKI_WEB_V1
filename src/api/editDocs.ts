@@ -1,10 +1,18 @@
 import axios from 'axios'
 import * as FC from 'utils'
 
-export const updateDocsTitle = async (title: string, docsName: string) => {
+interface UpdateDocsProps {
+	title: string
+	docsName: string
+}
+
+export const updateDocsTitle = async ({ title, docsName }: UpdateDocsProps) => {
+	console.log(title)
 	return await axios.put(
 		`/docs/update/title/${title}`,
-		{ title: docsName },
+		{
+			title: docsName,
+		},
 		{
 			headers: {
 				Authorization: FC.getCookie('authorization'),

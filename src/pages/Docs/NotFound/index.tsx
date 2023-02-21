@@ -7,9 +7,12 @@ const NotFound = () => {
 	return (
 		<div>
 			<C.Header />
-			<C.Board>
-				<S.NotFound>404 Not Found</S.NotFound>
-			</C.Board>
+			<S.NotFoundWrap>
+				<C.Board>
+					<S.NotFound>404 Not Found</S.NotFound>
+				</C.Board>
+				<C.Aside />
+			</S.NotFoundWrap>
 			<C.Footer />
 		</div>
 	)

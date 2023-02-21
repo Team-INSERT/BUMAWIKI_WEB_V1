@@ -7,7 +7,11 @@ import { useRecoilValue } from 'recoil'
 import userState from 'context/userState'
 import { MutationFunction, useMutation, useQueryClient } from 'react-query'
 
-const DetailBtn = () => {
+interface DetailBtnProps {
+	docsId: number
+}
+
+const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	const router = R.useParams()
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
@@ -41,18 +45,13 @@ const DetailBtn = () => {
 			alert('내용이 없습니다.')
 			return
 		}
-		updateDocsTitleMutation.mutate({
-			title: router.title,
-			docsName,
-		})
+		updateDocsTitleMutation.mutate({ title: router.title, docsName })
 	}
 
 	const onClickDeleteDocs = async () => {
 		const result = window.confirm('정말 삭제하시겠습니까?')
 		if (result) {
-			deleteDocsTitleMutation.mutate({
-				title: router.title,
-			})
+			deleteDocsTitleMutation.mutate(docsId)
 		}
 	}
 

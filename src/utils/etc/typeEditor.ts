@@ -6,9 +6,9 @@ const typeEditor = (classify: string) => {
 	} else if (classify === 'CLUB') {
 		return '전공 동아리'
 	} else if (classify === 'TEACHER') {
-		return '일반교과 선생님'
+		return '인문교과 선생님'
 	} else if (classify === 'MAJOR_TEACHER') {
-		return '전공교과 선생님'
+		return '전문교과 선생님'
 	} else if (classify === 'MENTOR_TEACHER') {
 		return '멘토 선생님'
 	} else if (classify === 'FREE_CLUB') {

@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import Contributors from 'types/contributors'
 import { useQuery } from 'react-query'
 
-const MyPage = () => {
+const User = () => {
 	const [user, setUser] = React.useState({
 		id: 0,
 		nickName: '알 수 없음',
@@ -73,4 +73,4 @@ const MyPage = () => {
 	)
 }
 
-export default MyPage
+export default User

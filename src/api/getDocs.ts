@@ -13,7 +13,7 @@ export const findDocs = async (title: string) => {
 }
 
 export const getVersionDocs = async (title: string) => {
-	return (await axios.get(`docs/find/${title}`)).data
+	return (await axios.get(`docs/find/${title}/version`)).data
 }
 
 export const getBaseDocs = async (docsType: string) => {

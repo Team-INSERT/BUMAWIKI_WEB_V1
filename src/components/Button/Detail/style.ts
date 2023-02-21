@@ -13,6 +13,12 @@ export const DetailWrap = styled.div`
 export const DetailLinkWrap = styled(Link)`
 	text-decoration: none;
 	cursor: pointer;
+
+	&:last-child {
+		div {
+			border-right: 2px solid #ccc;
+		}
+	}
 `
 
 export const DetailButton = styled.div`
@@ -24,12 +30,6 @@ export const DetailButton = styled.div`
 	border-left: 2px solid #ccc;
 	border-top: 2px solid #ccc;
 	border-bottom: 2px solid #ccc;
-
-	&:last-child {
-		div {
-			border-right: 2px solid #ccc;
-		}
-	}
 `
 
 export const DetailText = styled.span`

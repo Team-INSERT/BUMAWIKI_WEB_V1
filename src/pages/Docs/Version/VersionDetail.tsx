@@ -52,9 +52,6 @@ const VersionDetail = () => {
 				<C.Board>
 					<S.DocsTitleWrap>
 						<S.DocsTitleText>{docs?.title}</S.DocsTitleText>
-						<S.DocsMenu>
-							<C.DetailBtn />
-						</S.DocsMenu>
 					</S.DocsTitleWrap>
 					<S.Classify>
 						<C.Classify>{FC.typeEditor(docs?.docsType as string)}</C.Classify>

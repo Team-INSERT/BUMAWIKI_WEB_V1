@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import FileListArray from 'types/filelistArray'
 
-const Docs = () => {
+const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
@@ -24,7 +24,7 @@ const Docs = () => {
 	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
 			alert('문서가 생성되었습니다!')
-			navigate(`/docs/${data.id}`)
+			navigate(`/docs/${data.title}`)
 		},
 		onError: (err) => {
 			alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
@@ -72,8 +72,7 @@ const Docs = () => {
 			)
 		)
 		if (files !== undefined) for (let i = files.length - 1; i >= 0; i--) data.append('files', files[i], files[i].name)
-
-		mutate({ data } as unknown as FormData)
+		mutate(data)
 	}
 
 	return (
@@ -109,11 +108,11 @@ const Docs = () => {
 						<S.CreateTableTR>
 							<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
-								{years.map((year) => (
-									<>
+								{years.map((year, index) => (
+									<div key={index}>
 										<S.EnrollLabel htmlFor={`${year}`}>{year}년</S.EnrollLabel>
 										<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id={`${year}`} name="radios" />
-									</>
+									</div>
 								))}
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
@@ -127,9 +126,9 @@ const Docs = () => {
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
 								{[null, null, null].map((_, index) => (
-									<>
-										<input key={index} type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
-									</>
+									<div key={index}>
+										<input type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
+									</div>
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
@@ -163,4 +162,4 @@ const Docs = () => {
 	)
 }
 
-export default Docs
+export default Create
