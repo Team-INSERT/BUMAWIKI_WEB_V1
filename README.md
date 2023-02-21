@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/kotlin-9a35e7?style=for-the-badge&logo=kotlin&logoColor=white"/>
 <img src="https://img.shields.io/badge/React JS-73c4f3?style=for-the-badge&logo=react&logoColor=white"/>
 <img src="https://img.shields.io/badge/TypeScript-4376c1?style=for-the-badge&logo=typescript&logoColor=white"/>
-<img src="https://img.shields.io/badge/styled-components-d88f82?style=for-the-badge&logo=styled-components&logoColor=white"/>
+<img src="https://img.shields.io/badge/styled components-d88f82?style=for-the-badge&logo=styled-components&logoColor=white"/>
 <img src="https://img.shields.io/badge/Jest-8e475b?style=for-the-badge&logo=jest&logoColor=white"/>
 <img src="https://img.shields.io/badge/Recoil-4776de?style=for-the-badge&logo=recoil&logoColor=white"/>
 <img src="https://img.shields.io/badge/React Query-e95258?style=for-the-badge&logo=react-query&logoColor=white"/>
