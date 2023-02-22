@@ -4,8 +4,10 @@ const dateParser = (date: string) => {
     ${parseInt(date.substring(5, 7)) - 10 >= 0 ? date.substring(5, 7) : date.substring(6, 7)}월 
     ${parseInt(date.substring(8, 10)) - 10 >= 0 ? date.substring(8, 10) : date.substring(9, 10)}일
     ${
-			parseInt(date.substring(11, 13)) >= 13
-				? `오후 ${parseInt(date.substring(11, 13)) - 12}`
+			parseInt(date.substring(11, 13)) >= 12
+				? parseInt(date.substring(11, 13)) === 12
+					? `오후 ${parseInt(date.substring(11, 13))}`
+					: `오후 ${parseInt(date.substring(11, 13)) - 12}`
 				: parseInt(date.substring(11, 13)) === 0
 				? '오전 12'
 				: `오전 ${parseInt(date.substring(11, 13))}`

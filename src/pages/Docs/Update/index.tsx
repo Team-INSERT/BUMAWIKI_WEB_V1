@@ -11,19 +11,6 @@ import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import axios from 'axios'
 import FileListArray from 'types/filelistArray'
-import MakeTableState from 'types/makeTableState'
-
-interface reducerAction {
-	name: string
-	value: string
-}
-
-function reducer(state: MakeTableState, action: reducerAction) {
-	return {
-		...state,
-		[action.name]: action.value,
-	}
-}
 
 const Update = () => {
 	const router = R.useParams()
@@ -34,7 +21,6 @@ const Update = () => {
 	const [contents, setContents] = React.useState('')
 	const [files, setFiles] = React.useState<FileListArray[]>([])
 	const [fileInput, setFileInput] = React.useState([''])
-	const [table, setTable] = React.useState('')
 
 	const { mutate } = useMutation(editApi.updateDocs as MutationFunction, {
 		onSuccess: () => {
@@ -59,29 +45,6 @@ const Update = () => {
 		if (e.target.files) setFiles([...files, e.target.files[0]])
 	}
 
-	const [state, dispatch] = React.useReducer(reducer, {
-		Color: '',
-		TextColor: '',
-		Line: '',
-		Name: '',
-		Height: '',
-		Birth: '',
-		Country: '',
-		MBTI: '',
-		Club: '',
-		Field: '',
-	})
-
-	const { Color, Country, TextColor, Line, Name, Height, Birth, MBTI, Club, Field } = state
-
-	const onChangeTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(e.target)
-	}
-
-	React.useEffect(() => {
-		setTable(FC.makeTable(Line, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field))
-	}, [table, TextColor, Color, Name, Height, Birth, Country, MBTI, Club, Field, Line])
-
 	const onClickUpdateDocs = async () => {
 		if (!user.isLogin) {
 			alert('로그인 후 이용 가능한 서비스입니다.')
@@ -97,7 +60,7 @@ const Update = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "contents": "${contents.replace('[[프로필]]', table).replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], {
+			new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], {
 				type: 'application/json',
 			}),
 			{ contentType: 'application/json' }
@@ -139,59 +102,6 @@ const Update = () => {
 							<S.FileAddText>사진 더 선택하기</S.FileAddText>
 						</S.FileAddWrap>
 						<S.DocsNeedFileText>문서에 필요한 사진태그 개수 : {files.length}개</S.DocsNeedFileText>
-						<br />
-						<S.CreateProfileText>프로필 생성기</S.CreateProfileText>
-						<S.CreateProfileWrap>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>표 색상</S.CreateProfileTableTitle>
-								<input placeholder="ex) #251678, orange" onChange={onChangeTable} name="Color" value={Color} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>글자 색상</S.CreateProfileTableTitle>
-								<input placeholder="ex) black, white" onChange={onChangeTable} name="TextColor" value={TextColor} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>선 색상</S.CreateProfileTableTitle>
-								<input placeholder="ex) black, white" onChange={onChangeTable} name="Line" value={Line} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>사진</S.CreateProfileTableTitle>
-								<S.CreateProfileTableFile>
-									<input type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
-								</S.CreateProfileTableFile>
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>이름</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="Name" value={Name} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>키</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="Height" value={Height} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>생일</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="Birth" value={Birth} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>국적</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="Country" value={Country} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>MBTI</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="MBTI" value={MBTI} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTable>
-								<S.CreateProfileTableTitle>소속</S.CreateProfileTableTitle>
-								<input onChange={onChangeTable} name="Club" value={Club} />
-							</S.CreateProfileTable>
-							<S.CreateProfileTableLast>
-								<S.CreateProfileTableTitleLast>분야</S.CreateProfileTableTitleLast>
-								<input onChange={onChangeTable} name="Field" value={Field} />
-							</S.CreateProfileTableLast>
-							<S.CreateProfileInputWarn>※ 내용 안에 [[프로필]] 태그를 삽입해주세요! ※</S.CreateProfileInputWarn>
-							<br />
-							<S.CreateProfileInputWarn>※ 프로필을 변경하시려면 [[프로필]] 태그를 삭제했다가 재입력해주셔야해요! ※</S.CreateProfileInputWarn>
-						</S.CreateProfileWrap>
 						<S.UpdateTextarea
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setContents(FC.autoClosingTag(e))}
@@ -200,7 +110,7 @@ const Update = () => {
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
 							dangerouslySetInnerHTML={{
-								__html: FC.documentation(contents.replace(/<br>/gi, '\n').replace('[[프로필]]', table)),
+								__html: FC.documentation(contents.replace(/<br>/gi, '\n')),
 							}}
 						/>
 						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>

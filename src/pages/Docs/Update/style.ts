@@ -206,9 +206,9 @@ export const UpdatePreview = styled.div`
 	resize: none;
 	outline: none;
 	padding: 10px;
-	font-family: 'Open Sans', sans-serif;
 	white-space: pre-wrap;
 	overflow: scroll;
+	font-weight: 500;
 `
 
 export const UpdatePreviewText = styled.span`
