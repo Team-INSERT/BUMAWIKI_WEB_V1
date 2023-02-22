@@ -8,7 +8,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
-axios.defaults.baseURL = 'http://bumawiki.kro.kr:8080/api'
+axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
