@@ -49,7 +49,9 @@ const MyPage = () => {
 											이 유저의 아이디는 {user.id}이며, 이메일은 {user.email}이다.
 										</span>
 										<br />
-										<S.LogoutText onClick={() => mutate()}>로그아웃</S.LogoutText>
+										<div>
+											<S.LogoutText onClick={() => mutate()}>로그아웃</S.LogoutText>
+										</div>
 									</>
 								) : (
 									<span>이 유저는 로그인을 하지 않은 유저다. 로그인을 하면 문서를 생성하고 편집할 수 있다.</span>
