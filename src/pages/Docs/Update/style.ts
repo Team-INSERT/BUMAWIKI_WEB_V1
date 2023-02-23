@@ -228,3 +228,33 @@ export const UpdateButton = styled.button`
 	cursor: pointer;
 	margin: 20px 0 20px auto;
 `
+
+export const AutoCompleteToggleWrap = styled.div`
+	margin: 10px 0 4px 0;
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
+`
+
+export const AutoCompleteToggleText = styled.span`
+	font-size: 14px;
+	margin-right: 4px;
+	font-weight: 600;
+
+	&::selection {
+		background-color: transparent;
+	}
+`
+
+export const AutoCompleteToggleButton = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1px;
+	width: 13px;
+	height: 13px;
+	background-color: ${(props) => props.color};
+	border: 1px solid black;
+	border-radius: 3px;
+`
