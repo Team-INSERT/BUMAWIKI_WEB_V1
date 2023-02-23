@@ -125,7 +125,10 @@ const Update = () => {
 							ref={textareaRef}
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setContents(isOnAutoComplete ? FC.autoClosingTag(e) : e.target.value)}
-							value={contents.replace(/\?\^table.*/gi, '[[프로필]]').replace(/<br>/gi, '\n')}
+							value={contents
+								.replace(/\?\^table.*/gi, '[[프로필]]')
+								.replace(/<br>/gi, '\n')
+								.replace(/&$^%/gi, '"')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview

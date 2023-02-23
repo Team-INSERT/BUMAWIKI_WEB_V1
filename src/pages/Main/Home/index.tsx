@@ -27,6 +27,10 @@ const Home = () => {
 							<span>부마위키</span>는 부산소마고 학생이라면 누구나 기여할 수 있는 위키입니다.
 							<br />
 							검증되지 않았거나 편향된 내용이 있을 수 있습니다.
+							<br />
+							<a href="https://forms.gle/DzAP7XSYH4ubK43FA" target="_blank" rel="noreferrer">
+								이슈 제보하기
+							</a>
 						</S.HomeDescriptionContents>
 					</S.HomeDescriptionWrap>
 					<S.HomeLine />
