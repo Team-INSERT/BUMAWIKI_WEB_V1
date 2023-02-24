@@ -19,6 +19,8 @@ const typeEditor = (classify: string) => {
 		return '읽기전용 사용자'
 	} else if (classify === 'USER') {
 		return '사용자'
+	} else if (classify === 'NOTICE') {
+		return '공지사항'
 	}
 	return classify
 }
