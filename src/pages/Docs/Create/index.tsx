@@ -92,6 +92,14 @@ const Create = () => {
 						<S.CreateTableTR>
 							<S.CreateTableTRTitle>분류</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
+								{user.authority === 'ADMIN' ? (
+									<>
+										<label htmlFor="STUDENT">학생</label>
+										<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="STUDENT" name="radio" />
+									</>
+								) : (
+									''
+								)}
 								<label htmlFor="TEACHER">인문 선생님</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
