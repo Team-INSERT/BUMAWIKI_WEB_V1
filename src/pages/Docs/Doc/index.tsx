@@ -4,7 +4,7 @@ import * as S from './style'
 import * as api from 'api/getDocs'
 
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs'
 import { AxiosError } from 'axios'
@@ -21,6 +21,7 @@ const initialDocs = {
 
 const Doc = () => {
 	const router = useParams()
+	const navigate = useNavigate()
 	const [isLoad, setIsLoad] = React.useState(false)
 	const [docs, setDocs] = useState<Docs>(initialDocs)
 
@@ -30,7 +31,7 @@ const Doc = () => {
 			setIsLoad(true)
 		},
 		onError: (err: AxiosError) => {
-			if (err.message.includes('404') || err.message.includes('500')) alert('문서를 찾을 수 없습니다! 이름을 확인해주세요.')
+			if (err.message.includes('404') || err.message.includes('500')) navigate('/404')
 			else alert('오류가 발생하여 문서를 불러올 수 없습니다.')
 			console.log(err)
 		},
