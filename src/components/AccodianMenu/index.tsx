@@ -10,7 +10,10 @@ const AccodianMenu = ({ children, name, isOpen }: AccodianType) => {
 	const [opacity, setOpacity] = React.useState<number>(1)
 
 	React.useEffect(() => {
-		if (isOpen === false) setDetail(false)
+		if (isOpen === false) {
+			setDetail(false)
+			setOpacity(0.4)
+		}
 		// eslint-disable-next-line
 	}, [])
 
