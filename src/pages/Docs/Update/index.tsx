@@ -34,7 +34,7 @@ const Update = () => {
 			if (err instanceof axios.AxiosError && err.response !== undefined) {
 				if (err.response.status === 403) {
 					if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
-					if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
+					else if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
 					else alert('로그인 후 사용 가능한 서비스입니다.')
 				} else {
 					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
