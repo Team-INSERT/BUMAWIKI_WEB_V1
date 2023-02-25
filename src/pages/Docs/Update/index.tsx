@@ -128,7 +128,7 @@ const Update = () => {
 							value={contents
 								.replace(/\?\^table.*/gi, '[[프로필]]')
 								.replace(/<br>/gi, '\n')
-								.replace(/&$^%/gi, '"')}
+								.replace(/&\$\^%/gi, '"')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
