@@ -9,6 +9,7 @@ import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import FileListArray from 'types/filelistArray'
+import axios from 'axios'
 
 const Create = () => {
 	const navigate = useNavigate()
@@ -27,13 +28,48 @@ const Create = () => {
 			navigate(`/docs/${data.title}`)
 		},
 		onError: (err) => {
-			alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
+			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
+				try {
+					axios
+						.put('/auth/refresh/access', {
+							refresh_token: FC.getCookie('refresh_token'),
+						})
+						.then((res) => {
+							document.cookie = `authorization=${res.data.accessToken};`
+							mutateDocs()
+						})
+						.catch(() => {
+							alert('로그인 후 이용 가능한 서비스입니다.')
+						})
+				} catch (err) {
+					alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
+				}
+			}
 			console.log(err)
 		},
 	})
 
 	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) setFiles([...files, e.target.files[0]])
+	}
+
+	const mutateDocs = () => {
+		const FormData = require('form-data')
+		const data = new FormData()
+		data.append(
+			'request',
+			new Blob(
+				[
+					`{ "title": "${title.replace(/"/gi, '&$^%')}", "enroll":"${enroll}", "contents":"${contents
+						.replace(/\n/gi, '<br>')
+						.replace(/"/gi, '&$^%')
+						.replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`,
+				],
+				{ type: 'application/json' }
+			)
+		)
+		if (files !== undefined) for (let i = files.length - 1; i >= 0; i--) data.append('files', files[i], files[i].name)
+		mutate(data)
 	}
 
 	const onClickCreateDocs = async () => {
@@ -62,22 +98,7 @@ const Create = () => {
 			return
 		}
 
-		const FormData = require('form-data')
-		const data = new FormData()
-		data.append(
-			'request',
-			new Blob(
-				[
-					`{ "title": "${title.replace(/"/gi, '&$^%')}", "enroll":"${enroll}", "contents":"${contents
-						.replace(/\n/gi, '<br>')
-						.replace(/"/gi, '&$^%')
-						.replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`,
-				],
-				{ type: 'application/json' }
-			)
-		)
-		if (files !== undefined) for (let i = files.length - 1; i >= 0; i--) data.append('files', files[i], files[i].name)
-		mutate(data)
+		mutateDocs()
 	}
 
 	return (

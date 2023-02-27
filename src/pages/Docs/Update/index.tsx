@@ -35,7 +35,26 @@ const Update = () => {
 				if (err.response.status === 403) {
 					if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
 					else if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
-					else alert('로그인 후 사용 가능한 서비스입니다.')
+					else if (err.response.data.message === 'Forbidden') {
+						document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
+						if (err instanceof axios.AxiosError && err?.response?.status === 403) {
+							try {
+								axios
+									.put('/auth/refresh/access', {
+										refresh_token: FC.getCookie('refresh_token'),
+									})
+									.then((res) => {
+										document.cookie = `authorization=${res.data.accessToken};`
+										mutateDocs()
+									})
+									.catch(() => {
+										alert('로그인 후 이용 가능한 서비스입니다.')
+									})
+							} catch (err) {
+								alert('로그인 후 이용 가능한 서비스입니다.')
+							}
+						}
+					}
 				} else {
 					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
 				}
@@ -53,17 +72,7 @@ const Update = () => {
 		if (e.target.files) setFiles([...files, e.target.files[0]])
 	}
 
-	const onClickUpdateDocs = async () => {
-		if (!user.isLogin) {
-			alert('로그인 후 이용 가능한 서비스입니다.')
-			return
-		}
-
-		if (!contents.length) {
-			alert('문서가 비어있습니다!')
-			return
-		}
-
+	const mutateDocs = () => {
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -78,6 +87,20 @@ const Update = () => {
 		}
 
 		mutate({ data, title: router.title })
+	}
+
+	const onClickUpdateDocs = async () => {
+		if (!user.isLogin) {
+			alert('로그인 후 이용 가능한 서비스입니다.')
+			return
+		}
+
+		if (!contents.length) {
+			alert('문서가 비어있습니다!')
+			return
+		}
+
+		mutateDocs()
 	}
 
 	useQuery('docs', () => getApi.getDocs(router.title as string), {
