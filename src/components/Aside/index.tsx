@@ -21,7 +21,7 @@ const Aside = () => {
 			{data?.map((docs: Docs) => (
 				<S.AsideDocWrap key={docs.id}>
 					<S.AsideList to={`/docs/${docs.title}`}>{FC.asideFormat(docs.title, docs.docsType)}</S.AsideList>
-					<S.AsideLastModified>&nbsp;― {FC.getLastDate(docs.lastModifiedAt)}</S.AsideLastModified>
+					<S.AsideLastModified>&nbsp; {FC.getLastDate(docs.lastModifiedAt)}</S.AsideLastModified>
 				</S.AsideDocWrap>
 			))}
 		</S.AsideWrap>
