@@ -4,6 +4,7 @@ import * as S from './style'
 import axios from 'axios'
 import React from 'react'
 import Docs from 'types/docs'
+import { Helmet } from 'react-helmet'
 
 const Teacher = () => {
 	const [major, setMajor] = React.useState([])
@@ -38,6 +39,13 @@ const Teacher = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 선생님`} />
+				<meta property="og:image" content="images/meta-img.png" />
+				<meta property="og:description" content="여러분이 가꾸어 나가는 역사의 고서 - 선생님" />
+				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
+				<title>부마위키 - 선생님</title>
+			</Helmet>
 			<C.Header />
 			<S.TeacherWrap>
 				<C.Board>

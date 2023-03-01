@@ -6,6 +6,7 @@ import * as FC from 'utils'
 import React from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs'
+import { Helmet } from 'react-helmet'
 
 const Accident = () => {
 	const [accidents, setAccidents] = React.useState([])
@@ -24,6 +25,13 @@ const Accident = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 사건/사고`} />
+				<meta property="og:image" content="images/meta-img.png" />
+				<meta property="og:description" content="여러분이 가꾸어 나가는 역사의 고서 - 사건/사고" />
+				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
+				<title>부마위키 - 사건/사고</title>
+			</Helmet>
 			<C.Header />
 			<S.AccidentWrap>
 				<C.Board>

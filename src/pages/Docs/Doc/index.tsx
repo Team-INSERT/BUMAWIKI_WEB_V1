@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs'
 import { AxiosError } from 'axios'
+import { Helmet } from 'react-helmet'
 
 const initialDocs = {
 	id: -1,
@@ -44,6 +45,15 @@ const Doc = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - ${docs.title} (${FC.typeEditor(docs.docsType)})`} />
+				<meta property="og:image" content="images/meta-img.png" />
+				<meta property="og:description" content={`${docs.contents.slice(0, 20)}...`} />
+				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
+				<title>
+					부마위키 - {docs.title} ({FC.typeEditor(docs.docsType)})
+				</title>
+			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>
