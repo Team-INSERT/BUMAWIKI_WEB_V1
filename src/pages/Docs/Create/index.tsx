@@ -60,7 +60,7 @@ const Create = () => {
 			'request',
 			new Blob(
 				[
-					`{ "title": "${title.replace(/"/gi, '&$^%')}", "enroll":"${enroll}", "contents":"${contents
+					`{ "title": "${title.replace(/"/gi, `"`)}", "enroll":"${enroll}", "contents":"${contents
 						.replace(/\n/gi, '<br>')
 						.replace(/"/gi, '&$^%')
 						.replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`,
@@ -73,8 +73,8 @@ const Create = () => {
 	}
 
 	const onClickCreateDocs = async () => {
-		if (title.includes('?') || title.includes('/')) {
-			alert('제목에는 ?나 /를 넣을 수 없습니다.')
+		if (title.includes('?') || title.includes('/') || title.includes('"')) {
+			alert('제목에는 ?나 /, "를 넣을 수 없습니다.')
 			return
 		}
 
