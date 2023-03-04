@@ -57,7 +57,7 @@ const VersionDetail = () => {
 									마지막 수정 : {FC.dateParser(versionDocs?.thisVersionCreatedAt || '')} | 수정자 : {versionDocs?.nickName}
 								</S.LastUpdateDate>
 								<C.AccodianMenu name="코드 내용" isOpen={false}>
-									<S.DocsContents>{versionDocs?.contents.replace(/<br>/gi, '\n')}</S.DocsContents>
+									<S.DocsContents>{versionDocs?.contents}</S.DocsContents>
 								</C.AccodianMenu>
 								<C.AccodianMenu name="수정된 내용" isOpen={false}>
 									<S.DocsContents
@@ -78,7 +78,7 @@ const VersionDetail = () => {
 								<C.AccodianMenu name="개요">
 									<S.DocsContents
 										dangerouslySetInnerHTML={{
-											__html: FC.documentation(versionDocs?.contents.replace(/<br>/gi, '\n') || ''),
+											__html: FC.documentation(versionDocs?.contents || ''),
 										}}></S.DocsContents>
 								</C.AccodianMenu>
 							</S.DocsContentsLoadWrap>

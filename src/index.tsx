@@ -20,10 +20,11 @@ const queryClient = new QueryClient({
 			if (err instanceof AxiosError) {
 				const { status, code, message } = err
 				if (message && code) {
-					if (status === 403) alert('로그인 후 이용 가능한 서비스입니다.')
+					if (message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
+					else if (message === 'YOUR BANNED') alert('읽기전용 유저는 문서를 편집할 수 없습니다.')
+					else if (status === 403) alert('로그인 후 이용 가능한 서비스입니다.')
 					else if (status === 404) alert('잘못된 접근입니다.')
 					else if (status === 500) alert('서버에 오류가 발생했습니다.')
-					else alert(`오류가 발생했습니다. 관리자에게 문의 바랍니다. 오류코드 : ${status}`)
 				}
 			}
 		},

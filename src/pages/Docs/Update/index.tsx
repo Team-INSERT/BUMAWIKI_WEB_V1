@@ -9,7 +9,6 @@ import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
-import axios from 'axios'
 import FileListArray from 'types/filelistArray'
 
 const Update = () => {
@@ -28,17 +27,6 @@ const Update = () => {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
-		},
-		onError: (err) => {
-			if (err instanceof axios.AxiosError) {
-				const { status, code, message } = err.response?.data
-
-				if (status >= 400) {
-					if (message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
-					else if (message === 'YOUR BANNED') alert('읽기전용 유저는 문서를 편집할 수 없습니다.')
-					else alert(`오류가 발생했습니다. 개발자에게 문의 바랍니다. 오류 코드 : ${code}`)
-				}
-			}
 		},
 	})
 
@@ -88,10 +76,6 @@ const Update = () => {
 			setContents(data.contents)
 			setTitle(data.title)
 		},
-		onError: (err) => {
-			alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-			console.log(err)
-		},
 	})
 
 	return (
@@ -128,15 +112,12 @@ const Update = () => {
 							ref={textareaRef}
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setContents(isOnAutoComplete ? FC.autoClosingTag(e) : e.target.value)}
-							value={contents
-								.replace(/\?\^table.*/gi, '[[프로필]]')
-								.replace(/<br>/gi, '\n')
-								.replace(/&\$\^%/gi, '"')}
+							value={contents.replace(/&\$\^%/gi, '"')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
 							dangerouslySetInnerHTML={{
-								__html: FC.documentation(contents.replace(/<br>/gi, '\n')),
+								__html: FC.documentation(contents),
 							}}
 						/>
 						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>

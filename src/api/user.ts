@@ -1,8 +1,8 @@
-import axios from 'axios'
+import { bumawikiAxios } from 'lib/axios/customAxios'
 import * as FC from 'utils'
 
 export const logoutUser = async () => {
-	return await axios.delete('/auth/bsm/logout', {
+	return await bumawikiAxios.delete('/auth/bsm/logout', {
 		data: {
 			refresh_token: FC.getCookie('refresh_token'),
 		},
@@ -11,7 +11,7 @@ export const logoutUser = async () => {
 
 export const loginUser = async (authCode: string) => {
 	return (
-		await axios.post(
+		await bumawikiAxios.post(
 			'/auth/oauth/bsm',
 			{},
 			{
@@ -22,12 +22,12 @@ export const loginUser = async (authCode: string) => {
 }
 
 export const getOtherUser = async (id: number) => {
-	return (await axios.get(`/user/id/${id}`)).data
+	return (await bumawikiAxios.get(`/user/id/${id}`)).data
 }
 
 export const getUser = async () => {
 	return (
-		await axios.get(`/user`, {
+		await bumawikiAxios.get(`/user`, {
 			headers: {
 				Authorization: FC.getCookie('authorization'),
 			},
@@ -36,7 +36,7 @@ export const getUser = async () => {
 }
 
 export const getRefreshToken = async () => {
-	return await axios.put('/auth/refresh/access', {
+	return await bumawikiAxios.put('/auth/refresh/access', {
 		refresh_token: FC.getCookie('refresh_token'),
 	})
 }

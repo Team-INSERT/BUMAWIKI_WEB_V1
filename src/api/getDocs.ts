@@ -1,21 +1,21 @@
-import axios from 'axios'
+import { bumawikiAxios } from 'lib/axios/customAxios'
 
 export const getDocs = async (title: string) => {
-	return (await axios.get(`/docs/find/title/${title}`)).data
+	return (await bumawikiAxios.get(`/docs/find/title/${title}`)).data
 }
 
 export const getLastModifiedDocs = async () => {
-	return (await axios.get('/docs/find/modified')).data
+	return (await bumawikiAxios.get('/docs/find/modified')).data
 }
 
 export const findDocs = async (title: string) => {
 	console.log(title)
-	return (await axios.get(`/docs/find/all/title/${title}`)).data
+	return (await bumawikiAxios.get(`/docs/find/all/title/${title}`)).data
 }
 
 export const getVersionDocs = async (title: string) => {
 	return (
-		await axios.get(`docs/find/${title}/version`, {
+		await bumawikiAxios.get(`docs/find/${title}/version`, {
 			headers: {
 				'Content-Type': `application/json; charset=utf-8;`,
 			},
@@ -24,5 +24,5 @@ export const getVersionDocs = async (title: string) => {
 }
 
 export const getBaseDocs = async (docsType: string) => {
-	return (await axios.get(`/docs/${docsType}`)).data
+	return (await bumawikiAxios.get(`/docs/${docsType}`)).data
 }

@@ -151,7 +151,7 @@ const Create = () => {
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
 							<S.CreateTableTRDiv
 								dangerouslySetInnerHTML={{
-									__html: FC.documentation(contents.replace(/<br>/gi, '\n')),
+									__html: FC.documentation(contents),
 								}}></S.CreateTableTRDiv>
 						</S.CreateTableTRTextContent>
 					</S.CreateTable>

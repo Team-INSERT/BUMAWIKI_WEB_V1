@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { bumawikiAxios } from 'lib/axios/customAxios'
 import * as FC from 'utils'
 
 interface UpdateDocsTitleProps {
@@ -12,7 +12,7 @@ interface UpdateDocsProps {
 }
 
 export const updateDocsTitle = async ({ title, docsName }: UpdateDocsTitleProps) => {
-	return await axios.put(
+	return await bumawikiAxios.put(
 		`/docs/update/title/${title}`,
 		{
 			title: docsName,
@@ -27,7 +27,7 @@ export const updateDocsTitle = async ({ title, docsName }: UpdateDocsTitleProps)
 
 export const createDocs = async (data: FormData) => {
 	return (
-		await axios.post('/docs/create', data, {
+		await bumawikiAxios.post('/docs/create', data, {
 			headers: {
 				'Content-Type': `multipart/form-data`,
 				Authorization: FC.getCookie('authorization'),
@@ -38,7 +38,7 @@ export const createDocs = async (data: FormData) => {
 }
 
 export const updateDocs = async ({ data, title }: UpdateDocsProps) => {
-	return await axios.put(`docs/update/${title}`, data, {
+	return await bumawikiAxios.put(`docs/update/${title}`, data, {
 		headers: {
 			'Content-Type': `multipart/form-data`,
 			Authorization: FC.getCookie('authorization'),
@@ -47,7 +47,7 @@ export const updateDocs = async ({ data, title }: UpdateDocsProps) => {
 }
 
 export const deleteDocs = async (title: string) => {
-	return await axios.delete(`/docs/delete/${title}`, {
+	return await bumawikiAxios.delete(`/docs/delete/${title}`, {
 		headers: {
 			Authorization: FC.getCookie('authorization'),
 		},
