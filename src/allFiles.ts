@@ -13,15 +13,15 @@ import SubFooter from './components/Section/SubFooter'
 import ScrollBtn from './components/Button/Scroll'
 import Docs from './pages/Docs/Doc'
 import Search from './pages/Docs/Search'
-import Signup from './pages/Docs/Users/SignUp/Signup'
+import Signup from 'pages/Users/SignUp/Signup'
 import Create from './pages/Docs/Create'
 import Update from './pages/Docs/Update'
 import NotFound from './pages/Docs/NotFound'
 import Version from './pages/Docs/Version/Version'
 import DetailBtn from './components/Button/Detail'
-import MyPage from './pages/Docs/Users/MyPage'
+import MyPage from './pages/Users/MyPage'
 import VersionDetail from './pages/Docs/Version/VersionDetail'
-import User from './pages/Docs/Users/User'
+import User from 'pages/Users/User'
 
 export {
 	Home,
