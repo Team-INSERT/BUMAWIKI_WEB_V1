@@ -21,9 +21,8 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	const updateDocsTitleMutation = useMutation(api.updateDocsTitle, {
 		onSuccess: (res) => {
 			alert('문서 이름이 변경되었습니다!')
-			queryClient.invalidateQueries('docs')
+			queryClient.invalidateQueries('lastModifiedDocs')
 			navigate(`/docs/${res.data.title}`)
-			window.location.reload()
 		},
 		onError: () => alert('문서 이름 변경 도중 오류가 발생했습니다.'),
 	})
@@ -39,9 +38,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			alert('문서가 삭제되었습니다!')
 			navigate('/')
 		},
-		onError: (err) => {
-			alert('문서 삭제 도중 오류가 발생했습니다.')
-		},
+		onError: () => alert('문서 삭제 도중 오류가 발생했습니다.'),
 	})
 
 	const onClickChangeDocsName = async () => {
@@ -54,9 +51,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 
 	const onClickDeleteDocs = async () => {
 		const result = window.confirm('정말 삭제하시겠습니까?')
-		if (result) {
-			deleteDocsTitleMutation.mutate(docsId)
-		}
+		if (result) deleteDocsTitleMutation.mutate(docsId)
 	}
 
 	return (

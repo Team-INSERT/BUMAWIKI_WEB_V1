@@ -5,25 +5,19 @@ import * as S from './style'
 
 import userState from 'context/userState'
 import React from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation } from 'react-query'
 import { useRecoilValue } from 'recoil'
 import Contributors from 'types/contributors'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
-	const queryClient = useQueryClient()
 
 	const { mutate } = useMutation(api.logoutUser, {
 		onSuccess: () => {
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			queryClient.invalidateQueries('user')
-			window.location.reload()
 		},
-		onError: (err) => {
-			alert('로그아웃에 실패했습니다.')
-			console.log(err)
-		},
+		onError: () => alert('로그아웃에 실패했습니다.'),
 	})
 
 	return (

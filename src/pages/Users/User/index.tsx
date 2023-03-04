@@ -20,10 +20,7 @@ const User = () => {
 		onSuccess: (data) => {
 			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
 		},
-		onError: (err) => {
-			alert('유저 정보를 불러오는 도중 오류가 발생했습니다.')
-			console.log(err)
-		},
+		onError: () => alert('유저 정보를 불러오는 도중 오류가 발생했습니다.'),
 	})
 
 	return (
@@ -52,9 +49,7 @@ const User = () => {
 									{user.contributeDocs.map((docs: Contributors, index) => (
 										<span key={index}>
 											문서명 :&nbsp;
-											<S.ContributeLink to={`/docs/${docs.title}`}>
-												{docs.title}
-											</S.ContributeLink>
+											<S.ContributeLink to={`/docs/${docs.title}`}>{docs.title}</S.ContributeLink>
 											<br />
 											수정 날짜 : {FC.dateParser(docs.createTime)}
 										</span>
