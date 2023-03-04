@@ -26,7 +26,6 @@ const Create = () => {
 			alert('문서가 생성되었습니다!')
 			navigate(`/docs/${data.title}`)
 		},
-		onError: () => alert('로그인 후 이용 가능한 서비스입니다.'),
 	})
 
 	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,23 +37,17 @@ const Create = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob(
-				[
-					`{ "title": "${title.replace(/"/gi, `"`)}", "enroll":"${enroll}", "contents":"${contents
-						.replace(/\n/gi, '<br>')
-						.replace(/"/gi, '&$^%')
-						.replace(/\\/gi, '\\\\')}", "docsType":"${docsType}"}`,
-				],
-				{ type: 'application/json' }
-			)
+			new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}"}`], {
+				type: 'application/json',
+			})
 		)
 		files.reverse().forEach((file) => data.append('files', file, file.name))
 		mutate(data)
 	}
 
 	const onClickCreateDocs = async () => {
-		if (title.includes('?') || title.includes('/') || title.includes('"')) {
-			alert('제목에는 ?나 /, "를 넣을 수 없습니다.')
+		if (title.includes('?') || title.includes('/') || title.includes('"') || title.includes('\\')) {
+			alert('문서명에는 물음표나 쌍따옴표, 슬래시나 역슬래시를 넣을 수 없습니다.')
 			return
 		}
 

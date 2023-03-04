@@ -12,21 +12,19 @@ const Teacher = () => {
 	const [mentor, setMentor] = React.useState([])
 
 	const getTeacherDocs = async (router: string) => {
-		try {
-			const res = await axios.get(`/docs/${router}`)
-			const data = res.data.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
+		const res = await axios.get(`/docs/${router}`)
+		const data = res.data.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 
-			if (router === 'teacher') {
-				setHumanities(data)
-				getTeacherDocs('majorTeacher')
-			} else if (router === 'majorTeacher') {
-				setMajor(data)
-				getTeacherDocs('mentorTeacher')
-			} else if (router === 'mentorTeacher') {
-				setMentor(data)
-			}
-		} catch (err) {
-			return
+		if (router === 'teacher') {
+			setHumanities(data)
+			getTeacherDocs('majorTeacher')
+		}
+		if (router === 'majorTeacher') {
+			setMajor(data)
+			getTeacherDocs('mentorTeacher')
+		}
+		if (router === 'mentorTeacher') {
+			setMentor(data)
 		}
 	}
 

@@ -15,7 +15,7 @@ const Signup = () => {
 			navigate('/')
 			window.location.reload()
 		},
-		onError: (err) => {
+		onError: () => {
 			navigate('/')
 			alert('로그인 도중 오류가 발생했습니다.')
 		},

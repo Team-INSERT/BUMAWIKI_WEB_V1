@@ -1,5 +1,4 @@
 import * as R from './allFiles'
-import * as FC from 'utils'
 import * as api from 'api/user'
 
 import userState from 'context/userState'

@@ -17,7 +17,6 @@ const MyPage = () => {
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 		},
-		onError: () => alert('로그아웃에 실패했습니다.'),
 	})
 
 	return (

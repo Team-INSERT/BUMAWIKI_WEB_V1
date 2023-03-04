@@ -20,7 +20,6 @@ const User = () => {
 		onSuccess: (data) => {
 			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
 		},
-		onError: () => alert('유저 정보를 불러오는 도중 오류가 발생했습니다.'),
 	})
 
 	return (
