@@ -14,26 +14,12 @@ const App = () => {
 	const setUser = useSetRecoilState(userState)
 
 	const refreshLogin = async () => {
-		try {
-			const data = await api.getUser()
-			setUser({
-				...data,
-				contributeDocs: data.contributeDocs.reverse(),
-				isLogin: true,
-			})
-		} catch (err) {
-			document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
-				axios
-					.put('/auth/refresh/access', {
-						refresh_token: FC.getCookie('refresh_token'),
-					})
-					.then((res) => {
-						document.cookie = `authorization=${res.data.accessToken};`
-						window.location.reload()
-					})
-			}
-		}
+		const data = await api.getUser()
+		setUser({
+			...data,
+			contributeDocs: data.contributeDocs.reverse(),
+			isLogin: true,
+		})
 	}
 
 	React.useEffect(() => {

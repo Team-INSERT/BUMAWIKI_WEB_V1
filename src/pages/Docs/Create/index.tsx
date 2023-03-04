@@ -9,7 +9,6 @@ import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import FileListArray from 'types/filelistArray'
-import axios from 'axios'
 
 const Create = () => {
 	const navigate = useNavigate()
@@ -27,23 +26,7 @@ const Create = () => {
 			alert('문서가 생성되었습니다!')
 			navigate(`/docs/${data.title}`)
 		},
-		onError: (err) => {
-			if (err instanceof axios.AxiosError && err?.response?.status === 403) {
-				try {
-					axios
-						.put('/auth/refresh/access', {
-							refresh_token: FC.getCookie('refresh_token'),
-						})
-						.then((res) => {
-							document.cookie = `authorization=${res.data.accessToken};`
-							mutateDocs()
-						})
-						.catch(() => alert('로그인 후 이용 가능한 서비스입니다.'))
-				} catch (err) {
-					alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
-				}
-			}
-		},
+		onError: () => alert('로그인 후 이용 가능한 서비스입니다.'),
 	})
 
 	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {

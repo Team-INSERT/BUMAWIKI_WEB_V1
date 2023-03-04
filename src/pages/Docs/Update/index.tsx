@@ -30,33 +30,13 @@ const Update = () => {
 			navigate(`/docs/${router.title}`)
 		},
 		onError: (err) => {
-			console.log(err)
-			if (err instanceof axios.AxiosError && err.response !== undefined) {
-				if (err.response.status === 403) {
-					if (err.response.data.message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
-					else if (err.response.data.error === 'Forbidden') alert('읽기전용 유저입니다.')
-					else if (err.response.data.message === 'Forbidden') {
-						document.cookie = `authorization=;expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-						if (err instanceof axios.AxiosError && err?.response?.status === 403) {
-							try {
-								axios
-									.put('/auth/refresh/access', {
-										refresh_token: FC.getCookie('refresh_token'),
-									})
-									.then((res) => {
-										document.cookie = `authorization=${res.data.accessToken};`
-										mutateDocs()
-									})
-									.catch(() => {
-										alert('로그인 후 이용 가능한 서비스입니다.')
-									})
-							} catch (err) {
-								alert('로그인 후 이용 가능한 서비스입니다.')
-							}
-						}
-					}
-				} else {
-					alert(`오류가 발생했습니다. 개별적으로 관리자에게 문의바랍니다. 오류코드 : ${err.response.status}`)
+			if (err instanceof axios.AxiosError) {
+				const { status, code, message } = err.response?.data
+
+				if (status >= 400) {
+					if (message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
+					else if (message === 'YOUR BANNED') alert('읽기전용 유저는 문서를 편집할 수 없습니다.')
+					else alert(`오류가 발생했습니다. 개발자에게 문의 바랍니다. 오류 코드 : ${code}`)
 				}
 			}
 		},
@@ -77,7 +57,7 @@ const Update = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "contents": "${contents.replace(/\n/gi, '<br>').replace(/"/gi, '&$^%').replace(/\\/gi, '/')}" }`], {
+			new Blob([`{ "contents": "${contents}" }`], {
 				type: 'application/json',
 			}),
 			{ contentType: 'application/json' }
