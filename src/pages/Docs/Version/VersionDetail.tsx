@@ -6,19 +6,12 @@ import * as api from 'api/getDocs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
+import { VersionDocsInfo, VersionDocsService } from 'types/versionDocs'
 
 const VersionDetail = () => {
 	const router = useParams()
-	const [docs, setDocs] = React.useState({
-		title: '',
-		docsType: '',
-	})
-	const [versionDocs, setVersionDocs] = React.useState({
-		contents: '',
-		nickName: '',
-		thisVersionCreatedAt: '',
-		userId: '',
-	})
+	const [docs, setDocs] = React.useState<VersionDocsInfo>()
+	const [versionDocs, setVersionDocs] = React.useState<VersionDocsService>()
 	const [prevContents, setPrevContents] = React.useState('')
 	const [nextContents, setNextContents] = React.useState('')
 	const [isLoad, setIsLoad] = React.useState(false)
@@ -61,10 +54,10 @@ const VersionDetail = () => {
 						{isLoad ? (
 							<S.DocsContentsLoadWrap>
 								<S.LastUpdateDate>
-									마지막 수정 : {FC.dateParser(versionDocs.thisVersionCreatedAt)} | 수정자 : {versionDocs.nickName}
+									마지막 수정 : {FC.dateParser(versionDocs?.thisVersionCreatedAt || '')} | 수정자 : {versionDocs?.nickName}
 								</S.LastUpdateDate>
 								<C.AccodianMenu name="코드 내용" isOpen={false}>
-									<S.DocsContents>{versionDocs.contents.replace(/<br>/gi, '\n')}</S.DocsContents>
+									<S.DocsContents>{versionDocs?.contents.replace(/<br>/gi, '\n')}</S.DocsContents>
 								</C.AccodianMenu>
 								<C.AccodianMenu name="수정된 내용" isOpen={false}>
 									<S.DocsContents
@@ -85,7 +78,7 @@ const VersionDetail = () => {
 								<C.AccodianMenu name="개요">
 									<S.DocsContents
 										dangerouslySetInnerHTML={{
-											__html: FC.documentation(versionDocs?.contents.replace(/<br>/gi, '\n')),
+											__html: FC.documentation(versionDocs?.contents.replace(/<br>/gi, '\n') || ''),
 										}}></S.DocsContents>
 								</C.AccodianMenu>
 							</S.DocsContentsLoadWrap>

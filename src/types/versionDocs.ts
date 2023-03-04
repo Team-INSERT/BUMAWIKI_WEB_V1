@@ -4,4 +4,16 @@ interface VersionDocs {
 	nickName: string
 }
 
-export default VersionDocs
+interface VersionDocsInfo {
+	title: string
+	docsType: string
+}
+
+interface VersionDocsService {
+	contents: string
+	nickName: string
+	thisVersionCreatedAt: string
+	userId: string
+}
+
+export { VersionDocs, VersionDocsInfo, VersionDocsService }

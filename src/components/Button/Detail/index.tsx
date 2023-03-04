@@ -24,7 +24,6 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			queryClient.invalidateQueries('lastModifiedDocs')
 			navigate(`/docs/${res.data.title}`)
 		},
-		onError: () => alert('문서 이름 변경 도중 오류가 발생했습니다.'),
 	})
 
 	const onClickNavigatePage = (type: string) => {
@@ -38,7 +37,6 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			alert('문서가 삭제되었습니다!')
 			navigate('/')
 		},
-		onError: () => alert('문서 삭제 도중 오류가 발생했습니다.'),
 	})
 
 	const onClickChangeDocsName = async () => {
