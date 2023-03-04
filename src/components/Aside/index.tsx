@@ -7,11 +7,7 @@ import Docs from 'types/docs'
 import { useQuery } from 'react-query'
 
 const Aside = () => {
-	const { data } = useQuery('lastModifiedDocs', api.getLastModifiedDocs, {
-		onError: (err) => {
-			console.log(err)
-		},
-	})
+	const { data } = useQuery('lastModifiedDocs', api.getLastModifiedDocs)
 
 	return (
 		<S.AsideWrap>

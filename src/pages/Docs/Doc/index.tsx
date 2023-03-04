@@ -34,7 +34,6 @@ const Doc = () => {
 		onError: (err: AxiosError) => {
 			if (err.message.includes('404') || err.message.includes('500')) navigate('/404')
 			else alert('오류가 발생하여 문서를 불러올 수 없습니다.')
-			console.log(err)
 		},
 	})
 

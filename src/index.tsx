@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.scss'
 import App from './App'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryCache, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
 
@@ -14,6 +14,11 @@ const queryClient = new QueryClient({
 			suspense: false,
 		},
 	},
+	queryCache: new QueryCache({
+		onError: (err) => {
+			console.log(err)
+		},
+	}),
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

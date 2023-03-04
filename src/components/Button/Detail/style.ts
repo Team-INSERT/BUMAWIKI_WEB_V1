@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const DetailButtonWrap = styled.div`
@@ -10,7 +9,7 @@ export const DetailWrap = styled.div`
 	cursor: pointer;
 `
 
-export const DetailLinkWrap = styled(Link)`
+export const DetailLinkWrap = styled.div`
 	text-decoration: none;
 	cursor: pointer;
 

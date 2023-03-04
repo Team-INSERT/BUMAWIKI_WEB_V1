@@ -82,9 +82,9 @@ const Update = () => {
 			}),
 			{ contentType: 'application/json' }
 		)
-		for (let i = files.length - 1; i >= 0; i--) {
-			data.append('files', files[i], files[i].name)
-		}
+		files.reverse().forEach((file) => {
+			data.append('files', file, file.name)
+		})
 
 		mutate({ data, title: router.title })
 	}

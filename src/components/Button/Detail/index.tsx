@@ -25,11 +25,14 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			navigate(`/docs/${res.data.title}`)
 			window.location.reload()
 		},
-		onError: (err) => {
-			alert('오류가 발생했습니다.')
-			console.log(err)
-		},
+		onError: () => alert('문서 이름 변경 도중 오류가 발생했습니다.'),
 	})
+
+	const onClickNavigatePage = (type: string) => {
+		if (type === 'VERSION') navigate(`/version/${router.title}`)
+		else if (type === 'UPDATE' && !user.isLogin) alert('로그인 후 편집하실 수 있습니다!')
+		else navigate(`/update/${router.title}`)
+	}
 
 	const deleteDocsTitleMutation = useMutation(api.deleteDocs as MutationFunction, {
 		onSuccess: () => {
@@ -37,8 +40,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 			navigate('/')
 		},
 		onError: (err) => {
-			alert('오류가 발생했습니다.')
-			console.log(err)
+			alert('문서 삭제 도중 오류가 발생했습니다.')
 		},
 	})
 
@@ -58,41 +60,35 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	}
 
 	return (
-		<>
-			{user.isLogin ? (
-				<S.DetailButtonWrap>
-					{user.authority === 'ADMIN' ? (
-						<>
-							<S.DetailWrap onClick={onClickDeleteDocs}>
-								<S.DetailButton>
-									<S.DetailText>삭제</S.DetailText>
-								</S.DetailButton>
-							</S.DetailWrap>
-							<S.DetailInput value={docsName} onChange={(e) => setDocsName(e.target.value)} />
-							<S.DetailWrap onClick={onClickChangeDocsName}>
-								<S.DetailButton>
-									<S.DetailText>변경</S.DetailText>
-								</S.DetailButton>
-							</S.DetailWrap>
-						</>
-					) : (
-						''
-					)}
-					<S.DetailLinkWrap to={`/update/${router.title}`}>
+		<S.DetailButtonWrap>
+			{user.authority === 'ADMIN' ? (
+				<>
+					<S.DetailWrap onClick={onClickDeleteDocs}>
 						<S.DetailButton>
-							<S.DetailText>편집</S.DetailText>
+							<S.DetailText>삭제</S.DetailText>
 						</S.DetailButton>
-					</S.DetailLinkWrap>
-					<S.DetailLinkWrap to={`/version/${router.title}`}>
+					</S.DetailWrap>
+					<S.DetailInput value={docsName} onChange={(e) => setDocsName(e.target.value)} />
+					<S.DetailWrap onClick={onClickChangeDocsName}>
 						<S.DetailButton>
-							<S.DetailText>기록</S.DetailText>
+							<S.DetailText>변경</S.DetailText>
 						</S.DetailButton>
-					</S.DetailLinkWrap>
-				</S.DetailButtonWrap>
+					</S.DetailWrap>
+				</>
 			) : (
 				''
 			)}
-		</>
+			<S.DetailLinkWrap onClick={() => onClickNavigatePage('UPDATE')}>
+				<S.DetailButton>
+					<S.DetailText>편집</S.DetailText>
+				</S.DetailButton>
+			</S.DetailLinkWrap>
+			<S.DetailLinkWrap onClick={() => onClickNavigatePage('VERSION')}>
+				<S.DetailButton>
+					<S.DetailText>기록</S.DetailText>
+				</S.DetailButton>
+			</S.DetailLinkWrap>
+		</S.DetailButtonWrap>
 	)
 }
 

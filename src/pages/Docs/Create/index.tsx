@@ -38,14 +38,11 @@ const Create = () => {
 							document.cookie = `authorization=${res.data.accessToken};`
 							mutateDocs()
 						})
-						.catch(() => {
-							alert('로그인 후 이용 가능한 서비스입니다.')
-						})
+						.catch(() => alert('로그인 후 이용 가능한 서비스입니다.'))
 				} catch (err) {
 					alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.')
 				}
 			}
-			console.log(err)
 		},
 	})
 
@@ -68,7 +65,7 @@ const Create = () => {
 				{ type: 'application/json' }
 			)
 		)
-		if (files !== undefined) for (let i = files.length - 1; i >= 0; i--) data.append('files', files[i], files[i].name)
+		files.reverse().forEach((file) => data.append('files', file, file.name))
 		mutate(data)
 	}
 

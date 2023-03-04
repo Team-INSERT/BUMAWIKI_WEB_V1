@@ -19,12 +19,8 @@ const Header = () => {
 	const navigate = R.useNavigate()
 
 	const navigateSearchResult = () => {
-		if (search.length === 0) {
-			alert('검색할 문서명을 입력해주세요!')
-		} else {
-			navigate(`/search/${search}`)
-			window.location.reload()
-		}
+		if (search.length === 0) alert('검색할 문서명을 입력해주세요!')
+		else navigate(`/search/${search}`)
 	}
 	React.useEffect(() => {
 		if (user.id) setIsLoad(true)

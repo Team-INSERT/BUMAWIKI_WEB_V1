@@ -5,7 +5,7 @@ import React from 'react'
 
 const NotFound = () => {
 	return (
-		<div>
+		<>
 			<C.Header />
 			<S.NotFoundWrap>
 				<C.Board>
@@ -14,7 +14,7 @@ const NotFound = () => {
 				<C.Aside />
 			</S.NotFoundWrap>
 			<C.Footer />
-		</div>
+		</>
 	)
 }
 

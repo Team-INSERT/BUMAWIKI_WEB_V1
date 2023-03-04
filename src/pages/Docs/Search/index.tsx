@@ -4,7 +4,7 @@ import * as api from 'api/getDocs'
 import * as FC from 'utils'
 import * as S from './style'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs'
 
@@ -14,17 +14,19 @@ const Search = () => {
 	const [result, setResult] = React.useState([])
 	const [isLoad, setIsLoad] = React.useState(false)
 
-	useQuery('findDocs', () => api.findDocs(router.result as string), {
+	const { refetch } = useQuery('findDocs', () => api.findDocs(router.result as string), {
 		onSuccess: (data) => {
 			if (data.length === 1) navigate(`/docs/${data[0].title}`)
 			setResult(data)
 			setIsLoad(true)
 		},
-		onError: (err) => {
-			alert('검색 도중 오류가 발생했습니다.')
-			console.log(err)
-		},
+		onError: () => setIsLoad(false),
 	})
+
+	useEffect(() => {
+		refetch()
+		// eslint-disable-next-line
+	}, [router])
 
 	return (
 		<>
