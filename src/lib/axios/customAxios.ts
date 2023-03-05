@@ -2,7 +2,7 @@ import axios from 'axios'
 import tokenExpired from 'lib/token/tokenExpired'
 
 const bumawikiAxios = axios.create({
-	baseURL: process.env.REACT_APP_BASE_URL,
+	baseURL: 'http://bumawiki.kro.kr/api',
 	timeout: 10000,
 })
 
