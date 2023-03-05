@@ -9,7 +9,7 @@ import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
-import FileListArray from 'types/filelistArray'
+import UpdateDocsType from 'types/updateDocs'
 
 const Update = () => {
 	const router = R.useParams()
@@ -17,9 +17,12 @@ const Update = () => {
 	const navigate = R.useNavigate()
 	const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
-	const [title, setTitle] = React.useState('')
-	const [contents, setContents] = React.useState('')
-	const [files, setFiles] = React.useState<FileListArray[]>([])
+	const [docs, setDocs] = React.useState<UpdateDocsType>({
+		title: '',
+		contents: '',
+		files: [],
+	})
+
 	const [fileInput, setFileInput] = React.useState([''])
 	const [isOnAutoComplete, setIsOnAutoComplete] = React.useState(JSON.parse(localStorage.getItem('autoComplete') || 'true'))
 
@@ -37,7 +40,7 @@ const Update = () => {
 	}
 
 	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) setFiles([...files, e.target.files[0]])
+		if (e.target.files) setDocs({ ...docs, files: [...docs.files, e.target.files[0]] })
 	}
 
 	const mutateDocs = () => {
@@ -45,27 +48,27 @@ const Update = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "contents": "${contents}" }`], {
+			new Blob([`{ "contents": "${docs.contents}" }`], {
 				type: 'application/json',
 			}),
 			{ contentType: 'application/json' }
 		)
-		files.reverse().forEach((file) => data.append('files', file, file.name))
+		docs.files.reverse().forEach((file) => data.append('files', file, file.name))
 
 		mutate({ data, title: router.title })
 	}
 
 	const onClickUpdateDocs = async () => {
 		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
-		if (!contents.length) return alert('문서가 비어있습니다!')
+		if (!docs.contents.length) return alert('문서가 비어있습니다!')
 
 		mutateDocs()
 	}
 
 	useQuery('docs', () => getApi.getDocs(router.title as string), {
 		onSuccess: (data) => {
-			setContents(data.contents)
-			setTitle(data.title)
+			setDocs({ ...docs, contents: data.contents })
+			setDocs({ ...docs, title: data.title })
 		},
 	})
 
@@ -75,7 +78,7 @@ const Update = () => {
 			<S.DocsWrap>
 				<C.Board>
 					<S.DocsTitleWrap>
-						<S.DocsTitleText>문서 편집 : {title}</S.DocsTitleText>
+						<S.DocsTitleText>문서 편집 : {docs.title}</S.DocsTitleText>
 					</S.DocsTitleWrap>
 					<S.DocsExampleImage src="/images/docs-example.png" alt="문서작성법" />
 					<S.DocsLine />
@@ -87,7 +90,7 @@ const Update = () => {
 							<S.FileAddButton>+</S.FileAddButton>
 							<S.FileAddText>사진 더 선택하기</S.FileAddText>
 						</S.FileAddWrap>
-						<S.DocsNeedFileText>문서에 필요한 사진태그 개수 : {files.length}개</S.DocsNeedFileText>
+						<S.DocsNeedFileText>문서에 필요한 사진태그 개수 : {docs.files.length}개</S.DocsNeedFileText>
 						<S.AutoCompleteToggleWrap onClick={onClickAutoComplete}>
 							<S.AutoCompleteToggleText>자동완성</S.AutoCompleteToggleText>
 							<S.AutoCompleteToggleButton color={isOnAutoComplete ? '#274168' : 'white'}>
@@ -102,13 +105,13 @@ const Update = () => {
 						<S.UpdateTextarea
 							ref={textareaRef}
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
-							onChange={(e) => setContents(isOnAutoComplete ? FC.autoClosingTag(e) : e.target.value)}
-							value={contents.replace(/&\$\^%/gi, '"')}
+							onChange={(e) => setDocs(isOnAutoComplete ? { ...docs, contents: FC.autoClosingTag(e) } : { ...docs, contents: e.target.value })}
+							value={docs.contents.replace(/&\$\^%/gi, '"')}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
 							dangerouslySetInnerHTML={{
-								__html: FC.documentation(contents),
+								__html: FC.documentation(docs.contents),
 							}}
 						/>
 						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>
