@@ -7,7 +7,7 @@ import userState from 'context/userState'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { useRecoilValue } from 'recoil'
-import Contributors from 'types/contributors'
+import Contributors from 'types/contributors.type'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)

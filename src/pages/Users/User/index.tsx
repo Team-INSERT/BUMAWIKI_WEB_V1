@@ -5,7 +5,7 @@ import * as api from 'api/user'
 
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import Contributors from 'types/contributors'
+import Contributors from 'types/contributors.type'
 import { useQuery } from 'react-query'
 import UserType from 'types/user'
 
