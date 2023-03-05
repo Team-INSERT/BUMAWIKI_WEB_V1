@@ -1,18 +1,17 @@
-const dateParser = (date: string) => {
+import moment from 'moment'
+
+const dateParser = (UTC: string) => {
+	const weeks = ['일', '월', '화', '수', '목', '금', '토']
+	const date = moment(UTC)
+
 	const PARSING_DATE = `
-    ${date.substring(0, 4)}년 
-    ${parseInt(date.substring(5, 7)) - 10 >= 0 ? date.substring(5, 7) : date.substring(6, 7)}월 
-    ${parseInt(date.substring(8, 10)) - 10 >= 0 ? date.substring(8, 10) : date.substring(9, 10)}일
-    ${
-			parseInt(date.substring(11, 13)) >= 12
-				? parseInt(date.substring(11, 13)) === 12
-					? `오후 ${parseInt(date.substring(11, 13))}`
-					: `오후 ${parseInt(date.substring(11, 13)) - 12}`
-				: parseInt(date.substring(11, 13)) === 0
-				? '오전 12'
-				: `오전 ${parseInt(date.substring(11, 13))}`
-		}시 
-    ${parseInt(date.substring(14, 16)) - 10 >= 0 ? date.substring(14, 16) : date.substring(15, 16)}분`
+    ${date.year()}년 
+    ${date.month() + 1}월 
+    ${date.date()}일
+	${weeks[date.day()]}요일
+    ${date.format('A') === 'PM' ? '오후' : '오전'}
+	${date.format('A') === 'PM' ? date.hour() - 12 : date.hour()}시 
+    ${date.minute()}분`
 
 	return PARSING_DATE
 }
