@@ -6,7 +6,7 @@ import * as S from './style'
 
 import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
-import Docs from 'types/docs'
+import Docs from 'types/docs.type'
 
 const Search = () => {
 	const router = R.useParams()

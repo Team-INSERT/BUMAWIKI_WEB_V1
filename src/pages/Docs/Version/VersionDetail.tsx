@@ -6,7 +6,7 @@ import * as api from 'api/getDocs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { VersionDocsInfo, VersionDocsService } from 'types/versionDocs'
+import { VersionDocsInfo, VersionDocsService } from 'types/version.type'
 
 const VersionDetail = () => {
 	const router = useParams()

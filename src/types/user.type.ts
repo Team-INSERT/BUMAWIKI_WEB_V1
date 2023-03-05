@@ -1,4 +1,4 @@
-import ContibuteDocsType from './contributeDocs'
+import ContibuteDocsType from './contributeDocs.type'
 
 interface UserType {
 	id: number

@@ -8,7 +8,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import CreateDocsType from 'types/createDocs'
+import CreateDocsType from 'types/create.type'
 
 const Create = () => {
 	const navigate = useNavigate()

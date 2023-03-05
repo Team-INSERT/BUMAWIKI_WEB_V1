@@ -7,7 +7,7 @@ import * as V from './style'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { VersionDocs } from 'types/versionDocs'
+import { VersionDocs } from 'types/version.type'
 
 const Version = () => {
 	const router = useParams()

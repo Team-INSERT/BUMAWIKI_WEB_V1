@@ -9,7 +9,7 @@ import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
-import UpdateDocsType from 'types/updateDocs'
+import UpdateDocsType from 'types/update.type.'
 
 const Update = () => {
 	const router = R.useParams()

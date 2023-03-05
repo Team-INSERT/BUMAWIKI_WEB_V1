@@ -6,7 +6,7 @@ import * as api from 'api/getDocs'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import Docs from 'types/docs'
+import Docs from 'types/docs.type'
 import { AxiosError } from 'axios'
 import { Helmet } from 'react-helmet'
 

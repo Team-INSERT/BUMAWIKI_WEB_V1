@@ -7,7 +7,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import Contributors from 'types/contributors.type'
 import { useQuery } from 'react-query'
-import UserType from 'types/user'
+import UserType from 'types/user.type'
 
 const User = () => {
 	const [user, setUser] = React.useState<UserType>()

@@ -4,7 +4,7 @@ import * as api from 'api/getDocs'
 
 import React from 'react'
 import axios from 'axios'
-import Docs from 'types/docs'
+import Docs from 'types/docs.type'
 import { useQuery } from 'react-query'
 import { Helmet } from 'react-helmet'
 

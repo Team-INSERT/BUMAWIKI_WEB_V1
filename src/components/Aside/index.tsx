@@ -3,7 +3,7 @@ import * as FC from 'utils'
 import * as api from 'api/getDocs'
 
 import React from 'react'
-import Docs from 'types/docs'
+import Docs from 'types/docs.type'
 import { useQuery } from 'react-query'
 
 const Aside = () => {

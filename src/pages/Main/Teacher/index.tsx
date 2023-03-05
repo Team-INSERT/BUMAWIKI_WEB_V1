@@ -3,7 +3,7 @@ import * as S from './style'
 
 import axios from 'axios'
 import React from 'react'
-import Docs from 'types/docs'
+import Docs from 'types/docs.type'
 import { Helmet } from 'react-helmet'
 
 const Teacher = () => {

@@ -1,4 +1,4 @@
-import FileListArray from './filelistArray'
+import FileListArray from './filelistArray.type'
 
 interface CreateDocsType {
 	title: string
