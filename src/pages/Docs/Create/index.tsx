@@ -8,25 +8,20 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
-import FileListArray from 'types/filelistArray'
+import CreateDocsType from 'types/createDocs'
 
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
 
-	const [docs, setDocs] = React.useState({
+	const [docs, setDocs] = React.useState<CreateDocsType>({
 		title: decodeURI(window.location.search.replace('?name=', '')) || '',
+		contents: '',
 		docsType: '',
 		enroll: -1,
 		files: [],
 	})
-
-	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
-	const [docsType, setDocsType] = React.useState<string>('')
-	const [contents, setContents] = React.useState<string>('')
-	const [enroll, setEnroll] = React.useState<number>()
-	const [files, setFiles] = React.useState<FileListArray[]>([])
 
 	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
@@ -40,21 +35,21 @@ const Create = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "title": "${title}", "enroll":"${enroll}", "contents":"${contents}", "docsType":"${docsType}"}`], {
+			new Blob([`{ "title": "${docs.title}", "enroll":"${docs.enroll}", "contents":"${docs.contents}", "docsType":"${docs.docsType}"}`], {
 				type: 'application/json',
 			})
 		)
-		files.reverse().forEach((file) => data.append('files', file, file.name))
+		docs.files.reverse().forEach((file) => data.append('files', file, file.name))
 		mutate(data)
 	}
 
 	const onClickCreateDocs = () => {
-		if (title.includes('?') || title.includes('/') || title.includes('"') || title.includes('\\'))
+		if (docs.title.includes('?') || docs.title.includes('/') || docs.title.includes('"') || docs.title.includes('\\'))
 			return alert('문서명에는 물음표나 쌍따옴표, 슬래시나 역슬래시를 넣을 수 없습니다.')
 		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
-		if (!enroll) return alert('연도를 선택해주세요!')
-		if (!title.length) return alert('문서의 이름을 정해주세요!')
-		if (!docsType) return alert('문서의 분류를 선택해주세요!')
+		if (!docs.enroll) return alert('연도를 선택해주세요!')
+		if (!docs.title.length) return alert('문서의 이름을 정해주세요!')
+		if (!docs.docsType) return alert('문서의 분류를 선택해주세요!')
 
 		mutateDocs()
 	}
@@ -74,28 +69,28 @@ const Create = () => {
 								{user.authority === 'ADMIN' ? (
 									<>
 										<label htmlFor="STUDENT">학생</label>
-										<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="STUDENT" name="radio" />
+										<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="STUDENT" name="radio" />
 									</>
 								) : (
 									''
 								)}
 								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.value })} id="TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="MAJOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="MAJOR_TEACHER" name="radio" />
 								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="MENTOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="MENTOR_TEACHER" name="radio" />
 								<label htmlFor="ACCIDENT">사건/사고</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="ACCIDENT" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="ACCIDENT" name="radio" />
 								<label htmlFor="CLUB">전공동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="FREE_CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FREE_CLUB" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
 							<S.CreateTableTRTitle>문서 이름</S.CreateTableTRTitle>
-							<S.CreateTableTRInputContents onChange={(e) => setTitle(e.target.value)} value={title} />
+							<S.CreateTableTRInputContents onChange={(e) => setDocs({ ...docs, title: e.target.value })} value={docs.title} />
 						</S.CreateTableTR>
 						<S.CreateTableTR>
 							<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
@@ -103,7 +98,12 @@ const Create = () => {
 								{years.map((year, index) => (
 									<div key={index}>
 										<S.EnrollLabel htmlFor={`${year}`}>{year}년</S.EnrollLabel>
-										<S.CreateTableRadio type="radio" onChange={(e) => setEnroll(parseInt(e.target.id))} id={`${year}`} name="radios" />
+										<S.CreateTableRadio
+											type="radio"
+											onChange={(e) => setDocs({ ...docs, enroll: parseInt(e.target.id) })}
+											id={`${year}`}
+											name="radios"
+										/>
 									</div>
 								))}
 							</S.CreateTableTRContents>
@@ -123,7 +123,7 @@ const Create = () => {
 										type="file"
 										accept="image/*"
 										onChange={(e) => {
-											if (e.target.files) setFiles([...files, e.target.files[0]])
+											if (e.target.files) setDocs({ ...docs, files: [...docs.files, e.target.files[0]] })
 										}}
 									/>
 								))}
@@ -133,15 +133,15 @@ const Create = () => {
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
 							<S.CreateTableTRTextarea
 								onKeyDown={(e) => FC.onKeyDownUseTab(e)}
-								onChange={(e) => setContents(FC.autoClosingTag(e))}
-								value={contents}
+								onChange={(e) => setDocs({ ...docs, contents: FC.autoClosingTag(e) })}
+								value={docs.contents}
 							/>
 						</S.CreateTableTRTextContent>
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>미리보기</S.CreateTableTRTitle>
 							<S.CreateTableTRDiv
 								dangerouslySetInnerHTML={{
-									__html: FC.documentation(contents),
+									__html: FC.documentation(docs.contents),
 								}}></S.CreateTableTRDiv>
 						</S.CreateTableTRTextContent>
 					</S.CreateTable>
