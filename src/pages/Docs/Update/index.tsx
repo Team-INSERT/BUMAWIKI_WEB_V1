@@ -33,7 +33,7 @@ const Update = () => {
 	const onClickAutoComplete = () => {
 		localStorage.setItem('autoComplete', `${!isOnAutoComplete}`)
 		setIsOnAutoComplete(!isOnAutoComplete)
-		if (textareaRef.current !== null) textareaRef.current.focus()
+		if (textareaRef.current) textareaRef.current.focus()
 	}
 
 	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,23 +50,14 @@ const Update = () => {
 			}),
 			{ contentType: 'application/json' }
 		)
-		files.reverse().forEach((file) => {
-			data.append('files', file, file.name)
-		})
+		files.reverse().forEach((file) => data.append('files', file, file.name))
 
 		mutate({ data, title: router.title })
 	}
 
 	const onClickUpdateDocs = async () => {
-		if (!user.isLogin) {
-			alert('로그인 후 이용 가능한 서비스입니다.')
-			return
-		}
-
-		if (!contents.length) {
-			alert('문서가 비어있습니다!')
-			return
-		}
+		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
+		if (!contents.length) return alert('문서가 비어있습니다!')
 
 		mutateDocs()
 	}

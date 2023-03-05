@@ -7,14 +7,10 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import Contributors from 'types/contributors'
 import { useQuery } from 'react-query'
+import UserType from 'types/user'
 
 const User = () => {
-	const [user, setUser] = React.useState({
-		id: 0,
-		nickName: '알 수 없음',
-		authority: '',
-		contributeDocs: [],
-	})
+	const [user, setUser] = React.useState<UserType>()
 	const router = useParams()
 	useQuery('otherUser', () => api.getOtherUser(parseInt(router.id as string)), {
 		onSuccess: (data) => {
@@ -28,16 +24,16 @@ const User = () => {
 			<S.UserWrap>
 				<C.Board>
 					<S.UserTitleWrap>
-						<S.UserTitleText>유저 : {user.nickName}</S.UserTitleText>
+						<S.UserTitleText>유저 : {user?.nickName}</S.UserTitleText>
 					</S.UserTitleWrap>
-					<C.Classify>{user.authority}</C.Classify>
+					<C.Classify>{user?.authority}</C.Classify>
 					<S.UserLine />
 					<S.UserInfoWrap>
 						<C.AccodianMenu name={'정보'}>
 							<S.UserInfoLoadWrap>
 								<span>
-									이름은 {user.nickName}이며, 부마위키의{' '}
-									{user.authority === 'ADMIN' ? '관리자' : user.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
+									이름은 {user?.nickName}이며, 부마위키의{' '}
+									{user?.authority === 'ADMIN' ? '관리자' : user?.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
 								</span>
 							</S.UserInfoLoadWrap>
 						</C.AccodianMenu>
@@ -45,7 +41,7 @@ const User = () => {
 							<S.ContributeWrap>
 								<span>이 유저가 기여한 문서의 정보들이다.</span>
 								<S.ContributeList>
-									{user.contributeDocs.map((docs: Contributors, index) => (
+									{user?.contributeDocs.map((docs: Contributors, index) => (
 										<span key={index}>
 											문서명 :&nbsp;
 											<S.ContributeLink to={`/docs/${docs.title}`}>{docs.title}</S.ContributeLink>

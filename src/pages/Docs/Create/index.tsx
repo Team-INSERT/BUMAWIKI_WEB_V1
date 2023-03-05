@@ -15,6 +15,13 @@ const Create = () => {
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
 
+	const [docs, setDocs] = React.useState({
+		title: decodeURI(window.location.search.replace('?name=', '')) || '',
+		docsType: '',
+		enroll: -1,
+		files: [],
+	})
+
 	const [title, setTitle] = React.useState(decodeURI(window.location.search.replace('?name=', '')) || '')
 	const [docsType, setDocsType] = React.useState<string>('')
 	const [contents, setContents] = React.useState<string>('')
@@ -27,10 +34,6 @@ const Create = () => {
 			navigate(`/docs/${data.title}`)
 		},
 	})
-
-	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) setFiles([...files, e.target.files[0]])
-	}
 
 	const mutateDocs = () => {
 		const FormData = require('form-data')
@@ -45,31 +48,13 @@ const Create = () => {
 		mutate(data)
 	}
 
-	const onClickCreateDocs = async () => {
-		if (title.includes('?') || title.includes('/') || title.includes('"') || title.includes('\\')) {
-			alert('문서명에는 물음표나 쌍따옴표, 슬래시나 역슬래시를 넣을 수 없습니다.')
-			return
-		}
-
-		if (!user.isLogin) {
-			alert('로그인 후 이용 가능한 서비스입니다.')
-			return
-		}
-
-		if (!enroll) {
-			alert('연도를 선택해주세요!')
-			return
-		}
-
-		if (!title.length) {
-			alert('문서의 이름을 정해주세요!')
-			return
-		}
-
-		if (!docsType) {
-			alert('문서의 분류를 선택해주세요!')
-			return
-		}
+	const onClickCreateDocs = () => {
+		if (title.includes('?') || title.includes('/') || title.includes('"') || title.includes('\\'))
+			return alert('문서명에는 물음표나 쌍따옴표, 슬래시나 역슬래시를 넣을 수 없습니다.')
+		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
+		if (!enroll) return alert('연도를 선택해주세요!')
+		if (!title.length) return alert('문서의 이름을 정해주세요!')
+		if (!docsType) return alert('문서의 분류를 선택해주세요!')
 
 		mutateDocs()
 	}
@@ -95,7 +80,7 @@ const Create = () => {
 									''
 								)}
 								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.value })} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocsType(e.target.id)} id="MAJOR_TEACHER" name="radio" />
 								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
@@ -132,10 +117,15 @@ const Create = () => {
 						<S.CreateTableTRFile>
 							<S.CreateTableTRTitle>이미지</S.CreateTableTRTitle>
 							<S.FileInputWrap>
-								{[null, null, null].map((_, index) => (
-									<div key={index}>
-										<input type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
-									</div>
+								{[1, 2, 3].map((key) => (
+									<input
+										key={key}
+										type="file"
+										accept="image/*"
+										onChange={(e) => {
+											if (e.target.files) setFiles([...files, e.target.files[0]])
+										}}
+									/>
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
