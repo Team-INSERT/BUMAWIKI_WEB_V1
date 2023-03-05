@@ -30,7 +30,7 @@ const Create = () => {
 		},
 	})
 
-	const mutateDocs = () => {
+	const createDocs = () => {
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -51,7 +51,7 @@ const Create = () => {
 		if (!docs.title.length) return alert('문서의 이름을 정해주세요!')
 		if (!docs.docsType) return alert('문서의 분류를 선택해주세요!')
 
-		mutateDocs()
+		createDocs()
 	}
 
 	return (
