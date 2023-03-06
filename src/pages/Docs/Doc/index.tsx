@@ -38,7 +38,9 @@ const Doc = () => {
 				<meta property="og:image" content="images/meta-img.png" />
 				<meta property="og:description" content={`${docs?.contents.slice(0, 20)}...`} />
 				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
-				<title>{/* 부마위키 - {docs?.title} ({FC.typeEditor(docs?.docsType || '')}) */}</title>
+				<title>
+					부마위키 - {docs?.title} ({FC.typeEditor(docs?.docsType || '')})
+				</title>
 			</Helmet>
 			<C.Header />
 			<S.DocsWrap>

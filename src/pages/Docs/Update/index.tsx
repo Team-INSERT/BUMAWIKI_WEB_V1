@@ -26,6 +26,13 @@ const Update = () => {
 	const [fileInput, setFileInput] = React.useState([''])
 	const [isOnAutoComplete, setIsOnAutoComplete] = React.useState(JSON.parse(localStorage.getItem('autoComplete') || 'true'))
 
+	useQuery('docs', () => getApi.getDocs(router.title as string), {
+		onSuccess: (data) => {
+			setDocs({ ...docs, contents: data.contents })
+			setDocs({ ...docs, title: data.title })
+		},
+	})
+
 	const { mutate } = useMutation(editApi.updateDocs as MutationFunction, {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
@@ -39,11 +46,7 @@ const Update = () => {
 		if (textareaRef.current) textareaRef.current.focus()
 	}
 
-	const uploadFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) setDocs({ ...docs, files: [...docs.files, e.target.files[0]] })
-	}
-
-	const mutateDocs = () => {
+	const updateDocs = () => {
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -62,15 +65,8 @@ const Update = () => {
 		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
 		if (!docs.contents.length) return alert('문서가 비어있습니다!')
 
-		mutateDocs()
+		updateDocs()
 	}
-
-	useQuery('docs', () => getApi.getDocs(router.title as string), {
-		onSuccess: (data) => {
-			setDocs({ ...docs, contents: data.contents })
-			setDocs({ ...docs, title: data.title })
-		},
-	})
 
 	return (
 		<>
@@ -84,7 +80,14 @@ const Update = () => {
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map((index) => (
-							<input key={index} type="file" accept="image/*" onChange={(e) => uploadFiles(e)} />
+							<input
+								key={index}
+								type="file"
+								accept="image/*"
+								onChange={(e) => {
+									if (e.target.files) setDocs({ ...docs, files: [...docs.files, e.target.files[0]] })
+								}}
+							/>
 						))}
 						<S.FileAddWrap onClick={() => setFileInput([...fileInput, ''])}>
 							<S.FileAddButton>+</S.FileAddButton>
