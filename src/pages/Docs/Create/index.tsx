@@ -9,11 +9,17 @@ import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import CreateDocsType from 'types/create.type'
+import Frame from 'types/frame.type'
 
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
+
+	const [frame, setFrame] = React.useState<Frame>({
+		row: 2,
+		column: 2,
+	})
 
 	const [docs, setDocs] = React.useState<CreateDocsType>({
 		title: decodeURI(window.location.search.replace('?name=', '')) || '',
@@ -86,6 +92,8 @@ const Create = () => {
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FREE_CLUB" name="radio" />
+								<label htmlFor="FRAME">틀</label>
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FRAME" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
@@ -129,6 +137,19 @@ const Create = () => {
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
+						{docs.docsType === "FRAME" ? (
+							<S.CreateTableTRFrame>
+								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
+								<S.FrameInputWrap>
+									<S.FrameInput type="number" min="2" max="5" onChange={(e) => setFrame({ ...frame, column: parseInt(e.target.value) })} />
+									<S.FrameInput type="number" min="2" max="10" onChange={(e) => setFrame({ ...frame, row: parseInt(e.target.value) })} />
+									{/* <S.FrameCreateButton onClick={FC.makeFrame(2, 5)}>ing</S.FrameCreateButton> */}
+									<FC.makeFrame lows="1" cols="4" />
+								</S.FrameInputWrap>
+							</S.CreateTableTRFrame>
+						) : (
+							''
+						)}
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
 							<S.CreateTableTRTextarea

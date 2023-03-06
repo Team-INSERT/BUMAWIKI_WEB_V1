@@ -77,6 +77,38 @@ export const CreateTableTRDiv = styled.div`
 	}
 `
 
+export const CreateTableTRFrame = styled.div`
+	height: 100px;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	border: 2px solid #ccc;
+	border-bottom: none;
+
+	@media (max-width: 500px) {
+		height: 100px;
+	}
+`
+
+export const FrameInputWrap = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	padding-left: 20px;
+`
+
+export const FrameInput = styled.input`
+	width:70px;
+`
+
+export const FrameCreateButton = styled.button`
+	width:70px;
+`
+
 export const CreateTableTRTitle = styled.div`
 	background-color: #274168;
 	height: 100%;
