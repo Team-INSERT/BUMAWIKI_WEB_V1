@@ -24,6 +24,7 @@ const Header = () => {
 	}
 	React.useEffect(() => {
 		if (user.id) setIsLoad(true)
+		console.log(user)
 	}, [user])
 
 	return (
