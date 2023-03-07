@@ -21,7 +21,8 @@ bumawikiAxios.interceptors.response.use(
 	},
 	(error) => {
 		const { status, code, message } = error.response.data
-		if (status === 403 && message === 'Forbidden' && code) {
+		console.log(status, code, message)
+		if (status === 403) {
 			tokenExpired()
 		}
 		return Promise.reject(error)

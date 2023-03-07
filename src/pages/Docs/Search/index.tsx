@@ -53,14 +53,12 @@ const Search = () => {
 									))}
 								</>
 							) : (
-								<div>
+								<>
 									<span>아직 &quot;{router.result}&quot; 문서는 없습니다.</span>
 									<br />
 									<br />
-									<R.Link to={`/create?name=${router.result}`} style={{ textDecoration: 'none', color: 'blue' }}>
-										지금 문서를 생성해보세요
-									</R.Link>
-								</div>
+									<S.SearchCreateLink to={`/create?name=${router.result}`}>지금 문서를 생성해보세요</S.SearchCreateLink>
+								</>
 							)}
 						</S.SearchList>
 					</S.SearchResult>

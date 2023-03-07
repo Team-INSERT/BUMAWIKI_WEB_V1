@@ -60,3 +60,8 @@ export const SearchLink = styled(Link)`
 	text-decoration: none;
 	cursor: pointer;
 `
+
+export const SearchCreateLink = styled(Link)`
+	text-decoration: none;
+	color: blue;
+`

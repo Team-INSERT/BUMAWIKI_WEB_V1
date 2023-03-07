@@ -57,7 +57,7 @@ const VersionDetail = () => {
 									마지막 수정 : {FC.dateParser(versionDocs?.thisVersionCreatedAt || '')} | 수정자 : {versionDocs?.nickName}
 								</S.LastUpdateDate>
 								<C.AccodianMenu name="코드 내용" isOpen={false}>
-									<S.DocsContents>{versionDocs?.contents}</S.DocsContents>
+									<S.DocsContents>{versionDocs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"')}</S.DocsContents>
 								</C.AccodianMenu>
 								<C.AccodianMenu name="수정된 내용" isOpen={false}>
 									<S.DocsContents

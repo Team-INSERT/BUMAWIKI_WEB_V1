@@ -10,6 +10,7 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import UpdateDocsType from 'types/update.type.'
+import { decodeContents, encodeContents } from 'utils/document/requestContents'
 
 const Update = () => {
 	const router = R.useParams()
@@ -28,8 +29,7 @@ const Update = () => {
 
 	useQuery('docs', () => getApi.getDocs(router.title as string), {
 		onSuccess: (data) => {
-			setDocs({ ...docs, contents: data.contents })
-			setDocs({ ...docs, title: data.title })
+			setDocs({ ...docs, contents: decodeContents(data.contents), title: data.title })
 		},
 	})
 
@@ -51,12 +51,12 @@ const Update = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "contents": "${docs.contents}" }`], {
+			new Blob([`{ "contents": "${encodeContents(docs.contents)}" }`], {
 				type: 'application/json',
 			}),
 			{ contentType: 'application/json' }
 		)
-		docs.files.reverse().forEach((file) => data.append('files', file, file.name))
+		docs.files.forEach((file) => data.append('files', file, file.name))
 
 		mutate({ data, title: router.title })
 	}
