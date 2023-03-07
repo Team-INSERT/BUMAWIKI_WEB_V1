@@ -1,5 +1,6 @@
 import { bumawikiAxios } from 'lib/axios/customAxios'
 import { getCookie } from 'utils'
+import delCookie from 'utils/etc/delCookie'
 
 const tokenExpired = async () => {
 	try {
@@ -8,7 +9,8 @@ const tokenExpired = async () => {
 		})
 		document.cookie = `authorization=${res.data.accessToken};`
 	} catch (err) {
-		document.cookie = ``
+		delCookie('authorization')
+		delCookie('refresh_token')
 	}
 }
 
