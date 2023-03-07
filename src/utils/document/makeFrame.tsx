@@ -22,41 +22,43 @@ import Frame from 'types/frame.type'
 //     );
 
 // }
-const [frame, setFrame] = React.useState<Frame>({
-    title: '틀',
-    head: '',
-    contents: '',
-})
 
-const data = [
-    {
-        head: { frame.head },
-        contents: {
 
+
+
+const MakeFrame = (data: any) => {
+    const [title, setTitle] = React.useState<string>('틀');
+    const [head, setHead] = React.useState<string>('');
+    const [contents, setContents] = React.useState<string[]>([]);
+
+    const dataSet = [
+        {
+            "head": { head },
+            "contents": { contents },
         }
-    }
-]
+    ]
 
-const addData = () => {
-    const dataSet = {
-        head: { frame.head }
+    const addData = () => {
+        contents.push("ing");
     }
-}
 
-const makeFrame = (data: any) => {
     return (
-        <table>
-            <th>틀:{frame.title}</th>
-            {data.map((item: string, index: number) => (
-                <tr key={index}>
-                    <th>{item.head}</th>
-                    {data.contents.map((item: string) => (
-                        <td key={index}>{item}</td>
-                    ))}
+        <div>
+            <button onClick={addData}>ing</button>
+            <table>
+                <tr>
+                    <th>{title}</th>
                 </tr>
-            ))}
-        </table>
+                {dataSet.map((item: any) => (
+                    <tr key={item.index}>
+                        {contents.map((item: string) => (
+                            <td>{item}</td>
+                        ))}
+                    </tr>
+                ))}
+            </table>
+        </div>
     );
 }
 
-export default makeFrame
+export default MakeFrame

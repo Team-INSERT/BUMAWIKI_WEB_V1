@@ -16,7 +16,7 @@ const Create = () => {
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
 
-	const [frame, setFrame] = React.useState<Frame>({
+	const [size, setSize] = React.useState<Frame>({
 		row: 2,
 		column: 2,
 	})
@@ -59,6 +59,21 @@ const Create = () => {
 
 		createDocs()
 	}
+
+	const frame = () => {
+		console.log("ing")
+		console.log(docs.docsType)
+		const setRow = []
+		const setColumn = []
+		for (let i = 0; i < size.row; i++) {
+			setColumn.push("<열></열>")
+		}
+		setDocs({ ...docs, contents: `<틀>\n<틀제목></틀제목>\n<행>${setColumn}</행>\n</틀>`, title: "틀:" })
+	}
+
+	// const changeDocsType = (type: string) => {
+	// 	setDocs({ ...docs, docsType: type })
+	// }
 
 	return (
 		<>
@@ -141,10 +156,9 @@ const Create = () => {
 							<S.CreateTableTRFrame>
 								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
 								<S.FrameInputWrap>
-									<S.FrameInput type="number" min="2" max="5" onChange={(e) => setFrame({ ...frame, column: parseInt(e.target.value) })} />
-									<S.FrameInput type="number" min="2" max="10" onChange={(e) => setFrame({ ...frame, row: parseInt(e.target.value) })} />
-									{/* <S.FrameCreateButton onClick={FC.makeFrame(2, 5)}>ing</S.FrameCreateButton> */}
-									<FC.makeFrame lows="1" cols="4" />
+									<S.FrameInput type="number" min="2" max="5" value={size.column} onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })} />
+									<S.FrameInput type="number" min="2" max="10" value={size.row} onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })} />
+									<button onClick={frame}>ing</button>
 								</S.FrameInputWrap>
 							</S.CreateTableTRFrame>
 						) : (
