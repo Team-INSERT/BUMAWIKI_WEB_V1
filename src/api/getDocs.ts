@@ -9,7 +9,6 @@ export const getLastModifiedDocs = async () => {
 }
 
 export const findDocs = async (title: string) => {
-	console.log(title)
 	return (await bumawikiAxios.get(`/docs/find/all/title/${title}`)).data
 }
 
