@@ -4,7 +4,7 @@ import * as FC from 'utils'
 import * as S from './style'
 
 import userState, { initUserState } from 'context/userState'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useMutation } from 'react-query'
 import { useRecoilState } from 'recoil'
 import Contributors from 'types/contributors.type'
