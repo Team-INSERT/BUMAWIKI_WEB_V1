@@ -94,6 +94,7 @@ export const CreateTableTRFrame = styled.div`
 	}
 `
 
+
 export const FrameInputDiv = styled.div`
 	display: flex;
 	flex-direction: column;

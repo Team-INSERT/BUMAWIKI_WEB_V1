@@ -22,7 +22,7 @@ import Frame from 'types/frame.type'
 //     );
 
 // }
-
+//쓰읍..
 
 
 

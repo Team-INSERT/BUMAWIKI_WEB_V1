@@ -9,18 +9,22 @@ import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import CreateDocsType from 'types/create.type'
-import Frame from 'types/frame.type'
+import { encodeContents } from 'utils/document/requestContents'
+
 
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
 
+<<<<<<< HEAD
 	const [size, setSize] = React.useState<Frame>({
 		row: 2,
 		column: 2,
 	})
 
+=======
+>>>>>>> 852c66003e4dcbd6f6a086af66441750b9b2c571
 	const [docs, setDocs] = React.useState<CreateDocsType>({
 		title: decodeURI(window.location.search.replace('?name=', '')) || '',
 		contents: '',
@@ -41,9 +45,12 @@ const Create = () => {
 		const data = new FormData()
 		data.append(
 			'request',
-			new Blob([`{ "title": "${docs.title}", "enroll":"${docs.enroll}", "contents":"${docs.contents}", "docsType":"${docs.docsType}"}`], {
-				type: 'application/json',
-			})
+			new Blob(
+				[`{ "title": "${docs.title}", "enroll":"${docs.enroll}", "contents":"${encodeContents(docs.contents)}", "docsType":"${docs.docsType}"}`],
+				{
+					type: 'application/json',
+				}
+			)
 		)
 		docs.files.reverse().forEach((file) => data.append('files', file, file.name))
 		mutate(data)
@@ -110,8 +117,6 @@ const Create = () => {
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FREE_CLUB" name="radio" />
-								<label htmlFor="FRAME">틀</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FRAME" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
@@ -155,6 +160,7 @@ const Create = () => {
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
+<<<<<<< HEAD
 						{docs.docsType === "FRAME" ? (
 							<S.CreateTableTRFrame>
 								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
@@ -173,6 +179,8 @@ const Create = () => {
 						) : (
 							''
 						)}
+=======
+>>>>>>> 852c66003e4dcbd6f6a086af66441750b9b2c571
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
 							<S.CreateTableTRTextarea
