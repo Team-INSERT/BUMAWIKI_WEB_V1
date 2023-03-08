@@ -1,15 +1,17 @@
 import { atom } from 'recoil'
 
+export const initUserState = {
+	id: 0,
+	email: '',
+	nickName: '',
+	authority: '',
+	contributeDocs: [],
+	isLogin: false,
+}
+
 const userState = atom({
 	key: 'userState',
-	default: {
-		id: 0,
-		email: '',
-		nickName: '',
-		authority: 'USER',
-		contributeDocs: [],
-		isLogin: false,
-	},
+	default: initUserState,
 })
 
 export default userState

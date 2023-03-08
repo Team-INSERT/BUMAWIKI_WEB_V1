@@ -77,6 +77,10 @@ export const CreateTableTRDiv = styled.div`
 	}
 `
 
+export const FrameInputWrap = styled.div`
+	display:flex;
+`
+
 export const CreateTableTRFrame = styled.div`
 	height: 100px;
 	display: flex;
@@ -90,7 +94,7 @@ export const CreateTableTRFrame = styled.div`
 	}
 `
 
-export const FrameInputWrap = styled.div`
+export const FrameInputDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -102,11 +106,16 @@ export const FrameInputWrap = styled.div`
 `
 
 export const FrameInput = styled.input`
-	width:70px;
+	width:80px;
+`
+
+export const CreateFrameButton = styled.button`
+	width:83.2px;
+	font-size:10px;
 `
 
 export const FrameCreateButton = styled.button`
-	width:70px;
+	width:75px;
 `
 
 export const CreateTableTRTitle = styled.div`

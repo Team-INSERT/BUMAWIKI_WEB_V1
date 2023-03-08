@@ -20,8 +20,8 @@ bumawikiAxios.interceptors.response.use(
 		return response
 	},
 	(error) => {
-		const { status, code, message } = error.response.data
-		if (status === 403 && message === 'Forbidden' && code) {
+		const { status, message } = error.response.data
+		if (status === 403 && message === 'User Not Login') {
 			tokenExpired()
 		}
 		return Promise.reject(error)

@@ -60,15 +60,18 @@ const Create = () => {
 		createDocs()
 	}
 
-	const frame = () => {
+	const makeFrame = () => {
 		console.log("ing")
 		console.log(docs.docsType)
 		const setRow = []
 		const setColumn = []
-		for (let i = 0; i < size.row; i++) {
-			setColumn.push("<열></열>")
+		for (let i = 0; i < size.column; i++) {
+			setColumn.push("<열>내용삽입</열>")
 		}
-		setDocs({ ...docs, contents: `<틀>\n<틀제목></틀제목>\n<행>${setColumn}</행>\n</틀>`, title: "틀:" })
+		for (let i = 0; i < size.row; i++) {
+			setRow.push("<행>" + setColumn.join("") + "</행>\n")
+		}
+		setDocs({ ...docs, contents: `<틀>\n<틀제목>제목</틀제목>\n${setRow.join("")}\n</틀>`, title: "틀:" })
 	}
 
 	// const changeDocsType = (type: string) => {
@@ -155,11 +158,17 @@ const Create = () => {
 						{docs.docsType === "FRAME" ? (
 							<S.CreateTableTRFrame>
 								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
-								<S.FrameInputWrap>
-									<S.FrameInput type="number" min="2" max="5" value={size.column} onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })} />
-									<S.FrameInput type="number" min="2" max="10" value={size.row} onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })} />
-									<button onClick={frame}>ing</button>
-								</S.FrameInputWrap>
+								<S.FrameInputDiv>
+									<S.FrameInputWrap>
+										<h5>열</h5>
+										<S.FrameInput type="number" min="2" max="5" value={size.column} onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })} />
+									</S.FrameInputWrap>
+									<S.FrameInputWrap>
+										<h5>행</h5>
+										<S.FrameInput type="number" min="2" max="10" value={size.row} onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })} />
+									</S.FrameInputWrap>
+									<S.CreateFrameButton onClick={makeFrame}>틀생성/초기화</S.CreateFrameButton>
+								</S.FrameInputDiv>
 							</S.CreateTableTRFrame>
 						) : (
 							''

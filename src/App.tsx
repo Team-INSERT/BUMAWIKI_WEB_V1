@@ -6,19 +6,29 @@ import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
+import tokenExpired from 'lib/token/tokenExpired'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	const refreshLogin = async () => {
+	const getUser = async () => {
 		const data = await api.getUser()
 		setUser({
 			...data,
 			contributeDocs: data.contributeDocs.reverse(),
 			isLogin: true,
 		})
+	}
+
+	const refreshLogin = async () => {
+		try {
+			await getUser()
+		} catch (err) {
+			await tokenExpired()
+			getUser()
+		}
 	}
 
 	React.useEffect(() => {

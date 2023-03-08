@@ -3,19 +3,22 @@ import * as api from 'api/user'
 import * as FC from 'utils'
 import * as S from './style'
 
-import userState from 'context/userState'
+import userState, { initUserState } from 'context/userState'
 import React from 'react'
 import { useMutation } from 'react-query'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import Contributors from 'types/contributors.type'
 
 const MyPage = () => {
-	const user = useRecoilValue(userState)
+	const [user, setUser] = useRecoilState(userState)
 
 	const { mutate } = useMutation(api.logoutUser, {
 		onSuccess: () => {
 			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
 			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
+			if (!FC.getCookie('refresh_token') && user.isLogin) {
+				setUser(initUserState)
+			}
 		},
 	})
 

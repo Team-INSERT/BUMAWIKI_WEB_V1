@@ -33,17 +33,16 @@ const documentation = (content: string) => {
 		.replace(/}/gi, `%;" @#@#@^?`)
 
 		// 틀 생성
-		.replace(/<틀>/gi, `?^table style="border-collapse:collapse;border:solid 4px #274168; margin: auto; text-align:center; padding:10px"^?`)
+		.replace(/<틀>/gi, `?^table style="border-collapse:collapse;border:solid 3px #274168; margin: auto; text-align:center; padding:10px; width:80%"^?`)
 		.replace(/<\/틀>/gi, `?^@#@#@table^?`)
 		.replace(/<행>/gi, `?^tr^?`)
-		// .replace(/<행>/gi, `?^tr style="border-collapse: collapse; border:2px solid #274168 ; width:360px"^?`)
 		.replace(/<\/행>/gi, `?^@#@#@tr^?`)
-		.replace(/<열>/gi, `?^td style="border:solid 4px #274168;margin: 100px"^?`)
+		.replace(/<열>/gi, `?^td style="border:solid 3px #274168; height:30px"^?`)
 		.replace(/<\/열>/gi, `?^@#@#@td^?`)
-		.replace(/<틀제목>/gi, `?^caption style="border:solid 4px #274158; border-bottom:none; background-color:#274168;color:white; font-weight:700"^?`)
+		.replace(/<틀제목>/gi, `?^caption style="border:solid 3px #274158; border-bottom:none; background-color:#274168;color:white; font-weight:700; padding:10px; font-size:20px"^?`)
 		.replace(/<\/틀제목>/gi, `?^@#@#@caption^?`)
-		.replace(/<여얼>/gi, `?^td colSpan="10" style="border:solid 4px #274168"^?`)
-		.replace(/<\/여얼>/gi, `?^@#@#@td^?`)
+		.replace(/<열 가로병합={/gi, `?^td style="border:solid 3px #274168; height:30px" colSpan='`)
+		.replace(/<열 세로병합={/gi, `?^td style="border:solid 3px #274168" rowSpan='`)
 
 		// 문서 보안
 		.replace(/<.*>/gi, ``)

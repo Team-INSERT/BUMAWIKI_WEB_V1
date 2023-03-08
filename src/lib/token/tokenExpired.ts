@@ -1,5 +1,6 @@
 import { bumawikiAxios } from 'lib/axios/customAxios'
 import { getCookie } from 'utils'
+import delCookie from 'utils/etc/delCookie'
 
 const tokenExpired = async () => {
 	try {
@@ -8,7 +9,8 @@ const tokenExpired = async () => {
 		})
 		document.cookie = `authorization=${res.data.accessToken};`
 	} catch (err) {
-		alert('세션이 만료되었습니다. 다시 로그인해주세요.')
+		delCookie('authorization')
+		delCookie('refresh_token')
 	}
 }
 
