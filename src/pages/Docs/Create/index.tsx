@@ -10,11 +10,17 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import CreateDocsType from 'types/create.type'
 import { encodeContents } from 'utils/document/requestContents'
+import Frame from 'types/frame.type'
 
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
+
+	const [size, setSize] = React.useState<Frame>({
+		row: 2,
+		column: 2,
+	})
 
 	const [docs, setDocs] = React.useState<CreateDocsType>({
 		title: decodeURI(window.location.search.replace('?name=', '')) || '',
@@ -57,6 +63,24 @@ const Create = () => {
 
 		createDocs()
 	}
+
+	const makeFrame = () => {
+		console.log('ing')
+		console.log(docs.docsType)
+		const setRow = []
+		const setColumn = []
+		for (let i = 0; i < size.column; i++) {
+			setColumn.push('<열>내용삽입</열>')
+		}
+		for (let i = 0; i < size.row; i++) {
+			setRow.push('<행>' + setColumn.join('') + '</행>\n')
+		}
+		setDocs({ ...docs, contents: `<틀>\n<틀제목>제목</틀제목>\n${setRow.join('')}\n</틀>`, title: '틀:' })
+	}
+
+	// const changeDocsType = (type: string) => {
+	// 	setDocs({ ...docs, docsType: type })
+	// }
 
 	return (
 		<>
@@ -133,6 +157,36 @@ const Create = () => {
 								))}
 							</S.FileInputWrap>
 						</S.CreateTableTRFile>
+						{docs.docsType === 'FRAME' ? (
+							<S.CreateTableTRFrame>
+								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
+								<S.FrameInputDiv>
+									<S.FrameInputWrap>
+										<h5>열</h5>
+										<S.FrameInput
+											type="number"
+											min="2"
+											max="5"
+											value={size.column}
+											onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
+										/>
+									</S.FrameInputWrap>
+									<S.FrameInputWrap>
+										<h5>행</h5>
+										<S.FrameInput
+											type="number"
+											min="2"
+											max="10"
+											value={size.row}
+											onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
+										/>
+									</S.FrameInputWrap>
+									<S.CreateFrameButton onClick={makeFrame}>틀생성/초기화</S.CreateFrameButton>
+								</S.FrameInputDiv>
+							</S.CreateTableTRFrame>
+						) : (
+							''
+						)}
 						<S.CreateTableTRTextContent>
 							<S.CreateTableTRTitle>문서 내용</S.CreateTableTRTitle>
 							<S.CreateTableTRTextarea
