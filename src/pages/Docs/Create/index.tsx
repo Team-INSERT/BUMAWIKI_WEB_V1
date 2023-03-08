@@ -114,6 +114,8 @@ const Create = () => {
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FREE_CLUB" name="radio" />
+								<label htmlFor="FRAME">틀</label>
+								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FRAME" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>

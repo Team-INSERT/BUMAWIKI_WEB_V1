@@ -9,8 +9,8 @@ const dateParser = (UTC: string) => {
     ${date.month() + 1}월 
     ${date.date()}일
 	${weeks[date.day()]}요일
-    ${date.format('A') === 'PM' ? '오후' : '오전'}
-	${date.format('A') === 'PM' ? date.hour() - 12 : date.hour()}시 
+    ${date.format('A')}
+	${date.format('A') === '오후' ? date.hour() - 12 : date.hour()}시 
     ${date.minute()}분`
 
 	return PARSING_DATE
