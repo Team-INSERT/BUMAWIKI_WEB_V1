@@ -11,6 +11,7 @@ import { useRecoilValue } from 'recoil'
 import CreateDocsType from 'types/create.type'
 import { encodeContents } from 'utils/document/requestContents'
 import Frame from 'types/frame.type'
+import Color from 'types/color.type'
 
 const Create = () => {
 	const navigate = useNavigate()
@@ -20,6 +21,11 @@ const Create = () => {
 	const [size, setSize] = React.useState<Frame>({
 		row: 2,
 		column: 2,
+	})
+
+	const [colors, setColors] = React.useState<Color>({
+		frameColor: '#274168',
+		textColor: 'white',
 	})
 
 	const [docs, setDocs] = React.useState<CreateDocsType>({
@@ -65,8 +71,6 @@ const Create = () => {
 	}
 
 	const makeFrame = () => {
-		console.log('ing')
-		console.log(docs.docsType)
 		const setRow = []
 		const setColumn = []
 		for (let i = 0; i < size.column; i++) {
@@ -75,12 +79,21 @@ const Create = () => {
 		for (let i = 0; i < size.row; i++) {
 			setRow.push('<행>' + setColumn.join('') + '</행>\n')
 		}
-		setDocs({ ...docs, contents: `<틀>\n<틀제목>제목</틀제목>\n${setRow.join('')}\n</틀>`, title: '틀:' })
+		setDocs({ ...docs, contents: `<틀>\n\n<틀제목>제목</틀제목>\n${setRow.join('')}\n</틀>` })
 	}
 
-	// const changeDocsType = (type: string) => {
-	// 	setDocs({ ...docs, docsType: type })
-	// }
+	const changeDocsType = (type: string) => {
+		if (type === 'FRAME') {
+			setDocs({ ...docs, docsType: type, title: '틀:' })
+		} else {
+			setDocs({ ...docs, docsType: type, title: '', contents: '' })
+		}
+	}
+
+	const changeColor = () => {
+		localStorage.setItem('frameColor', colors.frameColor)
+		localStorage.setItem('textColor', colors.textColor)
+	}
 
 	return (
 		<>
@@ -103,19 +116,19 @@ const Create = () => {
 									''
 								)}
 								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="MAJOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="MAJOR_TEACHER" name="radio" />
 								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="MENTOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="MENTOR_TEACHER" name="radio" />
 								<label htmlFor="ACCIDENT">사건/사고</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="ACCIDENT" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="ACCIDENT" name="radio" />
 								<label htmlFor="CLUB">전공동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FREE_CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="FREE_CLUB" name="radio" />
 								<label htmlFor="FRAME">틀</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="FRAME" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="FRAME" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
@@ -163,27 +176,47 @@ const Create = () => {
 							<S.CreateTableTRFrame>
 								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
 								<S.FrameInputDiv>
-									<S.FrameInputWrap>
-										<h5>열</h5>
-										<S.FrameInput
-											type="number"
-											min="2"
-											max="5"
-											value={size.column}
-											onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
-										/>
-									</S.FrameInputWrap>
-									<S.FrameInputWrap>
-										<h5>행</h5>
-										<S.FrameInput
-											type="number"
-											min="2"
-											max="10"
-											value={size.row}
-											onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
-										/>
-									</S.FrameInputWrap>
-									<S.CreateFrameButton onClick={makeFrame}>틀생성/초기화</S.CreateFrameButton>
+									<S.FrameInputBox>
+										<div>
+											<S.FrameInputWrap>
+												<S.FrameText>열</S.FrameText>
+												<S.FrameInput
+													type="number"
+													min="2"
+													max="5"
+													value={size.column}
+													onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
+												/>
+											</S.FrameInputWrap>
+											<S.FrameInputWrap>
+												<S.FrameText>행</S.FrameText>
+												<S.FrameInput
+													type="number"
+													min="2"
+													max="10"
+													value={size.row}
+													onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
+												/>
+											</S.FrameInputWrap>
+										</div>
+										<div>
+											<S.FrameInputWrap>
+												<S.FrameText>글자색</S.FrameText>
+												<S.FrameInput
+													type="color"
+													onChange={(e) => setColors({ ...colors, textColor: e.target.value })}
+												/>
+											</S.FrameInputWrap>
+											<S.FrameInputWrap>
+												<S.FrameText>배경색</S.FrameText>
+												<S.FrameInput
+													type="color"
+													onChange={(e) => setColors({ ...colors, frameColor: e.target.value })}
+												/>
+											</S.FrameInputWrap>
+										</div>
+									</S.FrameInputBox>
+									<S.CreateFrameButton onClick={() => { makeFrame(); changeColor() }}>틀생성/초기화</S.CreateFrameButton>
 								</S.FrameInputDiv>
 							</S.CreateTableTRFrame>
 						) : (
