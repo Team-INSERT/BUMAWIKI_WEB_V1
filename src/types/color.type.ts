@@ -3,4 +3,5 @@ interface Color {
     textColor: string
 }
 
+
 export default Color
