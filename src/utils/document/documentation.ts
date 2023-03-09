@@ -1,4 +1,6 @@
 const documentation = (content: string) => {
+	const frameColor = localStorage.getItem('frameColor')
+	const textColor = localStorage.getItem('textColor')
 	const ORIGINAL_CONTENT = content
 		// 태그 지원
 		.replace(/<항목>/gi, `?^li style="list-style: disc;"^?`)
@@ -35,20 +37,20 @@ const documentation = (content: string) => {
 		// 틀 생성
 		.replace(
 			/<틀>/gi,
-			`?^table style="border-collapse:collapse;border:solid 3px #274168; margin: auto; text-align:center; padding:10px; width:80%"^?`
+			`?^table style="border-collapse:collapse;border:solid 3px ${frameColor}; margin: auto; text-align:center; padding:10px; width:80%"^?`
 		)
 		.replace(/<\/틀>/gi, `?^@#@#@table^?`)
 		.replace(/<행>/gi, `?^tr^?`)
 		.replace(/<\/행>/gi, `?^@#@#@tr^?`)
-		.replace(/<열>/gi, `?^td style="border:solid 3px #274168; height:30px"^?`)
+		.replace(/<열>/gi, `?^td style="border:solid 3px ${frameColor}; height:30px"^?`)
 		.replace(/<\/열>/gi, `?^@#@#@td^?`)
 		.replace(
 			/<틀제목>/gi,
-			`?^caption style="border:solid 3px #274158; border-bottom:none; background-color:#274168;color:white; font-weight:700; padding:10px; font-size:20px"^?`
+			`?^caption style="border:solid 3px ${frameColor}; border-bottom:none; background-color: ${frameColor};color:${textColor}; font-weight:700; padding:5px; font-size:20px"^?`
 		)
 		.replace(/<\/틀제목>/gi, `?^@#@#@caption^?`)
-		.replace(/<열 가로병합={/gi, `?^td style="border:solid 3px #274168; height:30px" colSpan='`)
-		.replace(/<열 세로병합={/gi, `?^td style="border:solid 3px #274168" rowSpan='`)
+		.replace(/<열 가로병합={/gi, `?^td style="border:solid 3px ${frameColor}; height:30px" colSpan='`)
+		.replace(/<열 세로병합={/gi, `?^td style="border:solid 3px ${frameColor}" rowSpan='`)
 
 		// 문서 보안
 		.replace(/<.*>/gi, ``)
