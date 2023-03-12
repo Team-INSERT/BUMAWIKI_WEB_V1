@@ -12,29 +12,18 @@ import CreateDocsType from 'types/create.type'
 import { encodeContents } from 'utils/document/requestContents'
 import Frame from 'types/frame.type'
 import Color from 'types/color.type'
+import sizeInitState from 'state/sizeInitState'
+import colorInitState from 'state/colorInitState'
+import createInitState from 'state/createInitState'
 
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
 	const years = FC.getAllYear()
 
-	const [size, setSize] = React.useState<Frame>({
-		row: 2,
-		column: 2,
-	})
-
-	const [colors, setColors] = React.useState<Color>({
-		frameColor: '#274168',
-		textColor: 'white',
-	})
-
-	const [docs, setDocs] = React.useState<CreateDocsType>({
-		title: decodeURI(window.location.search.replace('?name=', '')) || '',
-		contents: '',
-		docsType: '',
-		enroll: -1,
-		files: [],
-	})
+	const [size, setSize] = React.useState<Frame>(sizeInitState)
+	const [colors, setColors] = React.useState<Color>(colorInitState)
+	const [docs, setDocs] = React.useState<CreateDocsType>(createInitState)
 
 	const { mutate } = useMutation(api.createDocs, {
 		onSuccess: (data) => {
@@ -202,21 +191,21 @@ const Create = () => {
 										<div>
 											<S.FrameInputWrap>
 												<S.FrameText>글자색</S.FrameText>
-												<S.FrameInput
-													type="color"
-													onChange={(e) => setColors({ ...colors, textColor: e.target.value })}
-												/>
+												<S.FrameInput type="color" onChange={(e) => setColors({ ...colors, textColor: e.target.value })} />
 											</S.FrameInputWrap>
 											<S.FrameInputWrap>
 												<S.FrameText>배경색</S.FrameText>
-												<S.FrameInput
-													type="color"
-													onChange={(e) => setColors({ ...colors, frameColor: e.target.value })}
-												/>
+												<S.FrameInput type="color" onChange={(e) => setColors({ ...colors, frameColor: e.target.value })} />
 											</S.FrameInputWrap>
 										</div>
 									</S.FrameInputBox>
-									<S.CreateFrameButton onClick={() => { makeFrame(); changeColor() }}>틀생성/초기화</S.CreateFrameButton>
+									<S.CreateFrameButton
+										onClick={() => {
+											makeFrame()
+											changeColor()
+										}}>
+										틀생성/초기화
+									</S.CreateFrameButton>
 								</S.FrameInputDiv>
 							</S.CreateTableTRFrame>
 						) : (

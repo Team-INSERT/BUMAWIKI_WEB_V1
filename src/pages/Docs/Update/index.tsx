@@ -11,6 +11,7 @@ import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import UpdateDocsType from 'types/update.type.'
 import { decodeContents, encodeContents } from 'utils/document/requestContents'
+import updateInitState from 'state/updateInitState'
 
 const Update = () => {
 	const router = R.useParams()
@@ -18,12 +19,7 @@ const Update = () => {
 	const navigate = R.useNavigate()
 	const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
-	const [docs, setDocs] = React.useState<UpdateDocsType>({
-		title: '',
-		contents: '',
-		files: [],
-	})
-
+	const [docs, setDocs] = React.useState<UpdateDocsType>(updateInitState)
 	const [fileInput, setFileInput] = React.useState([''])
 	const [isOnAutoComplete, setIsOnAutoComplete] = React.useState(JSON.parse(localStorage.getItem('autoComplete') || 'true'))
 

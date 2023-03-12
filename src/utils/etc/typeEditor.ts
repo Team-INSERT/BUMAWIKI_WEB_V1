@@ -9,7 +9,7 @@ const typeEditor = (classify: string) => {
 	if (classify === 'ADMIN') return '관리자'
 	if (classify === 'BANNED') return '읽기전용 사용자'
 	if (classify === 'USER') return '사용자'
-	if (classify === 'NOTICE') return '공지사항'
+	if (classify === 'NOTICE') return '공지'
 	if (classify === 'FRAME') return '틀'
 	return classify
 }
