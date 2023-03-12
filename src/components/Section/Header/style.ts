@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+export const HeaderContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
 export const HeaderWrap = styled.div`
 	display: flex;
 	align-items: center;
@@ -9,12 +14,34 @@ export const HeaderWrap = styled.div`
 	background-color: #274168;
 `
 
+export const SubHeaderWrap = styled.div<{ isHover: boolean }>`
+	width: 100vw;
+	height: 17vh;
+	display: flex;
+	align-items: center;
+	background-color: #526786;
+	display: ${(props) => (props.isHover ? 'flex' : 'none')};
+`
+
 export const HeaderLink = styled(Link)`
 	display: flex;
 	align-items: center;
 
 	@media (max-width: 500px) {
 		display: none;
+	}
+`
+
+export const SubHeaderPlace = styled.div`
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		display: none;
+	}
+
+	img {
+		opacity: 0;
 	}
 `
 
@@ -33,7 +60,34 @@ export const HeaderSection = styled(Link)`
 	cursor: pointer;
 	text-decoration: none;
 	margin-left: 4vw;
+	height: 6.5vh;
 	justify-content: center;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		margin-left: 6vw;
+	}
+`
+
+export const SubHeaderSection = styled(Link)`
+	display: flex;
+	cursor: pointer;
+	text-decoration: none;
+	margin: 1vh 0 1vh auto;
+	justify-content: center;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		margin-left: 6vw;
+	}
+`
+
+export const SubHeaderSectionWrap = styled.div`
+	display: flex;
+	cursor: pointer;
+	text-decoration: none;
+	margin: 0 2vw 0 3vw;
+	flex-direction: column;
 	align-items: center;
 
 	@media (max-width: 500px) {
