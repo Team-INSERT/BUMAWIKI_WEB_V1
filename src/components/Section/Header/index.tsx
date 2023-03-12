@@ -35,20 +35,20 @@ const Header = () => {
 					<S.HeaderLogo src="/images/logo.png" alt="logo" />
 				</S.HeaderLink>
 				<S.HeaderSectionWrap>
-					<S.HeaderSection to={'/student'} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 						<S.HeaderSectionLogo src={Student} alt="" />
 						<S.HeaderSectionText>공지</S.HeaderSectionText>
 					</S.HeaderSection>
 					&nbsp;&nbsp;&nbsp;
-					<S.HeaderSection to={'/teacher'} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 						<S.HeaderSectionLogo src={Teacher} alt="" />
 						<S.HeaderSectionText>학교</S.HeaderSectionText>
 					</S.HeaderSection>
-					<S.HeaderSection to={'/accident'} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 						<S.HeaderSectionLogo src={Accident} alt="" />
 						<S.HeaderSectionText>기타</S.HeaderSectionText>
 					</S.HeaderSection>
-					<S.HeaderSection to={'/club'} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 						<S.HeaderSectionLogo src={Club} alt="" />
 						<S.HeaderSectionText>외부 서비스</S.HeaderSectionText>
 					</S.HeaderSection>

@@ -22,6 +22,7 @@ import DetailBtn from './components/Button/Detail'
 import MyPage from './pages/Users/MyPage'
 import VersionDetail from './pages/Docs/Version/VersionDetail'
 import User from 'pages/Users/User'
+import Frame from 'pages/Main/Frame'
 
 export {
 	Home,
@@ -48,4 +49,5 @@ export {
 	VersionDetail,
 	MyPage,
 	User,
+	Frame,
 }

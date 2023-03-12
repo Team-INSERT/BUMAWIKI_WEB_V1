@@ -44,6 +44,7 @@ const App = () => {
 				<Route path={'/teacher'} element={<R.Teacher />} />
 				<Route path={'/accident'} element={<R.Accident />} />
 				<Route path={'/club'} element={<R.Club />} />
+				<Route path={'/frame'} element={<R.Frame />} />
 				<Route path={'/docs/:title'} element={<R.Docs />} />
 				<Route path={'/search/:result'} element={<R.Search />} />
 				<Route path={'/oauth'} element={<R.Signup />} />
