@@ -7,7 +7,7 @@ export const VersionList = styled.li`
 
 	span {
 		display: block;
-		width: 250px;
+		width: 300px;
 		font-weight: 600;
 	}
 `
