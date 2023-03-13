@@ -12,6 +12,7 @@ import { MutationFunction, useMutation, useQuery } from 'react-query'
 import UpdateDocsType from 'types/update.type.'
 import { decodeContents, encodeContents } from 'utils/document/requestContents'
 import updateInitState from 'state/updateInitState'
+import { AxiosError } from 'axios'
 
 const Update = () => {
 	const router = R.useParams()
@@ -33,6 +34,20 @@ const Update = () => {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
+		},
+		onError: (err) => {
+			if (err instanceof AxiosError) {
+				const { status, code } = err
+				const message = err.response?.data.message
+				if (message && code) {
+					if (message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
+					else if (message === 'YOUR BANNED') alert('읽기전용 유저는 문서를 편집할 수 없습니다.')
+					else if (status === 403) alert('로그인 후 이용 가능한 서비스입니다.')
+					else if (status === 404) alert('잘못된 접근입니다.')
+					else if (status === 500) alert('서버에 오류가 발생했습니다.')
+					else alert(`ERROR : ${message}`)
+				}
+			}
 		},
 	})
 
