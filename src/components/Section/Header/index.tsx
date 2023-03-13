@@ -91,6 +91,9 @@ const Header = () => {
 						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
 							<S.HeaderSectionText>공지사항</S.HeaderSectionText>
 						</S.SubHeaderSection>
+						<S.SubHeaderSection to="https://forms.gle/DzAP7XSYH4ubK43FA">
+							<S.HeaderSectionText>문의하기</S.HeaderSectionText>
+						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/student">
