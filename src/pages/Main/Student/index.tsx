@@ -40,7 +40,7 @@ const Student = () => {
 					<S.StudentLine />
 					<S.StudentListWrap>
 						{years.map((year) => (
-							<C.AccodianMenu name={`${year}년도 입학생`} key={year} isOpen={year === 2023 ? false : true}>
+							<C.AccodianMenu name={`${year}년도 입학생`} key={year} isOpen={true}>
 								{students.map((student: Docs, index) => (
 									<S.StudentList key={index}>
 										{student.enroll === year ? (
