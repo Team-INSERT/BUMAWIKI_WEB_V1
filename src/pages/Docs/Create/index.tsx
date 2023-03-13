@@ -71,11 +71,12 @@ const Create = () => {
 		setDocs({ ...docs, contents: `<틀>\n\n<틀제목>제목</틀제목>\n${setRow.join('')}\n</틀>` })
 	}
 
-	const changeDocsType = (type: string) => {
+	const changeDocsType = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const type = e.target.id
 		if (type === 'FRAME') {
-			setDocs({ ...docs, docsType: type, title: '틀:' })
+			setDocs({ ...docs, docsType: type, title: `틀:${docs.title}` })
 		} else {
-			setDocs({ ...docs, docsType: type, title: '', contents: '' })
+			setDocs({ ...docs, docsType: type, title: docs.title.replace('틀:', ''), contents: '' })
 		}
 	}
 
@@ -105,19 +106,19 @@ const Create = () => {
 									''
 								)}
 								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="MAJOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="MAJOR_TEACHER" name="radio" />
 								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="MENTOR_TEACHER" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="MENTOR_TEACHER" name="radio" />
 								<label htmlFor="ACCIDENT">사건/사고</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="ACCIDENT" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="ACCIDENT" name="radio" />
 								<label htmlFor="CLUB">전공동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="CLUB" name="radio" />
 								<label htmlFor="FREE_CLUB">사설동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="FREE_CLUB" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="FREE_CLUB" name="radio" />
 								<label htmlFor="FRAME">틀</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e.target.id)} id="FRAME" name="radio" />
+								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="FRAME" name="radio" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
