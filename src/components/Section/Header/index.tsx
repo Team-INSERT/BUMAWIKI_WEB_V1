@@ -29,26 +29,26 @@ const Header = () => {
 	}, [user])
 
 	return (
-		<S.HeaderContainer>
+		<S.HeaderContainer onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 			<S.HeaderWrap>
 				<S.HeaderLink to={'/'}>
 					<S.HeaderLogo src="/images/logo.png" alt="logo" />
 				</S.HeaderLink>
 				<S.HeaderSectionWrap>
-					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''}>
 						<S.HeaderSectionLogo src={Student} alt="" />
 						<S.HeaderSectionText>공지</S.HeaderSectionText>
 					</S.HeaderSection>
 					&nbsp;&nbsp;&nbsp;
-					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''}>
 						<S.HeaderSectionLogo src={Teacher} alt="" />
 						<S.HeaderSectionText>학교</S.HeaderSectionText>
 					</S.HeaderSection>
-					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''}>
 						<S.HeaderSectionLogo src={Accident} alt="" />
 						<S.HeaderSectionText>기타</S.HeaderSectionText>
 					</S.HeaderSection>
-					<S.HeaderSection to={''} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.HeaderSection to={''}>
 						<S.HeaderSectionLogo src={Club} alt="" />
 						<S.HeaderSectionText>외부 서비스</S.HeaderSectionText>
 					</S.HeaderSection>
@@ -79,12 +79,12 @@ const Header = () => {
 					</S.HeaderLoginWrap>
 				</S.HeaderSearchWrap>
 			</S.HeaderWrap>
-			<S.SubHeaderWrap isHover={isHover} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+			<S.SubHeaderWrap isHover={isHover}>
 				<S.SubHeaderPlace>
 					<S.HeaderLogo src="/images/logo.png" alt="logo" />
 				</S.SubHeaderPlace>
 				<S.HeaderSectionWrap>
-					<S.SubHeaderSectionWrap onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/docs/부마위키%20방명록">
 							<S.HeaderSectionText>방명록</S.HeaderSectionText>
 						</S.SubHeaderSection>
@@ -92,7 +92,7 @@ const Header = () => {
 							<S.HeaderSectionText>공지사항</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
-					<S.SubHeaderSectionWrap onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/student">
 							<S.HeaderSectionText>학생</S.HeaderSectionText>
 						</S.SubHeaderSection>
@@ -103,7 +103,7 @@ const Header = () => {
 							<S.HeaderSectionText>동아리</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
-					<S.SubHeaderSectionWrap onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/frame">
 							<S.HeaderSectionText>틀</S.HeaderSectionText>
 						</S.SubHeaderSection>
@@ -111,7 +111,7 @@ const Header = () => {
 							<S.HeaderSectionText>사건</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
-					<S.SubHeaderSectionWrap onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="">
 							<S.HeaderSectionText>추가예정</S.HeaderSectionText>
 						</S.SubHeaderSection>
