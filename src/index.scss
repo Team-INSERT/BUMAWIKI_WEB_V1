@@ -41,3 +41,47 @@ input[type='file']::file-selector-button {
 ::-webkit-scrollbar {
 	display: none;
 }
+
+.frame_td {
+	height: 30px;
+	border: solid 3px #274168;
+}
+
+.frame_table {
+	border-collapse: collapse;
+	border: solid 3px #274168;
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+}
+
+.frame_caption {
+	background-color: #274168;
+	color: white;
+	font-weight: 700;
+	padding: 6px;
+	font-size: 20px;
+}
+
+.analects {
+	width: 100%;
+	background-color: #ccc;
+	height: 50px;
+	border: 1px solid black;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+
+	.analects_text {
+		margin-left: 16px;
+	}
+}
+
+.subtitle {
+	color: #274168;
+	margin-top: 20px;
+	font-size: 28px;
+	font-weight: 700;
+	font-family: 'Open Sans', sans-serif;
+}

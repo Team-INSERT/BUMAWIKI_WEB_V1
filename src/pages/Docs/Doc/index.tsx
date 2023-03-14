@@ -20,9 +20,23 @@ const Doc = () => {
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: async (res) => {
 			try {
-				const frame = await FC.includeFrame("틀:Da'at")
-				setDocs({ ...res, contents: res.contents.replace('include(', frame) })
-				setIsLoad(true)
+				if (res.contents.indexOf('include(') !== -1) {
+					const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
+					const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
+
+					console.log(frameName)
+					try {
+						var frame = await FC.includeFrame(frameName)
+						console.log(frame)
+					} catch (err) {
+						console.log('Tlqkf')
+					}
+					setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
+					setIsLoad(true)
+				} else {
+					setDocs(res)
+					setIsLoad(true)
+				}
 			} catch (err) {
 				console.log(err)
 			}
