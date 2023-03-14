@@ -86,37 +86,37 @@ const Header = () => {
 				<S.HeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/docs/부마위키%20방명록">
-							<S.HeaderSectionText>방명록</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>방명록</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
-							<S.HeaderSectionText>공지사항</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>공지사항</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="https://forms.gle/DzAP7XSYH4ubK43FA" target="_blank">
-							<S.HeaderSectionText>문의하기</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>문의하기</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/student">
-							<S.HeaderSectionText>학생</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>학생</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/teacher">
-							<S.HeaderSectionText>선생님</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>선생님</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/club">
-							<S.HeaderSectionText>동아리</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>동아리</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/frame">
-							<S.HeaderSectionText>틀</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>틀</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/accident">
-							<S.HeaderSectionText>사건</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>사건</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="">
-							<S.HeaderSectionText>추가예정</S.HeaderSectionText>
+							<S.HeaderSectionText display={true}>추가예정</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 				</S.HeaderSectionWrap>

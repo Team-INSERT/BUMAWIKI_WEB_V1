@@ -65,7 +65,7 @@ export const HeaderSection = styled(Link)`
 	align-items: center;
 
 	@media (max-width: 500px) {
-		margin-left: 6vw;
+		margin-left: 9vw;
 	}
 `
 
@@ -78,7 +78,7 @@ export const SubHeaderSection = styled(Link)`
 	align-items: center;
 
 	@media (max-width: 500px) {
-		margin-left: 6vw;
+		margin-right: auto;
 	}
 `
 
@@ -91,7 +91,7 @@ export const SubHeaderSectionWrap = styled.div`
 	align-items: center;
 
 	@media (max-width: 500px) {
-		margin-left: 6vw;
+		margin-left: 4vw;
 	}
 `
 
@@ -100,7 +100,7 @@ export const HeaderSectionLogo = styled.img`
 	height: 14px;
 `
 
-export const HeaderSectionText = styled.span`
+export const HeaderSectionText = styled.span<{ display?: boolean }>`
 	margin-left: 8px;
 	color: white;
 	font-size: 15px;
@@ -108,7 +108,8 @@ export const HeaderSectionText = styled.span`
 	font-weight: 800;
 
 	@media (max-width: 500px) {
-		display: none;
+		font-size: 10px;
+		display: ${(props) => (props.display ? 'block' : 'none')};
 	}
 `
 
