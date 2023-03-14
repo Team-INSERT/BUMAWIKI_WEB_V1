@@ -2,6 +2,7 @@ import * as C from 'allFiles'
 import * as api from 'api/editDocs'
 import * as FC from 'utils'
 import * as S from './style'
+import * as apid from 'api/getDocs'
 
 import userState from 'context/userState'
 import React from 'react'
@@ -81,9 +82,10 @@ const Create = () => {
 	}
 
 	const changeColor = () => {
-		localStorage.setItem('frameColor', colors.frameColor)
-		localStorage.setItem('textColor', colors.textColor)
+		localStorage.setItem(`frameColor`, colors.frameColor)
+		localStorage.setItem(`textColor`, colors.textColor)
 	}
+
 
 	return (
 		<>
@@ -231,6 +233,8 @@ const Create = () => {
 					<S.CreateSubmit>
 						<S.CreateWarn>※ 필독! 문서 내 부적절한 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.CreateWarn>
 						<S.CreateButton onClick={onClickCreateDocs}>문서 생성</S.CreateButton>
+						{/* <button onClick={() => { setDocs({ ...docs, contents: String(FC.includeFrame("틀:Da'at")) }) }}>ing</button> */}
+						<button onClick={() => FC.includeFrame("틀:Da'at")}>ing</button>
 					</S.CreateSubmit>
 					<C.SubFooter />
 				</C.Board>

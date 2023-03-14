@@ -9,6 +9,7 @@ import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
 import { AxiosError } from 'axios'
 import { Helmet } from 'react-helmet'
+import { decodeContents } from 'utils/document/requestContents'
 
 const Doc = () => {
 	const router = useParams()
@@ -17,9 +18,28 @@ const Doc = () => {
 	const [docs, setDocs] = useState<Docs>()
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
-		onSuccess: (res) => {
-			setDocs(res)
-			setIsLoad(true)
+		onSuccess: async (res) => {
+			try {
+				if (res.contents.indexOf('include(') !== -1) {
+					const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
+					const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
+
+					console.log(frameName)
+					try {
+						var frame = await FC.includeFrame(frameName)
+						console.log(frame)
+					} catch (err) {
+						console.log('Tlqkf')
+					}
+					setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
+					setIsLoad(true)
+				} else {
+					setDocs(res)
+					setIsLoad(true)
+				}
+			} catch (err) {
+				console.log(err)
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError && err.response?.status === 404) navigate('/404')
@@ -61,9 +81,10 @@ const Doc = () => {
 								<S.DocsContentsLoadWrap>
 									<S.LastUpdateDate>마지막 수정 : {FC.dateParser(docs !== undefined ? docs.lastModifiedAt : '')}</S.LastUpdateDate>
 									<C.AccodianMenu name="내용">
+										{/* <button onClick={FC.includeFrame('틀:딱')}>ing</button> */}
 										<S.DocsContents
 											dangerouslySetInnerHTML={{
-												__html: FC.documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"') as string),
+												__html: FC.documentation(decodeContents(docs?.contents.replace('include(', `${FC.includeFrame("틀:Da'at")}`) || '')),
 											}}></S.DocsContents>
 									</C.AccodianMenu>
 								</S.DocsContentsLoadWrap>
