@@ -3,7 +3,7 @@ import tokenExpired from 'lib/token/tokenExpired'
 
 const bumawikiAxios = axios.create({
 	baseURL: 'http://bumawiki.kro.kr/api',
-	timeout: 10000,
+	timeout: 100000,
 })
 
 bumawikiAxios.interceptors.request.use(
