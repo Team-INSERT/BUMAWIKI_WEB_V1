@@ -203,8 +203,6 @@ const Create = () => {
 					<S.CreateSubmit>
 						<S.CreateWarn>※ 필독! 문서 내 부적절한 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.CreateWarn>
 						<S.CreateButton onClick={onClickCreateDocs}>문서 생성</S.CreateButton>
-						{/* <button onClick={() => { setDocs({ ...docs, contents: String(FC.includeFrame("틀:Da'at")) }) }}>ing</button> */}
-						<button onClick={() => FC.includeFrame("틀:Da'at")}>ing</button>
 					</S.CreateSubmit>
 					<C.SubFooter />
 				</C.Board>
