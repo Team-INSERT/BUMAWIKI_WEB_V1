@@ -36,7 +36,11 @@ export const getUser = async () => {
 }
 
 export const getRefreshToken = async () => {
-	return await bumawikiAxios.put('/auth/refresh/access', {
-		refresh_token: FC.getCookie('refresh_token'),
-	})
+	return await bumawikiAxios.put(
+		'/auth/refresh/access',
+		{
+			refresh_token: FC.getCookie('refresh_token'),
+		},
+		{}
+	)
 }

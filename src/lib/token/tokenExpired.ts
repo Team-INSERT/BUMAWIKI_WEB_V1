@@ -1,16 +1,9 @@
-import { bumawikiAxios } from 'lib/axios/customAxios'
-import { getCookie } from 'utils'
+import { getRefreshToken } from 'api/user'
 import delCookie from 'utils/etc/delCookie'
 
 const tokenExpired = async () => {
 	try {
-		const res = await bumawikiAxios.put(
-			'/auth/refresh/access',
-			{
-				refresh_token: getCookie('refresh_token'),
-			},
-			{}
-		)
+		const res = await getRefreshToken()
 		document.cookie = `authorization=${res.data.accessToken};`
 	} catch (err) {
 		delCookie('authorization')

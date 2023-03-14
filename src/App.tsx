@@ -2,7 +2,7 @@ import * as R from './allFiles'
 import * as api from 'api/user'
 
 import userState from 'context/userState'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
@@ -14,20 +14,30 @@ const App = () => {
 	const setUser = useSetRecoilState(userState)
 
 	const getUser = async () => {
-		const data = await api.getUser()
-		setUser({
-			...data,
-			contributeDocs: data.contributeDocs.reverse(),
-			isLogin: true,
-		})
+		try {
+			const data = await api.getUser()
+			setUser({
+				...data,
+				contributeDocs: data.contributeDocs.reverse(),
+				isLogin: true,
+			})
+		} catch (err) {
+			console.error('로그인 후 서비스를 이용해주세요!')
+		}
 	}
 
 	const refreshLogin = async () => {
 		try {
 			await getUser()
 		} catch (err) {
-			await tokenExpired()
-			getUser()
+			if (err instanceof AxiosError) {
+				const { status, message } = err?.response?.data
+				if (status === 403) {
+					if (message === 'Refresh Token Expired') await tokenExpired()
+					if (message === 'User Not Login') console.error('로그인 후 서비스를 이용해주세요!')
+				}
+				getUser()
+			}
 		}
 	}
 

@@ -59,6 +59,12 @@ const Create = () => {
 	const makeFrame = () => {
 		const setRow = []
 		const setColumn = []
+
+		let row: string = ''
+		let column: string = ''
+
+		console.log(row.repeat(size.column))
+
 		for (let i = 0; i < size.column; i++) {
 			setColumn.push('<열>내용삽입</열>')
 		}
