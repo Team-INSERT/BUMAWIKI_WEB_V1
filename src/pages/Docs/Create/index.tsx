@@ -2,7 +2,6 @@ import * as C from 'allFiles'
 import * as api from 'api/editDocs'
 import * as FC from 'utils'
 import * as S from './style'
-import * as apid from 'api/getDocs'
 
 import userState from 'context/userState'
 import React from 'react'
@@ -12,9 +11,7 @@ import { useRecoilValue } from 'recoil'
 import CreateDocsType from 'types/create.type'
 import { encodeContents } from 'utils/document/requestContents'
 import Frame from 'types/frame.type'
-import Color from 'types/color.type'
 import sizeInitState from 'state/sizeInitState'
-import colorInitState from 'state/colorInitState'
 import createInitState from 'state/createInitState'
 
 const Create = () => {
@@ -23,7 +20,6 @@ const Create = () => {
 	const years = FC.getAllYear()
 
 	const [size, setSize] = React.useState<Frame>(sizeInitState)
-	const [colors, setColors] = React.useState<Color>(colorInitState)
 	const [docs, setDocs] = React.useState<CreateDocsType>(createInitState)
 
 	const { mutate } = useMutation(api.createDocs, {
@@ -80,12 +76,6 @@ const Create = () => {
 			setDocs({ ...docs, docsType: type, title: docs.title.replace('틀:', ''), contents: '' })
 		}
 	}
-
-	const changeColor = () => {
-		localStorage.setItem(`frameColor`, colors.frameColor)
-		localStorage.setItem(`textColor`, colors.textColor)
-	}
-
 
 	return (
 		<>
@@ -169,46 +159,26 @@ const Create = () => {
 								<S.CreateTableTRTitle>틀 규격</S.CreateTableTRTitle>
 								<S.FrameInputDiv>
 									<S.FrameInputBox>
-										<div>
-											<S.FrameInputWrap>
-												<S.FrameText>열</S.FrameText>
-												<S.FrameInput
-													type="number"
-													min="2"
-													max="5"
-													value={size.column}
-													onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
-												/>
-											</S.FrameInputWrap>
-											<S.FrameInputWrap>
-												<S.FrameText>행</S.FrameText>
-												<S.FrameInput
-													type="number"
-													min="2"
-													max="10"
-													value={size.row}
-													onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
-												/>
-											</S.FrameInputWrap>
-										</div>
-										<div>
-											<S.FrameInputWrap>
-												<S.FrameText>글자색</S.FrameText>
-												<S.FrameInput type="color" onChange={(e) => setColors({ ...colors, textColor: e.target.value })} />
-											</S.FrameInputWrap>
-											<S.FrameInputWrap>
-												<S.FrameText>배경색</S.FrameText>
-												<S.FrameInput type="color" onChange={(e) => setColors({ ...colors, frameColor: e.target.value })} />
-											</S.FrameInputWrap>
-										</div>
+										<S.FrameInputWrap>
+											<S.FrameText>열</S.FrameText>
+											<S.FrameInput
+												type="number"
+												min="2"
+												max="5"
+												value={size.column}
+												onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
+											/>
+											<S.FrameText>행</S.FrameText>
+											<S.FrameInput
+												type="number"
+												min="2"
+												max="10"
+												value={size.row}
+												onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
+											/>
+										</S.FrameInputWrap>
 									</S.FrameInputBox>
-									<S.CreateFrameButton
-										onClick={() => {
-											makeFrame()
-											changeColor()
-										}}>
-										틀생성/초기화
-									</S.CreateFrameButton>
+									<S.CreateFrameButton onClick={() => makeFrame()}>틀생성/초기화</S.CreateFrameButton>
 								</S.FrameInputDiv>
 							</S.CreateTableTRFrame>
 						) : (
