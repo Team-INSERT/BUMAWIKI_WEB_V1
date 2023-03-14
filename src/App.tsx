@@ -33,7 +33,7 @@ const App = () => {
 			if (err instanceof AxiosError) {
 				const { status, message } = err?.response?.data
 				if (status === 403) {
-					if (message === 'Refresh Token Expired') await tokenExpired()
+					if (message === 'Access Token Expired') await tokenExpired()
 					if (message === 'User Not Login') console.error('로그인 후 서비스를 이용해주세요!')
 				}
 				getUser()
