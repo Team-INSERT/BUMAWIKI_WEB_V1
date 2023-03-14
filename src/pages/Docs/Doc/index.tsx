@@ -9,6 +9,7 @@ import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
 import { AxiosError } from 'axios'
 import { Helmet } from 'react-helmet'
+import { decodeContents } from 'utils/document/requestContents'
 
 const Doc = () => {
 	const router = useParams()
@@ -17,9 +18,14 @@ const Doc = () => {
 	const [docs, setDocs] = useState<Docs>()
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
-		onSuccess: (res) => {
-			setDocs(res)
-			setIsLoad(true)
+		onSuccess: async (res) => {
+			try {
+				const frame = await FC.includeFrame("틀:Da'at")
+				setDocs({ ...res, contents: res.contents.replace('include(', frame) })
+				setIsLoad(true)
+			} catch (err) {
+				console.log(err)
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError && err.response?.status === 404) navigate('/404')
@@ -30,10 +36,6 @@ const Doc = () => {
 		refetch()
 		// eslint-disable-next-line
 	}, [router])
-
-
-	FC.includeFrame("틀:Da'at")
-
 
 	return (
 		<div>
@@ -68,7 +70,7 @@ const Doc = () => {
 										{/* <button onClick={FC.includeFrame('틀:딱')}>ing</button> */}
 										<S.DocsContents
 											dangerouslySetInnerHTML={{
-												__html: FC.documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"') as string),
+												__html: FC.documentation(decodeContents(docs?.contents.replace('include(', `${FC.includeFrame("틀:Da'at")}`) || '')),
 											}}></S.DocsContents>
 									</C.AccodianMenu>
 								</S.DocsContentsLoadWrap>
