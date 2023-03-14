@@ -87,7 +87,7 @@ const Update = () => {
 					<S.DocsTitleWrap>
 						<S.DocsTitleText>문서 편집 : {docs.title}</S.DocsTitleText>
 					</S.DocsTitleWrap>
-					<S.DocsExampleImage src="/images/example.png" alt="문서작성법" />
+					<S.DocsExampleImage src="/images/references.png" alt="문서작성법" />
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map((index) => (
