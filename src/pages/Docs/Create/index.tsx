@@ -136,7 +136,7 @@ const Create = () => {
 						<S.CreateTableTRExample>
 							<S.CreateTableTRTitle>예시</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
-								<S.ExampleImage src="/images/docs-example.png" alt="문서 양식" />
+								<S.ExampleImage src="/images/example.png" alt="문서 양식" />
 							</S.CreateTableTRContents>
 						</S.CreateTableTRExample>
 						<S.CreateTableTRFile>
