@@ -31,6 +31,10 @@ const Doc = () => {
 		// eslint-disable-next-line
 	}, [router])
 
+
+	FC.includeFrame("틀:Da'at")
+
+
 	return (
 		<div>
 			<Helmet>
@@ -61,6 +65,7 @@ const Doc = () => {
 								<S.DocsContentsLoadWrap>
 									<S.LastUpdateDate>마지막 수정 : {FC.dateParser(docs !== undefined ? docs.lastModifiedAt : '')}</S.LastUpdateDate>
 									<C.AccodianMenu name="내용">
+										{/* <button onClick={FC.includeFrame('틀:딱')}>ing</button> */}
 										<S.DocsContents
 											dangerouslySetInnerHTML={{
 												__html: FC.documentation(docs?.contents.replace(/<br>/gi, '\n').replace(/&\$\^%/gi, '"') as string),
