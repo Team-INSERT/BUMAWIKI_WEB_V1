@@ -57,21 +57,8 @@ const Create = () => {
 	}
 
 	const makeFrame = () => {
-		const setRow = []
-		const setColumn = []
-
-		let row: string = ''
-		let column: string = ''
-
-		console.log(row.repeat(size.column))
-
-		for (let i = 0; i < size.column; i++) {
-			setColumn.push('<열>내용삽입</열>')
-		}
-		for (let i = 0; i < size.row; i++) {
-			setRow.push('<행>' + setColumn.join('') + '</행>\n')
-		}
-		setDocs({ ...docs, contents: `<틀>\n\n<틀제목>제목</틀제목>\n${setRow.join('')}\n</틀>` })
+		const frame = `<틀>\n<틀제목>제목삽입</틀제목>\n` + `<행>${'<열>내용삽입</열>'.repeat(size.row)}</행>\n`.repeat(size.column) + `<틀>`
+		setDocs({ ...docs, contents: frame })
 	}
 
 	const changeDocsType = (e: React.ChangeEvent<HTMLInputElement>) => {
