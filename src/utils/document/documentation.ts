@@ -15,7 +15,7 @@ const documentation = (content: string) => {
 		.replace(/가로병합={{/gi, ` colSpan="`)
 		.replace(/세로병합={{/gi, ` rowSpan="`)
 		.replace(/}}/gi, `"`)
-		.replace(/\)/gi, '')
+		.replace(/\);/gi, '')
 
 		// 태그 지원
 		.replace(/<항목>/gi, `?^li style="list-style: disc;"^?`)
