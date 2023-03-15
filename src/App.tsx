@@ -22,6 +22,7 @@ const App = () => {
 				isLogin: true,
 			})
 		} catch (err) {
+			await tokenExpired()
 			console.error('로그인 후 서비스를 이용해주세요!')
 		}
 	}
@@ -31,8 +32,9 @@ const App = () => {
 			await getUser()
 		} catch (err) {
 			if (err instanceof AxiosError) {
-				const { status } = err?.response?.data
+				const { status, message } = err?.response?.data
 				if (status === 403) {
+					if (message === 'User Not Login') return console.error('로그인 후 서비스를 이용해주세요!')
 					await tokenExpired()
 				}
 				getUser()
