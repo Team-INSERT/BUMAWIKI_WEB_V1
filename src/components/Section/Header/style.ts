@@ -19,7 +19,7 @@ export const SubHeaderWrap = styled.div<{ isHover: boolean }>`
 	height: 17vh;
 	display: flex;
 	top: 6.5vh;
-	position: fixed;
+	position: absolute;
 	z-index: 2;
 	align-items: center;
 	background-color: #526786;
