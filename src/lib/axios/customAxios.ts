@@ -23,7 +23,7 @@ bumawikiAxios.interceptors.response.use(
 		const { status, message } = error.response.data
 		if (status === 403 && message !== 'User Not Login') {
 			if (message === 'Refresh Token Expired') {
-				alert('토큰이 만료되었습니다. 다시 로그인해주세요.')
+				console.error('토큰이 만료되었습니다. 다시 로그인해주세요.')
 			} else tokenExpired()
 		}
 		return Promise.reject(error)

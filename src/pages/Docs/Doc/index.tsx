@@ -22,9 +22,16 @@ const Doc = () => {
 			try {
 				if (res.contents.indexOf('include(') !== -1) {
 					const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
-					const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
-					const frame = await FC.includeFrame(frameName)
-					setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
+					const frames = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '').split(', ')
+
+					let frameValue = ''
+
+					for (const frame of frames) {
+						const result = await FC.includeFrame(frame)
+						frameValue += `${result}\n`
+					}
+
+					setDocs({ ...res, contents: res.contents.replace(includeTag, frameValue) })
 					setIsLoad(true)
 				} else {
 					setDocs(res)
