@@ -7,8 +7,8 @@ import Docs from 'types/docs.type'
 import { useQuery } from 'react-query'
 
 const Aside = () => {
-	const [page, setPage] = React.useState(1)
-	const { data, refetch } = useQuery('lastModifiedDocs', () => api.getLastModifiedDocs(page - 1))
+	const [page, setPage] = React.useState(0)
+	const { data, refetch } = useQuery('lastModifiedDocs', () => api.getLastModifiedDocs(page))
 
 	React.useEffect(() => {
 		refetch()
