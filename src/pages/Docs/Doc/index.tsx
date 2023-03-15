@@ -19,15 +19,24 @@ const Doc = () => {
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: async (res) => {
-			if (res.contents.indexOf('include(') !== -1) {
-				const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
-				const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
-				const frame = await FC.includeFrame(frameName)
-				setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
-				setIsLoad(true)
-			} else {
-				setDocs(res)
-				setIsLoad(true)
+			try {
+				if (res.contents.indexOf('include(') !== -1) {
+					const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
+					const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
+					const frame = await FC.includeFrame(frameName)
+					setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
+					setIsLoad(true)
+				} else {
+					setDocs(res)
+					setIsLoad(true)
+				}
+			} catch (err) {
+				if (err instanceof AxiosError) {
+					const { status } = err?.response?.data
+					if (status === 404) return alert('오류가 발생했습니다.')
+					if (status === 500) return alert('서버에 오류가 발생했습니다.')
+					return alert('오류가 발생하여 문서를 불러올 수 없습니다.')
+				}
 			}
 		},
 		onError: (err) => {
