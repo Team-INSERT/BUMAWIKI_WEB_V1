@@ -12,11 +12,11 @@ const Signup = () => {
 		onSuccess: (data) => {
 			document.cookie = `authorization=${data.accessToken};`
 			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`
-			navigate(-1)
+			navigate(-2)
 			window.location.reload()
 		},
 		onError: () => {
-			navigate(-1)
+			navigate(-2)
 			alert('로그인 도중 오류가 발생했습니다.')
 		},
 	})
