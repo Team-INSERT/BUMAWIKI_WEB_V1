@@ -19,20 +19,11 @@ const Doc = () => {
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: async (res) => {
-			try {
-				if (res.contents.indexOf('include(') !== -1) {
-					const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
-					const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
-					const frame = await FC.includeFrame(frameName)
-					setDocs({ ...res, contents: res.contents.replace(includeTag, frame) })
-					setIsLoad(true)
-				} else {
-					setDocs(res)
-					setIsLoad(true)
-				}
-			} catch (err) {
-				console.log(err)
-			}
+			const includeTag = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');') + 2)
+			const frameName = res.contents.substring(res.contents.indexOf('include('), res.contents.indexOf(');')).replace('include(', '')
+			const frame = await FC.includeFrame(frameName)
+			setDocs(res.contents.indexOf('include(') !== -1 ? { ...res, contents: res.contents.replace(includeTag, frame) } : res)
+			setIsLoad(true)
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError && err.response?.status === 404) navigate('/404')
