@@ -23,7 +23,7 @@ bumawikiAxios.interceptors.response.use(
 		const { status, message } = error.response.data
 		if (status === 403) {
 			if (message === 'Access Token Expired') {
-				localStorage.removeItem('access_token')
+				return tokenExpired()
 			}
 			if (message === 'User Not Login' && localStorage.getItem('refresh_token')) {
 				localStorage.removeItem('access_token')
