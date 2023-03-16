@@ -13,7 +13,6 @@ import { useRecoilValue } from 'recoil'
 
 const Header = () => {
 	const [search, setSearch] = React.useState('')
-	const [isLoad, setIsLoad] = React.useState(false)
 	const [isHover, setIsHover] = React.useState(false)
 
 	const user = useRecoilValue(userState)
@@ -23,11 +22,6 @@ const Header = () => {
 		if (!search.length) alert('검색할 문서명을 입력해주세요!')
 		else navigate(`/search/${search}`)
 	}
-
-	React.useEffect(() => {
-		if (user.id) setIsLoad(true)
-		else setIsLoad(false)
-	}, [user])
 
 	return (
 		<S.HeaderContainer onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
@@ -70,7 +64,7 @@ const Header = () => {
 						</S.HeaderSearchButton>
 					</S.HeaderSearchForm>
 					<S.HeaderLoginWrap>
-						{isLoad ? (
+						{user.isLogin ? (
 							<S.HeaderMypageText to="/mypage">마이페이지</S.HeaderMypageText>
 						) : (
 							<S.HeaderLoginText href="https://auth.bssm.kro.kr/oauth?clientId=a1a16261&redirectURI=http://bumawiki.kro.kr/oauth">

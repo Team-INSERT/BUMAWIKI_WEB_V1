@@ -14,11 +14,10 @@ const MyPage = () => {
 
 	const { mutate } = useMutation(api.logoutUser, {
 		onSuccess: () => {
-			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			if (!FC.getCookie('refresh_token') && user.isLogin) {
-				setUser(initUserState)
-			}
+			localStorage.removeItem('access_token')
+			localStorage.removeItem('refresh_token')
+			localStorage.removeItem('refresh_token_expired_at')
+			setUser(initUserState)
 		},
 	})
 
