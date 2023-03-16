@@ -24,10 +24,10 @@ bumawikiAxios.interceptors.response.use(
 		if (status === 403) {
 			if (message === 'Access Token Expired') {
 				localStorage.removeItem('access_token')
-				return tokenExpired()
 			}
 			if (message === 'User Not Login' && localStorage.getItem('refresh_token')) {
 				localStorage.removeItem('access_token')
+				return tokenExpired()
 			}
 			if (message === 'Forbidden') {
 				return alert('로그인 후 이용 가능한 서비스입니다.')
