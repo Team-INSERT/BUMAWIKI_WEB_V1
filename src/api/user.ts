@@ -28,7 +28,7 @@ export const getUser = async () => {
 	return (
 		await bumawikiAxios.get(`/user`, {
 			headers: {
-				Authorization: localStorage.getItem('authorization'),
+				Authorization: localStorage.getItem('access_token'),
 			},
 		})
 	).data
