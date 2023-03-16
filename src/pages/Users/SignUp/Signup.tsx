@@ -13,7 +13,6 @@ const Signup = () => {
 			document.cookie = `authorization=${data.accessToken};`
 			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`
 			navigate(-2)
-			window.location.reload()
 		},
 		onError: () => {
 			navigate(-2)

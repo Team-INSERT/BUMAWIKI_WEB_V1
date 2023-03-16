@@ -31,6 +31,7 @@ const User = () => {
 					<S.UserInfoWrap>
 						<C.AccodianMenu name={'정보'}>
 							<S.UserInfoLoadWrap>
+								{user?.authority ? <C.Authority email={user.email} /> : null}
 								<span>
 									이름은 {user?.nickName}이며, 부마위키의{' '}
 									{user?.authority === 'ADMIN' ? '관리자' : user?.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.

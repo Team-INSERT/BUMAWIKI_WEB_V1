@@ -5,6 +5,7 @@ interface UserType {
 	nickName: string
 	authority: string
 	contributeDocs: ContibuteDocsType[]
+	email: string
 }
 
 export default UserType

@@ -26,6 +26,7 @@ const Header = () => {
 
 	React.useEffect(() => {
 		if (user.id) setIsLoad(true)
+		else setIsLoad(false)
 	}, [user])
 
 	return (

@@ -44,3 +44,18 @@ export const getRefreshToken = async () => {
 		{}
 	)
 }
+
+export const updateUserAuthority = async (email: string, authority: string) => {
+	return await bumawikiAxios.put(
+		'/set/authority',
+		{
+			email,
+			authority,
+		},
+		{
+			headers: {
+				Authorization: FC.getCookie('refresh_token'),
+			},
+		}
+	)
+}
