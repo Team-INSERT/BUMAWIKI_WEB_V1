@@ -5,7 +5,7 @@ import * as S from './style'
 import * as getApi from 'api/getDocs'
 import * as editApi from 'api/editDocs'
 
-import userState from 'context/userState'
+import { userState } from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'

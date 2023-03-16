@@ -7,9 +7,9 @@ import Create from 'assets/create.svg'
 import Search from 'assets/search.svg'
 import Student from 'assets/student.svg'
 import Teacher from 'assets/teacher.svg'
-import userState from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
+import { userState } from 'context/userState'
 
 const Header = () => {
 	const [search, setSearch] = React.useState('')
@@ -52,9 +52,7 @@ const Header = () => {
 							<S.HeaderSectionLogo src={Create} alt="" />
 							<S.HeaderSectionText>문서 생성</S.HeaderSectionText>
 						</S.HeaderSection>
-					) : (
-						''
-					)}
+					) : null}
 				</S.HeaderSectionWrap>
 				<S.HeaderSearchWrap>
 					<S.HeaderSearchForm onSubmit={(e) => e.preventDefault()}>
@@ -81,37 +79,37 @@ const Header = () => {
 				<S.HeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/docs/부마위키%20방명록">
-							<S.HeaderSectionText display={true}>방명록</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">방명록</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
-							<S.HeaderSectionText display={true}>공지사항</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">공지사항</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="https://forms.gle/DzAP7XSYH4ubK43FA" target="_blank">
-							<S.HeaderSectionText display={true}>문의하기</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">문의하기</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/student">
-							<S.HeaderSectionText display={true}>학생</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">학생</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/teacher">
-							<S.HeaderSectionText display={true}>선생님</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">선생님</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/club">
-							<S.HeaderSectionText display={true}>동아리</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">동아리</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="/frame">
-							<S.HeaderSectionText display={true}>틀</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">틀</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/accident">
-							<S.HeaderSectionText display={true}>사건</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">사건</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
 						<S.SubHeaderSection to="">
-							<S.HeaderSectionText display={true}>추가예정</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">추가예정</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 				</S.HeaderSectionWrap>

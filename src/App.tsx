@@ -1,28 +1,25 @@
 import * as R from './allFiles'
 import * as api from 'api/user'
 
-import userState from 'context/userState'
-import axios from 'axios'
+import { userState } from 'context/userState'
+import axios, { AxiosError } from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
-import { useQuery } from 'react-query'
+import tokenExpired from 'lib/token/tokenExpired'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	const { refetch } = useQuery('getUser', api.getUser, {
-		onSuccess: (res) => setUser(res),
-	})
-
 	React.useEffect(() => {
-		refetch()
-		if (Date.parse(localStorage.getItem('refresh_token_expired_at') || '') <= new Date().getTime()) {
-			localStorage.removeItem('refresh_token')
-			localStorage.removeItem('access_token')
-		}
+		;(async () => {
+			setUser({
+				...(await api.getUser()),
+				isLogin: true,
+			})
+		})()
 		// eslint-disable-next-line
 	}, [])
 

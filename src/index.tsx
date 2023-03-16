@@ -6,7 +6,15 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			retry: 0,
+			suspense: false,
+		},
+	},
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

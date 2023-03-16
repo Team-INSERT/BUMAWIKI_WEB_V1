@@ -6,12 +6,10 @@ export const initUserState = {
 	nickName: '',
 	authority: '',
 	contributeDocs: [],
-	isLogin: false,
+	isLogin: localStorage.getItem('access_token') ? true : false,
 }
 
-const userState = atom({
+export const userState = atom({
 	key: 'userState',
 	default: initUserState,
 })
-
-export default userState

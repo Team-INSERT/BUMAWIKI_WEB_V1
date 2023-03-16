@@ -1,3 +1,4 @@
+import { initUserState } from 'context/userState'
 import { bumawikiAxios } from 'lib/axios/customAxios'
 
 export const logoutUser = async () => {
@@ -24,16 +25,6 @@ export const getOtherUser = async (id: number) => {
 	return (await bumawikiAxios.get(`/user/id/${id}`)).data
 }
 
-export const getUser = async () => {
-	return (
-		await bumawikiAxios.get(`/user`, {
-			headers: {
-				Authorization: localStorage.getItem('access_token'),
-			},
-		})
-	).data
-}
-
 export const getRefreshToken = async () => {
 	return await bumawikiAxios.put(
 		'/auth/refresh/access',
@@ -42,6 +33,20 @@ export const getRefreshToken = async () => {
 		},
 		{}
 	)
+}
+
+export const getUser = async () => {
+	try {
+		return (
+			await bumawikiAxios.get(`/user`, {
+				headers: {
+					Authorization: localStorage.getItem('access_token'),
+				},
+			})
+		).data
+	} catch (err) {
+		return initUserState
+	}
 }
 
 export const updateUserAuthority = async (email: string, authority: string) => {

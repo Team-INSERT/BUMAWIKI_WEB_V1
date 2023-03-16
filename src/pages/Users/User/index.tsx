@@ -9,7 +9,7 @@ import Contributors from 'types/contributors.type'
 import { useQuery } from 'react-query'
 import UserType from 'types/user.type'
 import { useRecoilValue } from 'recoil'
-import userState from 'context/userState'
+import { userState } from 'context/userState'
 
 const User = () => {
 	const userInfo = useRecoilValue(userState)

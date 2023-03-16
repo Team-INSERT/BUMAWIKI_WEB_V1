@@ -3,7 +3,7 @@ import * as api from 'api/editDocs'
 import * as FC from 'utils'
 import * as S from './style'
 
-import userState from 'context/userState'
+import { userState } from 'context/userState'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
