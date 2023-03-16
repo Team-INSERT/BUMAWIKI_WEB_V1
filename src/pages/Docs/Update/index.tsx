@@ -128,7 +128,10 @@ const Update = () => {
 								__html: FC.documentation(docs.contents),
 							}}
 						/>
-						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>
+						<S.UpdateSubmit>
+							<S.UpdateWarn>※ 타인에 대한 조롱 또는 비방, 비난으로 인해 발생하는 문제에 대한 책임은 본인에게 있습니다. 주의해주세요! ※</S.UpdateWarn>
+							<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>
+						</S.UpdateSubmit>
 					</S.DocsContentsWrap>
 					<C.SubFooter />
 				</C.Board>

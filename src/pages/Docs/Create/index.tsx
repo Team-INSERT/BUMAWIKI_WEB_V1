@@ -194,7 +194,7 @@ const Create = () => {
 						</S.CreateTableTRTextContent>
 					</S.CreateTable>
 					<S.CreateSubmit>
-						<S.CreateWarn>※ 필독! 문서 내 부적절한 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.CreateWarn>
+						<S.CreateWarn>※ 타인에 대한 조롱 또는 비방, 비난으로 인해 발생하는 문제에 대한 책임은 본인에게 있습니다. 주의해주세요! ※</S.CreateWarn>
 						<S.CreateButton onClick={onClickCreateDocs}>문서 생성</S.CreateButton>
 					</S.CreateSubmit>
 					<C.SubFooter />

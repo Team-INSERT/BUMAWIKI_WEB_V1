@@ -32,16 +32,16 @@ const User = () => {
 					<C.Classify>{user?.authority}</C.Classify>
 					<S.UserLine />
 					<S.UserInfoWrap>
-						<C.AccodianMenu name={'정보'}>
+						<C.AccodianMenu name="정보">
 							<S.UserInfoLoadWrap>
 								{userInfo.authority === 'ADMIN' ? <C.Authority email={user?.email || ''} /> : null}
 								<span>
-									이름은 {user?.nickName}이며, 부마위키의{' '}
-									{user?.authority === 'ADMIN' ? '관리자' : user?.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
+									이름은 {user?.nickName}이며, 부마위키의
+									{user?.authority === 'ADMIN' ? ' 관리자' : user?.authority === 'BANNED' ? ' 읽기전용 사용자' : ' 사용자'} 중 한 명이다.
 								</span>
 							</S.UserInfoLoadWrap>
 						</C.AccodianMenu>
-						<C.AccodianMenu name={'기여한 문서'}>
+						<C.AccodianMenu name="기여한 문서">
 							<S.ContributeWrap>
 								<span>이 유저가 기여한 문서의 정보들이다.</span>
 								<S.ContributeList>

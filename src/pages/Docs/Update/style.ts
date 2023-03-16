@@ -218,17 +218,6 @@ export const UpdatePreviewText = styled.span`
 	color: #274168;
 `
 
-export const UpdateButton = styled.button`
-	width: 130px;
-	height: 40px;
-	border: 2px solid #ccc;
-	background-color: #274168;
-	color: white;
-	font-weight: 800;
-	cursor: pointer;
-	margin: 20px 0 20px auto;
-`
-
 export const AutoCompleteToggleWrap = styled.div`
 	margin: 10px 0 4px 0;
 	display: flex;
@@ -257,4 +246,35 @@ export const AutoCompleteToggleButton = styled.div`
 	background-color: ${(props) => props.color};
 	border: 1px solid black;
 	border-radius: 3px;
+`
+
+export const UpdateSubmit = styled.div`
+	display: flex;
+	width: 65vw;
+	height: 50px;
+	margin-bottom: 20px;
+	justify-content: center;
+`
+
+export const UpdateWarn = styled.span`
+	color: red;
+	font-weight: 800;
+	margin-top: 10px;
+	font-size: 12px;
+	margin-right: auto;
+
+	@media (max-width: 500px) {
+		font-size: 8px;
+	}
+`
+
+export const UpdateButton = styled.button`
+	width: 130px;
+	height: 40px;
+	border: 2px solid #ccc;
+	background-color: #274168;
+	color: white;
+	font-weight: 800;
+	cursor: pointer;
+	margin: 12px 0 20px auto;
 `

@@ -102,13 +102,13 @@ export const CreateTableTRColorInput = styled.input`
 `
 
 export const FrameInputBox = styled.div`
-	display:flex;
+	display: flex;
 `
 
 export const FrameText = styled.div`
-	font-size:15px;
-	font-weight:700;
-	padding:2px;
+	font-size: 15px;
+	font-weight: 700;
+	padding: 2px;
 `
 
 export const FrameInputDiv = styled.div`
@@ -122,10 +122,10 @@ export const FrameInputDiv = styled.div`
 `
 
 export const FrameInput = styled.input`
-	width:80px;
-	margin-left:10px;
-	margin-top:0px;
-	height:20px;
+	width: 80px;
+	margin-left: 10px;
+	margin-top: 0px;
+	height: 20px;
 `
 
 export const CreateFrameButton = styled.button`
@@ -289,6 +289,7 @@ export const CreateWarn = styled.span`
 	color: red;
 	font-weight: 800;
 	margin-top: 10px;
+	font-size: 12px;
 	margin-right: auto;
 
 	@media (max-width: 500px) {
