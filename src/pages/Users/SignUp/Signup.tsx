@@ -1,4 +1,3 @@
-import * as FC from 'utils'
 import * as api from 'api/user'
 
 import React from 'react'
@@ -10,14 +9,12 @@ const Signup = () => {
 
 	const { mutate } = useMutation(() => api.loginUser(window.location.search.replace('?code=', '')), {
 		onSuccess: (data) => {
-			document.cookie = `authorization=${data.accessToken};`
-			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`
+			localStorage.setItem('access_token', data.accessToken)
+			localStorage.setItem('refresh_token', data.refreshToken)
+			localStorage.setItem('refresh_token_expired_at', data.expiredAt)
 			navigate(-2)
 		},
-		onError: () => {
-			navigate(-2)
-			alert('로그인 도중 오류가 발생했습니다.')
-		},
+		onError: () => navigate(-2),
 	})
 
 	React.useEffect(() => {

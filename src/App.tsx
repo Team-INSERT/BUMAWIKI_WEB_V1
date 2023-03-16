@@ -2,45 +2,27 @@ import * as R from './allFiles'
 import * as api from 'api/user'
 
 import userState from 'context/userState'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
-import tokenExpired from 'lib/token/tokenExpired'
+import { useQuery } from 'react-query'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	const getUser = async () => {
-		try {
-			const data = await api.getUser()
-			setUser({
-				...data,
-				contributeDocs: data.contributeDocs.reverse(),
-				isLogin: true,
-			})
-		} catch (err) {
-			await tokenExpired()
-			console.error('로그인 후 서비스를 이용해주세요!')
-		}
-	}
-
-	const refreshLogin = async () => {
-		try {
-			await getUser()
-		} catch (err) {
-			if (err instanceof AxiosError) {
-				const { status } = err?.response?.data
-				if (status === 403) await tokenExpired()
-				getUser()
-			}
-		}
-	}
+	const { refetch } = useQuery('getUser', api.getUser, {
+		onSuccess: (res) => setUser(res),
+	})
 
 	React.useEffect(() => {
-		refreshLogin()
+		refetch()
+		if (Date.parse(localStorage.getItem('refresh_token_expired_at') || '') <= new Date().getTime()) {
+			localStorage.removeItem('refresh_token')
+			localStorage.removeItem('access_token')
+		}
 		// eslint-disable-next-line
 	}, [])
 
