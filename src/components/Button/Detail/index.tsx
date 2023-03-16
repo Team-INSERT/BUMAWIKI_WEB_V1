@@ -28,7 +28,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 
 	const onClickNavigatePage = (type: string) => {
 		if (type === 'VERSION') navigate(`/version/${router.title}`)
-		else if (type === 'UPDATE' && !user.isLogin) alert('로그인 후 편집하실 수 있습니다!')
+		else if (type === 'UPDATE' && !user.id) alert('로그인 후 편집하실 수 있습니다!')
 		else navigate(`/update/${router.title}`)
 	}
 

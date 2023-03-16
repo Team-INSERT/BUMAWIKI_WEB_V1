@@ -26,7 +26,6 @@ bumawikiAxios.interceptors.response.use(
 				return tokenExpired()
 			}
 			if (message === 'User Not Login' && localStorage.getItem('refresh_token')) {
-				localStorage.removeItem('access_token')
 				return tokenExpired()
 			}
 			if (message === 'Forbidden') {

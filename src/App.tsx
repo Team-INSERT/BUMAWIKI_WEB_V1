@@ -16,7 +16,6 @@ const App = () => {
 		;(async () => {
 			setUser({
 				...(await api.getUser()),
-				isLogin: true,
 			})
 		})()
 		// eslint-disable-next-line

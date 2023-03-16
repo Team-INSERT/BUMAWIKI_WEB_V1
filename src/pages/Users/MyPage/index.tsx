@@ -8,6 +8,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Contributors from 'types/contributors.type'
+import { flushSync } from 'react-dom'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
@@ -18,7 +19,10 @@ const MyPage = () => {
 			localStorage.removeItem('access_token')
 			localStorage.removeItem('refresh_token')
 			localStorage.removeItem('refresh_token_expired_at')
-			setUser(initUserState)
+			console.log('asd')
+			flushSync(() => {
+				setUser(initUserState)
+			})
 		},
 	})
 

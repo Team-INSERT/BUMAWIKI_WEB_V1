@@ -73,7 +73,7 @@ const Update = () => {
 	}
 
 	const onClickUpdateDocs = async () => {
-		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
+		if (!user.id) return alert('로그인 후 이용 가능한 서비스입니다.')
 		if (!docs.contents.length) return alert('문서가 비어있습니다!')
 
 		updateDocs()

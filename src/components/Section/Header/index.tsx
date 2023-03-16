@@ -47,7 +47,7 @@ const Header = () => {
 						<S.HeaderSectionLogo src={Club} alt="" />
 						<S.HeaderSectionText>외부 서비스</S.HeaderSectionText>
 					</S.HeaderSection>
-					{user.isLogin ? (
+					{user.id ? (
 						<S.HeaderSection to={`/create`}>
 							<S.HeaderSectionLogo src={Create} alt="" />
 							<S.HeaderSectionText>문서 생성</S.HeaderSectionText>
@@ -62,7 +62,7 @@ const Header = () => {
 						</S.HeaderSearchButton>
 					</S.HeaderSearchForm>
 					<S.HeaderLoginWrap>
-						{user.isLogin ? (
+						{user.id ? (
 							<S.HeaderMypageText to="/mypage">마이페이지</S.HeaderMypageText>
 						) : (
 							<S.HeaderLoginText href="https://auth.bssm.kro.kr/oauth?clientId=a1a16261&redirectURI=http://bumawiki.kro.kr/oauth">

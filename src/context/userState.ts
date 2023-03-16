@@ -6,7 +6,6 @@ export const initUserState = {
 	nickName: '',
 	authority: '',
 	contributeDocs: [],
-	isLogin: localStorage.getItem('access_token') ? true : false,
 }
 
 export const userState = atom({
