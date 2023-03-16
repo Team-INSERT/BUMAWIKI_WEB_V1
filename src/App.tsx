@@ -6,6 +6,7 @@ import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
+import tokenExpired from 'lib/token/tokenExpired'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
@@ -14,9 +15,12 @@ const App = () => {
 
 	React.useEffect(() => {
 		;(async () => {
-			setUser({
-				...(await api.getUser()),
-			})
+			try {
+				setUser(await api.getUser())
+			} catch (err) {
+				await tokenExpired()
+				setUser(await api.getUser())
+			}
 		})()
 		// eslint-disable-next-line
 	}, [])

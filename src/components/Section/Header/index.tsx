@@ -23,6 +23,10 @@ const Header = () => {
 		else navigate(`/search/${search}`)
 	}
 
+	React.useEffect(() => {
+		console.log(user)
+	}, [user])
+
 	return (
 		<S.HeaderContainer onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
 			<S.HeaderWrap>
