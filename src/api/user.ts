@@ -53,7 +53,7 @@ export const updateUserAuthority = async (email: string, authority: string) => {
 		},
 		{
 			headers: {
-				Authorization: localStorage.getItem('refresh_token'),
+				Authorization: localStorage.getItem('access_token'),
 			},
 		}
 	)
