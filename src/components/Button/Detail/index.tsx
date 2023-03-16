@@ -2,7 +2,7 @@ import * as R from 'react-router-dom'
 import * as S from './style'
 import * as api from 'api/editDocs'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { userState } from 'context/userState'
 import { MutationFunction, useMutation, useQueryClient } from 'react-query'
 import { useRecoilValue } from 'recoil'
@@ -51,10 +51,6 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		const result = window.confirm('정말 삭제하시겠습니까?')
 		if (result) deleteDocsTitleMutation.mutate(docsId)
 	}
-
-	useEffect(() => {
-		console.log(user)
-	}, [user])
 
 	return (
 		<S.DetailButtonWrap>

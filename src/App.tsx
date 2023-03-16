@@ -2,11 +2,10 @@ import * as R from './allFiles'
 import * as api from 'api/user'
 
 import { userState } from 'context/userState'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
-import tokenExpired from 'lib/token/tokenExpired'
 
 axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 
