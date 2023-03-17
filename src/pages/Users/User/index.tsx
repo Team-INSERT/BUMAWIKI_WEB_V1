@@ -16,9 +16,7 @@ const User = () => {
 	const [user, setUser] = React.useState<UserType>()
 	const router = useParams()
 	useQuery('otherUser', () => api.getOtherUser(parseInt(router.id as string)), {
-		onSuccess: (data) => {
-			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
-		},
+		onSuccess: (data) => setUser(data),
 	})
 
 	return (
