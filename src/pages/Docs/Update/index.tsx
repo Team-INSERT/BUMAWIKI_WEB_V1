@@ -34,13 +34,15 @@ const Update = () => {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
+			console.log('asdnaslkdn')
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
-				const { status, message } = err?.response?.data
+				const { status, message, error } = err?.response?.data
+				console.log(status, message, err)
 				if (status === 403) {
 					if (message === 'Cannot Change Your Docs') return alert('자기 자신의 문서는 편집할 수 없습니다.')
-					if (message === 'Forbidden') return alert('권한이 없습니다. 로그인이 되어있는지 확인하거나, 수정 권한이 있는지 확인해주세요.')
+					if (error === 'Forbidden') return alert('읽기전용 사용자는 문서를 편집할 수 없습니다.')
 				}
 			}
 		},
