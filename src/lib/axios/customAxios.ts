@@ -22,7 +22,7 @@ bumawikiAxios.interceptors.response.use(
 	(error) => {
 		const { status, message } = error.response.data
 		if (message) {
-			if (status === 403) {
+			if (status === 403 && message !== 'Refresh Token Expired') {
 				tokenExpired()
 			}
 		}

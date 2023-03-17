@@ -36,7 +36,15 @@ const Update = () => {
 			navigate(`/docs/${router.title}`)
 		},
 		onError: (err) => {
-			if (err instanceof AxiosError) mutateUpdateDocs()
+			if (err instanceof AxiosError) {
+				const { status, message } = err?.response?.data
+				if (status === 403) {
+					if (message === 'Cannot Change Your Docs') return alert('자기 자신의 문서는 편집할 수 없습니다.')
+					else {
+						console.log('asd')
+					}
+				}
+			}
 		},
 	})
 

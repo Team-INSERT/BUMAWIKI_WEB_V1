@@ -13,6 +13,7 @@ import { encodeContents } from 'utils/document/requestContents'
 import Frame from 'types/frame.type'
 import sizeInitState from 'state/sizeInitState'
 import createInitState from 'state/createInitState'
+import { AxiosError } from 'axios'
 
 const Create = () => {
 	const navigate = useNavigate()
@@ -26,6 +27,14 @@ const Create = () => {
 		onSuccess: (data) => {
 			alert('문서가 생성되었습니다!')
 			navigate(`/docs/${data.title}`)
+		},
+		onError: (err) => {
+			if (err instanceof AxiosError) {
+				const { status, message } = err?.response?.data
+				if (status === 403) {
+					if (message === 'Post_Already_Exist') return alert('이미 같은 이름의 문서가 존재합니다.')
+				}
+			}
 		},
 	})
 
@@ -87,9 +96,7 @@ const Create = () => {
 										<label htmlFor="STUDENT">학생</label>
 										<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="STUDENT" name="radio" />
 									</>
-								) : (
-									''
-								)}
+								) : null}
 								<label htmlFor="TEACHER">인문 선생님</label>
 								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="TEACHER" name="radio" />
 								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
