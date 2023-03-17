@@ -40,9 +40,7 @@ const Update = () => {
 				const { status, message } = err?.response?.data
 				if (status === 403) {
 					if (message === 'Cannot Change Your Docs') return alert('자기 자신의 문서는 편집할 수 없습니다.')
-					else {
-						console.log('asd')
-					}
+					if (message === 'Forbidden') return alert('권한이 없습니다. 로그인이 되어있는지 확인하거나, 수정 권한이 있는지 확인해주세요.')
 				}
 			}
 		},
