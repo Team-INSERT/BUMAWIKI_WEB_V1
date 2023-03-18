@@ -54,7 +54,7 @@ const Teacher = () => {
 					<S.TeacherLine />
 					<S.TeacherWarnText>※ 필독! 문서 내 대상을 비하하는 내용을 서술하는 사용자는 부마위키 이용에 제한을 받을 수 있습니다 ※</S.TeacherWarnText>
 					<S.TeacherList>
-						<C.AccodianMenu name={`인문과목 선생님`}>
+						<C.AccodianMenu name={`보통교과 선생님`}>
 							<S.TeacherDetailList>
 								{humanities.map((teacher: Docs, index) => (
 									<S.TeacherListItem key={index}>
@@ -63,7 +63,7 @@ const Teacher = () => {
 								))}
 							</S.TeacherDetailList>
 						</C.AccodianMenu>
-						<C.AccodianMenu name={`전공과목 선생님`}>
+						<C.AccodianMenu name={`전문교과 선생님`}>
 							<S.TeacherDetailList>
 								{major.map((teacher: Docs, index) => (
 									<S.TeacherListItem key={index}>
