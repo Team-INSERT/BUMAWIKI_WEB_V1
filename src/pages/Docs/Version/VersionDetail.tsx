@@ -32,7 +32,7 @@ const VersionDetail = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>부마위키 - 기록 : {router?.versionId}</title>
+				<title>부마위키 - 세부기록</title>
 			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
