@@ -27,7 +27,7 @@ const Version = () => {
 	return (
 		<>
 			<Helmet>
-				<title>부마위키 - 기록 : {docsName}</title>
+				<title>부마위키 - 기록 : {docsName || ''}</title>
 			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
