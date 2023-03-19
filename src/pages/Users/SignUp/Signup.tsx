@@ -3,7 +3,7 @@ import * as api from 'api/user'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Signup = () => {
 	const navigate = useNavigate()
