@@ -59,7 +59,7 @@ const Create = () => {
 		if (docs.title.includes('?') || docs.title.includes('/') || docs.title.includes('"') || docs.title.includes('\\'))
 			return alert('문서명에는 물음표나 쌍따옴표, 슬래시나 역슬래시를 넣을 수 없습니다.')
 		if (!user.id) return alert('로그인 후 이용 가능한 서비스입니다.')
-		if (docs.enroll < 2021) return alert('연도를 선택해주세요!')
+		if (docs.enroll < 2021 && docs.docsType !== 'FRAME') return alert('연도를 선택해주세요!')
 		if (!docs.title.length) return alert('문서의 이름을 정해주세요!')
 		if (!docs.docsType) return alert('문서의 분류를 선택해주세요!')
 
@@ -118,22 +118,24 @@ const Create = () => {
 							<S.CreateTableTRTitle>문서 이름</S.CreateTableTRTitle>
 							<S.CreateTableTRInputContents onChange={(e) => setDocs({ ...docs, title: e.target.value })} value={docs.title} />
 						</S.CreateTableTR>
-						<S.CreateTableTR>
-							<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
-							<S.CreateTableTRContents>
-								{years.map((year, index) => (
-									<div key={index}>
-										<S.EnrollLabel htmlFor={`${year}`}>{year}년</S.EnrollLabel>
-										<S.CreateTableRadio
-											type="radio"
-											onChange={(e) => setDocs({ ...docs, enroll: parseInt(e.target.id) })}
-											id={`${year}`}
-											name="radios"
-										/>
-									</div>
-								))}
-							</S.CreateTableTRContents>
-						</S.CreateTableTR>
+						{docs.docsType !== 'FRAME' ? (
+							<S.CreateTableTR>
+								<S.CreateTableTRTitle>연도</S.CreateTableTRTitle>
+								<S.CreateTableTRContents>
+									{years.map((year, index) => (
+										<div key={index}>
+											<S.EnrollLabel htmlFor={`${year}`}>{year}년</S.EnrollLabel>
+											<S.CreateTableRadio
+												type="radio"
+												onChange={(e) => setDocs({ ...docs, enroll: parseInt(e.target.id) })}
+												id={`${year}`}
+												name="radios"
+											/>
+										</div>
+									))}
+								</S.CreateTableTRContents>
+							</S.CreateTableTR>
+						) : null}
 						<S.CreateTableTRExample>
 							<S.CreateTableTRTitle>예시</S.CreateTableTRTitle>
 							<S.CreateTableTRContents>
