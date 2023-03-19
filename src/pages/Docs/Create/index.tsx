@@ -15,6 +15,37 @@ import sizeInitState from 'state/sizeInitState'
 import createInitState from 'state/createInitState'
 import { AxiosError } from 'axios'
 
+const docsTypeRadio = [
+	{
+		title: '보통교과 선생님',
+		type: 'TEACHER',
+	},
+	{
+		title: '전문교과 선생님',
+		type: 'MAJOR_TEACHER',
+	},
+	{
+		title: '멘토 선생님',
+		type: 'MENTOR_TEACHER',
+	},
+	{
+		title: '사건/사고',
+		type: 'ACCIDENT',
+	},
+	{
+		title: '전공동아리',
+		type: 'CLUB',
+	},
+	{
+		title: '사설동아리',
+		type: 'FREE_CLUB',
+	},
+	{
+		title: '틀',
+		type: 'FRAME',
+	},
+]
+
 const Create = () => {
 	const navigate = useNavigate()
 	const user = useRecoilValue(userState)
@@ -68,7 +99,8 @@ const Create = () => {
 
 	const makeFrame = () => {
 		const frame = `<틀>\n<틀제목>제목삽입</틀제목>\n` + `<행>${'<열>내용삽입</열>'.repeat(size.row)}</행>\n`.repeat(size.column) + `</틀>`
-		setDocs({ ...docs, contents: frame })
+		if (!docs.contents) return setDocs({ ...docs, contents: frame })
+		return setDocs({ ...docs, contents: `${docs.contents}\n${frame}` })
 	}
 
 	const changeDocsType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,24 +126,16 @@ const Create = () => {
 							<S.CreateTableTRContents>
 								{user.authority === 'ADMIN' ? (
 									<>
-										<label htmlFor="STUDENT">학생</label>
+										<S.CreateTableRadioLabel htmlFor="STUDENT">학생</S.CreateTableRadioLabel>
 										<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="STUDENT" name="radio" />
 									</>
 								) : null}
-								<label htmlFor="TEACHER">인문 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="TEACHER" name="radio" />
-								<label htmlFor="MAJOR_TEACHER">전공 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="MAJOR_TEACHER" name="radio" />
-								<label htmlFor="MENTOR_TEACHER">멘토 선생님</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="MENTOR_TEACHER" name="radio" />
-								<label htmlFor="ACCIDENT">사건/사고</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="ACCIDENT" name="radio" />
-								<label htmlFor="CLUB">전공동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="CLUB" name="radio" />
-								<label htmlFor="FREE_CLUB">사설동아리</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="FREE_CLUB" name="radio" />
-								<label htmlFor="FRAME">틀</label>
-								<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id="FRAME" name="radio" />
+								{docsTypeRadio.map((value, index) => (
+									<div key={index}>
+										<S.CreateTableRadioLabel htmlFor={value.type}>{value.title}</S.CreateTableRadioLabel>
+										<S.CreateTableRadio type="radio" onChange={(e) => changeDocsType(e)} id={value.type} name="radio" />
+									</div>
+								))}
 							</S.CreateTableTRContents>
 						</S.CreateTableTR>
 						<S.CreateTableTR>
@@ -163,25 +187,29 @@ const Create = () => {
 								<S.FrameInputDiv>
 									<S.FrameInputBox>
 										<S.FrameInputWrap>
-											<S.FrameText>열</S.FrameText>
-											<S.FrameInput
-												type="number"
-												min="2"
-												max="5"
-												value={size.column}
-												onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
-											/>
-											<S.FrameText>행</S.FrameText>
-											<S.FrameInput
-												type="number"
-												min="2"
-												max="10"
-												value={size.row}
-												onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
-											/>
+											<S.FrameInputContainer>
+												<S.FrameText>열</S.FrameText>
+												<S.FrameInput
+													type="number"
+													min="2"
+													max="5"
+													value={size.column}
+													onChange={(e) => setSize({ ...size, column: parseInt(e.target.value) })}
+												/>
+											</S.FrameInputContainer>
+											<S.FrameInputContainer>
+												<S.FrameText>행</S.FrameText>
+												<S.FrameInput
+													type="number"
+													min="2"
+													max="10"
+													value={size.row}
+													onChange={(e) => setSize({ ...size, row: parseInt(e.target.value) })}
+												/>
+											</S.FrameInputContainer>
 										</S.FrameInputWrap>
 									</S.FrameInputBox>
-									<S.CreateFrameButton onClick={() => makeFrame()}>틀생성/초기화</S.CreateFrameButton>
+									<S.CreateFrameButton onClick={() => makeFrame()}>틀생성</S.CreateFrameButton>
 								</S.FrameInputDiv>
 							</S.CreateTableTRFrame>
 						) : (
