@@ -3,7 +3,7 @@ import * as FC from 'utils'
 import * as S from './style'
 import * as api from 'api/getDocs'
 
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
@@ -61,12 +61,14 @@ const Doc = () => {
 
 	return (
 		<div>
-			<Helmet>
-				<meta property="og:title" content={`부마위키 - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`} />
-				<title>
-					부마위키 - {docs?.title || ''} ({FC.typeEditor(docs?.docsType || '')})
-				</title>
-			</Helmet>
+			<Suspense>
+				<Helmet>
+					<meta property="og:title" content={`meta tag test - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`} />
+					<title>
+						부마위키 - {docs?.title || ''} ({FC.typeEditor(docs?.docsType || '')})
+					</title>
+				</Helmet>
+			</Suspense>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>

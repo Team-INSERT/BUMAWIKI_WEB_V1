@@ -5,6 +5,7 @@ import App from './App'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
+import { HelmetProvider } from 'react-helmet-async'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -21,7 +22,9 @@ root.render(
 	<RecoilRoot>
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools initialIsOpen={true} />
-			<App />
+			<HelmetProvider>
+				<App />
+			</HelmetProvider>
 		</QueryClientProvider>
 	</RecoilRoot>
 )
