@@ -14,6 +14,7 @@ import Frame from 'types/frame.type'
 import sizeInitState from 'state/sizeInitState'
 import createInitState from 'state/createInitState'
 import { AxiosError } from 'axios'
+import { Helmet } from 'react-helmet'
 
 const docsTypeRadio = [
 	{
@@ -114,6 +115,10 @@ const Create = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 문서 생성`} />
+				<title>부마위키 - 문서 생성</title>
+			</Helmet>
 			<C.Header />
 			<S.CreateWrap>
 				<C.Board>

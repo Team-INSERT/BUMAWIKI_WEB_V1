@@ -8,6 +8,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { VersionDocs } from 'types/version.type'
+import { Helmet } from 'react-helmet'
 
 const Version = () => {
 	const router = useParams()
@@ -25,6 +26,10 @@ const Version = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 기록:${docsName}`} />
+				<title>부마위키 - 기록:{docsName}</title>
+			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>

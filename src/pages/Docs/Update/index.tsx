@@ -13,6 +13,7 @@ import UpdateDocsType from 'types/update.type.'
 import { decodeContents, encodeContents } from 'utils/document/requestContents'
 import updateInitState from 'state/updateInitState'
 import { AxiosError } from 'axios'
+import { Helmet } from 'react-helmet'
 
 const Update = () => {
 	const router = R.useParams()
@@ -78,6 +79,10 @@ const Update = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 문서편집:${docs?.title}`} />
+				<title>부마위키 - 문서편집:{docs?.title || ''}</title>
+			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>

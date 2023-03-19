@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet'
 import { decodeContents } from 'utils/document/requestContents'
 import { useRecoilValue } from 'recoil'
 import { userState } from 'context/userState'
+import setMetaTags from 'utils/etc/setMetaTags'
 
 const Doc = () => {
 	const router = useParams()
@@ -56,6 +57,11 @@ const Doc = () => {
 
 	useEffect(() => {
 		refetch()
+		setMetaTags({
+			title: `부마위키 - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`,
+			description: 'test test',
+			imageUrl: '/images/meta-img.png',
+		})
 		// eslint-disable-next-line
 	}, [router])
 
@@ -63,9 +69,6 @@ const Doc = () => {
 		<div>
 			<Helmet>
 				<meta property="og:title" content={`부마위키 - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`} />
-				<meta property="og:image" content="images/meta-img.png" />
-				<meta property="og:description" content={`${docs?.contents.slice(0, 20)}...`} />
-				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
 				<title>
 					부마위키 - {docs?.title || ''} ({FC.typeEditor(docs?.docsType || '')})
 				</title>

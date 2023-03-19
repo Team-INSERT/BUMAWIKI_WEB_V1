@@ -7,6 +7,7 @@ import * as S from './style'
 import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
+import { Helmet } from 'react-helmet'
 
 const Search = () => {
 	const router = R.useParams()
@@ -30,6 +31,10 @@ const Search = () => {
 
 	return (
 		<>
+			<Helmet>
+				<meta property="og:title" content={`부마위키 - 검색 결과:${router.result}`} />
+				<title>부마위키 - 검색 결과:{router.result}</title>
+			</Helmet>
 			<C.Header />
 			<S.SearchWrap>
 				<C.Board>
