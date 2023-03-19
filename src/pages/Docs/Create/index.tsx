@@ -128,6 +128,8 @@ const Create = () => {
 									<>
 										<S.CreateTableRadioLabel htmlFor="STUDENT">학생</S.CreateTableRadioLabel>
 										<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="STUDENT" name="radio" />
+										<S.CreateTableRadioLabel htmlFor="READONLY">관리자 전용</S.CreateTableRadioLabel>
+										<S.CreateTableRadio type="radio" onChange={(e) => setDocs({ ...docs, docsType: e.target.id })} id="READONLY" name="radio" />
 									</>
 								) : null}
 								{docsTypeRadio.map((value, index) => (
