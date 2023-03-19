@@ -32,8 +32,7 @@ const Search = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 검색 결과:${router.result}`} />
-				<title>부마위키 - 검색 결과:{router.result}</title>
+				<title>부마위키 - 검색 결과 : {router.result}</title>
 			</Helmet>
 			<C.Header />
 			<S.SearchWrap>

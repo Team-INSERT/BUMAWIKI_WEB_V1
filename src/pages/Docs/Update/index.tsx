@@ -80,8 +80,7 @@ const Update = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 문서편집:${docs?.title}`} />
-				<title>부마위키 - 문서편집:{docs?.title || ''}</title>
+				<title>부마위키 - 문서편집 : {docs?.title || ''}</title>
 			</Helmet>
 			<C.Header />
 			<S.DocsWrap>

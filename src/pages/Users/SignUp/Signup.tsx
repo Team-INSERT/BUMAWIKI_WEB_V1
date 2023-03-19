@@ -3,6 +3,7 @@ import * as api from 'api/user'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
+import { Helmet } from 'react-helmet'
 
 const Signup = () => {
 	const navigate = useNavigate()
@@ -22,7 +23,11 @@ const Signup = () => {
 		// eslint-disable-next-line
 	}, [])
 
-	return <></>
+	return (
+		<Helmet>
+			<title>부마위키 - 로그인</title>
+		</Helmet>
+	)
 }
 
 export default Signup

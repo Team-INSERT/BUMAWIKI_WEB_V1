@@ -116,7 +116,6 @@ const Create = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 문서 생성`} />
 				<title>부마위키 - 문서 생성</title>
 			</Helmet>
 			<C.Header />

@@ -8,7 +8,6 @@ const NotFound = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 404 NOT FOUND`} />
 				<title>부마위키 - 404 NOT FOUND</title>
 			</Helmet>
 			<C.Header />

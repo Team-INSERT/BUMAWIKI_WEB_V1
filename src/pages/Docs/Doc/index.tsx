@@ -63,7 +63,6 @@ const Doc = () => {
 		<div>
 			<Suspense>
 				<Helmet>
-					<meta property="og:title" content={`meta tag test - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`} />
 					<title>
 						부마위키 - {docs?.title || ''} ({FC.typeEditor(docs?.docsType || '')})
 					</title>

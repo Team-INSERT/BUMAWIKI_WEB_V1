@@ -20,10 +20,6 @@ const Frame = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content="부마위키 - 틀" />
-				<meta property="og:image" content="images/meta-img.png" />
-				<meta property="og:description" content="여러분이 가꾸어 나가는 역사의 고서 - 틀" />
-				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
 				<title>부마위키 - 틀</title>
 			</Helmet>
 			<C.Header />

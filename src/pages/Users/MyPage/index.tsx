@@ -9,6 +9,7 @@ import { useMutation } from 'react-query'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Contributors from 'types/contributors.type'
 import { flushSync } from 'react-dom'
+import { Helmet } from 'react-helmet-async'
 
 const MyPage = () => {
 	const user = useRecoilValue(userState)
@@ -28,6 +29,9 @@ const MyPage = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>부마위키 - 마이페이지</title>
+			</Helmet>
 			<C.Header />
 			<S.MyPageWrap>
 				<C.Board>

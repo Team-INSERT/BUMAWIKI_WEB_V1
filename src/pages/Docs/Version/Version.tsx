@@ -27,8 +27,7 @@ const Version = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 기록:${docsName}`} />
-				<title>부마위키 - 기록:{docsName}</title>
+				<title>부마위키 - 기록 : {docsName}</title>
 			</Helmet>
 			<C.Header />
 			<S.DocsWrap>

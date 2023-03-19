@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { VersionDocsInfo, VersionDocsService } from 'types/version.type'
 import { decodeContents } from 'utils/document/requestContents'
+import { Helmet } from 'react-helmet-async'
 
 const VersionDetail = () => {
 	const router = useParams()
@@ -30,6 +31,9 @@ const VersionDetail = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>부마위키 - 기록 : {router?.versionId}</title>
+			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>

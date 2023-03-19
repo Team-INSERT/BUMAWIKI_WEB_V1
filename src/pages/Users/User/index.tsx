@@ -10,6 +10,7 @@ import { useQuery } from 'react-query'
 import UserType from 'types/user.type'
 import { useRecoilValue } from 'recoil'
 import { userState } from 'context/userState'
+import { Helmet } from 'react-helmet-async'
 
 const User = () => {
 	const userInfo = useRecoilValue(userState)
@@ -21,6 +22,9 @@ const User = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>부마위키 - 선생님</title>
+			</Helmet>
 			<C.Header />
 			<S.UserWrap>
 				<C.Board>
