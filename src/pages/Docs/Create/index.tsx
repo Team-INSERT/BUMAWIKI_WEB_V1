@@ -108,7 +108,7 @@ const Create = () => {
 		if (type === 'FRAME') {
 			setDocs({ ...docs, docsType: type, title: `틀:${docs.title}` })
 		} else {
-			setDocs({ ...docs, docsType: type, title: docs.title.replace('틀:', ''), contents: '' })
+			setDocs({ ...docs, docsType: type, title: docs.title.replace('틀:', '') })
 		}
 	}
 
