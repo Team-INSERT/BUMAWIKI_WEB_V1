@@ -5,7 +5,7 @@ import * as S from './style'
 import React from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Frame = () => {
 	const [frames, setFrames] = React.useState([])

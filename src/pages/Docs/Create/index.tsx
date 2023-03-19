@@ -14,7 +14,7 @@ import Frame from 'types/frame.type'
 import sizeInitState from 'state/sizeInitState'
 import createInitState from 'state/createInitState'
 import { AxiosError } from 'axios'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const docsTypeRadio = [
 	{

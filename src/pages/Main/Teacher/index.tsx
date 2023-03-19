@@ -4,7 +4,7 @@ import * as S from './style'
 import axios from 'axios'
 import React from 'react'
 import Docs from 'types/docs.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Teacher = () => {
 	const [major, setMajor] = React.useState([])

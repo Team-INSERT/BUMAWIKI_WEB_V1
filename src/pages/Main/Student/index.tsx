@@ -6,7 +6,7 @@ import * as FC from 'utils'
 import React from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Student = () => {
 	const [students, setStudents] = React.useState([])

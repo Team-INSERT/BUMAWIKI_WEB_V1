@@ -13,7 +13,7 @@ import UpdateDocsType from 'types/update.type.'
 import { decodeContents, encodeContents } from 'utils/document/requestContents'
 import updateInitState from 'state/updateInitState'
 import { AxiosError } from 'axios'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Update = () => {
 	const router = R.useParams()

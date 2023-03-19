@@ -6,7 +6,7 @@ import React from 'react'
 import axios from 'axios'
 import Docs from 'types/docs.type'
 import { useQuery } from 'react-query'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Club = () => {
 	const [clubs, setClubs] = React.useState([])

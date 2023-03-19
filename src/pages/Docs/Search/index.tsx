@@ -7,7 +7,7 @@ import * as S from './style'
 import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Search = () => {
 	const router = R.useParams()

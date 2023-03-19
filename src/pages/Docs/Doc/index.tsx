@@ -8,11 +8,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
 import { AxiosError } from 'axios'
-import { Helmet } from 'react-helmet'
 import { decodeContents } from 'utils/document/requestContents'
 import { useRecoilValue } from 'recoil'
 import { userState } from 'context/userState'
-import setMetaTags from 'utils/etc/setMetaTags'
+import { Helmet } from 'react-helmet-async'
 
 const Doc = () => {
 	const router = useParams()
@@ -57,11 +56,6 @@ const Doc = () => {
 
 	useEffect(() => {
 		refetch()
-		setMetaTags({
-			title: `부마위키 - ${docs?.title} (${FC.typeEditor(docs?.docsType || '')})`,
-			description: 'test test',
-			imageUrl: '/images/meta-img.png',
-		})
 		// eslint-disable-next-line
 	}, [router])
 

@@ -8,7 +8,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { VersionDocs } from 'types/version.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Version = () => {
 	const router = useParams()
