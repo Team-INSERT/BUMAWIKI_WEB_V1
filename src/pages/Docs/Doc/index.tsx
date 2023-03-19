@@ -10,12 +10,15 @@ import Docs from 'types/docs.type'
 import { AxiosError } from 'axios'
 import { Helmet } from 'react-helmet'
 import { decodeContents } from 'utils/document/requestContents'
+import { useRecoilValue } from 'recoil'
+import { userState } from 'context/userState'
 
 const Doc = () => {
 	const router = useParams()
 	const navigate = useNavigate()
 	const [isLoad, setIsLoad] = React.useState(false)
 	const [docs, setDocs] = useState<Docs>()
+	const user = useRecoilValue(userState)
 
 	const { refetch } = useQuery('docs', () => api.getDocs(router.title as string), {
 		onSuccess: async (res) => {
@@ -74,9 +77,11 @@ const Doc = () => {
 						<>
 							<S.DocsTitleWrap>
 								<S.DocsTitleText>{docs?.title.replace(/&\$\^%/gi, '"')}</S.DocsTitleText>
-								<S.DocsMenu>
-									<C.DetailBtn docsId={docs?.id || -1} />
-								</S.DocsMenu>
+								{docs?.docsType === 'READONLY' && user.authority !== 'ADMIN' ? null : (
+									<S.DocsMenu>
+										<C.DetailBtn docsId={docs?.id || -1} />
+									</S.DocsMenu>
+								)}
 							</S.DocsTitleWrap>
 							<S.Classify>
 								<C.Classify>{FC.typeEditor(docs?.docsType as string)}</C.Classify>

@@ -11,6 +11,7 @@ const typeEditor = (classify: string) => {
 	if (classify === 'USER') return '사용자'
 	if (classify === 'NOTICE') return '공지'
 	if (classify === 'FRAME') return '틀'
+	if (classify === 'READONLY') return '관리자 전용'
 	return classify
 }
 
