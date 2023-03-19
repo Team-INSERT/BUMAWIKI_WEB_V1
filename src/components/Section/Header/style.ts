@@ -16,7 +16,7 @@ export const HeaderWrap = styled.div`
 
 export const SubHeaderWrap = styled.div<{ isHover: boolean }>`
 	width: 100vw;
-	height: 17vh;
+	height: 22vh;
 	display: flex;
 	top: 6.5vh;
 	position: absolute;
@@ -85,11 +85,11 @@ export const SubHeaderSection = styled(Link)`
 	}
 `
 
-export const SubHeaderSectionWrap = styled.div`
+export const SubHeaderSectionWrap = styled.div<{ margin?: string }>`
 	display: flex;
 	cursor: pointer;
 	text-decoration: none;
-	margin: 0 2vw 0 3vw;
+	margin: 0 2vw 0 ${(props) => props.margin || '3vw'};
 	flex-direction: column;
 	align-items: center;
 

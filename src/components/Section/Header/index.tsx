@@ -78,11 +78,14 @@ const Header = () => {
 				</S.SubHeaderPlace>
 				<S.HeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
+						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
+							<S.HeaderSectionText display="true">공지사항</S.HeaderSectionText>
+						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/docs/부마위키%20방명록">
 							<S.HeaderSectionText display="true">방명록</S.HeaderSectionText>
 						</S.SubHeaderSection>
-						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
-							<S.HeaderSectionText display="true">공지사항</S.HeaderSectionText>
+						<S.SubHeaderSection to="/docs/부마위키%20개인정보처리방침">
+							<S.HeaderSectionText>처리방침</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="https://forms.gle/DzAP7XSYH4ubK43FA" target="_blank">
 							<S.HeaderSectionText display="true">문의하기</S.HeaderSectionText>
@@ -99,12 +102,15 @@ const Header = () => {
 							<S.HeaderSectionText display="true">동아리</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
-					<S.SubHeaderSectionWrap>
+					<S.SubHeaderSectionWrap margin="1.2vw">
 						<S.SubHeaderSection to="/frame">
 							<S.HeaderSectionText display="true">틀</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/accident">
 							<S.HeaderSectionText display="true">사건</S.HeaderSectionText>
+						</S.SubHeaderSection>
+						<S.SubHeaderSection to="/popular">
+							<S.HeaderSectionText display="true">개발예정</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
