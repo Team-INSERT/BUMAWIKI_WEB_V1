@@ -110,7 +110,7 @@ const Header = () => {
 							<S.HeaderSectionText display="true">사건</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/popular">
-							<S.HeaderSectionText display="true">개발예정</S.HeaderSectionText>
+							<S.HeaderSectionText display="true">인기문서</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>

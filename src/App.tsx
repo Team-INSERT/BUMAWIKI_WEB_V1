@@ -38,6 +38,7 @@ const App = () => {
 				<Route path={'/search/:result'} element={<R.Search />} />
 				<Route path={'/oauth'} element={<R.Signup />} />
 				<Route path={'/create'} element={<R.Create />} />
+				<Route path={'/popular'} element={<R.Popular />} />
 				<Route path={'/update/:title'} element={<R.Update />} />
 				<Route path={'/version/:title'} element={<R.Version />} />
 				<Route path={'/version/:title/detail/:versionId'} element={<R.VersionDetail />} />
