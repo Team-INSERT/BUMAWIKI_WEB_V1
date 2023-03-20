@@ -50,9 +50,13 @@ const Search = () => {
 								<>
 									{result.map((result: Docs, index) => (
 										<S.SearchListItem key={index}>
-											<S.SearchLink to={`/docs/${result.title}`}>
-												{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
-											</S.SearchLink>
+											{result.docsType === 'FRAME' ? (
+												<S.SearchLink to={`/docs/${result.title}`}>{result.title}</S.SearchLink>
+											) : (
+												<S.SearchLink to={`/docs/${result.title}`}>
+													{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
+												</S.SearchLink>
+											)}
 										</S.SearchListItem>
 									))}
 								</>
