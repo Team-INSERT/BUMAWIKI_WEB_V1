@@ -16,9 +16,18 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 	const [docsName, setDocsName] = React.useState('')
+	const [docsType, setDocsType] = React.useState('')
 	const queryClient = useQueryClient()
 
 	const updateDocsTitleMutation = useMutation(api.updateDocsTitle, {
+		onSuccess: (res) => {
+			alert('문서 이름이 변경되었습니다!')
+			queryClient.invalidateQueries('lastModifiedDocs')
+			navigate(`/docs/${res.data.title}`)
+		},
+	})
+
+	const updateDocsTypeMutation = useMutation(api.updateDocsType, {
 		onSuccess: (res) => {
 			alert('문서 이름이 변경되었습니다!')
 			queryClient.invalidateQueries('lastModifiedDocs')
@@ -47,6 +56,14 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		updateDocsTitleMutation.mutate({ title: router.title as string, docsName })
 	}
 
+	const onClickChangeDocsType = async () => {
+		if (!docsType.length) {
+			alert('내용이 없습니다.')
+			return
+		}
+		updateDocsTypeMutation.mutate({ title: router.title as string, docsType })
+	}
+
 	const onClickDeleteDocs = async () => {
 		const result = window.confirm('정말 삭제하시겠습니까?')
 		if (result) deleteDocsTitleMutation.mutate(docsId)
@@ -56,6 +73,12 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		<S.DetailButtonWrap>
 			{user.authority === 'ADMIN' ? (
 				<>
+					<S.DetailInput value={docsType} onChange={(e) => setDocsType(e.target.value)} />
+					<S.DetailWrap onClick={onClickChangeDocsType}>
+						<S.DetailButton>
+							<S.DetailText>타입변경</S.DetailText>
+						</S.DetailButton>
+					</S.DetailWrap>
 					<S.DetailWrap onClick={onClickDeleteDocs}>
 						<S.DetailButton>
 							<S.DetailText>삭제</S.DetailText>

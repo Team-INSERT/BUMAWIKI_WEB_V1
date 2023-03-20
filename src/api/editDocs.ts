@@ -5,23 +5,14 @@ interface UpdateDocsTitleProps {
 	docsName: string
 }
 
+interface UpdateDocsTypeProps {
+	title: string
+	docsType: string
+}
+
 interface UpdateDocsProps {
 	data: FormData
 	title: string
-}
-
-export const updateDocsTitle = async ({ title, docsName }: UpdateDocsTitleProps) => {
-	return await bumawikiAxios.put(
-		`/docs/update/title/${title}`,
-		{
-			title: docsName,
-		},
-		{
-			headers: {
-				Authorization: localStorage.getItem('access_token'),
-			},
-		}
-	)
 }
 
 export const createDocs = async (data: FormData) => {
@@ -51,4 +42,33 @@ export const deleteDocs = async (title: string) => {
 			Authorization: localStorage.getItem('access_token'),
 		},
 	})
+}
+
+export const updateDocsTitle = async ({ title, docsName }: UpdateDocsTitleProps) => {
+	return await bumawikiAxios.put(
+		`/docs/update/title/${title}`,
+		{
+			title: docsName,
+		},
+		{
+			headers: {
+				Authorization: localStorage.getItem('access_token'),
+			},
+		}
+	)
+}
+
+export const updateDocsType = async ({ docsType, title }: UpdateDocsTypeProps) => {
+	return await bumawikiAxios.put(
+		`/docs/update/title/docsType`,
+		{
+			title,
+			docsType,
+		},
+		{
+			headers: {
+				Authorization: localStorage.getItem('access_token'),
+			},
+		}
+	)
 }
