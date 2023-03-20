@@ -86,7 +86,6 @@ const Doc = () => {
 								<S.DocsContentsLoadWrap>
 									<S.LastUpdateDate>마지막 수정 : {FC.dateParser(docs !== undefined ? docs.lastModifiedAt : '')}</S.LastUpdateDate>
 									<C.AccodianMenu name="내용">
-										{/* <button onClick={FC.includeFrame('틀:딱')}>ing</button> */}
 										<S.DocsContents
 											dangerouslySetInnerHTML={{
 												__html: FC.documentation(decodeContents(docs?.contents.replace('include(', `${FC.includeFrame("틀:Da'at")}`) || '')),

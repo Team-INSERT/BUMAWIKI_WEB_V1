@@ -59,8 +59,14 @@ input[type='file']::file-selector-button {
 	background-color: #274168;
 	color: white;
 	font-weight: 700;
-	padding: 6px;
+	padding: 10px;
 	font-size: 20px;
+	text-align: center;
+	cursor: pointer;
+
+	&::marker {
+		content: "";
+	}
 }
 
 .analects {
