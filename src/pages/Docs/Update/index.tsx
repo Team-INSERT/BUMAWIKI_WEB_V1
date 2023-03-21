@@ -88,7 +88,7 @@ const Update = () => {
 					<S.DocsTitleWrap>
 						<S.DocsTitleText>문서 편집 : {docs.title}</S.DocsTitleText>
 					</S.DocsTitleWrap>
-					<S.DocsExampleImage src="/images/references.png" alt="문서작성법" />
+					<S.DocsExampleImage src="/images/example.png" alt="문서작성법" />
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map((index) => (
@@ -121,7 +121,7 @@ const Update = () => {
 							ref={textareaRef}
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setDocs(isOnAutoComplete ? { ...docs, contents: FC.autoClosingTag(e) } : { ...docs, contents: e.target.value })}
-							value={docs.contents.replace(/&\$\^%/gi, '"')}
+							value={docs.contents}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
