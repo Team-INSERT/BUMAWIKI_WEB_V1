@@ -69,21 +69,20 @@ input[type='file']::file-selector-button {
 	}
 }
 
-// details[open] summary~* {
-// 	animation: toggle 0.2s ease-in-out;
-// }
+details {
+	margin-bottom: 1em;
+	transition: all 1.5s ease-in-out;
+	max-height: 10em;
+	overflow: hidden;
+}
 
-// @keyframes toggle {
-// 	0% {
-// 		opacity: 0;
-// 		transform: translateY(-50px);
-// 	}
+details[open] {
+	max-height: 500em;
+}
 
-// 	100% {
-// 		opacity: 1;
-// 		transform: translateY(0px);
-// 	}
-// }
+details[close] {
+	max-height: auto;
+}
 
 .analects {
 	width: 100%;

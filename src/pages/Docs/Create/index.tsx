@@ -57,7 +57,7 @@ const Create = () => {
 	}
 
 	const makeFrame = () => {
-		const frame = `<틀>\n<틀제목>제목삽입</틀제목>\n` + `<행>${'<열>내용삽입</열>'.repeat(size.row)}</행>\n`.repeat(size.column) + `</틀>`
+		const frame = `<틀>\n<틀제목>제목삽입</틀제목>\n` + `<행>${'<열>내용삽입</열>'.repeat(size.column)}</행>\n`.repeat(size.row) + `</틀>`
 		setDocs({ ...docs, contents: frame })
 	}
 
