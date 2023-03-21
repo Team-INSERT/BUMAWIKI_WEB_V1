@@ -10,10 +10,14 @@ import { Helmet } from 'react-helmet-async'
 const Popular = () => {
 	const [populars, setPopulars] = React.useState([])
 
-	useQuery('getPopular', () => api.getBaseDocs('popular'), {
+	useQuery('getPopular', () => api.getBaseDocs('find/popular'), {
 		onSuccess: (res) => {
-			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
+			const data = res
+				.sort((a: Docs, b: Docs) => (a.view < b.view ? -1 : 1))
+				.reverse()
+				.slice(0, 20)
 			setPopulars(data)
+			console.log(data)
 		},
 	})
 
