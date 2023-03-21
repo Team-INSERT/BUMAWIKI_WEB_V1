@@ -69,6 +69,22 @@ input[type='file']::file-selector-button {
 	}
 }
 
+// details[open] summary~* {
+// 	animation: toggle 0.2s ease-in-out;
+// }
+
+// @keyframes toggle {
+// 	0% {
+// 		opacity: 0;
+// 		transform: translateY(-50px);
+// 	}
+
+// 	100% {
+// 		opacity: 1;
+// 		transform: translateY(0px);
+// 	}
+// }
+
 .analects {
 	width: 100%;
 	background-color: #ccc;

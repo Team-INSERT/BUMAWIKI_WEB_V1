@@ -4,7 +4,7 @@ const documentation = (content: string) => {
 		.replace(/<틀>/gi, `?^details close^??^table class="frame_table" style="width:100%;" ^?`)
 		.replace(/<\/틀>/gi, `?^@#@#@table^??^@#@#@details^?`)
 		.replace(/<틀제목/gi, `?^summary class="frame_caption" `)
-		.replace(/<\/틀제목>/gi, `?^br^??^span style="color:white"^?[ 펼치기 · 접기 ]?^@#@#@span^??^@#@#@summary^?`)
+		.replace(/<\/틀제목>/gi, `?^br^??^span style="color:white; font-size:14px"^?[ 펼치기 · 접기 ]?^@#@#@span^??^@#@#@summary^?`)
 		.replace(/<행>/gi, `?^tr^?`)
 		.replace(/<\/행>/gi, `?^@#@#@tr^?`)
 		.replace(/<열/gi, `?^td class="frame_td" `)
