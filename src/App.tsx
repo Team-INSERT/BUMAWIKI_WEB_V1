@@ -1,8 +1,8 @@
 import * as R from './allFiles'
 import * as api from 'api/user'
 
-import userState from 'context/userState'
-import axios, { AxiosError } from 'axios'
+import { userState } from 'context/userState'
+import axios from 'axios'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
@@ -13,37 +13,15 @@ axios.defaults.baseURL = 'http://bumawiki.kro.kr/api'
 const App = () => {
 	const setUser = useSetRecoilState(userState)
 
-	const getUser = async () => {
-		try {
-			const data = await api.getUser()
-			setUser({
-				...data,
-				contributeDocs: data.contributeDocs.reverse(),
-				isLogin: true,
-			})
-		} catch (err) {
-			await tokenExpired()
-			console.error('로그인 후 서비스를 이용해주세요!')
-		}
-	}
-
-	const refreshLogin = async () => {
-		try {
-			await getUser()
-		} catch (err) {
-			if (err instanceof AxiosError) {
-				const { status, message } = err?.response?.data
-				if (status === 403) {
-					if (message === 'User Not Login') return console.error('로그인 후 서비스를 이용해주세요!')
-					await tokenExpired()
-				}
-				getUser()
-			}
-		}
-	}
-
 	React.useEffect(() => {
-		refreshLogin()
+		;(async () => {
+			try {
+				setUser(await api.getUser())
+			} catch (err) {
+				await tokenExpired()
+				setUser(await api.getUser())
+			}
+		})()
 		// eslint-disable-next-line
 	}, [])
 
@@ -60,6 +38,7 @@ const App = () => {
 				<Route path={'/search/:result'} element={<R.Search />} />
 				<Route path={'/oauth'} element={<R.Signup />} />
 				<Route path={'/create'} element={<R.Create />} />
+				<Route path={'/popular'} element={<R.Popular />} />
 				<Route path={'/update/:title'} element={<R.Update />} />
 				<Route path={'/version/:title'} element={<R.Version />} />
 				<Route path={'/version/:title/detail/:versionId'} element={<R.VersionDetail />} />

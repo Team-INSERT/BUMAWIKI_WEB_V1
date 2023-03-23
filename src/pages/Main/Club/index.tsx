@@ -6,7 +6,7 @@ import React from 'react'
 import axios from 'axios'
 import Docs from 'types/docs.type'
 import { useQuery } from 'react-query'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Club = () => {
 	const [clubs, setClubs] = React.useState([])
@@ -16,7 +16,7 @@ const Club = () => {
 		onSuccess: async (res) => {
 			const data = res.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setClubs(data)
-			const freeClub = (await axios.get(`/docs/freeClub`)).data
+			const freeClub = (await axios.get(`/docs/free_club`)).data
 			const freeClubData = freeClub.sort((a: Docs, b: Docs) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1))
 			setFreeClubs(freeClubData)
 		},
@@ -25,10 +25,6 @@ const Club = () => {
 	return (
 		<div>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 동아리`} />
-				<meta property="og:image" content="images/meta-img.png" />
-				<meta property="og:description" content="여러분이 가꾸어 나가는 역사의 고서 - 동아리" />
-				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
 				<title>부마위키 - 동아리</title>
 			</Helmet>
 			<C.Header />

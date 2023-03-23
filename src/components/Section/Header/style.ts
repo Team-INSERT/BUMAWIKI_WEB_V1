@@ -16,7 +16,7 @@ export const HeaderWrap = styled.div`
 
 export const SubHeaderWrap = styled.div<{ isHover: boolean }>`
 	width: 100vw;
-	height: 17vh;
+	height: 22vh;
 	display: flex;
 	top: 6.5vh;
 	position: absolute;
@@ -85,11 +85,11 @@ export const SubHeaderSection = styled(Link)`
 	}
 `
 
-export const SubHeaderSectionWrap = styled.div`
+export const SubHeaderSectionWrap = styled.div<{ margin?: string }>`
 	display: flex;
 	cursor: pointer;
 	text-decoration: none;
-	margin: 0 2vw 0 3vw;
+	margin: 0 2vw 0 ${(props) => props.margin || '3vw'};
 	flex-direction: column;
 	align-items: center;
 
@@ -103,7 +103,7 @@ export const HeaderSectionLogo = styled.img`
 	height: 14px;
 `
 
-export const HeaderSectionText = styled.span<{ display?: boolean }>`
+export const HeaderSectionText = styled.span<{ display?: string }>`
 	margin-left: 8px;
 	color: white;
 	font-size: 15px;
@@ -112,7 +112,7 @@ export const HeaderSectionText = styled.span<{ display?: boolean }>`
 
 	@media (max-width: 500px) {
 		font-size: 10px;
-		display: ${(props) => (props.display ? 'block' : 'none')};
+		display: ${(props) => (props.display === 'true' ? 'block' : 'none')};
 	}
 `
 

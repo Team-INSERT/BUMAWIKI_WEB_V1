@@ -1,24 +1,21 @@
-import * as FC from 'utils'
 import * as api from 'api/user'
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
+import { Helmet } from 'react-helmet-async'
 
 const Signup = () => {
 	const navigate = useNavigate()
 
 	const { mutate } = useMutation(() => api.loginUser(window.location.search.replace('?code=', '')), {
 		onSuccess: (data) => {
-			document.cookie = `authorization=${data.accessToken};`
-			document.cookie = `refresh_token=${data.refreshToken};expires=${FC.dateUTCParser(data.expiredAt)};path=/;`
-			navigate('/')
-			window.location.reload()
+			localStorage.setItem('access_token', data.accessToken)
+			localStorage.setItem('refresh_token', data.refreshToken)
+			localStorage.setItem('refresh_token_expired_at', data.expiredAt)
+			navigate(-2)
 		},
-		onError: () => {
-			navigate('/')
-			alert('로그인 도중 오류가 발생했습니다.')
-		},
+		onError: () => navigate(-2),
 	})
 
 	React.useEffect(() => {
@@ -26,7 +23,11 @@ const Signup = () => {
 		// eslint-disable-next-line
 	}, [])
 
-	return <></>
+	return (
+		<Helmet>
+			<title>부마위키 - 로그인</title>
+		</Helmet>
+	)
 }
 
 export default Signup

@@ -6,7 +6,7 @@ import * as FC from 'utils'
 import React from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const Student = () => {
 	const [students, setStudents] = React.useState([])
@@ -22,10 +22,6 @@ const Student = () => {
 	return (
 		<>
 			<Helmet>
-				<meta property="og:title" content={`부마위키 - 학생`} />
-				<meta property="og:image" content="images/meta-img.png" />
-				<meta property="og:description" content="여러분이 가꾸어 나가는 역사의 고서 - 학생" />
-				<link href="images/icon.ico" rel="shortcut icon" type="image/x-icon" />
 				<title>부마위키 - 학생</title>
 			</Helmet>
 			<C.Header />

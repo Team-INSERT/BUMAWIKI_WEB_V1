@@ -23,6 +23,8 @@ import MyPage from './pages/Users/MyPage'
 import VersionDetail from './pages/Docs/Version/VersionDetail'
 import User from 'pages/Users/User'
 import Frame from 'pages/Main/Frame'
+import Authority from 'components/Button/Authority'
+import Popular from 'pages/Main/Popular'
 
 export {
 	Home,
@@ -50,4 +52,6 @@ export {
 	MyPage,
 	User,
 	Frame,
+	Authority,
+	Popular,
 }

@@ -3,7 +3,7 @@ import tokenExpired from 'lib/token/tokenExpired'
 
 const bumawikiAxios = axios.create({
 	baseURL: 'http://bumawiki.kro.kr/api',
-	timeout: 100000,
+	timeout: 10000,
 })
 
 bumawikiAxios.interceptors.request.use(
@@ -21,10 +21,10 @@ bumawikiAxios.interceptors.response.use(
 	},
 	(error) => {
 		const { status, message } = error.response.data
-		if (status === 403 && message !== 'User Not Login') {
-			if (message === 'Refresh Token Expired') {
-				console.error('토큰이 만료되었습니다. 다시 로그인해주세요.')
-			} else tokenExpired()
+		if (message) {
+			if (status === 403 && message !== 'Refresh Token Expired') {
+				tokenExpired()
+			}
 		}
 		return Promise.reject(error)
 	}

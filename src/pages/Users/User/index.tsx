@@ -8,18 +8,23 @@ import { useParams } from 'react-router-dom'
 import Contributors from 'types/contributors.type'
 import { useQuery } from 'react-query'
 import UserType from 'types/user.type'
+import { useRecoilValue } from 'recoil'
+import { userState } from 'context/userState'
+import { Helmet } from 'react-helmet-async'
 
 const User = () => {
+	const userInfo = useRecoilValue(userState)
 	const [user, setUser] = React.useState<UserType>()
 	const router = useParams()
 	useQuery('otherUser', () => api.getOtherUser(parseInt(router.id as string)), {
-		onSuccess: (data) => {
-			setUser({ ...data, contributeDocs: data.contributeDocs.reverse() })
-		},
+		onSuccess: (data) => setUser(data),
 	})
 
 	return (
 		<div>
+			<Helmet>
+				<title>부마위키 - 선생님</title>
+			</Helmet>
 			<C.Header />
 			<S.UserWrap>
 				<C.Board>
@@ -29,15 +34,16 @@ const User = () => {
 					<C.Classify>{user?.authority}</C.Classify>
 					<S.UserLine />
 					<S.UserInfoWrap>
-						<C.AccodianMenu name={'정보'}>
+						<C.AccodianMenu name="정보">
 							<S.UserInfoLoadWrap>
+								{userInfo.authority === 'ADMIN' ? <C.Authority email={user?.email || ''} /> : null}
 								<span>
-									이름은 {user?.nickName}이며, 부마위키의{' '}
-									{user?.authority === 'ADMIN' ? '관리자' : user?.authority === 'BANNED' ? '읽기전용 사용자' : '사용자'} 중 한 명이다.
+									이름은 {user?.nickName}이며, 부마위키의
+									{user?.authority === 'ADMIN' ? ' 관리자' : user?.authority === 'BANNED' ? ' 읽기전용 사용자' : ' 사용자'} 중 한 명이다.
 								</span>
 							</S.UserInfoLoadWrap>
 						</C.AccodianMenu>
-						<C.AccodianMenu name={'기여한 문서'}>
+						<C.AccodianMenu name="기여한 문서">
 							<S.ContributeWrap>
 								<span>이 유저가 기여한 문서의 정보들이다.</span>
 								<S.ContributeList>

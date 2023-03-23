@@ -3,9 +3,9 @@ import * as S from './style'
 import * as api from 'api/editDocs'
 
 import React from 'react'
-import { useRecoilValue } from 'recoil'
-import userState from 'context/userState'
+import { userState } from 'context/userState'
 import { MutationFunction, useMutation, useQueryClient } from 'react-query'
+import { useRecoilValue } from 'recoil'
 
 interface DetailBtnProps {
 	docsId: number
@@ -16,6 +16,7 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 	const user = useRecoilValue(userState)
 	const navigate = R.useNavigate()
 	const [docsName, setDocsName] = React.useState('')
+	const [docsType, setDocsType] = React.useState('')
 	const queryClient = useQueryClient()
 
 	const updateDocsTitleMutation = useMutation(api.updateDocsTitle, {
@@ -26,9 +27,17 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		},
 	})
 
+	const updateDocsTypeMutation = useMutation(api.updateDocsType, {
+		onSuccess: (res) => {
+			alert('문서 이름이 변경되었습니다!')
+			queryClient.invalidateQueries('lastModifiedDocs')
+			navigate(`/docs/${res.data.title}`)
+		},
+	})
+
 	const onClickNavigatePage = (type: string) => {
 		if (type === 'VERSION') navigate(`/version/${router.title}`)
-		else if (type === 'UPDATE' && !user.isLogin) alert('로그인 후 편집하실 수 있습니다!')
+		else if (type === 'UPDATE' && !user.id) alert('로그인 후 편집하실 수 있습니다!')
 		else navigate(`/update/${router.title}`)
 	}
 
@@ -47,6 +56,14 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		updateDocsTitleMutation.mutate({ title: router.title as string, docsName })
 	}
 
+	const onClickChangeDocsType = async () => {
+		if (!docsType.length) {
+			alert('내용이 없습니다.')
+			return
+		}
+		updateDocsTypeMutation.mutate({ title: router.title as string, docsType })
+	}
+
 	const onClickDeleteDocs = async () => {
 		const result = window.confirm('정말 삭제하시겠습니까?')
 		if (result) deleteDocsTitleMutation.mutate(docsId)
@@ -56,6 +73,12 @@ const DetailBtn = ({ docsId }: DetailBtnProps) => {
 		<S.DetailButtonWrap>
 			{user.authority === 'ADMIN' ? (
 				<>
+					<S.DetailInput value={docsType} onChange={(e) => setDocsType(e.target.value)} />
+					<S.DetailWrap onClick={onClickChangeDocsType}>
+						<S.DetailButton>
+							<S.DetailText>타입변경</S.DetailText>
+						</S.DetailButton>
+					</S.DetailWrap>
 					<S.DetailWrap onClick={onClickDeleteDocs}>
 						<S.DetailButton>
 							<S.DetailText>삭제</S.DetailText>

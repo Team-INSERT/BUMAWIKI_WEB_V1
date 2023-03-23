@@ -3,27 +3,35 @@ import * as api from 'api/user'
 import * as FC from 'utils'
 import * as S from './style'
 
-import userState, { initUserState } from 'context/userState'
+import { initUserState, userState } from 'context/userState'
 import React from 'react'
 import { useMutation } from 'react-query'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Contributors from 'types/contributors.type'
+import { flushSync } from 'react-dom'
+import { Helmet } from 'react-helmet-async'
 
 const MyPage = () => {
-	const [user, setUser] = useRecoilState(userState)
+	const user = useRecoilValue(userState)
+	const setUser = useSetRecoilState(userState)
 
 	const { mutate } = useMutation(api.logoutUser, {
 		onSuccess: () => {
-			document.cookie = `authorization=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			document.cookie = `refresh_token=; expires=Sat 02 Oct 2021 17:46:04 GMT; path=/;`
-			if (!FC.getCookie('refresh_token') && user.isLogin) {
+			localStorage.removeItem('access_token')
+			localStorage.removeItem('refresh_token')
+			localStorage.removeItem('refresh_token_expired_at')
+			console.log('asd')
+			flushSync(() => {
 				setUser(initUserState)
-			}
+			})
 		},
 	})
 
 	return (
 		<>
+			<Helmet>
+				<title>부마위키 - 마이페이지</title>
+			</Helmet>
 			<C.Header />
 			<S.MyPageWrap>
 				<C.Board>
@@ -60,7 +68,7 @@ const MyPage = () => {
 								<S.ContributeWrap>
 									<span>이 유저가 기여한 문서의 정보들이다.</span>
 									<S.ContributeList>
-										{user.contributeDocs.map((docs: Contributors, index) => (
+										{user.contributeDocs.map((docs: Contributors, index: number) => (
 											<span key={index}>
 												문서명 :&nbsp;
 												<S.ContributeLink to={`/docs/${docs.title}`}>{docs.title}</S.ContributeLink>

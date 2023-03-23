@@ -7,6 +7,7 @@ import * as S from './style'
 import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import Docs from 'types/docs.type'
+import { Helmet } from 'react-helmet-async'
 
 const Search = () => {
 	const router = R.useParams()
@@ -30,6 +31,9 @@ const Search = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>부마위키 - 검색 결과 : {router.result}</title>
+			</Helmet>
 			<C.Header />
 			<S.SearchWrap>
 				<C.Board>
@@ -46,9 +50,13 @@ const Search = () => {
 								<>
 									{result.map((result: Docs, index) => (
 										<S.SearchListItem key={index}>
-											<S.SearchLink to={`/docs/${result.title}`}>
-												{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
-											</S.SearchLink>
+											{result.docsType === 'FRAME' ? (
+												<S.SearchLink to={`/docs/${result.title}`}>{result.title}</S.SearchLink>
+											) : (
+												<S.SearchLink to={`/docs/${result.title}`}>
+													{result.title} — ( {FC.typeEditor(result.docsType)},{result.enroll} )
+												</S.SearchLink>
+											)}
 										</S.SearchListItem>
 									))}
 								</>

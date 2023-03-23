@@ -5,7 +5,7 @@ import * as S from './style'
 import * as getApi from 'api/getDocs'
 import * as editApi from 'api/editDocs'
 
-import userState from 'context/userState'
+import { userState } from 'context/userState'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
@@ -13,6 +13,7 @@ import UpdateDocsType from 'types/update.type.'
 import { decodeContents, encodeContents } from 'utils/document/requestContents'
 import updateInitState from 'state/updateInitState'
 import { AxiosError } from 'axios'
+import { Helmet } from 'react-helmet-async'
 
 const Update = () => {
 	const router = R.useParams()
@@ -34,18 +35,15 @@ const Update = () => {
 		onSuccess: () => {
 			alert('문서가 편집되었습니다!')
 			navigate(`/docs/${router.title}`)
+			console.log('asdnaslkdn')
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
-				const { status, code } = err
-				const message = err.response?.data.message
-				if (message && code) {
-					if (message === 'Cannot Change Your Docs') alert('자기자신의 문서는 변경할 수 없습니다.')
-					else if (message === 'YOUR BANNED') alert('읽기전용 유저는 문서를 편집할 수 없습니다.')
-					else if (status === 403) alert('로그인 후 이용 가능한 서비스입니다.')
-					else if (status === 404) alert('잘못된 접근입니다.')
-					else if (status === 500) alert('서버에 오류가 발생했습니다.')
-					else alert(`ERROR : ${message}`)
+				const { status, message, error } = err?.response?.data
+				console.log(status, message, err)
+				if (status === 403) {
+					if (message === 'Cannot Change Your Docs') return alert('자기 자신의 문서는 편집할 수 없습니다.')
+					if (error === 'Forbidden') return alert('읽기전용 사용자는 문서를 편집할 수 없습니다.')
 				}
 			}
 		},
@@ -57,7 +55,7 @@ const Update = () => {
 		if (textareaRef.current) textareaRef.current.focus()
 	}
 
-	const updateDocs = () => {
+	const mutateUpdateDocs = () => {
 		const FormData = require('form-data')
 		const data = new FormData()
 		data.append(
@@ -73,21 +71,24 @@ const Update = () => {
 	}
 
 	const onClickUpdateDocs = async () => {
-		if (!user.isLogin) return alert('로그인 후 이용 가능한 서비스입니다.')
+		if (!user.id) return alert('로그인 후 이용 가능한 서비스입니다.')
 		if (!docs.contents.length) return alert('문서가 비어있습니다!')
 
-		updateDocs()
+		mutateUpdateDocs()
 	}
 
 	return (
 		<>
+			<Helmet>
+				<title>부마위키 - 문서편집 : {docs?.title || ''}</title>
+			</Helmet>
 			<C.Header />
 			<S.DocsWrap>
 				<C.Board>
 					<S.DocsTitleWrap>
 						<S.DocsTitleText>문서 편집 : {docs.title}</S.DocsTitleText>
 					</S.DocsTitleWrap>
-					<S.DocsExampleImage src="/images/references.png" alt="문서작성법" />
+					<S.DocsExampleImage src="/images/example.png" alt="문서작성법" />
 					<S.DocsLine />
 					<S.DocsContentsWrap>
 						{fileInput.map((index) => (
@@ -120,7 +121,7 @@ const Update = () => {
 							ref={textareaRef}
 							onKeyDown={(e) => FC.onKeyDownUseTab(e)}
 							onChange={(e) => setDocs(isOnAutoComplete ? { ...docs, contents: FC.autoClosingTag(e) } : { ...docs, contents: e.target.value })}
-							value={docs.contents.replace(/&\$\^%/gi, '"')}
+							value={docs.contents}
 						/>
 						<S.UpdatePreviewText>미리보기</S.UpdatePreviewText>
 						<S.UpdatePreview
@@ -128,7 +129,10 @@ const Update = () => {
 								__html: FC.documentation(docs.contents),
 							}}
 						/>
-						<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>
+						<S.UpdateSubmit>
+							<S.UpdateWarn>※ 타인에 대한 조롱 또는 비방, 비난으로 인해 발생하는 문제에 대한 책임은 본인에게 있습니다. 주의해주세요! ※</S.UpdateWarn>
+							<S.UpdateButton onClick={onClickUpdateDocs}>문서 업데이트</S.UpdateButton>
+						</S.UpdateSubmit>
 					</S.DocsContentsWrap>
 					<C.SubFooter />
 				</C.Board>
