@@ -23,13 +23,13 @@ const User = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>부마위키 - 선생님</title>
+				<title>부마위키 - 유저</title>
 			</Helmet>
 			<C.Header />
 			<S.UserWrap>
 				<C.Board>
 					<S.UserTitleWrap>
-						<S.UserTitleText>유저 : {user?.nickName}</S.UserTitleText>
+						<S.UserTitleText>유저 : {user?.nickName.replace('박우빈', '이채우')}</S.UserTitleText>
 					</S.UserTitleWrap>
 					<C.Classify>{user?.authority}</C.Classify>
 					<S.UserLine />
@@ -38,7 +38,7 @@ const User = () => {
 							<S.UserInfoLoadWrap>
 								{userInfo.authority === 'ADMIN' ? <C.Authority email={user?.email || ''} /> : null}
 								<span>
-									이름은 {user?.nickName}이며, 부마위키의
+									이름은 {user?.nickName.replace('박우빈', '이채우')}이며, 부마위키의
 									{user?.authority === 'ADMIN' ? ' 관리자' : user?.authority === 'BANNED' ? ' 읽기전용 사용자' : ' 사용자'} 중 한 명이다.
 								</span>
 							</S.UserInfoLoadWrap>
