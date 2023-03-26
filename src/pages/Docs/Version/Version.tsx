@@ -46,7 +46,7 @@ const Version = () => {
 												<V.VersionLink to={`/version/${router.title}/detail/${index}`}>{FC.dateParser(ver.thisVersionCreatedAt)}</V.VersionLink>
 											</span>
 											<span>
-												작성자 : <V.VersionLink to={`/user/${ver.userId}`}>{ver.nickName}</V.VersionLink>
+												작성자 : <V.VersionLink to={`/user/${ver.userId}`}>{ver.nickName.replace('박우빈', '이채우')}</V.VersionLink>
 											</span>
 										</V.VersionList>
 									))}
