@@ -8,18 +8,18 @@ import Docs from 'types/docs.type'
 import { Helmet } from 'react-helmet-async'
 
 const Popular = () => {
-	const [populars, setPopulars] = React.useState([])
+	// const [populars, setPopulars] = React.useState([])
 
-	useQuery('getPopular', () => api.getBaseDocs('find/popular'), {
-		onSuccess: (res) => {
-			const data = res
-				.sort((a: Docs, b: Docs) => (a.view < b.view ? -1 : 1))
-				.reverse()
-				.slice(0, 20)
-			setPopulars(data)
-			console.log(data)
-		},
-	})
+	// useQuery('getPopular', () => api.getBaseDocs('find/popular'), {
+	// 	onSuccess: (res) => {
+	// 		const data = res
+	// 			.sort((a: Docs, b: Docs) => (a.view < b.view ? -1 : 1))
+	// 			.reverse()
+	// 			.slice(0, 20)
+	// 		setPopulars(data)
+	// 		console.log(data)
+	// 	},
+	// })
 
 	return (
 		<>
@@ -39,13 +39,14 @@ const Popular = () => {
 					<S.PopularListWrap>
 						<C.AccodianMenu name={`인기 문서`}>
 							<S.PopularList>
-								{populars.map((popular: Docs, index) => (
+								{/* {populars.map((popular: Docs, index) => (
 									<S.PopularListItem key={popular.id}>
 										<S.PopularLink to={`/docs/${popular.title}`}>
 											{index + 1}위 {popular.title} (조회수 {popular.view})
 										</S.PopularLink>
 									</S.PopularListItem>
-								))}
+								))} */}
+								끄세요ㅋㅋ
 							</S.PopularList>
 						</C.AccodianMenu>
 					</S.PopularListWrap>
