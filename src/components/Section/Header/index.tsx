@@ -102,15 +102,12 @@ const Header = () => {
 							<S.HeaderSectionText display="true">동아리</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
-					<S.SubHeaderSectionWrap margin="1.2vw">
+					<S.SubHeaderSectionWrap margin="3vw">
 						<S.SubHeaderSection to="/frame">
 							<S.HeaderSectionText display="true">틀</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/accident">
 							<S.HeaderSectionText display="true">사건</S.HeaderSectionText>
-						</S.SubHeaderSection>
-						<S.SubHeaderSection to="/popular">
-							<S.HeaderSectionText display="true">인기문서</S.HeaderSectionText>
 						</S.SubHeaderSection>
 					</S.SubHeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
