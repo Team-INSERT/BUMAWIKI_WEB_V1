@@ -21,7 +21,7 @@ const Aside = () => {
 				<S.AsideTitle>최근 수정된 문서</S.AsideTitle>
 			</S.AsideTitleWrap>
 			<S.AsideDocWrap>
-				<S.AsideList to={`/docs/INSERT%20인턴%20모집`}></S.AsideList>
+				<S.AsideList to={`/docs/INSERT%20인턴%20모집`}>INSERT 인턴 모집</S.AsideList>
 				<S.AsideLastModified>&nbsp; 상시채용</S.AsideLastModified>
 			</S.AsideDocWrap>
 			{data?.map((docs: Docs) => (
