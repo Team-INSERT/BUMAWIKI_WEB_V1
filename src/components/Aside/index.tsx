@@ -22,7 +22,7 @@ const Aside = () => {
 			</S.AsideTitleWrap>
 			<S.AsideDocWrap>
 				<S.AsideList to={`/docs/INSERT%20인턴%20모집`}>INSERT 인턴 모집</S.AsideList>
-				<S.AsideLastModified>&nbsp; 상시채용</S.AsideLastModified>
+				<S.AsideLastModified>&nbsp; 공지</S.AsideLastModified>
 			</S.AsideDocWrap>
 			{data?.map((docs: Docs) => (
 				<S.AsideDocWrap key={docs.id}>
