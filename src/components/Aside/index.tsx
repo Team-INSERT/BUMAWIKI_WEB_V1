@@ -20,6 +20,10 @@ const Aside = () => {
 			<S.AsideTitleWrap>
 				<S.AsideTitle>최근 수정된 문서</S.AsideTitle>
 			</S.AsideTitleWrap>
+			<S.AsideDocWrap>
+				<S.AsideList to={`/docs/INSERT%20인턴%20모집`}></S.AsideList>
+				<S.AsideLastModified>&nbsp; 상시채용</S.AsideLastModified>
+			</S.AsideDocWrap>
 			{data?.map((docs: Docs) => (
 				<S.AsideDocWrap key={docs.id}>
 					<S.AsideList to={`/docs/${docs.title}`}>{FC.asideFormat(docs.title, docs.docsType)}</S.AsideList>
