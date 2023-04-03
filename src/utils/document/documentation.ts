@@ -42,6 +42,8 @@ const documentation = (content: string) => {
 		.replace(/<\/외부링크>/gi, `?^@#@#@a^?`)
 		.replace(/<\/링크>/gi, `?^@#@#@a^?`)
 		.replace(/<br\/>/gi, `?^br@#@#@^?`)
+		.replace(/<<</gi, `<video src="`)
+		.replace(/>>>/gi, `" controls></video>`)
 		.replace(/<</gi, `?^img src="`)
 		.replace(/>>:{/gi, `" alt='' style="width:`)
 		.replace(/}/gi, `%;" @#@#@^?`)
