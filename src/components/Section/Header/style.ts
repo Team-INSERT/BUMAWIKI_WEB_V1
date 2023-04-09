@@ -30,6 +30,13 @@ export const HeaderLink = styled(Link)`
 	display: flex;
 	align-items: center;
 
+	span {
+		font-size: 2px;
+		color: white;
+		font-weight: 700;
+		margin-right: 13vw;
+	}
+
 	@media (max-width: 500px) {
 		display: none;
 	}
