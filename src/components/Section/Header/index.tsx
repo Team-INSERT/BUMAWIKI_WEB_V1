@@ -78,7 +78,7 @@ const Header = () => {
 				</S.SubHeaderPlace>
 				<S.HeaderSectionWrap>
 					<S.SubHeaderSectionWrap>
-						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내용">
+						<S.SubHeaderSection to="/docs/부마위키%20업데이트%20내역">
 							<S.HeaderSectionText display="true">공지사항</S.HeaderSectionText>
 						</S.SubHeaderSection>
 						<S.SubHeaderSection to="/docs/부마위키%20방명록">
